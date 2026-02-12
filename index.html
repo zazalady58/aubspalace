@@ -43,8 +43,8 @@ section{padding:50px 20px;max-width:1200px;margin:auto;}
 /* ======= ABOUT / SERVICES ======= */
 section#about p{font-weight:700;font-size:1.2rem;line-height:1.8;text-align:center;margin-bottom:20px;text-shadow:0 0 5px #ff77ff;}
 .services ul{list-style:none;display:flex;flex-wrap:wrap;gap:15px;justify-content:center;}
-.services li{background:rgba(255,255,255,0.05);border-radius:12px;padding:12px 20px;box-shadow:0 0 15px #c77dff;display:flex;align-items:center;gap:8px;font-weight:600;}
-.services li::before{content:"✔️";}
+.services li{background:rgba(255,255,255,0.05);border-radius:12px;padding:10px 18px;box-shadow:0 0 15px #c77dff;font-weight:700;}
+.services li::before{content:"✔️ ";}
 
 /* ======= GAME CARDS ======= */
 .container{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin:auto;padding-bottom:50px;}
@@ -57,61 +57,25 @@ section#about p{font-weight:700;font-size:1.2rem;line-height:1.8;text-align:cent
 .card .btn{display:inline-block;margin-top:auto;text-align:center;padding:12px 22px;background:linear-gradient(135deg,#c77dff,#ff77ff);color:#fff;text-decoration:none;border-radius:30px;font-weight:700;letter-spacing:0.6px;box-shadow:0 0 15px #c77dff,0 0 25px #ff77ff;transition:transform 0.3s,box-shadow 0.3s;animation:btnGlow 2.5s infinite alternate;}
 .card .btn:hover{transform:scale(1.05);box-shadow:0 0 45px #ff77ff,0 0 70px #c200ff;}
 @keyframes neonPulse{0%{border-color:rgba(255,119,255,0.6);box-shadow:0 0 10px #ff77ff,0 0 20px #c200ff;}50%{border-color:rgba(199,0,255,0.8);box-shadow:0 0 20px #ff77ff,0 0 40px #c200ff;}100%{border-color:rgba(255,119,255,1);box-shadow:0 0 30px #ff77ff,0 0 50px #c200ff;}}
+@keyframes btnGlow{0%{box-shadow:0 0 15px #c77dff,0 0 25px #ff77ff;}50%{box-shadow:0 0 25px #ff77ff,0 0 40px #c200ff;}100%{box-shadow:0 0 35px #ff77ff,0 0 50px #c200ff;}}
 
-/* ======= RULES & BONUS SIDE BY SIDE ===== */
-.rules-bonus-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-  margin-top: 20px;
-}
-.rb-box {
-  flex: 1 1 45%;
-  background: rgba(255,255,255,0.05);
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 10px 30px rgba(199,0,255,0.4);
-  border: 2px solid rgba(255,255,255,0.15);
-  font-size: 1.1rem;
-}
-.rb-box h3 {
-  margin-bottom: 12px;
-  color: #ffccff;
-  text-shadow: 0 0 8px #ff77ff;
-}
+/* ======= RULES & BONUS SIDE BY SIDE ======= */
+.rules-bonus{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+.rules-bonus .glass{flex:1;min-width:280px;}
 
-/* ======= CONTACT BIGGER ===== */
-.contact form input, 
-.contact form textarea {
-  font-size: 1.2rem;
-  padding: 18px;
-}
-.contact form button {
-  font-size: 1.3rem;
-  padding: 16px 30px;
-}
-.contact-icons a {
-  font-size: 1.2rem;
-  padding: 15px 28px;
-  border-radius: 12px;
-  background: linear-gradient(135deg,#c77dff,#ff77ff);
-  color:#fff;
-  font-weight:700;
-  text-decoration:none;
-  transition:0.3s;
-}
-.contact-icons a:hover {
-  transform:scale(1.1);
-  box-shadow:0 0 40px #ff77ff, 0 0 60px #c200ff;
-}
+/* ======= CONTACT ======= */
+.contact form{display:flex;flex-direction:column;gap:15px;max-width:600px;margin:auto;}
+.contact input,.contact textarea{padding:14px;border-radius:8px;border:none;outline:none;background:rgba(255,255,255,0.05);color:#fff;box-shadow:0 0 10px rgba(199,0,255,0.3);transition:0.3s;font-weight:700;}
+.contact input:focus,.contact textarea:focus{box-shadow:0 0 20px #ff77ff;}
+.contact button{padding:15px;border:none;border-radius:30px;font-weight:700;background:linear-gradient(135deg,#c77dff,#ff77ff);color:#fff;cursor:pointer;box-shadow:0 0 15px #c77dff,0 0 25px #ff77ff;transition:0.3s;font-size:1.1rem;}
+.contact button:hover{box-shadow:0 0 45px #ff77ff,0 0 70px #c200ff;transform:scale(1.05);}
+.contact-icons{display:flex;justify-content:center;gap:30px;margin-top:20px;}
+.contact-icons a{font-weight:700;font-size:1.2rem;color:#ffccff;text-decoration:none;}
+.contact-icons a:hover{color:#ff77ff;}
 
 /* ======= FOOTER ======= */
 footer{text-align:center;padding:30px;font-size:12px;opacity:0.8;color:#ffccff;}
-
-/* ======= RESPONSIVE ======= */
-@media(max-width:900px){.rb-box{flex:1 1 100%;}}
-@media(max-width:600px){header h1{font-size:36px;} .card h3{font-size:18px;}}
+@media(max-width:600px){header h1{font-size:36px;} .card h3{font-size:18px;} .contact-icons{flex-direction:column;gap:15px;}}
 </style>
 </head>
 
@@ -129,7 +93,8 @@ footer{text-align:center;padding:30px;font-size:12px;opacity:0.8;color:#ffccff;}
 <a href="#home">Home</a>
 <a href="#about">About Us</a>
 <a href="#games">Games</a>
-<a href="#rules-bonus">Rules & Bonuses</a>
+<a href="#rules">Rules</a>
+<a href="#bonus">Bonus</a>
 <a href="#contact">Contact</a>
 </div>
 
@@ -163,28 +128,38 @@ footer{text-align:center;padding:30px;font-size:12px;opacity:0.8;color:#ffccff;}
 <section id="games">
 <h2>Our Games</h2>
 <div class="container">
-<!-- All your previous cards go here, same as your earlier HTML -->
-<!-- Example card -->
 <div class="card"><img src="https://i.postimg.cc/tJppp1FJ/mw.webp" alt="Milkyway"><h3>Milkyway</h3><p>A fast-paced arcade game with vibrant space visuals and exciting shooting challenges.</p><a class="btn" href="https://milkywayapp.xyz/" target="_blank">Click Here</a></div>
-<!-- Repeat all your other game cards -->
+<div class="card"><img src="https://i.postimg.cc/q7x1WzMf/orion.jpg" alt="Orion Stars"><h3>Orion Stars</h3><p>A popular fish-shooting and casino-style game with colorful graphics and multiple ways to win.</p><a class="btn" href="http://start.orionstars.vip:8580/index.html" target="_blank">Click Here</a></div>
+<div class="card"><img src="https://i.postimg.cc/Vky46jJ5/juwa777.jpg" alt="Juwa"><h3>Juwa</h3><p>An all-in-one gaming app offering slots, fish games, and table games with easy navigation.</p><a class="btn" href="https://dl.juwa777.com/" target="_blank">Click Here</a></div>
+<div class="card"><img src="https://i.postimg.cc/2jMgQL1g/vb.webp" alt="Vblink"><h3>Vblink</h3><p>A dynamic gaming platform combining classic casino games with modern graphics and competitive play options.</p><a class="btn" href="https://www.vblink777.club/" target="_blank">Click Here</a></div>
+<div class="card"><img src="https://i.postimg.cc/rsrnngDb/game.jpg" alt="Game Vault"><h3>Game Vault</h3><p>A trusted gaming hub featuring slots, fish games, and casino favorites in one place.</p><a class="btn" href="https://download.gamevault999.com/" target="_blank">Click Here</a></div>
+<div class="card"><img src="https://i.postimg.cc/PxZY07Mz/vegas.jpg" alt="LasVegas Sweeps"><h3>LasVegas Sweeps</h3><p>A casino-style game inspired by Vegas with sleek slots and table games.</p><a class="btn" href="https://m.lasvegassweeps.com/" target="_blank">Click Here</a></div>
+<div class="card"><img src="https://i.postimg.cc/7PnT70t4/gr.jpg" alt="Gameroom"><h3>Gameroom</h3><p>Brings together arcade, casino, and fish games for nonstop entertainment.</p><a class="btn" href="https://www.gameroom777.com/" target="_blank">Click Here</a></div>
+<div class="card"><img src="https://i.postimg.cc/5tJVwYkZ/cm.jpg" alt="Cash Machine"><h3>Cash Machine</h3><p>A slot-focused game with flashy visuals and big win potential.</p><a class="btn" href="https://www.cashmachine777.com/" target="_blank">Click Here</a></div>
+<div class="card"><img src="https://i.postimg.cc/yYS4tyqs/pm.jpg" alt="Panda Master"><h3>Panda Master</h3><p>A colorful fish-shooting game with boss battles and rewarding bonus features.</p><a class="btn" href="https://pandamaster.vip:8888/index.html" target="_blank">Click Here</a></div>
+<div class="card"><img src="https://i.postimg.cc/kgsmvX3G/fire.jpg" alt="Fire Kirin"><h3>Fire Kirin</h3><p>A high-energy fish game with smooth controls, powerful weapons, and multiplayer action.</p><a class="btn" href="http://start.firekirin.xyz:8580/" target="_blank">Click Here</a></div>
+<div class="card"><img src="https://i.postimg.cc/3xSqwyQW/juwa-2.jpg" alt="Juwa 2.0"><h3>Juwa 2.0</h3><p>An upgraded version of Juwa with improved graphics, performance, and enhanced game variety.</p><a class="btn" href="https://m.juwa2.com/" target="_blank">Click Here</a></div>
+<div class="card"><img src="https://i.postimg.cc/gcsHpCWq/mafia.jpg" alt="Mafia"><h3>Mafia</h3><p>A themed casino-style game with bold visuals and intense gameplay inspired by underground crime worlds.</p><a class="btn" href="https://www.mafia77777.com/" target="_blank">Click Here</a></div>
+<div class="card"><img src="https://i.postimg.cc/SsDY0pMC/mr.jpg" alt="Mr. All in One"><h3>Mr. All in One</h3><p>A complete gaming platform offering slots, fish games, and table games in one app.</p><a class="btn" href="https://www.mrallinone777.com/" target="_blank">Click Here</a></div>
 </div>
 </section>
 
-<!-- RULES & BONUSES -->
-<section id="rules-bonus" class="glass">
-<h2>Rules & Bonuses</h2>
-<div class="rules-bonus-container">
-  <div class="rb-box">
-    <h3>💰 Rules</h3>
-    <p>Minimum cashout: 3x deposit, ≥ $40.</p>
-    <p>Maximum cashout: 10x deposit.</p>
-    <p>Daily cap: $1,500.</p>
-  </div>
-  <div class="rb-box">
-    <h3>🎁 Bonuses</h3>
-    <p>Referral: 50% bonus up to $10, redeemable after $40 wagering.</p>
-    <p>Cashback: 10% after 3 losses, credited in-game, redeemable $40 min.</p>
-  </div>
+<!-- RULES & BONUS SIDE BY SIDE -->
+<section class="rules-bonus">
+<div id="rules" class="glass">
+<h2><strong>Rules</strong></h2>
+<p><strong>💰 Cashout Rules:</strong><br>
+Minimum cashout is 3x the deposit and not less than $40.<br>
+Maximum cashout is 10x the original deposit.<br>
+Daily cashout cap: $1,500.<br>
+Example: Deposit $20 → Minimum cashout $60.<br>
+Deposit $10 → Minimum cashout $40.</p>
+</div>
+
+<div id="bonus" class="glass">
+<h2><strong>Bonuses</strong></h2>
+<p><strong>🎁 Referral Bonus:</strong> 50% bonus (up to $10 max) after your referral deposits. Redeemable after $40 wagering.<br><br>
+<strong>🔄 Special Cashback Bonus:</strong> 10% cashback after 3 consecutive losses. Credited directly in-game, redeemable at $40 minimum.</p>
 </div>
 </section>
 
@@ -192,14 +167,15 @@ footer{text-align:center;padding:30px;font-size:12px;opacity:0.8;color:#ffccff;}
 <section id="contact" class="glass contact">
 <h2>Contact Us</h2>
 <form>
-<input type="text" placeholder="Your Name" required>
-<input type="email" placeholder="Your Email" required>
-<textarea placeholder="Your Message" rows="6" required></textarea>
+<input type="text" placeholder="Name" required>
+<input type="email" placeholder="Email" required>
+<textarea placeholder="Message" rows="6" required></textarea>
 <button type="submit">Send Message</button>
 </form>
 <div class="contact-icons">
-<a href="mailto:aubreyhere98@gmail.com" target="_blank">📧 Email</a>
-<a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">📘 Facebook</a>
+<a href="mailto:aubreyhere98@gmail.com" target="_blank">Email</a>
+<a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">Facebook</a>
+<a href="https://www.facebook.com/share/1DjcaA1mTN/" target="_blank">Facebook</a>
 </div>
 </section>
 

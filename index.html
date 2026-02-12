@@ -5,7 +5,6 @@
 <title>Aub's Palace</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap">
-
 <style>
 /* ======= RESET & BASE ======= */
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -59,9 +58,8 @@ section#about p{font-weight:700;font-size:1.2rem;line-height:1.8;text-align:cent
 @keyframes neonPulse{0%{border-color:rgba(255,119,255,0.6);box-shadow:0 0 10px #ff77ff,0 0 20px #c200ff;}50%{border-color:rgba(199,0,255,0.8);box-shadow:0 0 20px #ff77ff,0 0 40px #c200ff;}100%{border-color:rgba(255,119,255,1);box-shadow:0 0 30px #ff77ff,0 0 50px #c200ff;}}
 @keyframes btnGlow{0%{box-shadow:0 0 15px #c77dff,0 0 25px #ff77ff;}50%{box-shadow:0 0 25px #ff77ff,0 0 40px #c200ff;}100%{box-shadow:0 0 35px #ff77ff,0 0 50px #c200ff;}}
 
-/* ======= RULES & BONUS SIDE BY SIDE ======= */
-.rules-bonus{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
-.rules-bonus .glass{flex:1;min-width:280px;}
+/* ======= RULES ======= */
+#rules{padding:25px;max-width:800px;margin:auto;background:rgba(255,255,255,0.05);border-radius:22px;box-shadow:0 10px 30px rgba(199,0,255,0.4);border:2px solid rgba(255,255,255,0.15);font-weight:700;line-height:1.6;text-align:center;font-size:1.1rem;}
 
 /* ======= CONTACT ======= */
 .contact form{display:flex;flex-direction:column;gap:15px;max-width:600px;margin:auto;}
@@ -70,15 +68,14 @@ section#about p{font-weight:700;font-size:1.2rem;line-height:1.8;text-align:cent
 .contact button{padding:15px;border:none;border-radius:30px;font-weight:700;background:linear-gradient(135deg,#c77dff,#ff77ff);color:#fff;cursor:pointer;box-shadow:0 0 15px #c77dff,0 0 25px #ff77ff;transition:0.3s;font-size:1.1rem;}
 .contact button:hover{box-shadow:0 0 45px #ff77ff,0 0 70px #c200ff;transform:scale(1.05);}
 .contact-icons{display:flex;justify-content:center;gap:30px;margin-top:20px;}
-.contact-icons a{font-weight:700;font-size:1.2rem;color:#ffccff;text-decoration:none;}
-.contact-icons a:hover{color:#ff77ff;}
+.contact-icons a img{width:50px;height:50px;transition:0.3s;}
+.contact-icons a img:hover{transform:scale(1.2);}
 
 /* ======= FOOTER ======= */
 footer{text-align:center;padding:30px;font-size:12px;opacity:0.8;color:#ffccff;}
-@media(max-width:600px){header h1{font-size:36px;} .card h3{font-size:18px;} .contact-icons{flex-direction:column;gap:15px;}}
+@media(max-width:600px){header h1{font-size:36px;} .card h3{font-size:18px;} .contact-icons a img{width:40px;height:40px;}}
 </style>
 </head>
-
 <body>
 
 <!-- PRELOADER -->
@@ -91,10 +88,9 @@ footer{text-align:center;padding:30px;font-size:12px;opacity:0.8;color:#ffccff;}
 <div id="sidebar">
 <h2>Menu</h2>
 <a href="#home">Home</a>
-<a href="#about">About Us</a>
-<a href="#games">Games</a>
 <a href="#rules">Rules</a>
-<a href="#bonus">Bonus</a>
+<a href="#games">Games</a>
+<a href="#about">About Us</a>
 <a href="#contact">Contact</a>
 </div>
 
@@ -109,25 +105,23 @@ footer{text-align:center;padding:30px;font-size:12px;opacity:0.8;color:#ffccff;}
 <canvas class="particles"></canvas>
 </div>
 
-<!-- ABOUT US -->
-<section id="about" class="glass">
-<h2>Welcome to Aub's Palace</h2>
-<p>Where authenticity meets real wins. We’re certified, verified, and 100% legit. Transparency matters here. Every transaction is secure, every interaction is professional, and every player is treated like royalty.</p>
-<div class="services">
-<ul>
-<li>Real payouts</li>
-<li>Fair play</li>
-<li>Active 24/7 support</li>
-<li>Fast / instant cash outs</li>
-<li>Secure & verified transactions</li>
-</ul>
-</div>
+<!-- RULES -->
+<section id="rules">
+<h2>Rules</h2>
+<p>💰 Minimum cashout is 3x the deposit and not less than $40.<br>
+💰 Maximum cashout is 10x the original deposit.<br>
+💰 Daily cashout cap: $1,500.<br>
+💰 Example: Deposit $20 → Minimum cashout $60.<br>
+💰 Deposit $10 → Minimum cashout $40.<br>
+💰 Referral Bonus: 50% bonus (up to $10 max) after your referral deposits. Redeemable after $40 wagering.<br>
+💰 Special Cashback Bonus: 10% cashback after 3 consecutive losses. Credited directly in-game, redeemable at $40 minimum.</p>
 </section>
 
-<!-- GAME LINKS -->
+<!-- GAMES -->
 <section id="games">
 <h2>Our Games</h2>
 <div class="container">
+<!-- Game cards (all 13) -->
 <div class="card"><img src="https://i.postimg.cc/tJppp1FJ/mw.webp" alt="Milkyway"><h3>Milkyway</h3><p>A fast-paced arcade game with vibrant space visuals and exciting shooting challenges.</p><a class="btn" href="https://milkywayapp.xyz/" target="_blank">Click Here</a></div>
 <div class="card"><img src="https://i.postimg.cc/q7x1WzMf/orion.jpg" alt="Orion Stars"><h3>Orion Stars</h3><p>A popular fish-shooting and casino-style game with colorful graphics and multiple ways to win.</p><a class="btn" href="http://start.orionstars.vip:8580/index.html" target="_blank">Click Here</a></div>
 <div class="card"><img src="https://i.postimg.cc/Vky46jJ5/juwa777.jpg" alt="Juwa"><h3>Juwa</h3><p>An all-in-one gaming app offering slots, fish games, and table games with easy navigation.</p><a class="btn" href="https://dl.juwa777.com/" target="_blank">Click Here</a></div>
@@ -144,22 +138,18 @@ footer{text-align:center;padding:30px;font-size:12px;opacity:0.8;color:#ffccff;}
 </div>
 </section>
 
-<!-- RULES & BONUS SIDE BY SIDE -->
-<section class="rules-bonus">
-<div id="rules" class="glass">
-<h2><strong>Rules</strong></h2>
-<p><strong>💰 Cashout Rules:</strong><br>
-Minimum cashout is 3x the deposit and not less than $40.<br>
-Maximum cashout is 10x the original deposit.<br>
-Daily cashout cap: $1,500.<br>
-Example: Deposit $20 → Minimum cashout $60.<br>
-Deposit $10 → Minimum cashout $40.</p>
-</div>
-
-<div id="bonus" class="glass">
-<h2><strong>Bonuses</strong></h2>
-<p><strong>🎁 Referral Bonus:</strong> 50% bonus (up to $10 max) after your referral deposits. Redeemable after $40 wagering.<br><br>
-<strong>🔄 Special Cashback Bonus:</strong> 10% cashback after 3 consecutive losses. Credited directly in-game, redeemable at $40 minimum.</p>
+<!-- ABOUT US -->
+<section id="about" class="glass">
+<h2>Welcome to Aub's Palace</h2>
+<p>Where authenticity meets real wins. We’re certified, verified, and 100% legit. Transparency matters here. Every transaction is secure, every interaction is professional, and every player is treated like royalty.</p>
+<div class="services">
+<ul>
+<li>Real payouts</li>
+<li>Fair play</li>
+<li>Active 24/7 support</li>
+<li>Fast / instant cash outs</li>
+<li>Secure & verified transactions</li>
+</ul>
 </div>
 </section>
 
@@ -173,9 +163,9 @@ Deposit $10 → Minimum cashout $40.</p>
 <button type="submit">Send Message</button>
 </form>
 <div class="contact-icons">
-<a href="mailto:aubreyhere98@gmail.com" target="_blank">Email</a>
-<a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">Facebook</a>
-<a href="https://www.facebook.com/share/1DjcaA1mTN/" target="_blank">Facebook</a>
+<a href="mailto:aubreyhere98@gmail.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/1280px-Gmail_icon_%282020%29.svg.png" alt="Email"></a>
+<a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="Facebook"></a>
+<a href="https://www.facebook.com/share/1DjcaA1mTN/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="Facebook"></a>
 </div>
 </section>
 

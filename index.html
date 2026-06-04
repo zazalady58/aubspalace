@@ -23,1061 +23,198 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Orbitron",Arial,sans-serif;background:#210026;color:#fff;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit}
+:focus-visible{outline:2px solid #f5d878;outline-offset:3px}
+
+#preloader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at center,rgba(194,74,255,.34),transparent 36%),linear-gradient(180deg,#050009,#21002f 56%,#050009);transition:opacity .7s ease,visibility .7s ease}
+#preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.loader-inner{width:min(380px,82vw);text-align:center}
+.loader-ap{width:min(240px,64vw);display:block;margin:0 auto 18px;mix-blend-mode:screen;filter:drop-shadow(0 0 34px rgba(199,90,255,.95)) drop-shadow(0 0 20px rgba(245,216,120,.65));animation:apFloat 1.6s ease-in-out infinite alternate}
+.loader-text{margin-top:6px;color:#f5d878;letter-spacing:.55em;font-size:11px;text-transform:uppercase}
+.loader-bar{width:76%;height:8px;margin:18px auto 0;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.08);border:1px solid rgba(245,216,120,.58);box-shadow:0 0 18px rgba(199,90,255,.35)}
+.loader-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#f5d878,#c75cff,#f5d878);animation:loaderFill 1.65s ease forwards}
+@keyframes loaderFill{to{width:100%}}
+@keyframes apFloat{from{transform:translateY(4px) scale(.97);opacity:.90}to{transform:translateY(-4px) scale(1.03);opacity:1}}
+
+/* DESKTOP TOP NAV */
+.top-nav{position:fixed;top:0;left:0;right:0;height:74px;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(8,0,14,.55);backdrop-filter:blur(14px);border-bottom:1px solid rgba(245,216,120,.18);transition:background .3s}
+.top-nav.scrolled{background:rgba(8,0,14,.92)}
+.top-nav-brand{display:flex;align-items:center;gap:10px;color:#f5d878;font-weight:900;font-size:20px;text-shadow:0 0 14px rgba(245,216,120,.35)}
+.top-nav-brand img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(199,92,255,.7))}
+.top-nav-links{display:flex;align-items:center;gap:34px;list-style:none}
+.top-nav-links a{position:relative;color:#fff;font-size:15px;letter-spacing:.04em;padding:6px 2px;transition:color .25s}
+.top-nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:linear-gradient(90deg,#f5d878,#c75cff);transform:scaleX(0);transform-origin:center;transition:transform .28s}
+.top-nav-links a:hover{color:#f5d878}
+.top-nav-links a:hover::after{transform:scaleX(1)}
+.top-nav-cta{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00!important;padding:10px 22px!important;border-radius:999px;font-weight:900;box-shadow:0 0 22px rgba(245,216,120,.35)}
+.top-nav-cta::after{display:none}
+
+.home-hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#100018;background-image:linear-gradient(180deg,rgba(16,0,24,.10),rgba(16,0,24,.30)),url("https://i.postimg.cc/435LDgyT/Chat-GPT-Image-Jun-3-2026-06-25-23-PM.png");background-size:contain;background-position:center;background-repeat:no-repeat;overflow:hidden}
+.hero-clicks{position:absolute;inset:0;z-index:5;pointer-events:none}
+.hero-clicks a{position:absolute;display:block;pointer-events:auto;text-indent:-9999px;overflow:hidden;border-radius:999px}
+.click-enter{top:2.1%;right:7.1%;width:245px;height:56px}
+.click-play{left:29.7%;top:47.8%;width:210px;height:62px}
+.click-rules{left:56.3%;top:47.8%;width:230px;height:62px}
+
+.mobile-nav{position:fixed;top:0;left:0;right:0;height:66px;z-index:50;display:none;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(8,0,14,.82);border-bottom:1px solid rgba(245,216,120,.18);backdrop-filter:blur(12px)}
+.mobile-brand{color:#f5d878;font-weight:900;font-size:18px;text-shadow:0 0 12px rgba(245,216,120,.28)}
+.mobile-menu-btn{font-size:34px;cursor:pointer;color:#f5d878;background:none;border:none;line-height:1}
+.mobile-menu{position:fixed;top:66px;left:0;right:0;z-index:49;display:none;background:rgba(8,0,14,.97);border-bottom:1px solid rgba(245,216,120,.18)}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:17px 22px;color:#fff;border-top:1px solid rgba(255,255,255,.07)}
+.mobile-menu a.gold{color:#f5d878}
+
+section{position:relative;padding:78px 6vw;background:radial-gradient(circle at top,rgba(199,92,255,.16),transparent 32%),linear-gradient(180deg,#26002f,#3b0040)}
+.section-title{text-align:center;font-size:clamp(34px,6vw,58px);margin-bottom:34px;color:#fff;text-shadow:0 0 22px rgba(201,94,255,.75)}
+.section-subtitle{text-align:center;max-width:860px;margin:-18px auto 34px;color:#f0d7ff;line-height:1.6;font-family:Arial,sans-serif;font-size:17px}
+
+.login-section,.palace-live-bonus-section{background:radial-gradient(circle at top left,rgba(245,216,120,.10),transparent 28%),radial-gradient(circle at top right,rgba(199,92,255,.16),transparent 28%),linear-gradient(180deg,#13001c,#26002f)}
+.login-card{max-width:850px;margin:auto;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.035));border:1px solid rgba(245,216,120,.18);border-radius:28px;padding:26px;box-shadow:0 0 44px rgba(201,94,255,.15)}
+.login-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+label{display:block;color:#f8e6bc;font-size:13px;margin-bottom:7px}
+input,textarea{width:100%;border:1px solid rgba(245,216,120,.22);border-radius:14px;background:rgba(0,0,0,.32);color:#fff;padding:14px;font-family:Arial,sans-serif;font-size:14px}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.45)}
+button,.small-gold-btn{border:none;border-radius:999px;padding:14px 18px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00;display:inline-flex;align-items:center;justify-content:center}
+.player-status{margin-top:16px;text-align:center;color:#f5d878;font-family:Arial,sans-serif;line-height:1.5}
+.logout-btn{display:none;margin:18px auto 0}
+.logged-in .logout-btn{display:flex}
+
+.palace-live-bonus-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.palace-box{background:radial-gradient(circle at center,rgba(199,92,255,.10),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.035));border:1px solid rgba(245,216,120,.16);border-radius:28px;padding:28px;box-shadow:0 0 38px rgba(201,94,255,.12)}
+.palace-box.wide{grid-column:span 2}
+.palace-box h2{color:#f5d878;margin-bottom:10px;font-size:clamp(22px,3vw,32px);text-shadow:0 0 14px rgba(245,216,120,.20)}
+.palace-box p{color:rgba(255,255,255,.74);line-height:1.55;margin-bottom:16px;font-family:Arial,sans-serif;font-size:17px}
+.reward-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 18px;min-height:48px;align-items:center}
+.reward-list span{font-size:12px;color:#f5d878;background:rgba(10,0,18,.45);border:1px solid rgba(245,216,120,.22);border-radius:999px;padding:8px 11px;box-shadow:inset 0 0 10px rgba(245,216,120,.04)}
+
+.palace-wheel-wrap{width:280px;height:280px;margin:26px auto 24px;position:relative;display:grid;place-items:center}
+.palace-wheel-wrap::before{content:"";position:absolute;inset:-16px;border-radius:50%;background:conic-gradient(from 0deg,#f5d878,#c75cff,#f5d878,#8b1bd8,#f5d878);filter:blur(10px);opacity:.55;animation:wheelGlow 6s linear infinite}
+@keyframes wheelGlow{to{transform:rotate(360deg)}}
+.palace-wheel-wrap::after{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-top:30px solid #f5d878;z-index:6;filter:drop-shadow(0 0 12px rgba(245,216,120,.95))}
+.palace-wheel{width:260px;height:260px;border-radius:50%;position:relative;border:5px solid #f5d878;box-shadow:0 0 30px rgba(245,216,120,.30),0 0 50px rgba(199,92,255,.35),inset 0 0 30px rgba(0,0,0,.35);transition:transform 4.4s cubic-bezier(.16,.84,.28,1)}
+.palace-wheel svg{width:100%;height:100%;display:block;border-radius:50%}
+.palace-wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:50%;background:radial-gradient(circle,rgba(40,8,55,.98),rgba(12,0,20,.99) 70%);display:grid;place-items:center;border:3px solid #f5d878;box-shadow:0 0 18px rgba(245,216,120,.45),inset 0 0 16px rgba(199,92,255,.4);z-index:3;overflow:hidden}
+.palace-wheel-center img{width:78px;height:78px;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 0 10px rgba(199,92,255,.9))}
+.palace-bonus-btn{width:100%;border:none;border-radius:999px;padding:16px 18px;background:linear-gradient(135deg,#8b1bd8,#c85fff);color:#fff;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 0 22px rgba(201,94,255,.28)}
+.palace-bonus-btn.gold{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00}
+.palace-bonus-btn:disabled{opacity:.48;cursor:not-allowed}
+.palace-result{margin-top:16px;color:#f5d878;font-weight:900;text-align:center;line-height:1.45;font-family:Arial,sans-serif;font-size:17px}
+.palace-timer{margin-top:8px;color:rgba(255,255,255,.60);text-align:center;font-size:14px;font-family:Arial,sans-serif}
+.weekly-confirm,.monthly-requirement,.claim-note,.bonus-help-card{margin-top:16px;padding:15px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(245,216,120,.11),rgba(199,92,255,.10));border:1px solid rgba(245,216,120,.20);color:#f8e6bc;font-family:Arial,sans-serif;line-height:1.45}
+.weekly-confirm label{display:flex;gap:10px;align-items:center;margin:0;cursor:pointer;font-size:14px}
+.weekly-confirm input{width:auto}
+.bonus-help-card{text-align:center}
+.bonus-help-card strong{display:block;color:#f5d878;font-family:"Orbitron",Arial,sans-serif;margin-bottom:6px}
+.bonus-help-card span{color:rgba(255,255,255,.72)}
+
+.palace-list{display:grid;gap:10px}
+.palace-row{display:flex;justify-content:space-between;gap:12px;align-items:center;background:rgba(0,0,0,.32);border:1px solid rgba(245,216,120,.10);border-radius:14px;padding:13px 15px}
+.palace-row span{color:rgba(255,255,255,.75);font-family:Arial,sans-serif}
+.palace-row strong{color:#f5d878;white-space:nowrap}
+.palace-live-count{text-align:center;margin-bottom:20px}
+.palace-live-count span{display:block;font-size:clamp(42px,7vw,72px);font-weight:900;color:#f5d878;text-shadow:0 0 18px rgba(245,216,120,.32)}
+.palace-live-count small{color:rgba(255,255,255,.60);letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif}
+
+#rules{background:radial-gradient(circle at top,rgba(245,216,120,.10),transparent 32%),linear-gradient(180deg,#25002f,#3b0040)}
+.rules-card-frame{max-width:980px;margin:auto;padding:13px;border-radius:32px;background:linear-gradient(135deg,#f5d878,#c85fff,#f5d878);box-shadow:0 0 55px rgba(201,94,255,.62)}
+.rules-card-frame img{width:100%;display:block;border-radius:23px}
+
+.games-grid{max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.game-card{background:linear-gradient(180deg,rgba(82,15,88,.95),rgba(54,4,65,.95));border-radius:28px;padding:20px;text-align:center;box-shadow:0 18px 40px rgba(0,0,0,.25);border:1px solid rgba(245,216,120,.10);transition:.25s ease}
+.game-card:hover{transform:translateY(-5px);border-color:rgba(245,216,120,.38);box-shadow:0 0 34px rgba(201,94,255,.35)}
+.game-card img{width:100%;height:180px;object-fit:cover;border-radius:18px}
+.game-card h3{font-size:22px;margin:14px 0 6px;color:#f5d878}
+.game-card p{color:#f1d8ff;font-size:16px;margin-bottom:14px;font-family:Arial,sans-serif}
+.game-card a{display:inline-block;min-width:118px;padding:12px 28px;border-radius:999px;color:#fff;background:linear-gradient(135deg,#bd53ff,#da8cff);box-shadow:0 0 22px rgba(201,94,255,.48)}
+
+.about-text{text-align:center;color:#f8e6bc;font-size:22px;margin-bottom:26px;font-family:Arial,sans-serif}
+.trust-strip{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;max-width:980px;margin:auto}
+.trust-strip span{padding:12px 18px;border-radius:999px;background:rgba(10,0,18,.45);color:#f5d878;border:1px solid rgba(245,216,120,.22)}
+.contact-icons{display:flex;justify-content:center;gap:28px;flex-wrap:wrap}
+.contact-icons img{width:70px;height:70px;object-fit:contain;transition:.25s}
+.contact-icons a:hover img{transform:scale(1.12)}
+footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(255,255,255,.60);font-family:Arial,sans-serif}
+.sticky-play{position:fixed;right:20px;bottom:20px;z-index:900}
+.sticky-play a{display:block;text-align:center;padding:15px 24px;border-radius:999px;color:#fff;font-weight:900;background:linear-gradient(135deg,#8217c9,#c95fff);border:1px solid rgba(245,216,120,.72);box-shadow:0 0 30px rgba(201,94,255,.55)}
+
+.modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(5,0,8,.82);backdrop-filter:blur(8px)}
+.modal.open{display:flex}
+.modal-box{width:min(580px,100%);background:linear-gradient(180deg,#30003c,#180020);border:1px solid rgba(245,216,120,.28);border-radius:26px;padding:28px;box-shadow:0 0 60px rgba(201,94,255,.35);max-height:90vh;overflow-y:auto}
+.modal-box h2{color:#f5d878;margin-bottom:10px;font-size:20px}
+.modal-box p{font-family:Arial,sans-serif;color:rgba(255,255,255,.78);line-height:1.5;margin-bottom:14px}
+.modal-box label{display:block;color:#f8e6bc;font-size:13px;margin:12px 0 6px}
+.modal-box textarea{min-height:90px;resize:vertical}
+.modal-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.modal-actions button,.modal-actions a{flex:1;min-width:130px;border:none;border-radius:999px;padding:13px 16px;font-weight:900;cursor:pointer;text-align:center;font-size:13px}
+.modal-primary{background:linear-gradient(135deg,#8b1bd8,#c85fff);color:#fff}
+.modal-gold{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00}
+.modal-email{background:linear-gradient(135deg,#1a6b3a,#2ecc71);color:#fff}
+.modal-close{background:rgba(255,255,255,.12);color:#fff}
+.claim-status{margin-top:12px;text-align:center;color:#f5d878;font-family:Arial,sans-serif;font-size:14px;min-height:20px}
 
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:"Orbitron",Arial,sans-serif;
-  background:#210026;
-  color:#fff;
-  overflow-x:hidden;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button,
-input,
-textarea{
-  font:inherit;
-}
-
-:focus-visible{
-  outline:2px solid #f5d878;
-  outline-offset:3px;
-}
-
-/* =========================
-   AP OPENING LOADER
-========================= */
-#preloader{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    radial-gradient(circle at center,rgba(194,74,255,.34),transparent 36%),
-    linear-gradient(180deg,#050009,#21002f 56%,#050009);
-  transition:opacity .7s ease,visibility .7s ease;
-}
-
-#preloader.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
-
-.loader-inner{
-  width:min(380px,82vw);
-  text-align:center;
-}
-
-.loader-ap{
-  width:min(260px,70vw);
-  display:block;
-  margin:0 auto 12px;
-  filter:
-    drop-shadow(0 0 28px rgba(199,90,255,.95))
-    drop-shadow(0 0 18px rgba(245,216,120,.70));
-  animation:apFloat 1.6s ease-in-out infinite alternate;
-}
-
-.loader-ap-text{
-  color:#f5d878;
-  font-size:clamp(32px,7vw,72px);
-  font-weight:900;
-  letter-spacing:.08em;
-  line-height:1;
-  text-shadow:
-    0 0 16px rgba(245,216,120,.85),
-    0 0 32px rgba(199,90,255,.80);
-  margin-top:-12px;
-}
-
-.loader-text{
-  margin-top:14px;
-  color:#f5d878;
-  letter-spacing:.55em;
-  font-size:11px;
-  text-transform:uppercase;
-}
-
-.loader-bar{
-  width:76%;
-  height:8px;
-  margin:18px auto 0;
-  border-radius:999px;
-  overflow:hidden;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(245,216,120,.58);
-  box-shadow:0 0 18px rgba(199,90,255,.35);
-}
-
-.loader-bar span{
-  display:block;
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,#f5d878,#c75cff,#f5d878);
-  animation:loaderFill 1.65s ease forwards;
-}
-
-@keyframes loaderFill{
-  to{width:100%;}
-}
-
-@keyframes apFloat{
-  from{
-    transform:translateY(4px) scale(.97);
-    opacity:.90;
-  }
-  to{
-    transform:translateY(-4px) scale(1.03);
-    opacity:1;
-  }
-}
-
-/* =========================
-   HERO
-========================= */
-.home-hero{
-  position:relative;
-  min-height:100vh;
-  background:
-    linear-gradient(180deg,rgba(5,0,8,.04),rgba(5,0,8,.16)),
-    url("https://i.postimg.cc/435LDgyT/Chat-GPT-Image-Jun-3-2026-06-25-23-PM.png") center top / cover no-repeat;
-  overflow:hidden;
-}
-
-.hero-clicks{
-  position:absolute;
-  inset:0;
-  z-index:5;
-  pointer-events:none;
-}
-
-.hero-clicks a{
-  position:absolute;
-  display:block;
-  pointer-events:auto;
-  text-indent:-9999px;
-  overflow:hidden;
-  border-radius:999px;
-}
-
-.click-enter{
-  top:2.1%;
-  right:7.1%;
-  width:245px;
-  height:56px;
-}
-
-.click-play{
-  left:29.7%;
-  top:47.8%;
-  width:210px;
-  height:62px;
-}
-
-.click-rules{
-  left:56.3%;
-  top:47.8%;
-  width:230px;
-  height:62px;
-}
-
-/* =========================
-   MOBILE NAV
-========================= */
-.mobile-nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  height:66px;
-  z-index:50;
-  display:none;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 18px;
-  background:rgba(8,0,14,.82);
-  border-bottom:1px solid rgba(245,216,120,.18);
-  backdrop-filter:blur(12px);
-}
-
-.mobile-brand{
-  color:#f5d878;
-  font-weight:900;
-  font-size:18px;
-  text-shadow:0 0 12px rgba(245,216,120,.28);
-}
-
-.mobile-menu-btn{
-  font-size:34px;
-  cursor:pointer;
-  color:#f5d878;
-  background:none;
-  border:none;
-  line-height:1;
-}
-
-.mobile-menu{
-  position:fixed;
-  top:66px;
-  left:0;
-  right:0;
-  z-index:49;
-  display:none;
-  background:rgba(8,0,14,.97);
-  border-bottom:1px solid rgba(245,216,120,.18);
-}
-
-.mobile-menu.open{
-  display:block;
-}
-
-.mobile-menu a{
-  display:block;
-  padding:17px 22px;
-  color:#fff;
-  border-top:1px solid rgba(255,255,255,.07);
-}
-
-.mobile-menu a.gold{
-  color:#f5d878;
-}
-
-/* =========================
-   GLOBAL SECTIONS
-========================= */
-section{
-  position:relative;
-  padding:78px 6vw;
-  background:
-    radial-gradient(circle at top,rgba(199,92,255,.16),transparent 32%),
-    linear-gradient(180deg,#26002f,#3b0040);
-}
-
-.section-title{
-  text-align:center;
-  font-size:clamp(34px,6vw,58px);
-  margin-bottom:34px;
-  color:#fff;
-  text-shadow:0 0 22px rgba(201,94,255,.75);
-}
-
-.section-subtitle{
-  text-align:center;
-  max-width:860px;
-  margin:-18px auto 34px;
-  color:#f0d7ff;
-  line-height:1.6;
-  font-family:Arial,sans-serif;
-  font-size:17px;
-}
-
-/* =========================
-   LOGIN
-========================= */
-.login-section,
-.palace-live-bonus-section{
-  background:
-    radial-gradient(circle at top left,rgba(245,216,120,.10),transparent 28%),
-    radial-gradient(circle at top right,rgba(199,92,255,.16),transparent 28%),
-    linear-gradient(180deg,#13001c,#26002f);
-}
-
-.login-card{
-  max-width:850px;
-  margin:auto;
-  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.035));
-  border:1px solid rgba(245,216,120,.18);
-  border-radius:28px;
-  padding:26px;
-  box-shadow:0 0 44px rgba(201,94,255,.15);
-}
-
-.login-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr auto;
-  gap:12px;
-  align-items:end;
-}
-
-label{
-  display:block;
-  color:#f8e6bc;
-  font-size:13px;
-  margin-bottom:7px;
-}
-
-input,
-textarea{
-  width:100%;
-  border:1px solid rgba(245,216,120,.22);
-  border-radius:14px;
-  background:rgba(0,0,0,.32);
-  color:#fff;
-  padding:14px;
-  font-family:Arial,sans-serif;
-  font-size:14px;
-}
-
-input::placeholder,
-textarea::placeholder{
-  color:rgba(255,255,255,.45);
-}
-
-button,
-.small-gold-btn{
-  border:none;
-  border-radius:999px;
-  padding:14px 18px;
-  font-weight:900;
-  cursor:pointer;
-  background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);
-  color:#1b0c00;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.player-status{
-  margin-top:16px;
-  text-align:center;
-  color:#f5d878;
-  font-family:Arial,sans-serif;
-  line-height:1.5;
-}
-
-.logout-btn{
-  display:none;
-  margin:18px auto 0;
-}
-
-.logged-in .logout-btn{
-  display:flex;
-}
-
-/* =========================
-   BONUS WHEELS
-========================= */
-.palace-live-bonus-grid{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:22px;
-}
-
-.palace-box{
-  background:
-    radial-gradient(circle at center,rgba(199,92,255,.10),transparent 55%),
-    linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.035));
-  border:1px solid rgba(245,216,120,.16);
-  border-radius:28px;
-  padding:28px;
-  box-shadow:0 0 38px rgba(201,94,255,.12);
-}
-
-.palace-box.wide{
-  grid-column:span 2;
-}
-
-.palace-box h2{
-  color:#f5d878;
-  margin-bottom:10px;
-  font-size:clamp(22px,3vw,32px);
-  text-shadow:0 0 14px rgba(245,216,120,.20);
-}
-
-.palace-box p{
-  color:rgba(255,255,255,.74);
-  line-height:1.55;
-  margin-bottom:16px;
-  font-family:Arial,sans-serif;
-  font-size:17px;
-}
-
-.reward-list{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  justify-content:center;
-  margin:0 0 18px;
-  min-height:48px;
-  align-items:center;
-}
-
-.reward-list span{
-  font-size:12px;
-  color:#f5d878;
-  background:rgba(10,0,18,.45);
-  border:1px solid rgba(245,216,120,.22);
-  border-radius:999px;
-  padding:8px 11px;
-  box-shadow:inset 0 0 10px rgba(245,216,120,.04);
-}
-
-/* improved wheel */
-.palace-wheel-wrap{
-  width:260px;
-  height:260px;
-  margin:26px auto 24px;
-  position:relative;
-  display:grid;
-  place-items:center;
-}
-
-.palace-wheel-wrap::before{
-  content:"";
-  position:absolute;
-  inset:-14px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle,rgba(245,216,120,.24),transparent 57%),
-    conic-gradient(from 0deg,#f5d878,#c75cff,#f5d878,#8b1bd8,#f5d878);
-  filter:blur(8px);
-  opacity:.78;
-}
-
-.palace-wheel-wrap::after{
-  content:"";
-  position:absolute;
-  top:-8px;
-  left:50%;
-  transform:translateX(-50%);
-  width:0;
-  height:0;
-  border-left:15px solid transparent;
-  border-right:15px solid transparent;
-  border-top:28px solid #f5d878;
-  z-index:6;
-  filter:drop-shadow(0 0 12px rgba(245,216,120,.9));
-}
-
-.palace-wheel{
-  width:238px;
-  height:238px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  position:relative;
-  overflow:hidden;
-  border:4px solid rgba(245,216,120,.78);
-  box-shadow:
-    0 0 28px rgba(245,216,120,.18),
-    0 0 40px rgba(199,92,255,.32),
-    inset 0 0 34px rgba(0,0,0,.42);
-  transition:transform 4.2s cubic-bezier(.16,.84,.28,1);
-}
-
-#dailyWheel{
-  background:
-    conic-gradient(
-      #f7e47f 0 20%,
-      #b64ff6 20% 40%,
-      #681bb3 40% 60%,
-      #fff1a6 60% 80%,
-      #2b003b 80% 100%
-    );
-}
-
-#monthlyWheel{
-  background:
-    conic-gradient(
-      #f7e47f 0 16.66%,
-      #b64ff6 16.66% 33.33%,
-      #681bb3 33.33% 50%,
-      #fff1a6 50% 66.66%,
-      #8b1bd8 66.66% 83.33%,
-      #2b003b 83.33% 100%
-    );
-}
-
-.palace-wheel::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 30% 20%,rgba(255,255,255,.32),transparent 15%),
-    radial-gradient(circle,transparent 34%,rgba(0,0,0,.30) 72%);
-  pointer-events:none;
-}
-
-.palace-wheel-center{
-  width:112px;
-  height:112px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle,rgba(245,216,120,.22),rgba(18,0,28,.96) 62%);
-  display:grid;
-  place-items:center;
-  border:2px solid rgba(245,216,120,.45);
-  box-shadow:
-    inset 0 0 18px rgba(201,94,255,.28),
-    0 0 20px rgba(245,216,120,.20);
-  z-index:3;
-  overflow:hidden;
-}
-
-.palace-wheel-center img{
-  width:98px;
-  height:98px;
-  object-fit:contain;
-  filter:
-    drop-shadow(0 0 12px rgba(199,92,255,.85))
-    drop-shadow(0 0 8px rgba(245,216,120,.45));
-}
-
-.palace-bonus-btn{
-  width:100%;
-  border:none;
-  border-radius:999px;
-  padding:16px 18px;
-  background:linear-gradient(135deg,#8b1bd8,#c85fff);
-  color:#fff;
-  font-weight:900;
-  letter-spacing:1px;
-  cursor:pointer;
-  box-shadow:0 0 22px rgba(201,94,255,.28);
-}
-
-.palace-bonus-btn.gold{
-  background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);
-  color:#1b0c00;
-}
-
-.palace-bonus-btn:disabled{
-  opacity:.48;
-  cursor:not-allowed;
-}
-
-.palace-result{
-  margin-top:16px;
-  color:#f5d878;
-  font-weight:900;
-  text-align:center;
-  line-height:1.45;
-  font-family:Arial,sans-serif;
-  font-size:17px;
-}
-
-.palace-timer{
-  margin-top:8px;
-  color:rgba(255,255,255,.60);
-  text-align:center;
-  font-size:14px;
-  font-family:Arial,sans-serif;
-}
-
-.weekly-confirm,
-.monthly-requirement,
-.claim-note,
-.bonus-help-card{
-  margin-top:16px;
-  padding:15px 16px;
-  border-radius:18px;
-  background:linear-gradient(135deg,rgba(245,216,120,.11),rgba(199,92,255,.10));
-  border:1px solid rgba(245,216,120,.20);
-  color:#f8e6bc;
-  font-family:Arial,sans-serif;
-  line-height:1.45;
-}
-
-.weekly-confirm label{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  margin:0;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.weekly-confirm input{
-  width:auto;
-}
-
-.bonus-help-card{
-  text-align:center;
-}
-
-.bonus-help-card strong{
-  display:block;
-  color:#f5d878;
-  font-family:"Orbitron",Arial,sans-serif;
-  margin-bottom:6px;
-}
-
-.bonus-help-card span{
-  color:rgba(255,255,255,.72);
-}
-
-/* =========================
-   WINNERS
-========================= */
-.palace-list{
-  display:grid;
-  gap:10px;
-}
-
-.palace-row{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  align-items:center;
-  background:rgba(0,0,0,.32);
-  border:1px solid rgba(245,216,120,.10);
-  border-radius:14px;
-  padding:13px 15px;
-}
-
-.palace-row span{
-  color:rgba(255,255,255,.75);
-  font-family:Arial,sans-serif;
-}
-
-.palace-row strong{
-  color:#f5d878;
-  white-space:nowrap;
-}
-
-.palace-live-count{
-  text-align:center;
-  margin-bottom:20px;
-}
-
-.palace-live-count span{
-  display:block;
-  font-size:clamp(42px,7vw,72px);
-  font-weight:900;
-  color:#f5d878;
-  text-shadow:0 0 18px rgba(245,216,120,.32);
-}
-
-.palace-live-count small{
-  color:rgba(255,255,255,.60);
-  letter-spacing:1px;
-  text-transform:uppercase;
-  font-family:Arial,sans-serif;
-}
-
-/* =========================
-   RULES
-========================= */
-#rules{
-  background:
-    radial-gradient(circle at top,rgba(245,216,120,.10),transparent 32%),
-    linear-gradient(180deg,#25002f,#3b0040);
-}
-
-.rules-card-frame{
-  max-width:980px;
-  margin:auto;
-  padding:13px;
-  border-radius:32px;
-  background:linear-gradient(135deg,#f5d878,#c85fff,#f5d878);
-  box-shadow:0 0 55px rgba(201,94,255,.62);
-}
-
-.rules-card-frame img{
-  width:100%;
-  display:block;
-  border-radius:23px;
-}
-
-/* =========================
-   GAMES
-========================= */
-.games-grid{
-  max-width:1180px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:28px;
-}
-
-.game-card{
-  background:linear-gradient(180deg,rgba(82,15,88,.95),rgba(54,4,65,.95));
-  border-radius:28px;
-  padding:20px;
-  text-align:center;
-  box-shadow:0 18px 40px rgba(0,0,0,.25);
-  border:1px solid rgba(245,216,120,.10);
-  transition:.25s ease;
-}
-
-.game-card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(245,216,120,.38);
-  box-shadow:0 0 34px rgba(201,94,255,.35);
-}
-
-.game-card img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:18px;
-}
-
-.game-card h3{
-  font-size:22px;
-  margin:14px 0 6px;
-  color:#f5d878;
-}
-
-.game-card p{
-  color:#f1d8ff;
-  font-size:16px;
-  margin-bottom:14px;
-  font-family:Arial,sans-serif;
-}
-
-.game-card a{
-  display:inline-block;
-  min-width:118px;
-  padding:12px 28px;
-  border-radius:999px;
-  color:#fff;
-  background:linear-gradient(135deg,#bd53ff,#da8cff);
-  box-shadow:0 0 22px rgba(201,94,255,.48);
-}
-
-/* =========================
-   ABOUT / CONTACT / FOOTER
-========================= */
-.about-text{
-  text-align:center;
-  color:#f8e6bc;
-  font-size:22px;
-  margin-bottom:26px;
-  font-family:Arial,sans-serif;
-}
-
-.trust-strip{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:12px;
-  max-width:980px;
-  margin:auto;
-}
-
-.trust-strip span{
-  padding:12px 18px;
-  border-radius:999px;
-  background:rgba(10,0,18,.45);
-  color:#f5d878;
-  border:1px solid rgba(245,216,120,.22);
-}
-
-.contact-icons{
-  display:flex;
-  justify-content:center;
-  gap:28px;
-  flex-wrap:wrap;
-}
-
-.contact-icons img{
-  width:70px;
-  height:70px;
-  object-fit:contain;
-  transition:.25s;
-}
-
-.contact-icons a:hover img{
-  transform:scale(1.12);
-}
-
-footer{
-  text-align:center;
-  padding:34px 20px 95px;
-  background:#25002e;
-  color:rgba(255,255,255,.60);
-  font-family:Arial,sans-serif;
-}
-
-.sticky-play{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:900;
-}
-
-.sticky-play a{
-  display:block;
-  text-align:center;
-  padding:15px 24px;
-  border-radius:999px;
-  color:#fff;
-  font-weight:900;
-  background:linear-gradient(135deg,#8217c9,#c95fff);
-  border:1px solid rgba(245,216,120,.72);
-  box-shadow:0 0 30px rgba(201,94,255,.55);
-}
-
-/* =========================
-   MODALS
-========================= */
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(5,0,8,.82);
-  backdrop-filter:blur(8px);
-}
-
-.modal.open{
-  display:flex;
-}
-
-.modal-box{
-  width:min(580px,100%);
-  background:linear-gradient(180deg,#30003c,#180020);
-  border:1px solid rgba(245,216,120,.28);
-  border-radius:26px;
-  padding:28px;
-  box-shadow:0 0 60px rgba(201,94,255,.35);
-  max-height:90vh;
-  overflow-y:auto;
-}
-
-.modal-box h2{
-  color:#f5d878;
-  margin-bottom:10px;
-  font-size:20px;
-}
-
-.modal-box p{
-  font-family:Arial,sans-serif;
-  color:rgba(255,255,255,.78);
-  line-height:1.5;
-  margin-bottom:14px;
-}
-
-.modal-box label{
-  display:block;
-  color:#f8e6bc;
-  font-size:13px;
-  margin:12px 0 6px;
-}
-
-.modal-box textarea{
-  min-height:90px;
-  resize:vertical;
-}
-
-.modal-actions{
-  display:flex;
-  gap:10px;
-  margin-top:16px;
-  flex-wrap:wrap;
-}
-
-.modal-actions button,
-.modal-actions a{
-  flex:1;
-  min-width:130px;
-  border:none;
-  border-radius:999px;
-  padding:13px 16px;
-  font-weight:900;
-  cursor:pointer;
-  text-align:center;
-  font-size:13px;
-}
-
-.modal-primary{
-  background:linear-gradient(135deg,#8b1bd8,#c85fff);
-  color:#fff;
-}
-
-.modal-gold{
-  background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);
-  color:#1b0c00;
-}
-
-.modal-email{
-  background:linear-gradient(135deg,#1a6b3a,#2ecc71);
-  color:#fff;
-}
-
-.modal-close{
-  background:rgba(255,255,255,.12);
-  color:#fff;
-}
-
-.claim-status{
-  margin-top:12px;
-  text-align:center;
-  color:#f5d878;
-  font-family:Arial,sans-serif;
-  font-size:14px;
-  min-height:20px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
 @media(max-width:900px){
-  .mobile-nav{
-    display:flex;
-  }
-
-  .home-hero{
-    min-height:72vh;
-    background-position:center top;
-    margin-top:66px;
-  }
-
-  .click-enter{
-    display:none;
-  }
-
-  .click-play{
-    left:22%;
-    top:43%;
-    width:25%;
-    height:6%;
-  }
-
-  .click-rules{
-    left:54%;
-    top:43%;
-    width:29%;
-    height:6%;
-  }
-
-  section{
-    padding:62px 20px;
-  }
-
-  .login-grid{
-    grid-template-columns:1fr;
-  }
-
-  .palace-live-bonus-grid{
-    grid-template-columns:1fr;
-  }
-
-  .palace-box.wide{
-    grid-column:span 1;
-  }
-
-  .games-grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-  }
-
-  .game-card{
-    padding:12px;
-    border-radius:22px;
-  }
-
-  .game-card img{
-    height:125px;
-    border-radius:14px;
-  }
-
-  .game-card h3{
-    font-size:17px;
-  }
-
-  .game-card p{
-    font-size:13px;
-  }
-
-  .game-card a{
-    padding:11px 22px;
-  }
-
-  .sticky-play{
-    left:16px;
-    right:16px;
-    bottom:16px;
-  }
-
-  .modal-actions{
-    flex-direction:column;
-  }
-
-  .modal-actions button,
-  .modal-actions a{
-    min-width:unset;
-  }
+  .top-nav{display:none}
+  .mobile-nav{display:flex}
+  .home-hero{min-height:64vh;background-size:contain;margin-top:66px}
+  .click-enter{display:none}
+  .click-play{left:22%;top:43%;width:25%;height:6%}
+  .click-rules{left:54%;top:43%;width:29%;height:6%}
+  section{padding:62px 20px}
+  .login-grid{grid-template-columns:1fr}
+  .palace-live-bonus-grid{grid-template-columns:1fr}
+  .palace-box.wide{grid-column:span 1}
+  .games-grid{grid-template-columns:repeat(2,1fr);gap:18px}
+  .game-card{padding:12px;border-radius:22px}
+  .game-card img{height:125px;border-radius:14px}
+  .game-card h3{font-size:17px}
+  .game-card p{font-size:13px}
+  .game-card a{padding:11px 22px}
+  .sticky-play{left:16px;right:16px;bottom:16px}
+  .modal-actions{flex-direction:column}
+  .modal-actions button,.modal-actions a{min-width:unset}
 }
-
 @media(max-width:430px){
-  .home-hero{
-    min-height:58vh;
-  }
-
-  .click-play,
-  .click-rules{
-    display:none;
-  }
-
-  .palace-wheel-wrap{
-    width:230px;
-    height:230px;
-  }
-
-  .palace-wheel{
-    width:210px;
-    height:210px;
-  }
-
-  .palace-wheel-center{
-    width:96px;
-    height:96px;
-  }
-
-  .palace-wheel-center img{
-    width:86px;
-    height:86px;
-  }
-
-  .games-grid{
-    gap:14px;
-  }
-
-  .game-card img{
-    height:110px;
-  }
+  .home-hero{min-height:58vh}
+  .click-play,.click-rules{display:none}
+  .palace-wheel-wrap{width:230px;height:230px}
+  .palace-wheel{width:210px;height:210px}
+  .palace-wheel-center{width:96px;height:96px}
+  .palace-wheel-center img{width:86px;height:86px}
+  .games-grid{gap:14px}
+  .game-card img{height:110px}
 }
+
+/* FINAL DEPLOY SAFETY */
+section, header { scroll-margin-top: 84px; }
+
 </style>
 </head>
 <body>
 
-<!-- AP OPENING LOADER -->
 <div id="preloader">
   <div class="loader-inner">
-    <img
-      class="loader-ap"
-      src="https://i.postimg.cc/wvjfHGR3/Chat-GPT-Image-Jun-3-2026-06-27-02-PM.png"
-      alt="AP Logo"
-    >
-    <div class="loader-ap-text">AP</div>
+    <img class="loader-ap" src="https://i.postimg.cc/wvjfHGR3/Chat-GPT-Image-Jun-3-2026-06-27-02-PM.png" alt="AP Logo">
     <div class="loader-text">LOADING THE PALACE</div>
     <div class="loader-bar"><span></span></div>
   </div>
 </div>
 
-<!-- MOBILE NAV -->
+<nav class="top-nav" id="topNav">
+  <a href="#home" class="top-nav-brand"><img src="https://i.postimg.cc/wvjfHGR3/Chat-GPT-Image-Jun-3-2026-06-27-02-PM.png" alt="AP">Aub's Palace</a>
+  <ul class="top-nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#bonus">Spins</a></li>
+    <li><a href="#games">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a class="top-nav-cta" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter</a></li>
+  </ul>
+</nav>
+
 <nav class="mobile-nav">
   <div class="mobile-brand">♛ Aub's Palace</div>
   <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
@@ -1088,984 +225,298 @@ footer{
   <a href="#login">Login</a>
   <a href="#bonus">Bonuses</a>
   <a href="#rules">Rules</a>
-  <a href="#games">Games</a>
+  <a href="#games">Gallery</a>
   <a href="#about">About</a>
   <a href="#contact">Contact</a>
   <a class="gold" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a>
 </div>
 
-<!-- HERO -->
 <header class="home-hero" id="home">
   <div class="hero-clicks">
-    <a
-      class="click-enter"
-      href="https://www.facebook.com/share/1C4aY1zm1e/"
-      target="_blank"
-      rel="noopener"
-      aria-label="Enter the Palace on Facebook"
-    >
-      Enter the Palace
-    </a>
-
-    <a
-      class="click-play"
-      href="https://www.facebook.com/share/1C4aY1zm1e/"
-      target="_blank"
-      rel="noopener"
-      aria-label="Play now on Facebook"
-    >
-      Play Now
-    </a>
-
-    <a
-      class="click-rules"
-      href="#rules"
-      aria-label="View rules"
-    >
-      View Rules
-    </a>
+    <a class="click-enter" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Enter the Palace on Facebook">Enter the Palace</a>
+    <a class="click-play" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Play now on Facebook">Play Now</a>
+    <a class="click-rules" href="#rules" aria-label="View rules">View Rules</a>
   </div>
 </header>
 
-<!-- LOGIN -->
 <section class="login-section" id="login">
   <h2 class="section-title">Player Login</h2>
-  <p class="section-subtitle">
-    Log in with your Aub's Palace website ID and password to unlock your Daily Palace Wheel and Monthly Crown Wheel.
-  </p>
-
+  <p class="section-subtitle">Log in with your Aub's Palace website ID and password to unlock your Daily Palace Wheel and Monthly Crown Wheel.</p>
   <div class="login-card" id="loginCard">
     <div class="login-grid">
-      <div>
-        <label for="loginEmail">Website ID / Email</label>
-        <input
-          id="loginEmail"
-          type="email"
-          autocomplete="username"
-          placeholder="example@aubspalace.com"
-        >
-      </div>
-
-      <div>
-        <label for="loginPassword">Password</label>
-        <input
-          id="loginPassword"
-          type="password"
-          autocomplete="current-password"
-          placeholder="Enter password"
-        >
-      </div>
-
+      <div><label for="loginEmail">Website ID / Email</label><input id="loginEmail" type="email" autocomplete="username" placeholder="example@aubspalace.com"></div>
+      <div><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password"></div>
       <button onclick="loginPlayer()">Login</button>
     </div>
-
-    <div class="player-status" id="playerStatus">
-      Need a website ID and password? Tap a Spin button and we'll help you request one on Facebook.
-    </div>
-
-    <button class="small-gold-btn logout-btn" id="logoutBtn" onclick="logoutPlayer()">
-      Logout
-    </button>
+    <div class="player-status" id="playerStatus">Need a website ID and password? Tap a Spin button and we'll help you request one on Facebook.</div>
+    <button class="small-gold-btn logout-btn" id="logoutBtn" onclick="logoutPlayer()">Logout</button>
   </div>
 </section>
 
-<!-- BONUS WHEELS -->
 <section class="palace-live-bonus-section" id="bonus">
   <h2 class="section-title">Palace Bonus Wheels & Live Wins</h2>
-  <p class="section-subtitle">
-    Spin the Daily Palace Wheel once every 24 hours. The Monthly Crown Wheel unlocks only after Aub's Palace approves your weekly play screenshot in the backend.
-  </p>
-
+  <p class="section-subtitle">Spin the Daily Palace Wheel once every 24 hours. The Monthly Crown Wheel unlocks only after Aub's Palace approves your weekly play screenshot in the backend.</p>
   <div class="palace-live-bonus-grid">
-
-    <!-- DAILY WHEEL -->
     <div class="palace-box">
       <h2>🎡 Daily Palace Wheel</h2>
       <p>Spin once every 24 hours for instant cash rewards or bonus offers.</p>
-
-      <div class="reward-list">
-        <span>$1</span>
-        <span>$2</span>
-        <span>$3</span>
-        <span>15% Bonus</span>
-        <span>Try Again Tomorrow</span>
-      </div>
-
-      <div class="palace-wheel-wrap">
-        <div class="palace-wheel" id="dailyWheel">
-          <div class="palace-wheel-center">
-            <img
-              src="https://i.postimg.cc/wvjfHGR3/Chat-GPT-Image-Jun-3-2026-06-27-02-PM.png"
-              alt="AP"
-            >
-          </div>
-        </div>
-      </div>
-
-      <button
-        class="palace-bonus-btn"
-        id="dailySpinBtn"
-        onclick="handleDailySpin()"
-        aria-label="Spin the daily wheel"
-      >
-        SPIN DAILY WHEEL
-      </button>
-
-      <div class="palace-result" id="dailyWheelResult">
-        Log in to spin your daily bonus.
-      </div>
-
+      <div class="reward-list"><span>$1</span><span>$2</span><span>$3</span><span>15% Bonus</span><span>Try Again Tomorrow</span></div>
+      <div class="palace-wheel-wrap"><div class="palace-wheel" id="dailyWheel"></div><div class="palace-wheel-center"><img src="https://i.postimg.cc/wvjfHGR3/Chat-GPT-Image-Jun-3-2026-06-27-02-PM.png" alt="AP"></div></div>
+      <button class="palace-bonus-btn" id="dailySpinBtn" onclick="handleDailySpin()" aria-label="Spin the daily wheel">SPIN DAILY WHEEL</button>
+      <div class="palace-result" id="dailyWheelResult">Log in to spin your daily bonus.</div>
       <div class="palace-timer" id="dailyResetTimer"></div>
-
-      <div class="bonus-help-card">
-        <strong>Need a Website ID?</strong>
-        <span>Tap Spin and we'll prepare a Facebook message for your login request.</span>
-      </div>
+      <div class="bonus-help-card"><strong>Need a Website ID?</strong><span>Tap Spin and we'll prepare a Facebook message for your login request.</span></div>
     </div>
 
-    <!-- MONTHLY WHEEL -->
     <div class="palace-box">
       <h2>👑 Monthly Crown Wheel</h2>
       <p>Qualified players spin once every 30 days after Aub's Palace backend approval.</p>
-
-      <div class="reward-list">
-        <span>$5</span>
-        <span>$8</span>
-        <span>Surprise Gift</span>
-        <span>Rewards</span>
-        <span>$10 Free Play</span>
-        <span>Try Again Later</span>
-      </div>
-
-      <div class="palace-wheel-wrap">
-        <div class="palace-wheel" id="monthlyWheel">
-          <div class="palace-wheel-center">
-            <img
-              src="https://i.postimg.cc/wvjfHGR3/Chat-GPT-Image-Jun-3-2026-06-27-02-PM.png"
-              alt="AP"
-            >
-          </div>
-        </div>
-      </div>
-
-      <button
-        class="palace-bonus-btn gold"
-        id="monthlySpinBtn"
-        onclick="handleMonthlySpin()"
-        aria-label="Spin the monthly wheel"
-      >
-        SPIN MONTHLY WHEEL
-      </button>
-
-      <div class="palace-result" id="monthlyWheelResult">
-        Log in to check monthly approval.
-      </div>
-
+      <div class="reward-list"><span>$5</span><span>$8</span><span>Surprise Gift</span><span>Rewards</span><span>$10 Free Play</span><span>Try Again Later</span></div>
+      <div class="palace-wheel-wrap"><div class="palace-wheel" id="monthlyWheel"></div><div class="palace-wheel-center"><img src="https://i.postimg.cc/wvjfHGR3/Chat-GPT-Image-Jun-3-2026-06-27-02-PM.png" alt="AP"></div></div>
+      <button class="palace-bonus-btn gold" id="monthlySpinBtn" onclick="handleMonthlySpin()" aria-label="Spin the monthly wheel">SPIN MONTHLY WHEEL</button>
+      <div class="palace-result" id="monthlyWheelResult">Log in to check monthly approval.</div>
       <div class="palace-timer" id="monthlyResetTimer"></div>
-
-      <div class="weekly-confirm">
-        <label>
-          <input type="checkbox" id="weeklyConfirm">
-          I confirm I played at least 5 times this week
-        </label>
-        <div style="margin-top:8px;color:rgba(255,255,255,.65);font-size:12px;font-family:Arial,sans-serif">
-          Monthly spin still requires Aub's Palace backend approval.
-        </div>
-      </div>
-
-      <div class="monthly-requirement">
-        Play at least <strong>5 times this week</strong>, send your screenshot to Facebook, then Aub's Palace unlocks your monthly spin.
-      </div>
+      <div class="weekly-confirm"><label><input type="checkbox" id="weeklyConfirm"> I confirm I played at least 5 times this week</label><div style="margin-top:8px;color:rgba(255,255,255,.65);font-size:12px;font-family:Arial,sans-serif">Monthly spin still requires Aub's Palace backend approval.</div></div>
+      <div class="monthly-requirement">Play at least <strong>5 times this week</strong>, send your screenshot to Facebook, then Aub's Palace unlocks your monthly spin.</div>
     </div>
 
-    <!-- CLAIM INFO -->
-    <div class="palace-box wide">
-      <h2>📲 How to Claim Rewards</h2>
-      <div class="claim-note">
-        After winning, fill in your name, contact info, game username, and any notes.
-        Your claim message is auto-prepared — copy it and send it with your screenshot to Aub's Palace on Facebook.
-        Rewards are reviewed before being added. Duplicate or unverifiable claims may be voided.
-      </div>
-    </div>
-
-    <!-- YESTERDAY WINNERS -->
-    <div class="palace-box wide">
-      <h2>🏆 Yesterday's Winners</h2>
-      <p>Top winners from the last completed reward cycle.</p>
-      <div class="palace-list" id="yesterdayWinners"></div>
-    </div>
-
-    <!-- LIVE WINNERS -->
-    <div class="palace-box wide">
-      <h2>🔥 Live Winners</h2>
-      <p>Live activity updates every 30 seconds.</p>
-
-      <div class="palace-live-count">
-        <span id="liveWinnerCount">128</span>
-        <small>active winners today · max 400</small>
-      </div>
-
-      <div class="palace-list" id="liveWinnerFeed"></div>
-    </div>
-
+    <div class="palace-box wide"><h2>📲 How to Claim Rewards</h2><div class="claim-note">After winning, fill in your name, contact info, game username, and any notes. Your claim message is auto-prepared — copy it and send it with your screenshot to Aub's Palace on Facebook. Rewards are reviewed before being added. Duplicate or unverifiable claims may be voided.</div></div>
+    <div class="palace-box wide"><h2>🏆 Yesterday's Winners</h2><p>Top winners from the last completed reward cycle.</p><div class="palace-list" id="yesterdayWinners"></div></div>
+    <div class="palace-box wide"><h2>🔥 Live Winners</h2><p>Live activity updates every 30 seconds.</p><div class="palace-live-count"><span id="liveWinnerCount">128</span><small>active winners today · max 400</small></div><div class="palace-list" id="liveWinnerFeed"></div></div>
   </div>
 </section>
 
-<!-- RULES -->
 <section id="rules">
   <h2 class="section-title">Rules</h2>
-
-  <div class="rules-card-frame">
-    <img
-      src="https://i.postimg.cc/fTGrXC1D/final-rules.png"
-      alt="Aub's Palace Rules"
-    >
-  </div>
+  <div class="rules-card-frame"><img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub's Palace Rules"></div>
 </section>
-<!-- NEED ACCOUNT MODAL -->
+
 <div class="modal" id="needAccountModal">
   <div class="modal-box">
     <h2>Website ID Required</h2>
     <p>You need an Aub's Palace website ID and password before you can spin. Copy this message, then send it to us on Facebook:</p>
-
     <textarea id="accountRequestMessage" readonly>Hey Aub's Palace! Could you please give me my website ID and password so I can log in and claim my daily and monthly bonus?</textarea>
-
-    <div class="modal-actions">
-      <button class="modal-gold" onclick="copyAccountRequest()">Copy Message</button>
-      <a class="modal-primary" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Open Facebook</a>
-      <button class="modal-close" onclick="closeNeedAccountModal()">Close</button>
-    </div>
+    <div class="modal-actions"><button class="modal-gold" onclick="copyAccountRequest()">Copy Message</button><a class="modal-primary" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Open Facebook</a><button class="modal-close" onclick="closeNeedAccountModal()">Close</button></div>
   </div>
 </div>
 
-<!-- CLAIM MODAL -->
 <div class="modal" id="claimModal">
   <div class="modal-box">
     <h2>👑 Claim Your Palace Reward</h2>
     <p id="claimSummary">Enter your info below. Your claim message will be auto-prepared.</p>
-
-    <label for="claimName">Name / Facebook Name</label>
-    <input id="claimName" type="text" placeholder="Your name or Facebook name" oninput="updateClaimMessage()">
-
-    <label for="claimContact">Contact Info</label>
-    <input id="claimContact" type="text" placeholder="Email, phone, or Facebook name" oninput="updateClaimMessage()">
-
-    <label for="claimGameUsername">Game Username</label>
-    <input id="claimGameUsername" type="text" placeholder="Your game username" oninput="updateClaimMessage()">
-
-    <label for="claimNote">Extra Note</label>
-    <textarea id="claimNote" placeholder="Optional: game played, screenshot info, or anything else..." oninput="updateClaimMessage()"></textarea>
-
-    <label for="claimMessage">Your Claim Message</label>
-    <textarea id="claimMessage" readonly style="min-height:130px"></textarea>
-
+    <label for="claimName">Name / Facebook Name</label><input id="claimName" type="text" placeholder="Your name or Facebook name" oninput="updateClaimMessage()">
+    <label for="claimContact">Contact Info</label><input id="claimContact" type="text" placeholder="Email, phone, or Facebook name" oninput="updateClaimMessage()">
+    <label for="claimGameUsername">Game Username</label><input id="claimGameUsername" type="text" placeholder="Your game username" oninput="updateClaimMessage()">
+    <label for="claimNote">Extra Note</label><textarea id="claimNote" placeholder="Optional: game played, screenshot info, or anything else..." oninput="updateClaimMessage()"></textarea>
+    <label for="claimMessage">Your Claim Message</label><textarea id="claimMessage" readonly style="min-height:130px"></textarea>
     <div class="claim-status" id="claimStatus"></div>
-
-    <div class="modal-actions">
-      <button class="modal-gold" onclick="copyClaimMessage()">Copy Claim</button>
-      <button class="modal-email" onclick="sendClaimEmail()">Send by Email</button>
-      <a class="modal-primary" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Claim on Facebook</a>
-      <button class="modal-close" onclick="closeClaimModal()">Close</button>
-    </div>
+    <div class="modal-actions"><button class="modal-gold" onclick="copyClaimMessage()">Copy Claim</button><button class="modal-email" onclick="sendClaimEmail()">Send by Email</button><a class="modal-primary" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Claim on Facebook</a><button class="modal-close" onclick="closeClaimModal()">Close</button></div>
   </div>
 </div>
 
-<!-- GAMES -->
 <section id="games">
   <h2 class="section-title">Games</h2>
   <p class="section-subtitle">Choose your game and enter Aub's trusted game collection.</p>
-
   <div class="games-grid">
-    <article class="game-card">
-      <img src="https://i.postimg.cc/tJppp1FJ/mw.webp" alt="Milkyway">
-      <h3>Milkyway</h3>
-      <p>Space arcade shooter.</p>
-      <a href="https://milkywayapp.xyz/" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/q7x1WzMf/orion.jpg" alt="Orion Stars">
-      <h3>Orion Stars</h3>
-      <p>Fish shooting casino game.</p>
-      <a href="http://start.orionstars.vip:8580/index.html" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/Vky46jJ5/juwa777.jpg" alt="Juwa">
-      <h3>Juwa</h3>
-      <p>All-in-one casino app.</p>
-      <a href="https://dl.juwa777.com/" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/2jMgQL1g/vb.webp" alt="Vblink">
-      <h3>Vblink</h3>
-      <p>Modern casino gameplay.</p>
-      <a href="https://www.vblink777.club/" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/rsrnngDb/game.jpg" alt="Game Vault">
-      <h3>Game Vault</h3>
-      <p>Casino hub platform.</p>
-      <a href="https://download.gamevault999.com/" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/PxZY07Mz/vegas.jpg" alt="LasVegas Sweeps">
-      <h3>LasVegas Sweeps</h3>
-      <p>Vegas-style slots.</p>
-      <a href="https://m.lasvegassweeps.com/" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/7PnT70t4/gr.jpg" alt="Gameroom">
-      <h3>Gameroom</h3>
-      <p>Arcade + casino combo.</p>
-      <a href="https://www.gameroom777.com/" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/5tJVwYkZ/cm.jpg" alt="Cash Machine">
-      <h3>Cash Machine</h3>
-      <p>Slot-focused game.</p>
-      <a href="https://www.cashmachine777.com/" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/yYS4tyqs/pm.jpg" alt="Panda Master">
-      <h3>Panda Master</h3>
-      <p>Fish shooter game.</p>
-      <a href="https://pandamaster.vip:8888/index.html" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/kgsmvX3G/fire.jpg" alt="Fire Kirin">
-      <h3>Fire Kirin</h3>
-      <p>Multiplayer fish game.</p>
-      <a href="http://start.firekirin.xyz:8580/" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/3xSqwyQW/juwa-2.jpg" alt="Juwa 2.0">
-      <h3>Juwa 2.0</h3>
-      <p>Upgraded Juwa version.</p>
-      <a href="https://m.juwa2.com/" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/gcsHpCWq/mafia.jpg" alt="Mafia">
-      <h3>Mafia</h3>
-      <p>Crime-themed casino.</p>
-      <a href="https://www.mafia77777.com/" target="_blank" rel="noopener">Play</a>
-    </article>
-
-    <article class="game-card">
-      <img src="https://i.postimg.cc/SsDY0pMC/mr.jpg" alt="Mr. All in One">
-      <h3>Mr. All in One</h3>
-      <p>Complete game pack.</p>
-      <a href="https://www.mrallinone777.com/" target="_blank" rel="noopener">Play</a>
-    </article>
+    <article class="game-card"><img src="https://i.postimg.cc/tJppp1FJ/mw.webp" alt="Milkyway"><h3>Milkyway</h3><p>Space arcade shooter.</p><a href="https://milkywayapp.xyz/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/q7x1WzMf/orion.jpg" alt="Orion Stars"><h3>Orion Stars</h3><p>Fish shooting casino game.</p><a href="http://start.orionstars.vip:8580/index.html" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/Vky46jJ5/juwa777.jpg" alt="Juwa"><h3>Juwa</h3><p>All-in-one casino app.</p><a href="https://dl.juwa777.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/2jMgQL1g/vb.webp" alt="Vblink"><h3>Vblink</h3><p>Modern casino gameplay.</p><a href="https://www.vblink777.club/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/rsrnngDb/game.jpg" alt="Game Vault"><h3>Game Vault</h3><p>Casino hub platform.</p><a href="https://download.gamevault999.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/PxZY07Mz/vegas.jpg" alt="LasVegas Sweeps"><h3>LasVegas Sweeps</h3><p>Vegas-style slots.</p><a href="https://m.lasvegassweeps.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/7PnT70t4/gr.jpg" alt="Gameroom"><h3>Gameroom</h3><p>Arcade + casino combo.</p><a href="https://www.gameroom777.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/5tJVwYkZ/cm.jpg" alt="Cash Machine"><h3>Cash Machine</h3><p>Slot-focused game.</p><a href="https://www.cashmachine777.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/yYS4tyqs/pm.jpg" alt="Panda Master"><h3>Panda Master</h3><p>Fish shooter game.</p><a href="https://pandamaster.vip:8888/index.html" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/kgsmvX3G/fire.jpg" alt="Fire Kirin"><h3>Fire Kirin</h3><p>Multiplayer fish game.</p><a href="http://start.firekirin.xyz:8580/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/3xSqwyQW/juwa-2.jpg" alt="Juwa 2.0"><h3>Juwa 2.0</h3><p>Upgraded Juwa version.</p><a href="https://m.juwa2.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/gcsHpCWq/mafia.jpg" alt="Mafia"><h3>Mafia</h3><p>Crime-themed casino.</p><a href="https://www.mafia77777.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/SsDY0pMC/mr.jpg" alt="Mr. All in One"><h3>Mr. All in One</h3><p>Complete game pack.</p><a href="https://www.mrallinone777.com/" target="_blank" rel="noopener">Play</a></article>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <h2 class="section-title">About Us</h2>
   <p class="about-text">Where authenticity meets real wins.</p>
-
-  <div class="trust-strip">
-    <span>💸 Fast Cashouts</span>
-    <span>🔒 Secure Payments</span>
-    <span>💬 24/7 Chat Support</span>
-    <span>👑 Real Payouts</span>
-    <span>⚖️ Fair Play</span>
-  </div>
+  <div class="trust-strip"><span>💸 Fast Cashouts</span><span>🔒 Secure Payments</span><span>💬 24/7 Chat Support</span><span>👑 Real Payouts</span><span>⚖️ Fair Play</span></div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <h2 class="section-title">Contact</h2>
-
   <div class="contact-icons">
-    <a href="mailto:aubreyhere98@gmail.com" aria-label="Email Aub's Palace">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/1280px-Gmail_icon_%282020%29.svg.png" alt="Gmail">
-    </a>
-
-    <a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Aub's Palace on Facebook">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="Facebook">
-    </a>
-
-    <a href="https://venmo.com/code?user_id=4145490287396764155&created=1776192079" target="_blank" rel="noopener" aria-label="Pay with Venmo">
-      <img src="https://i.postimg.cc/J44jPCqv/venmo.png" alt="Venmo">
-    </a>
+    <a href="mailto:aubreyhere98@gmail.com" aria-label="Email Aub's Palace"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/1280px-Gmail_icon_%282020%29.svg.png" alt="Gmail"></a>
+    <a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Aub's Palace on Facebook"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="Facebook"></a>
+    <a href="https://venmo.com/code?user_id=4145490287396764155&created=1776192079" target="_blank" rel="noopener" aria-label="Pay with Venmo"><img src="https://i.postimg.cc/J44jPCqv/venmo.png" alt="Venmo"></a>
   </div>
 </section>
 
 <footer>© 2023 Aub's Palace — Come for the spins... stay for Aub.</footer>
+<div class="sticky-play"><a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a></div>
 
-<div class="sticky-play">
-  <a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a>
-</div>
 <script>
-// ── SUPABASE ──
 const SUPABASE_URL="https://ctiyileypjciqmglhees.supabase.co";
 const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0aXlpbGV5cGpjaXFtZ2xoZWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTM4NDgsImV4cCI6MjA5NjA4OTg0OH0.nDboCmvqNMmUKTmJUBqlQi58IIvq1lI71dCYDSNMQhM";
 const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-
 const FORMSPREE_ENDPOINT="";
-
-let currentUser=null;
-let currentPlayer=null;
-let currentClaim={type:"",reward:""};
-let dailySpinVisualRotation=0;
-let monthlySpinVisualRotation=0;
-
-const DAILY_SEGMENTS={
-  "$1":36,
-  "$2":108,
-  "$3":180,
-  "15% Bonus":252,
-  "Try Again Tomorrow":324
-};
-
-const MONTHLY_SEGMENTS={
-  "$5":30,
-  "$8":90,
-  "Surprise Gift":150,
-  "Rewards":210,
-  "$10 Free Play":270,
-  "Try Again Later":330
-};
-
+let currentUser=null,currentPlayer=null,currentClaim={type:"",reward:""},dailySpinVisualRotation=0,monthlySpinVisualRotation=0;
+const DAILY_SEGMENTS={"$1":36,"$2":108,"$3":180,"15% Bonus":252,"Try Again Tomorrow":324};
+const MONTHLY_SEGMENTS={"$5":30,"$8":90,"Surprise Gift":150,"Rewards":210,"$10 Free Play":270,"Try Again Later":330};
 const NON_PRIZES=["Try Again Tomorrow","Try Again Later"];
 
-// ── PRELOADER ──
-function hidePreloader(){
-  const preloader=document.getElementById("preloader");
-  if(preloader){
-    preloader.classList.add("hide");
+// Nav background on scroll
+const topNav=document.getElementById("topNav");
+if(topNav){window.addEventListener("scroll",function(){topNav.classList.toggle("scrolled",window.scrollY>40)})}
+
+// Build crisp SVG wheels with labels + gold dividers
+const DAILY_LABELS=["$1","$2","$3","15% Bonus","Try Again"];
+const MONTHLY_LABELS=["$5","$8","Surprise Gift","Rewards","$10 Free Play","Try Again"];
+const WHEEL_FILLS=["#7d28c9","#f3dd72","#5a13a0","#e9cf63","#8b1bd8","#f7e892"];
+function buildWheel(id,labels){
+  const el=document.getElementById(id);if(!el)return;
+  const N=labels.length,cx=130,cy=130,r=126,seg=360/N;
+  let svg='<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">';
+  for(let i=0;i<N;i++){
+    const a0=(i*seg-90)*Math.PI/180,a1=((i+1)*seg-90)*Math.PI/180;
+    const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+    svg+='<path d="M'+cx+' '+cy+' L'+x0.toFixed(2)+' '+y0.toFixed(2)+' A'+r+' '+r+' 0 0 1 '+x1.toFixed(2)+' '+y1.toFixed(2)+' Z" fill="'+WHEEL_FILLS[i%WHEEL_FILLS.length]+'" stroke="#f5d878" stroke-width="2"/>';
+    const mid=(i*seg+seg/2-90)*Math.PI/180,tr=r*0.62;
+    const tx=cx+tr*Math.cos(mid),ty=cy+tr*Math.sin(mid),rot=i*seg+seg/2;
+    const dark=WHEEL_FILLS[i%WHEEL_FILLS.length].toLowerCase();
+    const isLight=dark==="#f3dd72"||dark==="#e9cf63"||dark==="#f7e892";
+    const fill=isLight?"#2b003b":"#fff5d6";
+    const fs=labels[i].length>9?9:11;
+    svg+='<text x="'+tx.toFixed(2)+'" y="'+ty.toFixed(2)+'" fill="'+fill+'" font-family="Orbitron,Arial" font-size="'+fs+'" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate('+rot.toFixed(2)+' '+tx.toFixed(2)+' '+ty.toFixed(2)+')">'+labels[i]+'</text>';
   }
+  svg+='</svg>';el.innerHTML=svg;
 }
+buildWheel("dailyWheel",DAILY_LABELS);
+buildWheel("monthlyWheel",MONTHLY_LABELS);
 
-document.addEventListener("DOMContentLoaded",function(){
-  setTimeout(hidePreloader,1500);
-});
-
+function hidePreloader(){const preloader=document.getElementById("preloader");if(preloader){preloader.classList.add("hide")}}
+document.addEventListener("DOMContentLoaded",function(){setTimeout(hidePreloader,1500)});
 setTimeout(hidePreloader,2800);
 
-// ── MOBILE MENU ──
-const mobileMenuBtn=document.getElementById("mobileMenuBtn");
-const mobileMenu=document.getElementById("mobileMenu");
+const mobileMenuBtn=document.getElementById("mobileMenuBtn"),mobileMenu=document.getElementById("mobileMenu");
+if(mobileMenuBtn&&mobileMenu){mobileMenuBtn.addEventListener("click",function(){mobileMenu.classList.toggle("open")});document.querySelectorAll("#mobileMenu a").forEach(function(link){link.addEventListener("click",function(){mobileMenu.classList.remove("open")})})}
 
-if(mobileMenuBtn && mobileMenu){
-  mobileMenuBtn.addEventListener("click",function(){
-    mobileMenu.classList.toggle("open");
-  });
-
-  document.querySelectorAll("#mobileMenu a").forEach(function(link){
-    link.addEventListener("click",function(){
-      mobileMenu.classList.remove("open");
-    });
-  });
-}
-
-// ── LOGIN ──
 async function loginPlayer(){
-  const email=document.getElementById("loginEmail").value.trim();
-  const password=document.getElementById("loginPassword").value;
-
-  if(!email || !password){
-    setPlayerStatus("Please enter your website ID/email and password.");
-    return;
-  }
-
+  const email=document.getElementById("loginEmail").value.trim(),password=document.getElementById("loginPassword").value;
+  if(!email||!password){setPlayerStatus("Please enter your website ID/email and password.");return}
   setPlayerStatus("Logging in...");
-
-  const {data,error}=await supabaseClient.auth.signInWithPassword({
-    email:email,
-    password:password
-  });
-
-  if(error){
-    setPlayerStatus("Login failed: "+error.message);
-    return;
-  }
-
-  currentUser=data.user;
-  await loadPlayerProfile();
+  const {data,error}=await supabaseClient.auth.signInWithPassword({email:email,password:password});
+  if(error){setPlayerStatus("Login failed: "+error.message);return}
+  currentUser=data.user;await loadPlayerProfile();
 }
-
 async function logoutPlayer(){
-  await supabaseClient.auth.signOut();
-
-  currentUser=null;
-  currentPlayer=null;
-
+  await supabaseClient.auth.signOut();currentUser=null;currentPlayer=null;
   document.getElementById("loginCard").classList.remove("logged-in");
-
   setPlayerStatus("Logged out. Log in to spin your bonus wheels.");
-
   document.getElementById("dailyWheelResult").innerText="Log in to spin your daily bonus.";
   document.getElementById("monthlyWheelResult").innerText="Log in to check monthly approval.";
   document.getElementById("dailyResetTimer").innerText="";
   document.getElementById("monthlyResetTimer").innerText="";
 }
-
-function setPlayerStatus(message){
-  document.getElementById("playerStatus").innerText=message;
-}
-
+function setPlayerStatus(message){document.getElementById("playerStatus").innerText=message}
 async function loadPlayerProfile(){
-  const {data:{user}}=await supabaseClient.auth.getUser();
-  currentUser=user;
-
-  if(!user){
-    setPlayerStatus("Need a website ID and password? Tap a Spin button and request one on Facebook.");
-    return;
-  }
-
-  const {data,error}=await supabaseClient
-    .from("players")
-    .select("*")
-    .eq("id",user.id)
-    .single();
-
-  if(error || !data){
-    setPlayerStatus("Logged in, but player profile was not found. Contact Aub's Palace.");
-    return;
-  }
-
-  currentPlayer=data;
-
-  document.getElementById("loginCard").classList.add("logged-in");
-
-  setPlayerStatus(
-    "Welcome, "+data.name+" 👑 | Website ID: "+(user.email || "Your Aub's Palace ID")+". Your bonus wheels are loaded below."
-  );
-
+  const {data:{user}}=await supabaseClient.auth.getUser();currentUser=user;
+  if(!user){setPlayerStatus("Need a website ID and password? Tap a Spin button and request one on Facebook.");return}
+  const {data,error}=await supabaseClient.from("players").select("*").eq("id",user.id).single();
+  if(error||!data){setPlayerStatus("Logged in, but player profile was not found. Contact Aub's Palace.");return}
+  currentPlayer=data;document.getElementById("loginCard").classList.add("logged-in");
+  setPlayerStatus("Welcome, "+data.name+" 👑 | Website ID: "+(user.email||"Your Aub's Palace ID")+". Your bonus wheels are loaded below.");
   updateSpinStatusUI();
 }
 
-// ── ACCOUNT REQUEST MODAL ──
-function openNeedAccountModal(){
-  document.getElementById("needAccountModal").classList.add("open");
-}
+function openNeedAccountModal(){document.getElementById("needAccountModal").classList.add("open")}
+function closeNeedAccountModal(){document.getElementById("needAccountModal").classList.remove("open")}
+async function copyAccountRequest(){const message=document.getElementById("accountRequestMessage").value;await navigator.clipboard.writeText(message);alert("Message copied. Open Facebook and send it to Aub's Palace.")}
 
-function closeNeedAccountModal(){
-  document.getElementById("needAccountModal").classList.remove("open");
-}
-
-async function copyAccountRequest(){
-  const message=document.getElementById("accountRequestMessage").value;
-  await navigator.clipboard.writeText(message);
-  alert("Message copied. Open Facebook and send it to Aub's Palace.");
-}
-
-// ── CLAIM MODAL ──
 function openClaimModal(type,reward){
-  currentClaim={
-    type:type,
-    reward:reward
-  };
-
-  document.getElementById("claimSummary").innerText=
-    "You won "+reward+" from the "+type+". Fill in your details below.";
-
+  currentClaim={type:type,reward:reward};
+  document.getElementById("claimSummary").innerText="You won "+reward+" from the "+type+". Fill in your details below.";
   document.getElementById("claimName").value="";
   document.getElementById("claimContact").value="";
   document.getElementById("claimGameUsername").value="";
   document.getElementById("claimNote").value="";
   document.getElementById("claimStatus").innerText="";
-
   updateClaimMessage();
-
   document.getElementById("claimModal").classList.add("open");
 }
-
-function closeClaimModal(){
-  document.getElementById("claimModal").classList.remove("open");
-}
-
+function closeClaimModal(){document.getElementById("claimModal").classList.remove("open")}
 function updateClaimMessage(){
-  const name=document.getElementById("claimName").value.trim();
-  const contact=document.getElementById("claimContact").value.trim();
-  const username=document.getElementById("claimGameUsername").value.trim();
-  const note=document.getElementById("claimNote").value.trim();
-
-  document.getElementById("claimMessage").value=
-    "Hi Aub's Palace, I want to claim my bonus reward.\n\n"+
-    "Bonus Type: "+currentClaim.type+"\n"+
-    "Reward Won: "+currentClaim.reward+"\n"+
-    "Name / Facebook Name: "+(name || "(not filled)")+"\n"+
-    "Contact Info: "+(contact || "(not filled)")+"\n"+
-    "Game Username: "+(username || "(not filled)")+"\n"+
-    "Note: "+(note || "N/A")+"\n\n"+
-    "I will send my screenshot for verification.";
+  const name=document.getElementById("claimName").value.trim(),contact=document.getElementById("claimContact").value.trim(),username=document.getElementById("claimGameUsername").value.trim(),note=document.getElementById("claimNote").value.trim();
+  document.getElementById("claimMessage").value="Hi Aub's Palace, I want to claim my bonus reward.\n\n"+"Bonus Type: "+currentClaim.type+"\n"+"Reward Won: "+currentClaim.reward+"\n"+"Name / Facebook Name: "+(name||"(not filled)")+"\n"+"Contact Info: "+(contact||"(not filled)")+"\n"+"Game Username: "+(username||"(not filled)")+"\n"+"Note: "+(note||"N/A")+"\n\n"+"I will send my screenshot for verification.";
 }
-
-async function copyClaimMessage(){
-  updateClaimMessage();
-
-  await navigator.clipboard.writeText(document.getElementById("claimMessage").value);
-
-  document.getElementById("claimStatus").innerText=
-    "✅ Copied! Open Facebook and send it with your screenshot.";
-}
-
+async function copyClaimMessage(){updateClaimMessage();await navigator.clipboard.writeText(document.getElementById("claimMessage").value);document.getElementById("claimStatus").innerText="✅ Copied! Open Facebook and send it with your screenshot."}
 async function sendClaimEmail(){
   updateClaimMessage();
-
-  const name=document.getElementById("claimName").value.trim() || "Player";
-  const message=document.getElementById("claimMessage").value;
-  const subject="Palace Reward Claim – "+currentClaim.reward+" – "+name;
-
-  if(FORMSPREE_ENDPOINT){
-    document.getElementById("claimStatus").innerText="📧 Sending...";
-
-    try{
-      const response=await fetch(FORMSPREE_ENDPOINT,{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json",
-          "Accept":"application/json"
-        },
-        body:JSON.stringify({
-          subject:subject,
-          message:message,
-          _replyto:document.getElementById("claimContact").value.trim()
-        })
-      });
-
-      if(response.ok){
-        document.getElementById("claimStatus").innerText=
-          "✅ Claim sent! We'll review and confirm.";
-        return;
-      }
-
-      document.getElementById("claimStatus").innerText=
-        "Couldn't auto-send — opening your email app...";
-    }catch(error){
-      document.getElementById("claimStatus").innerText=
-        "Couldn't auto-send — opening your email app...";
-    }
-  }
-
+  const name=document.getElementById("claimName").value.trim()||"Player",message=document.getElementById("claimMessage").value,subject="Palace Reward Claim – "+currentClaim.reward+" – "+name;
+  if(FORMSPREE_ENDPOINT){document.getElementById("claimStatus").innerText="📧 Sending...";try{const response=await fetch(FORMSPREE_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({subject:subject,message:message,_replyto:document.getElementById("claimContact").value.trim()})});if(response.ok){document.getElementById("claimStatus").innerText="✅ Claim sent! We'll review and confirm.";return}document.getElementById("claimStatus").innerText="Couldn't auto-send — opening your email app..."}catch(error){document.getElementById("claimStatus").innerText="Couldn't auto-send — opening your email app..."}}
   document.getElementById("claimStatus").innerText="📧 Opening your email app...";
-
-  window.location.href=
-    "mailto:aubreyhere98@gmail.com?subject="+
-    encodeURIComponent(subject)+
-    "&body="+
-    encodeURIComponent(message);
+  window.location.href="mailto:aubreyhere98@gmail.com?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(message);
 }
 
-// ── TIMERS ──
-const DAY_MS=24*60*60*1000;
-const MONTH_MS=30*24*60*60*1000;
-
-function formatRemaining(ms){
-  if(ms<=0){
-    return"Available now";
-  }
-
-  const totalSeconds=Math.floor(ms/1000);
-  const days=Math.floor(totalSeconds/86400);
-  const hours=Math.floor((totalSeconds%86400)/3600);
-  const minutes=Math.floor((totalSeconds%3600)/60);
-  const seconds=totalSeconds%60;
-
-  if(days>0){
-    return days+"d "+hours+"h "+minutes+"m";
-  }
-
-  return hours+"h "+minutes+"m "+seconds+"s";
-}
-
-function timeSince(dateString){
-  if(!dateString){
-    return Infinity;
-  }
-
-  return Date.now()-new Date(dateString).getTime();
-}
-
+const DAY_MS=24*60*60*1000,MONTH_MS=30*24*60*60*1000;
+function formatRemaining(ms){if(ms<=0)return"Available now";const totalSeconds=Math.floor(ms/1000),days=Math.floor(totalSeconds/86400),hours=Math.floor((totalSeconds%86400)/3600),minutes=Math.floor((totalSeconds%3600)/60),seconds=totalSeconds%60;return days>0?days+"d "+hours+"h "+minutes+"m":hours+"h "+minutes+"m "+seconds+"s"}
+function timeSince(dateString){if(!dateString)return Infinity;return Date.now()-new Date(dateString).getTime()}
 function updateSpinStatusUI(){
-  if(!currentPlayer){
-    return;
-  }
-
-  const dailySpinBtn=document.getElementById("dailySpinBtn");
-  const monthlySpinBtn=document.getElementById("monthlySpinBtn");
-  const dailyWheelResult=document.getElementById("dailyWheelResult");
-  const monthlyWheelResult=document.getElementById("monthlyWheelResult");
-  const dailyResetTimer=document.getElementById("dailyResetTimer");
-  const monthlyResetTimer=document.getElementById("monthlyResetTimer");
-
-  const dailyRemaining=currentPlayer.daily_last_spin
-    ? DAY_MS-timeSince(currentPlayer.daily_last_spin)
-    : 0;
-
-  const monthlyRemaining=currentPlayer.monthly_last_spin
-    ? MONTH_MS-timeSince(currentPlayer.monthly_last_spin)
-    : 0;
-
-  if(dailyRemaining>0){
-    dailySpinBtn.disabled=true;
-    dailyWheelResult.innerText="Last reward: "+(currentPlayer.last_daily_reward || "used");
-    dailyResetTimer.innerText="⏳ Next daily spin in: "+formatRemaining(dailyRemaining);
-  }else{
-    dailySpinBtn.disabled=false;
-    dailyWheelResult.innerText="Daily spin available — good luck!";
-    dailyResetTimer.innerText="✅ Available now.";
-  }
-
-  if(monthlyRemaining>0){
-    monthlySpinBtn.disabled=true;
-    monthlyWheelResult.innerText="Last reward: "+(currentPlayer.last_monthly_reward || "used");
-    monthlyResetTimer.innerText="⏳ Next monthly spin in: "+formatRemaining(monthlyRemaining);
-  }else if(!currentPlayer.monthly_allowed){
-    monthlySpinBtn.disabled=true;
-    monthlyWheelResult.innerText="Monthly spin locked. Send your weekly play screenshot to Facebook for approval.";
-    monthlyResetTimer.innerText="Waiting for Aub's Palace backend approval.";
-  }else{
-    monthlySpinBtn.disabled=false;
-    monthlyWheelResult.innerText="Monthly spin approved — confirm your weekly plays, then spin.";
-    monthlyResetTimer.innerText="✅ Approved.";
-  }
+  if(!currentPlayer)return;
+  const dailySpinBtn=document.getElementById("dailySpinBtn"),monthlySpinBtn=document.getElementById("monthlySpinBtn"),dailyWheelResult=document.getElementById("dailyWheelResult"),monthlyWheelResult=document.getElementById("monthlyWheelResult"),dailyResetTimer=document.getElementById("dailyResetTimer"),monthlyResetTimer=document.getElementById("monthlyResetTimer");
+  const dailyRemaining=currentPlayer.daily_last_spin?DAY_MS-timeSince(currentPlayer.daily_last_spin):0,monthlyRemaining=currentPlayer.monthly_last_spin?MONTH_MS-timeSince(currentPlayer.monthly_last_spin):0;
+  if(dailyRemaining>0){dailySpinBtn.disabled=true;dailyWheelResult.innerText="Last reward: "+(currentPlayer.last_daily_reward||"used");dailyResetTimer.innerText="⏳ Next daily spin in: "+formatRemaining(dailyRemaining)}else{dailySpinBtn.disabled=false;dailyWheelResult.innerText="Daily spin available — good luck!";dailyResetTimer.innerText="✅ Available now."}
+  if(monthlyRemaining>0){monthlySpinBtn.disabled=true;monthlyWheelResult.innerText="Last reward: "+(currentPlayer.last_monthly_reward||"used");monthlyResetTimer.innerText="⏳ Next monthly spin in: "+formatRemaining(monthlyRemaining)}else if(!currentPlayer.monthly_allowed){monthlySpinBtn.disabled=true;monthlyWheelResult.innerText="Monthly spin locked. Send your weekly play screenshot to Facebook for approval.";monthlyResetTimer.innerText="Waiting for Aub's Palace backend approval."}else{monthlySpinBtn.disabled=false;monthlyWheelResult.innerText="Monthly spin approved — confirm your weekly plays, then spin.";monthlyResetTimer.innerText="✅ Approved."}
 }
 
-// ── WHEEL SPIN LOGIC ──
-const dailyWheel=document.getElementById("dailyWheel");
-const monthlyWheel=document.getElementById("monthlyWheel");
-const dailySpinBtn=document.getElementById("dailySpinBtn");
-const monthlySpinBtn=document.getElementById("monthlySpinBtn");
-
-function spinTo(wheelElement,currentRotation,segmentAngle){
-  const target=currentRotation+1800+(360-segmentAngle);
-  wheelElement.style.transform="rotate("+target+"deg)";
-  return target;
-}
-
+const dailyWheel=document.getElementById("dailyWheel"),monthlyWheel=document.getElementById("monthlyWheel"),dailySpinBtn=document.getElementById("dailySpinBtn"),monthlySpinBtn=document.getElementById("monthlySpinBtn");
+function spinTo(wheelElement,currentRotation,segmentAngle){const target=currentRotation+1800+(360-segmentAngle);wheelElement.style.transform="rotate("+target+"deg)";return target}
 async function handleDailySpin(){
-  if(!currentUser){
-    openNeedAccountModal();
-    return;
-  }
-
-  dailySpinBtn.disabled=true;
-
-  document.getElementById("dailyWheelResult").innerText="Spinning...";
-
+  if(!currentUser){openNeedAccountModal();return}
+  dailySpinBtn.disabled=true;document.getElementById("dailyWheelResult").innerText="Spinning...";
   const {data,error}=await supabaseClient.rpc("spin_daily_wheel");
-
-  if(error){
-    document.getElementById("dailyWheelResult").innerText="Spin error: "+error.message;
-    await loadPlayerProfile();
-    return;
-  }
-
-  if(!data.success){
-    document.getElementById("dailyWheelResult").innerText=data.message || "Daily spin unavailable.";
-    await loadPlayerProfile();
-    return;
-  }
-
-  const angle=DAILY_SEGMENTS[data.reward]!==undefined
-    ? DAILY_SEGMENTS[data.reward]
-    : Math.random()*360;
-
+  if(error){document.getElementById("dailyWheelResult").innerText="Spin error: "+error.message;await loadPlayerProfile();return}
+  if(!data.success){document.getElementById("dailyWheelResult").innerText=data.message||"Daily spin unavailable.";await loadPlayerProfile();return}
+  const angle=DAILY_SEGMENTS[data.reward]!==undefined?DAILY_SEGMENTS[data.reward]:Math.random()*360;
   dailySpinVisualRotation=spinTo(dailyWheel,dailySpinVisualRotation,angle);
-
   document.getElementById("dailyWheelResult").innerText="🎉 You won: "+data.reward;
-
-  if(!NON_PRIZES.includes(data.reward)){
-    setTimeout(function(){
-      openClaimModal("Daily Palace Wheel",data.reward);
-    },4400);
-  }
-
+  if(!NON_PRIZES.includes(data.reward)){setTimeout(function(){openClaimModal("Daily Palace Wheel",data.reward)},4400)}
   setTimeout(loadPlayerProfile,4500);
 }
-
 async function handleMonthlySpin(){
-  if(!currentUser){
-    openNeedAccountModal();
-    return;
-  }
-
-  if(!document.getElementById("weeklyConfirm").checked){
-    document.getElementById("monthlyWheelResult").innerText=
-      "Please confirm you played 5+ times this week before spinning.";
-    return;
-  }
-
-  monthlySpinBtn.disabled=true;
-
-  document.getElementById("monthlyWheelResult").innerText="Checking eligibility...";
-
+  if(!currentUser){openNeedAccountModal();return}
+  if(!document.getElementById("weeklyConfirm").checked){document.getElementById("monthlyWheelResult").innerText="Please confirm you played 5+ times this week before spinning.";return}
+  monthlySpinBtn.disabled=true;document.getElementById("monthlyWheelResult").innerText="Checking eligibility...";
   const {data,error}=await supabaseClient.rpc("spin_monthly_wheel");
-
-  if(error){
-    document.getElementById("monthlyWheelResult").innerText="Spin error: "+error.message;
-    await loadPlayerProfile();
-    return;
-  }
-
-  if(!data.success){
-    document.getElementById("monthlyWheelResult").innerText=data.message || "Monthly spin unavailable.";
-    await loadPlayerProfile();
-    return;
-  }
-
-  const angle=MONTHLY_SEGMENTS[data.reward]!==undefined
-    ? MONTHLY_SEGMENTS[data.reward]
-    : Math.random()*360;
-
+  if(error){document.getElementById("monthlyWheelResult").innerText="Spin error: "+error.message;await loadPlayerProfile();return}
+  if(!data.success){document.getElementById("monthlyWheelResult").innerText=data.message||"Monthly spin unavailable.";await loadPlayerProfile();return}
+  const angle=MONTHLY_SEGMENTS[data.reward]!==undefined?MONTHLY_SEGMENTS[data.reward]:Math.random()*360;
   monthlySpinVisualRotation=spinTo(monthlyWheel,monthlySpinVisualRotation,angle);
-
   document.getElementById("monthlyWheelResult").innerText="🎉 You won: "+data.reward;
-
-  if(!NON_PRIZES.includes(data.reward)){
-    setTimeout(function(){
-      openClaimModal("Monthly Crown Wheel",data.reward);
-    },4400);
-  }
-
+  if(!NON_PRIZES.includes(data.reward)){setTimeout(function(){openClaimModal("Monthly Crown Wheel",data.reward)},4400)}
   setTimeout(loadPlayerProfile,4500);
 }
 
-// ── LIVE WINNERS ──
-const palaceNames=[
-  "Marcus","Jordan","Tyler","Aisha","Devon","Zara",
-  "Chris","Monique","Jake","Destiny","Andre","Kyla",
-  "Brian","Jasmine","Mike","Tasha","Carlos","Brittany",
-  "Darius","Simone","Kevin","Ashley","Damon","Ariana"
-];
-
-const palaceGames=[
-  "Milkyway","Orion Stars","Juwa","Vblink","Game Vault",
-  "LasVegas Sweeps","Gameroom","Cash Machine","Panda Master",
-  "Fire Kirin","Juwa 2.0","Mafia","Mr. All in One"
-];
-
-function randomItem(array){
-  return array[Math.floor(Math.random()*array.length)];
-}
-
-function money(min=45,max=850){
-  return "$"+(Math.floor(Math.random()*(max-min+1))+min).toLocaleString();
-}
-
-function rareMoney(){
-  return Math.random()<0.08 ? money(1200,2800) : money(45,850);
-}
-
+const palaceNames=["Marcus","Jordan","Tyler","Aisha","Devon","Zara","Chris","Monique","Jake","Destiny","Andre","Kyla","Brian","Jasmine","Mike","Tasha","Carlos","Brittany","Darius","Simone","Kevin","Ashley","Damon","Ariana"];
+const palaceGames=["Milkyway","Orion Stars","Juwa","Vblink","Game Vault","LasVegas Sweeps","Gameroom","Cash Machine","Panda Master","Fire Kirin","Juwa 2.0","Mafia","Mr. All in One"];
+function randomItem(array){return array[Math.floor(Math.random()*array.length)]}
+function money(min=45,max=850){return"$"+(Math.floor(Math.random()*(max-min+1))+min).toLocaleString()}
+function rareMoney(){return Math.random()<0.08?money(1200,2800):money(45,850)}
 function generateYesterdayWinners(){
-  const winners=[
-    {
-      rank:"#1",
-      name:randomItem(palaceNames),
-      game:randomItem(palaceGames),
-      amount:money(650,1200)
-    },
-    {
-      rank:"#2",
-      name:randomItem(palaceNames),
-      game:randomItem(palaceGames),
-      amount:money(400,850)
-    },
-    {
-      rank:"#3",
-      name:randomItem(palaceNames),
-      game:randomItem(palaceGames),
-      amount:money(250,650)
-    }
-  ];
-
-  document.getElementById("yesterdayWinners").innerHTML=winners.map(function(winner){
-    return '<div class="palace-row"><span>'+
-      winner.rank+' '+winner.name+' · '+winner.game+
-      '</span><strong>'+winner.amount+'</strong></div>';
-  }).join("");
+  const winners=[{rank:"#1",name:randomItem(palaceNames),game:randomItem(palaceGames),amount:money(650,1200)},{rank:"#2",name:randomItem(palaceNames),game:randomItem(palaceGames),amount:money(400,850)},{rank:"#3",name:randomItem(palaceNames),game:randomItem(palaceGames),amount:money(250,650)}];
+  document.getElementById("yesterdayWinners").innerHTML=winners.map(function(winner){return'<div class="palace-row"><span>'+winner.rank+' '+winner.name+' · '+winner.game+'</span><strong>'+winner.amount+'</strong></div>'}).join("");
 }
-
-function generateLiveWin(){
-  const actions=[
-    "won",
-    "cashed out",
-    "triggered bonus on",
-    "hit jackpot on",
-    "scored on",
-    "unlocked reward on",
-    "got multiplier on"
-  ];
-
-  return{
-    name:randomItem(palaceNames),
-    game:randomItem(palaceGames),
-    action:randomItem(actions),
-    amount:rareMoney()
-  };
-}
-
+function generateLiveWin(){const actions=["won","cashed out","triggered bonus on","hit jackpot on","scored on","unlocked reward on","got multiplier on"];return{name:randomItem(palaceNames),game:randomItem(palaceGames),action:randomItem(actions),amount:rareMoney()}}
 let palaceLiveWins=[];
-
-function renderLiveWins(){
-  if(palaceLiveWins.length===0){
-    for(let i=0;i<5;i++){
-      palaceLiveWins.push(generateLiveWin());
-    }
-  }
-
-  document.getElementById("liveWinnerFeed").innerHTML=palaceLiveWins.map(function(win){
-    return '<div class="palace-row"><span>🔥 '+
-      win.name+' '+win.action+' '+win.game+
-      '</span><strong>'+win.amount+'</strong></div>';
-  }).join("");
-}
-
-function updateLiveWinnerCount(){
-  let count=Number(localStorage.getItem("palaceLiveWinnerCount") || 128);
-
-  if(count>=400){
-    count=400;
-  }else{
-    count=Math.min(400,count+Math.floor(Math.random()*3)+1);
-  }
-
-  localStorage.setItem("palaceLiveWinnerCount",count.toString());
-  document.getElementById("liveWinnerCount").innerText=count.toLocaleString();
-}
-
-function updateLiveWins(){
-  palaceLiveWins.unshift(generateLiveWin());
-  palaceLiveWins=palaceLiveWins.slice(0,5);
-  renderLiveWins();
-  updateLiveWinnerCount();
-}
-
-// ── INIT ──
+function renderLiveWins(){if(palaceLiveWins.length===0){for(let i=0;i<5;i++){palaceLiveWins.push(generateLiveWin())}}document.getElementById("liveWinnerFeed").innerHTML=palaceLiveWins.map(function(win){return'<div class="palace-row"><span>🔥 '+win.name+' '+win.action+' '+win.game+'</span><strong>'+win.amount+'</strong></div>'}).join("")}
+function updateLiveWinnerCount(){let count=Number(localStorage.getItem("palaceLiveWinnerCount")||128);if(count>=400){count=400}else{count=Math.min(400,count+Math.floor(Math.random()*3)+1)}localStorage.setItem("palaceLiveWinnerCount",count.toString());document.getElementById("liveWinnerCount").innerText=count.toLocaleString()}
+function updateLiveWins(){palaceLiveWins.unshift(generateLiveWin());palaceLiveWins=palaceLiveWins.slice(0,5);renderLiveWins();updateLiveWinnerCount()}
 document.addEventListener("DOMContentLoaded",async function(){
   const {data}=await supabaseClient.auth.getSession();
-
-  if(data.session && data.session.user){
-    currentUser=data.session.user;
-    await loadPlayerProfile();
-  }
-
-  generateYesterdayWinners();
-  renderLiveWins();
-  updateLiveWinnerCount();
-
-  setInterval(function(){
-    if(currentPlayer){
-      updateSpinStatusUI();
-    }
-  },1000);
-
+  if(data.session&&data.session.user){currentUser=data.session.user;await loadPlayerProfile()}
+  generateYesterdayWinners();renderLiveWins();updateLiveWinnerCount();
+  setInterval(function(){if(currentPlayer){updateSpinStatusUI()}},1000);
   setInterval(updateLiveWins,30000);
 });
 </script>
 </body>
 </html>
+index-8.html
+Zoomed out of item.

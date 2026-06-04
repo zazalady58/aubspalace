@@ -30,37 +30,36 @@ a{color:inherit;text-decoration:none}
 button,input,textarea{font:inherit}
 :focus-visible{outline:2px solid #f5d878;outline-offset:3px}
 
+/* LOADER */
 #preloader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at center,rgba(194,74,255,.34),transparent 36%),linear-gradient(180deg,#050009,#21002f 56%,#050009);transition:opacity .7s ease,visibility .7s ease}
 #preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
 .loader-inner{width:min(380px,82vw);text-align:center}
-.loader-ap{width:min(240px,64vw);display:block;margin:0 auto 18px;filter:drop-shadow(0 0 34px rgba(199,90,255,.95)) drop-shadow(0 0 20px rgba(245,216,120,.65));animation:apFloat 1.6s ease-in-out infinite alternate}
-.loader-text{margin-top:6px;color:#f5d878;letter-spacing:.55em;font-size:11px;text-transform:uppercase}
+.loader-ap{width:min(260px,70vw);display:block;margin:0 auto 10px;filter:drop-shadow(0 0 28px rgba(199,90,255,.95)) drop-shadow(0 0 18px rgba(245,216,120,.70));animation:apFloat 1.6s ease-in-out infinite alternate}
+.loader-ap-text{color:#f5d878;font-size:clamp(32px,7vw,72px);font-weight:900;letter-spacing:.08em;line-height:1;text-shadow:0 0 16px rgba(245,216,120,.85),0 0 32px rgba(199,90,255,.80);margin-top:-12px}
+.loader-text{margin-top:14px;color:#f5d878;letter-spacing:.55em;font-size:11px;text-transform:uppercase}
 .loader-bar{width:76%;height:8px;margin:18px auto 0;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.08);border:1px solid rgba(245,216,120,.58);box-shadow:0 0 18px rgba(199,90,255,.35)}
 .loader-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#f5d878,#c75cff,#f5d878);animation:loaderFill 1.65s ease forwards}
 @keyframes loaderFill{to{width:100%}}
 @keyframes apFloat{from{transform:translateY(4px) scale(.97);opacity:.90}to{transform:translateY(-4px) scale(1.03);opacity:1}}
 
-/* DESKTOP TOP NAV */
-.top-nav{position:fixed;top:0;left:0;right:0;height:74px;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(8,0,14,.55);backdrop-filter:blur(14px);border-bottom:1px solid rgba(245,216,120,.18);transition:background .3s}
-.top-nav.scrolled{background:rgba(8,0,14,.92)}
-.top-nav-brand{display:flex;align-items:center;gap:10px;color:#f5d878;font-weight:900;font-size:20px;text-shadow:0 0 14px rgba(245,216,120,.35)}
-.top-nav-brand img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(199,92,255,.7))}
-.top-nav-links{display:flex;align-items:center;gap:34px;list-style:none}
-.top-nav-links a{position:relative;color:#fff;font-size:15px;letter-spacing:.04em;padding:6px 2px;transition:color .25s}
-.top-nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:linear-gradient(90deg,#f5d878,#c75cff);transform:scaleX(0);transform-origin:center;transition:transform .28s}
-.top-nav-links a:hover{color:#f5d878}
-.top-nav-links a:hover::after{transform:scaleX(1)}
-.top-nav-cta{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00!important;padding:10px 22px!important;border-radius:999px;font-weight:900;box-shadow:0 0 22px rgba(245,216,120,.35)}
-.top-nav-cta::after{display:none}
+/* REAL NAV OVER HERO */
+.site-nav{position:absolute;top:0;left:0;right:0;height:84px;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;background:linear-gradient(180deg,rgba(5,0,10,.86),rgba(5,0,10,.40),transparent);backdrop-filter:blur(5px)}
+.nav-brand{display:flex;align-items:center;gap:10px;color:#f5d878;font-weight:900;font-size:22px;text-shadow:0 0 13px rgba(245,216,120,.35)}
+.nav-brand .crown{font-size:30px}
+.nav-links{display:flex;align-items:center;gap:34px;color:#fff}
+.nav-links a{font-size:15px;text-shadow:0 0 10px rgba(0,0,0,.75);transition:.2s}
+.nav-links a:hover,.nav-links a.active{color:#f5d878}
+.nav-cta{border:1px solid rgba(245,216,120,.72);border-radius:999px;padding:13px 26px;color:#f5d878;background:rgba(5,0,10,.28);box-shadow:0 0 18px rgba(245,216,120,.10)}
 
-.home-hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#100018;background-image:linear-gradient(180deg,rgba(16,0,24,.10),rgba(16,0,24,.30)),url("https://i.postimg.cc/435LDgyT/Chat-GPT-Image-Jun-3-2026-06-25-23-PM.png");background-size:contain;background-position:center;background-repeat:no-repeat;overflow:hidden}
-.hero-clicks{position:absolute;inset:0;z-index:5;pointer-events:none}
+/* HERO */
+.home-hero{position:relative;min-height:100vh;background:linear-gradient(180deg,rgba(5,0,8,.04),rgba(5,0,8,.16)),url("https://i.postimg.cc/435LDgyT/Chat-GPT-Image-Jun-3-2026-06-25-23-PM.png") center top / cover no-repeat;overflow:hidden}
+.hero-clicks{position:absolute;inset:0;z-index:10;pointer-events:none}
 .hero-clicks a{position:absolute;display:block;pointer-events:auto;text-indent:-9999px;overflow:hidden;border-radius:999px}
-.click-enter{top:2.1%;right:7.1%;width:245px;height:56px}
 .click-play{left:29.7%;top:47.8%;width:210px;height:62px}
 .click-rules{left:56.3%;top:47.8%;width:230px;height:62px}
 
-.mobile-nav{position:fixed;top:0;left:0;right:0;height:66px;z-index:50;display:none;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(8,0,14,.82);border-bottom:1px solid rgba(245,216,120,.18);backdrop-filter:blur(12px)}
+/* MOBILE NAV */
+.mobile-nav{position:fixed;top:0;left:0;right:0;height:66px;z-index:50;display:none;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(8,0,14,.90);border-bottom:1px solid rgba(245,216,120,.18);backdrop-filter:blur(12px)}
 .mobile-brand{color:#f5d878;font-weight:900;font-size:18px;text-shadow:0 0 12px rgba(245,216,120,.28)}
 .mobile-menu-btn{font-size:34px;cursor:pointer;color:#f5d878;background:none;border:none;line-height:1}
 .mobile-menu{position:fixed;top:66px;left:0;right:0;z-index:49;display:none;background:rgba(8,0,14,.97);border-bottom:1px solid rgba(245,216,120,.18)}
@@ -83,6 +82,15 @@ button,.small-gold-btn{border:none;border-radius:999px;padding:14px 18px;font-we
 .logout-btn{display:none;margin:18px auto 0}
 .logged-in .logout-btn{display:flex}
 
+/* TRUST BAR */
+.hero-trust-section{padding:28px 6vw;background:linear-gradient(180deg,#09000f,#170020);border-top:1px solid rgba(245,216,120,.15);border-bottom:1px solid rgba(245,216,120,.15)}
+.hero-trust{max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;border:1px solid rgba(245,216,120,.24);border-radius:28px;padding:16px;background:rgba(5,0,10,.58);box-shadow:0 0 36px rgba(201,94,255,.20)}
+.trust-item{display:flex;gap:12px;align-items:center;justify-content:center;padding:8px 10px;border-right:1px solid rgba(245,216,120,.14)}
+.trust-item:last-child{border-right:none}
+.trust-icon{font-size:30px;color:#f5d878;filter:drop-shadow(0 0 10px rgba(245,216,120,.35))}
+.trust-title{color:#f5d878;font-weight:900;font-size:13px}
+.trust-desc{font-family:Arial,sans-serif;font-size:12px;color:rgba(255,255,255,.78);line-height:1.25}
+
 .palace-live-bonus-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
 .palace-box{background:radial-gradient(circle at center,rgba(199,92,255,.10),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.035));border:1px solid rgba(245,216,120,.16);border-radius:28px;padding:28px;box-shadow:0 0 38px rgba(201,94,255,.12)}
 .palace-box.wide{grid-column:span 2}
@@ -91,14 +99,15 @@ button,.small-gold-btn{border:none;border-radius:999px;padding:14px 18px;font-we
 .reward-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 18px;min-height:48px;align-items:center}
 .reward-list span{font-size:12px;color:#f5d878;background:rgba(10,0,18,.45);border:1px solid rgba(245,216,120,.22);border-radius:999px;padding:8px 11px;box-shadow:inset 0 0 10px rgba(245,216,120,.04)}
 
-.palace-wheel-wrap{width:280px;height:280px;margin:26px auto 24px;position:relative;display:grid;place-items:center}
-.palace-wheel-wrap::before{content:"";position:absolute;inset:-16px;border-radius:50%;background:conic-gradient(from 0deg,#f5d878,#c75cff,#f5d878,#8b1bd8,#f5d878);filter:blur(10px);opacity:.55;animation:wheelGlow 6s linear infinite}
-@keyframes wheelGlow{to{transform:rotate(360deg)}}
-.palace-wheel-wrap::after{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-top:30px solid #f5d878;z-index:6;filter:drop-shadow(0 0 12px rgba(245,216,120,.95))}
-.palace-wheel{width:260px;height:260px;border-radius:50%;position:relative;border:5px solid #f5d878;box-shadow:0 0 30px rgba(245,216,120,.30),0 0 50px rgba(199,92,255,.35),inset 0 0 30px rgba(0,0,0,.35);transition:transform 4.4s cubic-bezier(.16,.84,.28,1)}
-.palace-wheel svg{width:100%;height:100%;display:block;border-radius:50%}
-.palace-wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:50%;background:radial-gradient(circle,rgba(40,8,55,.98),rgba(12,0,20,.99) 70%);display:grid;place-items:center;border:3px solid #f5d878;box-shadow:0 0 18px rgba(245,216,120,.45),inset 0 0 16px rgba(199,92,255,.4);z-index:3;overflow:hidden}
-.palace-wheel-center img{width:78px;height:78px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(199,92,255,.9))}
+.palace-wheel-wrap{width:260px;height:260px;margin:26px auto 24px;position:relative;display:grid;place-items:center}
+.palace-wheel-wrap::before{content:"";position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(circle,rgba(245,216,120,.24),transparent 57%),conic-gradient(from 0deg,#f5d878,#c75cff,#f5d878,#8b1bd8,#f5d878);filter:blur(8px);opacity:.78}
+.palace-wheel-wrap::after{content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:28px solid #f5d878;z-index:6;filter:drop-shadow(0 0 12px rgba(245,216,120,.9))}
+.palace-wheel{width:238px;height:238px;border-radius:50%;display:grid;place-items:center;position:relative;overflow:hidden;border:4px solid rgba(245,216,120,.78);box-shadow:0 0 28px rgba(245,216,120,.18),0 0 40px rgba(199,92,255,.32),inset 0 0 34px rgba(0,0,0,.42);transition:transform 4.2s cubic-bezier(.16,.84,.28,1)}
+#dailyWheel{background:conic-gradient(#f7e47f 0 20%,#b64ff6 20% 40%,#681bb3 40% 60%,#fff1a6 60% 80%,#2b003b 80% 100%)}
+#monthlyWheel{background:conic-gradient(#f7e47f 0 16.66%,#b64ff6 16.66% 33.33%,#681bb3 33.33% 50%,#fff1a6 50% 66.66%,#8b1bd8 66.66% 83.33%,#2b003b 83.33% 100%)}
+.palace-wheel::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.32),transparent 15%),radial-gradient(circle,transparent 34%,rgba(0,0,0,.30) 72%);pointer-events:none}
+.palace-wheel-center{width:112px;height:112px;border-radius:50%;background:radial-gradient(circle,rgba(245,216,120,.22),rgba(18,0,28,.96) 62%);display:grid;place-items:center;border:2px solid rgba(245,216,120,.45);box-shadow:inset 0 0 18px rgba(201,94,255,.28),0 0 20px rgba(245,216,120,.20);z-index:3;overflow:hidden}
+.palace-wheel-center img{width:98px;height:98px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(199,92,255,.85)) drop-shadow(0 0 8px rgba(245,216,120,.45))}
 .palace-bonus-btn{width:100%;border:none;border-radius:999px;padding:16px 18px;background:linear-gradient(135deg,#8b1bd8,#c85fff);color:#fff;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 0 22px rgba(201,94,255,.28)}
 .palace-bonus-btn.gold{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00}
 .palace-bonus-btn:disabled{opacity:.48;cursor:not-allowed}
@@ -157,14 +166,16 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
 .claim-status{margin-top:12px;text-align:center;color:#f5d878;font-family:Arial,sans-serif;font-size:14px;min-height:20px}
 
 @media(max-width:900px){
-  .top-nav{display:none}
+  .site-nav{display:none}
   .mobile-nav{display:flex}
-  .home-hero{min-height:64vh;background-size:contain;margin-top:66px}
-  .click-enter{display:none}
+  .home-hero{min-height:72vh;background-position:center top;margin-top:66px}
   .click-play{left:22%;top:43%;width:25%;height:6%}
   .click-rules{left:54%;top:43%;width:29%;height:6%}
   section{padding:62px 20px}
   .login-grid{grid-template-columns:1fr}
+  .hero-trust{grid-template-columns:1fr;border-radius:22px}
+  .trust-item{border-right:none;border-bottom:1px solid rgba(245,216,120,.12);justify-content:flex-start}
+  .trust-item:last-child{border-bottom:none}
   .palace-live-bonus-grid{grid-template-columns:1fr}
   .palace-box.wide{grid-column:span 1}
   .games-grid{grid-template-columns:repeat(2,1fr);gap:18px}
@@ -187,10 +198,6 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
   .games-grid{gap:14px}
   .game-card img{height:110px}
 }
-
-/* FINAL DEPLOY SAFETY */
-section, header { scroll-margin-top: 84px; }
-
 </style>
 </head>
 <body>
@@ -198,22 +205,30 @@ section, header { scroll-margin-top: 84px; }
 <div id="preloader">
   <div class="loader-inner">
     <img class="loader-ap" src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP Logo">
+    <div class="loader-ap-text">AP</div>
     <div class="loader-text">LOADING THE PALACE</div>
     <div class="loader-bar"><span></span></div>
   </div>
 </div>
 
-<nav class="top-nav" id="topNav">
-  <a href="#home" class="top-nav-brand"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP">Aub's Palace</a>
-  <ul class="top-nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#rules">Rules</a></li>
-    <li><a href="#bonus">Spins</a></li>
-    <li><a href="#games">Games</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a class="top-nav-cta" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter</a></li>
-  </ul>
-</nav>
+<header class="home-hero" id="home">
+  <nav class="site-nav">
+    <a href="#home" class="nav-brand"><span class="crown">♛</span><span>Aub's Palace</span></a>
+    <div class="nav-links">
+      <a href="#home" class="active">Home</a>
+      <a href="#rules">Rules</a>
+      <a href="#bonus">Spins</a>
+      <a href="#games">Games</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a>
+  </nav>
+
+  <div class="hero-clicks">
+    <a class="click-play" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Play now on Facebook">Play Now</a>
+    <a class="click-rules" href="#rules" aria-label="View rules">View Rules</a>
+  </div>
+</header>
 
 <nav class="mobile-nav">
   <div class="mobile-brand">♛ Aub's Palace</div>
@@ -226,20 +241,23 @@ section, header { scroll-margin-top: 84px; }
   <a href="#bonus">Spins</a>
   <a href="#games">Games</a>
   <a href="#contact">Contact</a>
+  <a href="#login">Login</a>
   <a class="gold" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a>
 </div>
 
-<header class="home-hero" id="home">
-  <div class="hero-clicks">
-    <a class="click-enter" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Enter the Palace on Facebook">Enter the Palace</a>
-    <a class="click-play" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Play now on Facebook">Play Now</a>
-    <a class="click-rules" href="#rules" aria-label="View rules">View Rules</a>
+<section class="hero-trust-section" id="trust">
+  <div class="hero-trust">
+    <div class="trust-item"><span class="trust-icon">💸</span><div><div class="trust-title">Real payouts</div><div class="trust-desc">Fast, reliable, no hidden delays.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">🛡️</span><div><div class="trust-title">Fair play</div><div class="trust-desc">Clear rules, always transparent.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">🎧</span><div><div class="trust-title">24/7 support</div><div class="trust-desc">We're here anytime, day or night.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">⚡</span><div><div class="trust-title">Fast cashouts</div><div class="trust-desc">Lightning-fast withdrawals.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">🔒</span><div><div class="trust-title">Secure transactions</div><div class="trust-desc">Protected deposits and cashouts.</div></div></div>
   </div>
-</header>
+</section>
 
 <section class="login-section" id="login">
   <h2 class="section-title">Player Login</h2>
-  <p class="section-subtitle">Log in with your Aub's Palace website ID and password to unlock your Daily Palace Wheel and Monthly Crown Wheel.</p>
+  <p class="section-subtitle">Already have your website ID and password? Log in here first, then spin below.</p>
   <div class="login-card" id="loginCard">
     <div class="login-grid">
       <div><label for="loginEmail">Website ID / Email</label><input id="loginEmail" type="email" autocomplete="username" placeholder="example@aubspalace.com"></div>
@@ -251,20 +269,15 @@ section, header { scroll-margin-top: 84px; }
   </div>
 </section>
 
-<section id="rules">
-  <h2 class="section-title">Rules</h2>
-  <div class="rules-card-frame"><img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub's Palace Rules"></div>
-</section>
-
 <section class="palace-live-bonus-section" id="bonus">
-  <h2 class="section-title">Palace Bonus Wheels & Live Wins</h2>
+  <h2 class="section-title">Spins & Live Wins</h2>
   <p class="section-subtitle">Spin the Daily Palace Wheel once every 24 hours. The Monthly Crown Wheel unlocks only after Aub's Palace approves your weekly play screenshot in the backend.</p>
   <div class="palace-live-bonus-grid">
     <div class="palace-box">
       <h2>🎡 Daily Palace Wheel</h2>
       <p>Spin once every 24 hours for instant cash rewards or bonus offers.</p>
       <div class="reward-list"><span>$1</span><span>$2</span><span>$3</span><span>15% Bonus</span><span>Try Again Tomorrow</span></div>
-      <div class="palace-wheel-wrap"><div class="palace-wheel" id="dailyWheel"></div><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div>
+      <div class="palace-wheel-wrap"><div class="palace-wheel" id="dailyWheel"><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div></div>
       <button class="palace-bonus-btn" id="dailySpinBtn" onclick="handleDailySpin()" aria-label="Spin the daily wheel">SPIN DAILY WHEEL</button>
       <div class="palace-result" id="dailyWheelResult">Log in to spin your daily bonus.</div>
       <div class="palace-timer" id="dailyResetTimer"></div>
@@ -275,7 +288,7 @@ section, header { scroll-margin-top: 84px; }
       <h2>👑 Monthly Crown Wheel</h2>
       <p>Qualified players spin once every 30 days after Aub's Palace backend approval.</p>
       <div class="reward-list"><span>$5</span><span>$8</span><span>Surprise Gift</span><span>Rewards</span><span>$10 Free Play</span><span>Try Again Later</span></div>
-      <div class="palace-wheel-wrap"><div class="palace-wheel" id="monthlyWheel"></div><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div>
+      <div class="palace-wheel-wrap"><div class="palace-wheel" id="monthlyWheel"><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div></div>
       <button class="palace-bonus-btn gold" id="monthlySpinBtn" onclick="handleMonthlySpin()" aria-label="Spin the monthly wheel">SPIN MONTHLY WHEEL</button>
       <div class="palace-result" id="monthlyWheelResult">Log in to check monthly approval.</div>
       <div class="palace-timer" id="monthlyResetTimer"></div>
@@ -289,12 +302,22 @@ section, header { scroll-margin-top: 84px; }
   </div>
 </section>
 
+<section id="rules">
+  <h2 class="section-title">Rules</h2>
+  <div class="rules-card-frame"><img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub's Palace Rules"></div>
+</section>
+
 <div class="modal" id="needAccountModal">
   <div class="modal-box">
     <h2>Website ID Required</h2>
-    <p>You need an Aub's Palace website ID and password before you can spin. Copy this message, then send it to us on Facebook:</p>
+    <p>You need an Aub's Palace website ID and password before you can spin. Already have one? Click login. If not, copy the message and send it on Facebook.</p>
     <textarea id="accountRequestMessage" readonly>Hey Aub's Palace! Could you please give me my website ID and password so I can log in and claim my daily and monthly bonus?</textarea>
-    <div class="modal-actions"><button class="modal-gold" onclick="copyAccountRequest()">Copy Message</button><a class="modal-primary" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Open Facebook</a><button class="modal-close" onclick="closeNeedAccountModal()">Close</button></div>
+    <div class="modal-actions">
+      <button class="modal-gold" onclick="copyAccountRequest()">Copy Message</button>
+      <button class="modal-primary" onclick="goToLogin()">I Have ID — Login</button>
+      <a class="modal-primary" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Open Facebook</a>
+      <button class="modal-close" onclick="closeNeedAccountModal()">Close</button>
+    </div>
   </div>
 </div>
 
@@ -360,41 +383,14 @@ const DAILY_SEGMENTS={"$1":36,"$2":108,"$3":180,"15% Bonus":252,"Try Again Tomor
 const MONTHLY_SEGMENTS={"$5":30,"$8":90,"Surprise Gift":150,"Rewards":210,"$10 Free Play":270,"Try Again Later":330};
 const NON_PRIZES=["Try Again Tomorrow","Try Again Later"];
 
-// Nav background on scroll
-const topNav=document.getElementById("topNav");
-if(topNav){window.addEventListener("scroll",function(){topNav.classList.toggle("scrolled",window.scrollY>40)})}
-
-// Build crisp SVG wheels with labels + gold dividers
-const DAILY_LABELS=["$1","$2","$3","15% Bonus","Try Again"];
-const MONTHLY_LABELS=["$5","$8","Surprise Gift","Rewards","$10 Free Play","Try Again"];
-const WHEEL_FILLS=["#7d28c9","#f3dd72","#5a13a0","#e9cf63","#8b1bd8","#f7e892"];
-function buildWheel(id,labels){
-  const el=document.getElementById(id);if(!el)return;
-  const N=labels.length,cx=130,cy=130,r=126,seg=360/N;
-  let svg='<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">';
-  for(let i=0;i<N;i++){
-    const a0=(i*seg-90)*Math.PI/180,a1=((i+1)*seg-90)*Math.PI/180;
-    const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
-    svg+='<path d="M'+cx+' '+cy+' L'+x0.toFixed(2)+' '+y0.toFixed(2)+' A'+r+' '+r+' 0 0 1 '+x1.toFixed(2)+' '+y1.toFixed(2)+' Z" fill="'+WHEEL_FILLS[i%WHEEL_FILLS.length]+'" stroke="#f5d878" stroke-width="2"/>';
-    const mid=(i*seg+seg/2-90)*Math.PI/180,tr=r*0.62;
-    const tx=cx+tr*Math.cos(mid),ty=cy+tr*Math.sin(mid),rot=i*seg+seg/2;
-    const dark=WHEEL_FILLS[i%WHEEL_FILLS.length].toLowerCase();
-    const isLight=dark==="#f3dd72"||dark==="#e9cf63"||dark==="#f7e892";
-    const fill=isLight?"#2b003b":"#fff5d6";
-    const fs=labels[i].length>9?9:11;
-    svg+='<text x="'+tx.toFixed(2)+'" y="'+ty.toFixed(2)+'" fill="'+fill+'" font-family="Orbitron,Arial" font-size="'+fs+'" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate('+rot.toFixed(2)+' '+tx.toFixed(2)+' '+ty.toFixed(2)+')">'+labels[i]+'</text>';
-  }
-  svg+='</svg>';el.innerHTML=svg;
-}
-buildWheel("dailyWheel",DAILY_LABELS);
-buildWheel("monthlyWheel",MONTHLY_LABELS);
-
 function hidePreloader(){const preloader=document.getElementById("preloader");if(preloader){preloader.classList.add("hide")}}
 document.addEventListener("DOMContentLoaded",function(){setTimeout(hidePreloader,1500)});
 setTimeout(hidePreloader,2800);
 
 const mobileMenuBtn=document.getElementById("mobileMenuBtn"),mobileMenu=document.getElementById("mobileMenu");
 if(mobileMenuBtn&&mobileMenu){mobileMenuBtn.addEventListener("click",function(){mobileMenu.classList.toggle("open")});document.querySelectorAll("#mobileMenu a").forEach(function(link){link.addEventListener("click",function(){mobileMenu.classList.remove("open")})})}
+
+function goToLogin(){closeNeedAccountModal();document.getElementById("login").scrollIntoView({behavior:"smooth"});setTimeout(function(){document.getElementById("loginEmail").focus()},650)}
 
 async function loginPlayer(){
   const email=document.getElementById("loginEmail").value.trim(),password=document.getElementById("loginPassword").value;
@@ -516,5 +512,5 @@ document.addEventListener("DOMContentLoaded",async function(){
 </script>
 </body>
 </html>
-index.claude.html
-Displaying index.claude.html.
+index-9.html
+Displaying index-9.html.

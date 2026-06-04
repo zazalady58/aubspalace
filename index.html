@@ -91,23 +91,24 @@ button,.small-gold-btn{border:none;border-radius:999px;padding:14px 18px;font-we
 .trust-title{color:#f5d878;font-weight:900;font-size:13px}
 .trust-desc{font-family:Arial,sans-serif;font-size:12px;color:rgba(255,255,255,.78);line-height:1.25}
 
-.palace-live-bonus-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-.palace-box{background:radial-gradient(circle at center,rgba(199,92,255,.10),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.035));border:1px solid rgba(245,216,120,.16);border-radius:28px;padding:28px;box-shadow:0 0 38px rgba(201,94,255,.12)}
+.palace-live-bonus-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:22px;align-items:stretch}
+.palace-box{display:flex;flex-direction:column;background:radial-gradient(circle at center,rgba(199,92,255,.10),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.035));border:1px solid rgba(245,216,120,.16);border-radius:28px;padding:28px;box-shadow:0 0 38px rgba(201,94,255,.12)}
+.palace-box .palace-wheel-wrap{margin-top:8px}
+.palace-box .palace-bonus-btn{margin-top:auto}
 .palace-box.wide{grid-column:span 2}
 .palace-box h2{color:#f5d878;margin-bottom:10px;font-size:clamp(22px,3vw,32px);text-shadow:0 0 14px rgba(245,216,120,.20)}
 .palace-box p{color:rgba(255,255,255,.74);line-height:1.55;margin-bottom:16px;font-family:Arial,sans-serif;font-size:17px}
-.reward-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 18px;min-height:48px;align-items:center}
+.reward-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 18px;min-height:74px;align-items:center}
 .reward-list span{font-size:12px;color:#f5d878;background:rgba(10,0,18,.45);border:1px solid rgba(245,216,120,.22);border-radius:999px;padding:8px 11px;box-shadow:inset 0 0 10px rgba(245,216,120,.04)}
 
-.palace-wheel-wrap{width:260px;height:260px;margin:26px auto 24px;position:relative;display:grid;place-items:center}
-.palace-wheel-wrap::before{content:"";position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(circle,rgba(245,216,120,.24),transparent 57%),conic-gradient(from 0deg,#f5d878,#c75cff,#f5d878,#8b1bd8,#f5d878);filter:blur(8px);opacity:.78}
-.palace-wheel-wrap::after{content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:28px solid #f5d878;z-index:6;filter:drop-shadow(0 0 12px rgba(245,216,120,.9))}
-.palace-wheel{width:238px;height:238px;border-radius:50%;display:grid;place-items:center;position:relative;overflow:hidden;border:4px solid rgba(245,216,120,.78);box-shadow:0 0 28px rgba(245,216,120,.18),0 0 40px rgba(199,92,255,.32),inset 0 0 34px rgba(0,0,0,.42);transition:transform 4.2s cubic-bezier(.16,.84,.28,1)}
-#dailyWheel{background:conic-gradient(#f7e47f 0 20%,#b64ff6 20% 40%,#681bb3 40% 60%,#fff1a6 60% 80%,#2b003b 80% 100%)}
-#monthlyWheel{background:conic-gradient(#f7e47f 0 16.66%,#b64ff6 16.66% 33.33%,#681bb3 33.33% 50%,#fff1a6 50% 66.66%,#8b1bd8 66.66% 83.33%,#2b003b 83.33% 100%)}
-.palace-wheel::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.32),transparent 15%),radial-gradient(circle,transparent 34%,rgba(0,0,0,.30) 72%);pointer-events:none}
-.palace-wheel-center{width:112px;height:112px;border-radius:50%;background:radial-gradient(circle,rgba(245,216,120,.22),rgba(18,0,28,.96) 62%);display:grid;place-items:center;border:2px solid rgba(245,216,120,.45);box-shadow:inset 0 0 18px rgba(201,94,255,.28),0 0 20px rgba(245,216,120,.20);z-index:3;overflow:hidden}
-.palace-wheel-center img{width:98px;height:98px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(199,92,255,.85)) drop-shadow(0 0 8px rgba(245,216,120,.45))}
+.palace-wheel-wrap{width:280px;height:280px;margin:26px auto 24px;position:relative;display:grid;place-items:center}
+.palace-wheel-wrap::before{content:"";position:absolute;inset:-16px;border-radius:50%;background:conic-gradient(from 0deg,#f5d878,#c75cff,#f5d878,#8b1bd8,#f5d878);filter:blur(10px);opacity:.55;animation:wheelGlow 6s linear infinite}
+@keyframes wheelGlow{to{transform:rotate(360deg)}}
+.palace-wheel-wrap::after{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-top:30px solid #f5d878;z-index:6;filter:drop-shadow(0 0 12px rgba(245,216,120,.95))}
+.palace-wheel{width:260px;height:260px;border-radius:50%;position:relative;border:5px solid #f5d878;box-shadow:0 0 30px rgba(245,216,120,.30),0 0 50px rgba(199,92,255,.35),inset 0 0 30px rgba(0,0,0,.35);transition:transform 4.4s cubic-bezier(.16,.84,.28,1)}
+.palace-wheel svg{width:100%;height:100%;display:block;border-radius:50%}
+.palace-wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:50%;background:radial-gradient(circle,rgba(40,8,55,.98),rgba(12,0,20,.99) 70%);display:grid;place-items:center;border:3px solid #f5d878;box-shadow:0 0 18px rgba(245,216,120,.45),inset 0 0 16px rgba(199,92,255,.4);z-index:3;overflow:hidden}
+.palace-wheel-center img{width:78px;height:78px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(199,92,255,.9))}
 .palace-bonus-btn{width:100%;border:none;border-radius:999px;padding:16px 18px;background:linear-gradient(135deg,#8b1bd8,#c85fff);color:#fff;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 0 22px rgba(201,94,255,.28)}
 .palace-bonus-btn.gold{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00}
 .palace-bonus-btn:disabled{opacity:.48;cursor:not-allowed}
@@ -148,6 +149,44 @@ button,.small-gold-btn{border:none;border-radius:999px;padding:14px 18px;font-we
 .contact-icons a:hover img{transform:scale(1.12)}
 footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(255,255,255,.60);font-family:Arial,sans-serif}
 .sticky-play{position:fixed;right:20px;bottom:20px;z-index:900}
+
+/* WINNER TOAST POPUPS */
+/* AGE GATE */
+.age-gate{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at center,rgba(40,8,60,.97),rgba(5,0,10,.99))}
+.age-gate.hide{display:none}
+.age-box{width:min(440px,100%);text-align:center;background:linear-gradient(180deg,#30003c,#180020);border:1px solid rgba(245,216,120,.35);border-radius:26px;padding:34px 28px;box-shadow:0 0 60px rgba(201,94,255,.4)}
+.age-box img{width:96px;height:96px;object-fit:contain;margin:0 auto 14px;display:block;filter:drop-shadow(0 0 14px rgba(199,92,255,.8))}
+.age-box h2{color:#f5d878;font-size:24px;margin-bottom:10px}
+.age-box p{font-family:Arial,sans-serif;color:rgba(255,255,255,.78);line-height:1.5;margin-bottom:22px;font-size:14px}
+.age-actions{display:flex;gap:12px}
+.age-actions button{flex:1;border:none;border-radius:999px;padding:15px;font-weight:900;cursor:pointer;font-family:Orbitron,Arial,sans-serif}
+.age-yes{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00}
+.age-no{background:rgba(255,255,255,.12);color:#fff}
+.age-deny{color:#ff8a8a!important;font-size:18px;line-height:1.6}
+
+/* COPIED TOAST */
+.copy-toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%) translateY(20px);z-index:100001;background:linear-gradient(135deg,#1a6b3a,#2ecc71);color:#fff;font-family:Orbitron,Arial,sans-serif;font-weight:900;font-size:14px;padding:14px 26px;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,.4),0 0 22px rgba(46,204,113,.5);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+.copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* BUTTON SPINNER */
+.btn-spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(27,12,0,.35);border-top-color:#1b0c00;border-radius:50%;animation:btnspin .6s linear infinite;vertical-align:middle}
+@keyframes btnspin{to{transform:rotate(360deg)}}
+
+/* CONFETTI */
+.confetti-piece{position:fixed;top:-12px;width:10px;height:14px;z-index:99998;pointer-events:none;border-radius:2px;animation:confettiFall linear forwards}
+@keyframes confettiFall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+
+.winner-toasts{position:fixed;left:20px;bottom:20px;z-index:950;display:flex;flex-direction:column;gap:10px;max-width:340px;pointer-events:none}
+.winner-toast{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:16px;background:linear-gradient(135deg,rgba(40,8,60,.96),rgba(20,0,32,.96));border:1px solid rgba(245,216,120,.45);box-shadow:0 8px 30px rgba(0,0,0,.5),0 0 22px rgba(201,94,255,.30);transform:translateX(-120%);opacity:0;transition:transform .5s cubic-bezier(.16,.84,.28,1),opacity .5s;font-family:Arial,sans-serif}
+.winner-toast.show{transform:translateX(0);opacity:1}
+.winner-toast .wt-icon{font-size:24px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(245,216,120,.6))}
+.winner-toast .wt-body{line-height:1.3}
+.winner-toast .wt-name{color:#f5d878;font-weight:900;font-size:13px}
+.winner-toast .wt-text{color:rgba(255,255,255,.8);font-size:12px}
+.winner-toast .wt-amount{color:#7CFC9B;font-weight:900;font-size:15px;white-space:nowrap;text-shadow:0 0 10px rgba(124,252,155,.4)}
+.winner-toast.jackpot{border-color:#ffd96a;box-shadow:0 8px 30px rgba(0,0,0,.5),0 0 30px rgba(255,217,106,.55)}
+.winner-toast.jackpot .wt-amount{color:#ffd96a;text-shadow:0 0 12px rgba(255,217,106,.6)}
+@media(max-width:900px){.winner-toasts{left:12px;right:12px;bottom:84px;max-width:none}}
 .sticky-play a{display:block;text-align:center;padding:15px 24px;border-radius:999px;color:#fff;font-weight:900;background:linear-gradient(135deg,#8217c9,#c95fff);border:1px solid rgba(245,216,120,.72);box-shadow:0 0 30px rgba(201,94,255,.55)}
 
 .modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(5,0,8,.82);backdrop-filter:blur(8px)}
@@ -201,6 +240,20 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
 </style>
 </head>
 <body>
+
+<div class="age-gate" id="ageGate">
+  <div class="age-box">
+    <img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP">
+    <h2>Welcome to Aub's Palace</h2>
+    <p>This site is for entertainment and is intended for adults only. You must be 18 years or older to enter. Please play responsibly.</p>
+    <div class="age-actions">
+      <button class="age-no" onclick="denyAge()">Exit</button>
+      <button class="age-yes" onclick="acceptAge()">I'm 18+ — Enter</button>
+    </div>
+  </div>
+</div>
+
+<div class="copy-toast" id="copyToast">✅ Copied!</div>
 
 <div id="preloader">
   <div class="loader-inner">
@@ -269,6 +322,11 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
   </div>
 </section>
 
+<section id="rules">
+  <h2 class="section-title">Rules</h2>
+  <div class="rules-card-frame"><img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub's Palace Rules"></div>
+</section>
+
 <section class="palace-live-bonus-section" id="bonus">
   <h2 class="section-title">Spins & Live Wins</h2>
   <p class="section-subtitle">Spin the Daily Palace Wheel once every 24 hours. The Monthly Crown Wheel unlocks only after Aub's Palace approves your weekly play screenshot in the backend.</p>
@@ -277,7 +335,7 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
       <h2>🎡 Daily Palace Wheel</h2>
       <p>Spin once every 24 hours for instant cash rewards or bonus offers.</p>
       <div class="reward-list"><span>$1</span><span>$2</span><span>$3</span><span>15% Bonus</span><span>Try Again Tomorrow</span></div>
-      <div class="palace-wheel-wrap"><div class="palace-wheel" id="dailyWheel"><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div></div>
+      <div class="palace-wheel-wrap"><div class="palace-wheel" id="dailyWheel"></div><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div>
       <button class="palace-bonus-btn" id="dailySpinBtn" onclick="handleDailySpin()" aria-label="Spin the daily wheel">SPIN DAILY WHEEL</button>
       <div class="palace-result" id="dailyWheelResult">Log in to spin your daily bonus.</div>
       <div class="palace-timer" id="dailyResetTimer"></div>
@@ -288,7 +346,7 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
       <h2>👑 Monthly Crown Wheel</h2>
       <p>Qualified players spin once every 30 days after Aub's Palace backend approval.</p>
       <div class="reward-list"><span>$5</span><span>$8</span><span>Surprise Gift</span><span>Rewards</span><span>$10 Free Play</span><span>Try Again Later</span></div>
-      <div class="palace-wheel-wrap"><div class="palace-wheel" id="monthlyWheel"><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div></div>
+      <div class="palace-wheel-wrap"><div class="palace-wheel" id="monthlyWheel"></div><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div>
       <button class="palace-bonus-btn gold" id="monthlySpinBtn" onclick="handleMonthlySpin()" aria-label="Spin the monthly wheel">SPIN MONTHLY WHEEL</button>
       <div class="palace-result" id="monthlyWheelResult">Log in to check monthly approval.</div>
       <div class="palace-timer" id="monthlyResetTimer"></div>
@@ -300,11 +358,6 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
     <div class="palace-box wide"><h2>🏆 Yesterday's Winners</h2><p>Top winners from the last completed reward cycle.</p><div class="palace-list" id="yesterdayWinners"></div></div>
     <div class="palace-box wide"><h2>🔥 Live Winners</h2><p>Live activity updates every 30 seconds.</p><div class="palace-live-count"><span id="liveWinnerCount">128</span><small>active winners today · max 400</small></div><div class="palace-list" id="liveWinnerFeed"></div></div>
   </div>
-</section>
-
-<section id="rules">
-  <h2 class="section-title">Rules</h2>
-  <div class="rules-card-frame"><img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub's Palace Rules"></div>
 </section>
 
 <div class="modal" id="needAccountModal">
@@ -370,8 +423,9 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
   </div>
 </section>
 
-<footer>© 2023 Aub's Palace — Come for the spins... stay for Aub.</footer>
+<footer>© 2023 Aub's Palace — Come for the spins... stay for Aub.<br><span style="display:block;margin-top:10px;font-size:11px;opacity:.7;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.5">For entertainment purposes. 18+ only. Play responsibly. Bonuses and rewards are subject to verification and approval. Aub's Palace reserves the right to void duplicate or fraudulent claims.</span></footer>
 <div class="sticky-play"><a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a></div>
+<div class="winner-toasts" id="winnerToasts"></div>
 
 <script>
 const SUPABASE_URL="https://ctiyileypjciqmglhees.supabase.co";
@@ -383,9 +437,75 @@ const DAILY_SEGMENTS={"$1":36,"$2":108,"$3":180,"15% Bonus":252,"Try Again Tomor
 const MONTHLY_SEGMENTS={"$5":30,"$8":90,"Surprise Gift":150,"Rewards":210,"$10 Free Play":270,"Try Again Later":330};
 const NON_PRIZES=["Try Again Tomorrow","Try Again Later"];
 
+// Build crisp SVG wheels with labels + gold dividers
+const DAILY_LABELS=["$1","$2","$3","15% Bonus","Try Again"];
+const MONTHLY_LABELS=["$5","$8","Surprise Gift","Rewards","$10 Free Play","Try Again"];
+const WHEEL_FILLS=["#7d28c9","#f3dd72","#5a13a0","#e9cf63","#8b1bd8","#f7e892"];
+function buildWheel(id,labels){
+  const el=document.getElementById(id);if(!el)return;
+  const N=labels.length,cx=130,cy=130,r=126,seg=360/N;
+  let svg='<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">';
+  for(let i=0;i<N;i++){
+    const a0=(i*seg-90)*Math.PI/180,a1=((i+1)*seg-90)*Math.PI/180;
+    const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+    svg+='<path d="M'+cx+' '+cy+' L'+x0.toFixed(2)+' '+y0.toFixed(2)+' A'+r+' '+r+' 0 0 1 '+x1.toFixed(2)+' '+y1.toFixed(2)+' Z" fill="'+WHEEL_FILLS[i%WHEEL_FILLS.length]+'" stroke="#f5d878" stroke-width="2"/>';
+    const mid=(i*seg+seg/2-90)*Math.PI/180,tr=r*0.64;
+    const tx=cx+tr*Math.cos(mid),ty=cy+tr*Math.sin(mid),rot=i*seg+seg/2;
+    const c=WHEEL_FILLS[i%WHEEL_FILLS.length].toLowerCase();
+    const isLight=c==="#f3dd72"||c==="#e9cf63"||c==="#f7e892";
+    const fill=isLight?"#2b003b":"#fff5d6";
+    const fs=labels[i].length>9?9:11;
+    svg+='<text x="'+tx.toFixed(2)+'" y="'+ty.toFixed(2)+'" fill="'+fill+'" font-family="Orbitron,Arial" font-size="'+fs+'" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate('+rot.toFixed(2)+' '+tx.toFixed(2)+' '+ty.toFixed(2)+')">'+labels[i]+'</text>';
+  }
+  svg+='</svg>';el.innerHTML=svg;
+}
+buildWheel("dailyWheel",DAILY_LABELS);
+buildWheel("monthlyWheel",MONTHLY_LABELS);
+
+// Highlight active nav link while scrolling
+const navLinks=document.querySelectorAll(".nav-links a");
+const navSections=["home","rules","bonus","games","contact"];
+window.addEventListener("scroll",function(){
+  let cur="home";
+  navSections.forEach(function(id){
+    const sec=document.getElementById(id);
+    if(sec&&window.scrollY>=sec.offsetTop-120)cur=id;
+  });
+  navLinks.forEach(function(a){
+    a.classList.toggle("active",a.getAttribute("href")==="#"+cur);
+  });
+});
+
 function hidePreloader(){const preloader=document.getElementById("preloader");if(preloader){preloader.classList.add("hide")}}
 document.addEventListener("DOMContentLoaded",function(){setTimeout(hidePreloader,1500)});
 setTimeout(hidePreloader,2800);
+
+// AGE GATE
+(function(){
+  try{ if(localStorage.getItem("apAgeOk")==="1"){var g=document.getElementById("ageGate"); if(g) g.classList.add("hide");} }catch(e){}
+})();
+function acceptAge(){try{localStorage.setItem("apAgeOk","1")}catch(e){}document.getElementById("ageGate").classList.add("hide")}
+function denyAge(){document.querySelector("#ageGate .age-box").innerHTML='<h2 class="age-deny">You must be 18 or older to enter Aub\'s Palace.</h2>'}
+
+// COPY TOAST
+function showCopyToast(msg){var t=document.getElementById("copyToast");if(!t)return;t.innerText=msg||"✅ Copied!";t.classList.add("show");clearTimeout(window._copyT);window._copyT=setTimeout(function(){t.classList.remove("show")},1800)}
+
+// CONFETTI
+function fireConfetti(){
+  var colors=["#f5d878","#c75cff","#7CFC9B","#ffd96a","#a855f7","#fff"];
+  for(var i=0;i<70;i++){
+    (function(i){
+      var p=document.createElement("div");
+      p.className="confetti-piece";
+      p.style.left=Math.random()*100+"vw";
+      p.style.background=colors[Math.floor(Math.random()*colors.length)];
+      p.style.animationDuration=(Math.random()*1.5+1.8)+"s";
+      p.style.animationDelay=(Math.random()*0.5)+"s";
+      document.body.appendChild(p);
+      setTimeout(function(){p.remove()},3800);
+    })(i);
+  }
+}
 
 const mobileMenuBtn=document.getElementById("mobileMenuBtn"),mobileMenu=document.getElementById("mobileMenu");
 if(mobileMenuBtn&&mobileMenu){mobileMenuBtn.addEventListener("click",function(){mobileMenu.classList.toggle("open")});document.querySelectorAll("#mobileMenu a").forEach(function(link){link.addEventListener("click",function(){mobileMenu.classList.remove("open")})})}
@@ -395,8 +515,12 @@ function goToLogin(){closeNeedAccountModal();document.getElementById("login").sc
 async function loginPlayer(){
   const email=document.getElementById("loginEmail").value.trim(),password=document.getElementById("loginPassword").value;
   if(!email||!password){setPlayerStatus("Please enter your website ID/email and password.");return}
+  const btn=document.querySelector("#loginCard .login-grid button");
+  const oldLabel=btn?btn.innerHTML:"";
+  if(btn){btn.disabled=true;btn.innerHTML='<span class="btn-spinner"></span>&nbsp;Logging in...'}
   setPlayerStatus("Logging in...");
   const {data,error}=await supabaseClient.auth.signInWithPassword({email:email,password:password});
+  if(btn){btn.disabled=false;btn.innerHTML=oldLabel}
   if(error){setPlayerStatus("Login failed: "+error.message);return}
   currentUser=data.user;await loadPlayerProfile();
 }
@@ -422,7 +546,7 @@ async function loadPlayerProfile(){
 
 function openNeedAccountModal(){document.getElementById("needAccountModal").classList.add("open")}
 function closeNeedAccountModal(){document.getElementById("needAccountModal").classList.remove("open")}
-async function copyAccountRequest(){const message=document.getElementById("accountRequestMessage").value;await navigator.clipboard.writeText(message);alert("Message copied. Open Facebook and send it to Aub's Palace.")}
+async function copyAccountRequest(){const message=document.getElementById("accountRequestMessage").value;await navigator.clipboard.writeText(message);showCopyToast("✅ Message copied!")}
 
 function openClaimModal(type,reward){
   currentClaim={type:type,reward:reward};
@@ -440,7 +564,7 @@ function updateClaimMessage(){
   const name=document.getElementById("claimName").value.trim(),contact=document.getElementById("claimContact").value.trim(),username=document.getElementById("claimGameUsername").value.trim(),note=document.getElementById("claimNote").value.trim();
   document.getElementById("claimMessage").value="Hi Aub's Palace, I want to claim my bonus reward.\n\n"+"Bonus Type: "+currentClaim.type+"\n"+"Reward Won: "+currentClaim.reward+"\n"+"Name / Facebook Name: "+(name||"(not filled)")+"\n"+"Contact Info: "+(contact||"(not filled)")+"\n"+"Game Username: "+(username||"(not filled)")+"\n"+"Note: "+(note||"N/A")+"\n\n"+"I will send my screenshot for verification.";
 }
-async function copyClaimMessage(){updateClaimMessage();await navigator.clipboard.writeText(document.getElementById("claimMessage").value);document.getElementById("claimStatus").innerText="✅ Copied! Open Facebook and send it with your screenshot."}
+async function copyClaimMessage(){updateClaimMessage();await navigator.clipboard.writeText(document.getElementById("claimMessage").value);document.getElementById("claimStatus").innerText="✅ Copied! Open Facebook and send it with your screenshot.";showCopyToast("✅ Claim copied!")}
 async function sendClaimEmail(){
   updateClaimMessage();
   const name=document.getElementById("claimName").value.trim()||"Player",message=document.getElementById("claimMessage").value,subject="Palace Reward Claim – "+currentClaim.reward+" – "+name;
@@ -471,7 +595,7 @@ async function handleDailySpin(){
   const angle=DAILY_SEGMENTS[data.reward]!==undefined?DAILY_SEGMENTS[data.reward]:Math.random()*360;
   dailySpinVisualRotation=spinTo(dailyWheel,dailySpinVisualRotation,angle);
   document.getElementById("dailyWheelResult").innerText="🎉 You won: "+data.reward;
-  if(!NON_PRIZES.includes(data.reward)){setTimeout(function(){openClaimModal("Daily Palace Wheel",data.reward)},4400)}
+  if(!NON_PRIZES.includes(data.reward)){setTimeout(function(){fireConfetti()},4200);setTimeout(function(){openClaimModal("Daily Palace Wheel",data.reward)},4400)}
   setTimeout(loadPlayerProfile,4500);
 }
 async function handleMonthlySpin(){
@@ -484,7 +608,7 @@ async function handleMonthlySpin(){
   const angle=MONTHLY_SEGMENTS[data.reward]!==undefined?MONTHLY_SEGMENTS[data.reward]:Math.random()*360;
   monthlySpinVisualRotation=spinTo(monthlyWheel,monthlySpinVisualRotation,angle);
   document.getElementById("monthlyWheelResult").innerText="🎉 You won: "+data.reward;
-  if(!NON_PRIZES.includes(data.reward)){setTimeout(function(){openClaimModal("Monthly Crown Wheel",data.reward)},4400)}
+  if(!NON_PRIZES.includes(data.reward)){setTimeout(function(){fireConfetti()},4200);setTimeout(function(){openClaimModal("Monthly Crown Wheel",data.reward)},4400)}
   setTimeout(loadPlayerProfile,4500);
 }
 
@@ -500,17 +624,51 @@ function generateYesterdayWinners(){
 function generateLiveWin(){const actions=["won","cashed out","triggered bonus on","hit jackpot on","scored on","unlocked reward on","got multiplier on"];return{name:randomItem(palaceNames),game:randomItem(palaceGames),action:randomItem(actions),amount:rareMoney()}}
 let palaceLiveWins=[];
 function renderLiveWins(){if(palaceLiveWins.length===0){for(let i=0;i<5;i++){palaceLiveWins.push(generateLiveWin())}}document.getElementById("liveWinnerFeed").innerHTML=palaceLiveWins.map(function(win){return'<div class="palace-row"><span>🔥 '+win.name+' '+win.action+' '+win.game+'</span><strong>'+win.amount+'</strong></div>'}).join("")}
-function updateLiveWinnerCount(){let count=Number(localStorage.getItem("palaceLiveWinnerCount")||128);if(count>=400){count=400}else{count=Math.min(400,count+Math.floor(Math.random()*3)+1)}localStorage.setItem("palaceLiveWinnerCount",count.toString());document.getElementById("liveWinnerCount").innerText=count.toLocaleString()}
+function animateCount(el,to){var from=Number((el.innerText||"0").replace(/,/g,""))||0;if(from===to){el.innerText=to.toLocaleString();return}var steps=18,i=0;clearInterval(el._ct);el._ct=setInterval(function(){i++;var v=Math.round(from+(to-from)*(i/steps));el.innerText=v.toLocaleString();if(i>=steps){clearInterval(el._ct);el.innerText=to.toLocaleString()}},22)}
+function updateLiveWinnerCount(){let count=Number(localStorage.getItem("palaceLiveWinnerCount")||128);if(count>=400){count=400}else{count=Math.min(400,count+Math.floor(Math.random()*3)+1)}localStorage.setItem("palaceLiveWinnerCount",count.toString());animateCount(document.getElementById("liveWinnerCount"),count)}
 function updateLiveWins(){palaceLiveWins.unshift(generateLiveWin());palaceLiveWins=palaceLiveWins.slice(0,5);renderLiveWins();updateLiveWinnerCount()}
+
+// WINNER TOAST POPUPS
+const TOAST_EVENTS=[
+  {icon:"💰",verb:"cashed out",min:80,max:650},
+  {icon:"🎰",verb:"hit a jackpot on",min:900,max:2800,jackpot:true},
+  {icon:"🎁",verb:"won free play on",free:true},
+  {icon:"🔥",verb:"won",min:50,max:500},
+  {icon:"⚡",verb:"scored big on",min:120,max:780},
+  {icon:"👑",verb:"unlocked a bonus on",min:60,max:400}
+];
+function showWinnerToast(){
+  const box=document.getElementById("winnerToasts");if(!box)return;
+  const ev=TOAST_EVENTS[Math.floor(Math.random()*TOAST_EVENTS.length)];
+  const name=randomItem(palaceNames),game=randomItem(palaceGames);
+  let amount;
+  if(ev.free){amount=randomItem(["$10 Free Play","$5 Free Play","15% Bonus","Free Spin"]);}
+  else{amount=money(ev.min,ev.max);}
+  const t=document.createElement("div");
+  t.className="winner-toast"+(ev.jackpot?" jackpot":"");
+  t.innerHTML='<span class="wt-icon">'+ev.icon+'</span><div class="wt-body"><div class="wt-name">'+name+'</div><div class="wt-text">'+ev.verb+' '+game+'</div></div><div class="wt-amount">'+amount+'</div>';
+  box.appendChild(t);
+  requestAnimationFrame(function(){t.classList.add("show")});
+  setTimeout(function(){t.classList.remove("show");setTimeout(function(){t.remove()},550)},5000);
+  // keep max 3 on screen
+  while(box.children.length>3){box.removeChild(box.firstChild)}
+}
+function startWinnerToasts(){
+  setTimeout(showWinnerToast,3500);
+  setInterval(function(){
+    showWinnerToast();
+  },Math.floor(Math.random()*4000)+6000); // every 6-10s
+}
 document.addEventListener("DOMContentLoaded",async function(){
   const {data}=await supabaseClient.auth.getSession();
   if(data.session&&data.session.user){currentUser=data.session.user;await loadPlayerProfile()}
   generateYesterdayWinners();renderLiveWins();updateLiveWinnerCount();
   setInterval(function(){if(currentPlayer){updateSpinStatusUI()}},1000);
   setInterval(updateLiveWins,30000);
+  startWinnerToasts();
 });
 </script>
 </body>
 </html>
-index-9.html
-Displaying index-9.html.
+index-10.html
+Displaying index-10.html.

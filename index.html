@@ -30,37 +30,36 @@ a{color:inherit;text-decoration:none}
 button,input,textarea{font:inherit}
 :focus-visible{outline:2px solid #f5d878;outline-offset:3px}
 
-#preloader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at center,rgba(120,40,180,.28),transparent 42%),linear-gradient(180deg,#050009,#180024 56%,#050009);transition:opacity .7s ease,visibility .7s ease}
+/* LOADER */
+#preloader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at center,rgba(194,74,255,.34),transparent 36%),linear-gradient(180deg,#050009,#21002f 56%,#050009);transition:opacity .7s ease,visibility .7s ease}
 #preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
 .loader-inner{width:min(380px,82vw);text-align:center}
-.loader-ap{width:min(190px,52vw);display:block;margin:0 auto 16px;filter:drop-shadow(0 0 22px rgba(199,90,255,.8)) drop-shadow(0 0 12px rgba(245,216,120,.5));animation:apFloat 1.6s ease-in-out infinite alternate}
-.loader-text{margin-top:6px;color:#f5d878;letter-spacing:.5em;font-size:11px;text-transform:uppercase}
+.loader-ap{width:min(260px,70vw);display:block;margin:0 auto 10px;filter:drop-shadow(0 0 28px rgba(199,90,255,.95)) drop-shadow(0 0 18px rgba(245,216,120,.70));animation:apFloat 1.6s ease-in-out infinite alternate}
+.loader-ap-text{color:#f5d878;font-size:clamp(32px,7vw,72px);font-weight:900;letter-spacing:.08em;line-height:1;text-shadow:0 0 16px rgba(245,216,120,.85),0 0 32px rgba(199,90,255,.80);margin-top:-12px}
+.loader-text{margin-top:14px;color:#f5d878;letter-spacing:.55em;font-size:11px;text-transform:uppercase}
 .loader-bar{width:76%;height:8px;margin:18px auto 0;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.08);border:1px solid rgba(245,216,120,.58);box-shadow:0 0 18px rgba(199,90,255,.35)}
 .loader-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#f5d878,#c75cff,#f5d878);animation:loaderFill 1.65s ease forwards}
 @keyframes loaderFill{to{width:100%}}
 @keyframes apFloat{from{transform:translateY(4px) scale(.97);opacity:.90}to{transform:translateY(-4px) scale(1.03);opacity:1}}
 
-/* DESKTOP TOP NAV */
-.top-nav{position:fixed;top:0;left:0;right:0;height:74px;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(8,0,14,.55);backdrop-filter:blur(14px);border-bottom:1px solid rgba(245,216,120,.18);transition:background .3s}
-.top-nav.scrolled{background:rgba(8,0,14,.92)}
-.top-nav-brand{display:flex;align-items:center;gap:10px;font-family:"Great Vibes",cursive;font-weight:400;font-size:30px;background:linear-gradient(135deg,#ffe9a8,#f5d878,#e8b84a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 18px rgba(245,216,120,.35);line-height:1}
-.top-nav-brand img{width:40px;height:40px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(199,92,255,.7))}
-.top-nav-links{display:flex;align-items:center;gap:34px;list-style:none}
-.top-nav-links a{position:relative;color:#fff;font-size:15px;letter-spacing:.04em;padding:6px 2px;transition:color .25s}
-.top-nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:linear-gradient(90deg,#f5d878,#c75cff);transform:scaleX(0);transform-origin:center;transition:transform .28s}
-.top-nav-links a:hover{color:#f5d878}
-.top-nav-links a:hover::after{transform:scaleX(1)}
-.top-nav-cta{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00!important;padding:10px 22px!important;border-radius:999px;font-weight:900;box-shadow:0 0 22px rgba(245,216,120,.35)}
-.top-nav-cta::after{display:none}
+/* REAL NAV OVER HERO */
+.site-nav{position:absolute;top:0;left:0;right:0;height:84px;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;background:linear-gradient(180deg,rgba(5,0,10,.86),rgba(5,0,10,.40),transparent);backdrop-filter:blur(5px)}
+.nav-brand{display:flex;align-items:center;gap:10px;color:#f5d878;font-weight:900;font-size:22px;text-shadow:0 0 13px rgba(245,216,120,.35)}
+.nav-brand .crown{font-size:30px}
+.nav-links{display:flex;align-items:center;gap:34px;color:#fff}
+.nav-links a{font-size:15px;text-shadow:0 0 10px rgba(0,0,0,.75);transition:.2s}
+.nav-links a:hover,.nav-links a.active{color:#f5d878}
+.nav-cta{border:1px solid rgba(245,216,120,.72);border-radius:999px;padding:13px 26px;color:#f5d878;background:rgba(5,0,10,.28);box-shadow:0 0 18px rgba(245,216,120,.10)}
 
-.home-hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#100018;background-image:linear-gradient(180deg,rgba(16,0,24,.10),rgba(16,0,24,.30)),url("https://i.postimg.cc/435LDgyT/Chat-GPT-Image-Jun-3-2026-06-25-23-PM.png");background-size:contain;background-position:center;background-repeat:no-repeat;overflow:hidden}
-.hero-clicks{position:absolute;inset:0;z-index:5;pointer-events:none}
+/* HERO */
+.home-hero{position:relative;min-height:100vh;background:linear-gradient(180deg,rgba(5,0,8,.04),rgba(5,0,8,.16)),url("https://i.postimg.cc/435LDgyT/Chat-GPT-Image-Jun-3-2026-06-25-23-PM.png") center top / cover no-repeat;overflow:hidden}
+.hero-clicks{position:absolute;inset:0;z-index:10;pointer-events:none}
 .hero-clicks a{position:absolute;display:block;pointer-events:auto;text-indent:-9999px;overflow:hidden;border-radius:999px}
-.click-enter{top:2.1%;right:7.1%;width:245px;height:56px}
 .click-play{left:29.7%;top:47.8%;width:210px;height:62px}
 .click-rules{left:56.3%;top:47.8%;width:230px;height:62px}
 
-.mobile-nav{position:fixed;top:0;left:0;right:0;height:66px;z-index:50;display:none;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(8,0,14,.82);border-bottom:1px solid rgba(245,216,120,.18);backdrop-filter:blur(12px)}
+/* MOBILE NAV */
+.mobile-nav{position:fixed;top:0;left:0;right:0;height:66px;z-index:50;display:none;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(8,0,14,.90);border-bottom:1px solid rgba(245,216,120,.18);backdrop-filter:blur(12px)}
 .mobile-brand{color:#f5d878;font-weight:900;font-size:18px;text-shadow:0 0 12px rgba(245,216,120,.28)}
 .mobile-menu-btn{font-size:34px;cursor:pointer;color:#f5d878;background:none;border:none;line-height:1}
 .mobile-menu{position:fixed;top:66px;left:0;right:0;z-index:49;display:none;background:rgba(8,0,14,.97);border-bottom:1px solid rgba(245,216,120,.18)}
@@ -83,12 +82,23 @@ button,.small-gold-btn{border:none;border-radius:999px;padding:14px 18px;font-we
 .logout-btn{display:none;margin:18px auto 0}
 .logged-in .logout-btn{display:flex}
 
-.palace-live-bonus-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-.palace-box{background:radial-gradient(circle at center,rgba(199,92,255,.10),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.035));border:1px solid rgba(245,216,120,.16);border-radius:28px;padding:28px;box-shadow:0 0 38px rgba(201,94,255,.12)}
+/* TRUST BAR */
+.hero-trust-section{padding:28px 6vw;background:linear-gradient(180deg,#09000f,#170020);border-top:1px solid rgba(245,216,120,.15);border-bottom:1px solid rgba(245,216,120,.15)}
+.hero-trust{max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;border:1px solid rgba(245,216,120,.24);border-radius:28px;padding:16px;background:rgba(5,0,10,.58);box-shadow:0 0 36px rgba(201,94,255,.20)}
+.trust-item{display:flex;gap:12px;align-items:center;justify-content:center;padding:8px 10px;border-right:1px solid rgba(245,216,120,.14)}
+.trust-item:last-child{border-right:none}
+.trust-icon{font-size:30px;color:#f5d878;filter:drop-shadow(0 0 10px rgba(245,216,120,.35))}
+.trust-title{color:#f5d878;font-weight:900;font-size:13px}
+.trust-desc{font-family:Arial,sans-serif;font-size:12px;color:rgba(255,255,255,.78);line-height:1.25}
+
+.palace-live-bonus-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:22px;align-items:stretch}
+.palace-box{display:flex;flex-direction:column;background:radial-gradient(circle at center,rgba(199,92,255,.10),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.035));border:1px solid rgba(245,216,120,.16);border-radius:28px;padding:28px;box-shadow:0 0 38px rgba(201,94,255,.12)}
+.palace-box .palace-wheel-wrap{margin-top:8px}
+.palace-box .palace-bonus-btn{margin-top:auto}
 .palace-box.wide{grid-column:span 2}
 .palace-box h2{color:#f5d878;margin-bottom:10px;font-size:clamp(22px,3vw,32px);text-shadow:0 0 14px rgba(245,216,120,.20)}
 .palace-box p{color:rgba(255,255,255,.74);line-height:1.55;margin-bottom:16px;font-family:Arial,sans-serif;font-size:17px}
-.reward-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 18px;min-height:48px;align-items:center}
+.reward-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 18px;min-height:74px;align-items:center}
 .reward-list span{font-size:12px;color:#f5d878;background:rgba(10,0,18,.45);border:1px solid rgba(245,216,120,.22);border-radius:999px;padding:8px 11px;box-shadow:inset 0 0 10px rgba(245,216,120,.04)}
 
 .palace-wheel-wrap{width:280px;height:280px;margin:26px auto 24px;position:relative;display:grid;place-items:center}
@@ -140,11 +150,12 @@ button,.small-gold-btn{border:none;border-radius:999px;padding:14px 18px;font-we
 footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(255,255,255,.60);font-family:Arial,sans-serif}
 .sticky-play{position:fixed;right:20px;bottom:20px;z-index:900}
 
+/* WINNER TOAST POPUPS */
 /* AGE GATE */
 .age-gate{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at center,rgba(40,8,60,.97),rgba(5,0,10,.99))}
 .age-gate.hide{display:none}
 .age-box{width:min(440px,100%);text-align:center;background:linear-gradient(180deg,#30003c,#180020);border:1px solid rgba(245,216,120,.35);border-radius:26px;padding:34px 28px;box-shadow:0 0 60px rgba(201,94,255,.4)}
-.age-box img{width:90px;height:90px;object-fit:contain;margin:0 auto 14px;display:block;filter:drop-shadow(0 0 14px rgba(199,92,255,.8))}
+.age-box img{width:96px;height:96px;object-fit:contain;margin:0 auto 14px;display:block;filter:drop-shadow(0 0 14px rgba(199,92,255,.8))}
 .age-box h2{color:#f5d878;font-size:24px;margin-bottom:10px}
 .age-box p{font-family:Arial,sans-serif;color:rgba(255,255,255,.78);line-height:1.5;margin-bottom:22px;font-size:14px}
 .age-actions{display:flex;gap:12px}
@@ -165,7 +176,6 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
 .confetti-piece{position:fixed;top:-12px;width:10px;height:14px;z-index:99998;pointer-events:none;border-radius:2px;animation:confettiFall linear forwards}
 @keyframes confettiFall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
 
-/* WINNER TOASTS */
 .winner-toasts{position:fixed;left:20px;bottom:20px;z-index:950;display:flex;flex-direction:column;gap:10px;max-width:340px;pointer-events:none}
 .winner-toast{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:16px;background:linear-gradient(135deg,rgba(40,8,60,.96),rgba(20,0,32,.96));border:1px solid rgba(245,216,120,.45);box-shadow:0 8px 30px rgba(0,0,0,.5),0 0 22px rgba(201,94,255,.30);transform:translateX(-120%);opacity:0;transition:transform .5s cubic-bezier(.16,.84,.28,1),opacity .5s;font-family:Arial,sans-serif}
 .winner-toast.show{transform:translateX(0);opacity:1}
@@ -194,92 +204,17 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
 .modal-close{background:rgba(255,255,255,.12);color:#fff}
 .claim-status{margin-top:12px;text-align:center;color:#f5d878;font-family:Arial,sans-serif;font-size:14px;min-height:20px}
 
-
-/* HERO TRUST / INTRO */
-.hero-trust-section{
-  padding:58px 6vw;
-  background:
-    radial-gradient(circle at top left,rgba(245,216,120,.12),transparent 30%),
-    radial-gradient(circle at top right,rgba(199,92,255,.18),transparent 34%),
-    linear-gradient(180deg,#12001d,#25002f);
-}
-.hero-trust-wrap{
-  max-width:1180px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:1fr 1.35fr;
-  gap:28px;
-  align-items:center;
-}
-.hero-trust-intro{
-  background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.030));
-  border:1px solid rgba(245,216,120,.16);
-  border-radius:28px;
-  padding:28px;
-  box-shadow:0 0 38px rgba(201,94,255,.13);
-}
-.hero-trust-intro .eyebrow{
-  color:#f5d878;
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.22em;
-}
-.hero-trust-intro h2{
-  margin:12px 0 10px;
-  font-size:clamp(25px,3vw,40px);
-  color:#fff;
-  text-shadow:0 0 18px rgba(201,94,255,.55);
-}
-.hero-trust-intro p{
-  color:rgba(255,255,255,.74);
-  line-height:1.6;
-  font-family:Arial,sans-serif;
-}
-.hero-trust-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-}
-.trust-card{
-  min-height:130px;
-  padding:18px 14px;
-  border-radius:22px;
-  background:linear-gradient(180deg,rgba(76,13,92,.72),rgba(24,0,35,.72));
-  border:1px solid rgba(245,216,120,.18);
-  box-shadow:0 14px 32px rgba(0,0,0,.20);
-  text-align:center;
-}
-.trust-card strong{
-  display:block;
-  color:#f5d878;
-  font-size:15px;
-  margin-bottom:9px;
-}
-.trust-card span{
-  display:block;
-  color:rgba(255,255,255,.70);
-  font-family:Arial,sans-serif;
-  font-size:13px;
-  line-height:1.35;
-}
-@media(max-width:1000px){
-  .hero-trust-wrap{grid-template-columns:1fr}
-  .hero-trust-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:430px){
-  .hero-trust-grid{grid-template-columns:1fr}
-  .trust-card{min-height:auto}
-}
-
 @media(max-width:900px){
-  .top-nav{display:none}
+  .site-nav{display:none}
   .mobile-nav{display:flex}
-  .home-hero{min-height:64vh;background-size:contain;background-position:center top;margin-top:66px}
-  .click-enter{display:none}
+  .home-hero{min-height:72vh;background-position:center top;margin-top:66px}
   .click-play{left:22%;top:43%;width:25%;height:6%}
   .click-rules{left:54%;top:43%;width:29%;height:6%}
   section{padding:62px 20px}
   .login-grid{grid-template-columns:1fr}
+  .hero-trust{grid-template-columns:1fr;border-radius:22px}
+  .trust-item{border-right:none;border-bottom:1px solid rgba(245,216,120,.12);justify-content:flex-start}
+  .trust-item:last-child{border-bottom:none}
   .palace-live-bonus-grid{grid-template-columns:1fr}
   .palace-box.wide{grid-column:span 1}
   .games-grid{grid-template-columns:repeat(2,1fr);gap:18px}
@@ -303,8 +238,409 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
   .game-card img{height:110px}
 }
 
-/* FINAL DEPLOY SAFETY */
-section, header { scroll-margin-top: 84px; }
+/* =========================
+   AUB'S PALACE PREMIUM FINAL PATCH
+   No image generation. Keeps age gate, winner popups, confetti,
+   copy toast, login spinner, animated counter, and footer note.
+========================= */
+
+.section-title{
+  font-family:"Great Vibes",cursive;
+  font-weight:400;
+  letter-spacing:.02em;
+  font-size:clamp(58px,8vw,100px);
+  background:linear-gradient(135deg,#fff8d4,#f5d878,#d99a28,#fff2b0);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 28px rgba(245,216,120,.26),0 0 50px rgba(201,94,255,.24);
+}
+
+.site-nav{
+  background:linear-gradient(180deg,rgba(10,0,18,.92),rgba(10,0,18,.50),rgba(10,0,18,.16));
+  border-bottom:1px solid rgba(245,216,120,.18);
+  box-shadow:0 10px 34px rgba(0,0,0,.20);
+}
+
+.site-nav::before{
+  content:"";
+  position:absolute;
+  left:6vw;
+  right:6vw;
+  bottom:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(245,216,120,.70),rgba(199,92,255,.45),transparent);
+}
+
+.nav-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-family:"Great Vibes",cursive;
+  font-size:40px;
+  line-height:1;
+  font-weight:400;
+  background:linear-gradient(135deg,#fff6cb,#f5d878,#d59b2d);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 20px rgba(245,216,120,.34);
+}
+
+.nav-brand img{
+  width:52px;
+  height:52px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 14px rgba(199,92,255,.85)) drop-shadow(0 0 8px rgba(245,216,120,.45));
+}
+
+.nav-links a{
+  font-size:14px;
+  letter-spacing:.055em;
+  color:rgba(255,255,255,.88);
+}
+
+.nav-links a.active,
+.nav-links a:hover{
+  color:#f5d878;
+  text-shadow:0 0 12px rgba(245,216,120,.32);
+}
+
+.nav-cta{
+  border:1px solid rgba(245,216,120,.72);
+  background:linear-gradient(135deg,rgba(245,216,120,.13),rgba(199,92,255,.10));
+  box-shadow:0 0 24px rgba(245,216,120,.12),inset 0 0 18px rgba(245,216,120,.06);
+}
+
+.loader-ap{
+  width:min(210px,56vw);
+}
+
+.loader-inner{
+  transform:translateY(-4px);
+}
+
+.palace-box{
+  position:relative;
+  overflow:hidden;
+}
+
+.palace-box::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 50% 0%,rgba(245,216,120,.08),transparent 35%);
+  pointer-events:none;
+}
+
+@media(min-width:901px){
+  .palace-live-bonus-grid > .palace-box:nth-child(1),
+  .palace-live-bonus-grid > .palace-box:nth-child(2){
+    min-height:735px;
+  }
+  .palace-live-bonus-grid > .palace-box:nth-child(1) .palace-wheel-wrap,
+  .palace-live-bonus-grid > .palace-box:nth-child(2) .palace-wheel-wrap{
+    margin-top:auto;
+  }
+}
+
+.palace-box h2,
+.palace-box > p{
+  text-align:center;
+}
+
+.palace-wheel-wrap{
+  width:304px;
+  height:304px;
+  margin:22px auto 26px;
+}
+
+.palace-wheel-wrap::before{
+  inset:-18px;
+  background:
+    radial-gradient(circle,rgba(245,216,120,.28),transparent 54%),
+    conic-gradient(from 0deg,#f5d878,#7f28cb,#fff1a6,#451060,#f5d878);
+  filter:blur(12px);
+  opacity:.62;
+}
+
+.palace-wheel-wrap::after{
+  top:-10px;
+  border-left-width:18px;
+  border-right-width:18px;
+  border-top-width:34px;
+  border-top-color:#ffe89a;
+}
+
+.palace-wheel{
+  width:280px;
+  height:280px;
+  border:6px solid #f5d878;
+  box-shadow:
+    0 0 0 5px rgba(56,9,72,.85),
+    0 0 34px rgba(245,216,120,.34),
+    0 0 60px rgba(199,92,255,.35),
+    inset 0 0 32px rgba(0,0,0,.40);
+}
+
+.palace-wheel svg text{
+  text-shadow:0 0 6px rgba(0,0,0,.75);
+}
+
+.palace-wheel-center{
+  width:108px;
+  height:108px;
+  border:3px solid #ffe89a;
+  background:
+    radial-gradient(circle at 42% 35%,rgba(245,216,120,.26),transparent 32%),
+    radial-gradient(circle,rgba(32,0,43,.98),rgba(9,0,16,1) 72%);
+  box-shadow:
+    0 0 20px rgba(245,216,120,.45),
+    0 0 30px rgba(199,92,255,.30),
+    inset 0 0 20px rgba(199,92,255,.35);
+}
+
+.palace-wheel-center img{
+  width:86px;
+  height:86px;
+  object-fit:contain;
+}
+
+.reward-list span{
+  background:linear-gradient(135deg,rgba(16,0,25,.74),rgba(52,8,66,.58));
+  border-color:rgba(245,216,120,.26);
+}
+
+.monthly-requirement,
+.weekly-confirm,
+.bonus-help-card,
+.claim-note{
+  background:linear-gradient(135deg,rgba(25,0,35,.82),rgba(245,216,120,.07));
+}
+
+.about-luxury,
+.contact-luxury{
+  background:
+    radial-gradient(circle at top,rgba(245,216,120,.10),transparent 30%),
+    radial-gradient(circle at bottom,rgba(199,92,255,.14),transparent 34%),
+    linear-gradient(180deg,#26002f,#170020);
+}
+
+.about-lux-grid{
+  max-width:1180px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+}
+
+.about-lux-card{
+  text-align:center;
+  min-height:210px;
+  padding:26px 18px;
+  border-radius:26px;
+  background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.030));
+  border:1px solid rgba(245,216,120,.18);
+  box-shadow:0 18px 38px rgba(0,0,0,.22),0 0 24px rgba(201,94,255,.10);
+}
+
+.about-lux-icon{
+  font-size:36px;
+  margin-bottom:14px;
+  filter:drop-shadow(0 0 12px rgba(245,216,120,.45));
+}
+
+.about-lux-card h3{
+  color:#f5d878;
+  margin-bottom:10px;
+  font-size:17px;
+}
+
+.about-lux-card p{
+  color:rgba(255,255,255,.72);
+  font-family:Arial,sans-serif;
+  line-height:1.45;
+  font-size:14px;
+}
+
+.contact-card-grid{
+  max-width:960px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.contact-card{
+  min-height:210px;
+  padding:28px 20px;
+  border-radius:28px;
+  text-align:center;
+  background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.030));
+  border:1px solid rgba(245,216,120,.18);
+  box-shadow:0 18px 40px rgba(0,0,0,.24);
+  transition:transform .22s ease,filter .22s ease,border-color .22s ease;
+}
+
+.contact-card.primary{
+  border-color:rgba(245,216,120,.34);
+  box-shadow:0 0 38px rgba(201,94,255,.20),0 18px 40px rgba(0,0,0,.24);
+}
+
+.contact-card:hover{
+  transform:translateY(-5px);
+  filter:brightness(1.08);
+  border-color:rgba(245,216,120,.44);
+}
+
+.contact-card img{
+  width:74px;
+  height:74px;
+  object-fit:contain;
+  margin-bottom:18px;
+}
+
+.contact-card strong{
+  display:block;
+  color:#f5d878;
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.contact-card span{
+  display:block;
+  color:rgba(255,255,255,.72);
+  font-family:Arial,sans-serif;
+  line-height:1.4;
+}
+
+.palace-bonus-btn,
+.game-card a,
+.nav-cta{
+  transition:transform .18s ease,filter .18s ease,opacity .18s ease;
+}
+
+.palace-bonus-btn:hover:not(:disabled),
+.game-card a:hover,
+.nav-cta:hover{
+  transform:translateY(-1px);
+  filter:brightness(1.08);
+}
+
+section,header{
+  scroll-margin-top:92px;
+}
+
+@media(max-width:1000px){
+  .about-lux-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:900px){
+  .nav-brand{
+    font-size:30px;
+  }
+  .palace-wheel-wrap{
+    width:260px;
+    height:260px;
+  }
+  .palace-wheel{
+    width:238px;
+    height:238px;
+  }
+  .palace-wheel-center{
+    width:98px;
+    height:98px;
+  }
+  .palace-wheel-center img{
+    width:78px;
+    height:78px;
+  }
+  .contact-card-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:650px){
+  .about-lux-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+
+/* FINAL BUSINESS UPGRADES */
+.game-card{position:relative;overflow:hidden}
+.game-tag{
+  position:absolute;
+  top:12px;
+  left:12px;
+  z-index:2;
+  padding:7px 10px;
+  border-radius:999px;
+  background:linear-gradient(135deg,rgba(245,216,120,.95),rgba(199,92,255,.82));
+  color:#190020;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.04em;
+  box-shadow:0 0 18px rgba(245,216,120,.25);
+}
+.rules-summary{
+  max-width:920px;
+  margin:-12px auto 24px;
+  padding:18px 20px;
+  border-radius:22px;
+  background:linear-gradient(135deg,rgba(245,216,120,.10),rgba(199,92,255,.10));
+  border:1px solid rgba(245,216,120,.20);
+  box-shadow:0 0 32px rgba(201,94,255,.10);
+  text-align:center;
+}
+.rules-summary strong{
+  display:block;
+  color:#f5d878;
+  margin-bottom:8px;
+  font-size:18px;
+}
+.rules-summary span{
+  display:block;
+  color:rgba(255,255,255,.78);
+  font-family:Arial,sans-serif;
+  line-height:1.5;
+}
+.congrats-box{
+  text-align:center;
+  background:
+    radial-gradient(circle at top,rgba(245,216,120,.16),transparent 34%),
+    linear-gradient(180deg,#360044,#14001d);
+}
+.congrats-box h2{
+  font-family:"Great Vibes",cursive;
+  font-size:64px;
+  font-weight:400;
+  background:linear-gradient(135deg,#fff8d4,#f5d878,#d99a28);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+#congratsCode{
+  background:rgba(0,0,0,.24);
+  border:1px solid rgba(245,216,120,.18);
+  border-radius:16px;
+  padding:12px;
+}
+.admin-helper-box textarea{
+  min-height:92px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12px;
+}
+@media(max-width:430px){
+  .congrats-box h2{font-size:52px}
+  .game-tag{font-size:9px;padding:6px 8px}
+}
 
 </style>
 </head>
@@ -327,24 +663,32 @@ section, header { scroll-margin-top: 84px; }
 <div id="preloader">
   <div class="loader-inner">
     <img class="loader-ap" src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP Logo">
+   
     <div class="loader-text">LOADING THE PALACE</div>
     <div class="loader-bar"><span></span></div>
   </div>
 </div>
 
-<nav class="top-nav" id="topNav">
-  <a href="#home" class="top-nav-brand"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP">Aub's Palace</a>
-  <ul class="top-nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#login">Login</a></li>
-    <li><a href="#rules">Rules</a></li>
-    <li><a href="#bonus">Spins</a></li>
-    <li><a href="#games">Games</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a class="top-nav-cta" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter</a></li>
-  </ul>
-</nav>
+<header class="home-hero" id="home">
+  <nav class="site-nav">
+    <a href="#home" class="nav-brand"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP official logo"><span>Aub's Palace</span></a>
+    <div class="nav-links">
+      <a href="#home" class="active">Home</a>
+      <a href="#login">Login</a>
+      <a href="#rules">Rules</a>
+      <a href="#bonus">Spins</a>
+      <a href="#games">Games</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a>
+  </nav>
+
+  <div class="hero-clicks">
+    <a class="click-play" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Play now on Facebook">Play Now</a>
+    <a class="click-rules" href="#rules" aria-label="View rules">View Rules</a>
+  </div>
+</header>
 
 <nav class="mobile-nav">
   <div class="mobile-brand">♛ Aub's Palace</div>
@@ -353,26 +697,28 @@ section, header { scroll-margin-top: 84px; }
 
 <div class="mobile-menu" id="mobileMenu">
   <a href="#home">Home</a>
-  <a href="#login">Login</a>
   <a href="#rules">Rules</a>
   <a href="#bonus">Spins</a>
   <a href="#games">Games</a>
   <a href="#about">About</a>
   <a href="#contact">Contact</a>
+  <a href="#login">Login</a>
   <a class="gold" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a>
 </div>
 
-<header class="home-hero" id="home">
-  <div class="hero-clicks">
-    <a class="click-enter" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Enter the Palace on Facebook">Enter the Palace</a>
-    <a class="click-play" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Play now on Facebook">Play Now</a>
-    <a class="click-rules" href="#rules" aria-label="View rules">View Rules</a>
+<section class="hero-trust-section" id="trust">
+  <div class="hero-trust">
+    <div class="trust-item"><span class="trust-icon">⚡</span><div><div class="trust-title">Fast Cashouts</div><div class="trust-desc">Quick and reliable payout support.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">🔒</span><div><div class="trust-title">Secure Payments</div><div class="trust-desc">Protected deposits and cashouts.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">💬</span><div><div class="trust-title">24/7 Chat Support</div><div class="trust-desc">Message Aub's Palace anytime.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">👑</span><div><div class="trust-title">Real Payouts</div><div class="trust-desc">Trusted wins with clean review.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">⚖️</span><div><div class="trust-title">Fair Play</div><div class="trust-desc">Clear rules and honest bonuses.</div></div></div>
   </div>
-</header>
+</section>
 
 <section class="login-section" id="login">
   <h2 class="section-title">Player Login</h2>
-  <p class="section-subtitle">Log in with your Aub's Palace website ID and password to unlock your Daily Palace Wheel and Monthly Crown Wheel.</p>
+  <p class="section-subtitle">Already have your website ID and password? Log in here first, then spin below.</p>
   <div class="login-card" id="loginCard">
     <div class="login-grid">
       <div><label for="loginEmail">Website ID / Email</label><input id="loginEmail" type="email" autocomplete="username" placeholder="example@aubspalace.com"></div>
@@ -386,11 +732,16 @@ section, header { scroll-margin-top: 84px; }
 
 <section id="rules">
   <h2 class="section-title">Rules</h2>
+
+  <div class="rules-summary">
+    <strong>Quick Rules Summary</strong>
+    <span>Please read before playing. Max cashout rules apply. Bonuses and rewards must be verified. Duplicate, fake, or unverifiable claims may be voided. Rewards are reviewed before being added.</span>
+  </div>
   <div class="rules-card-frame"><img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub's Palace Rules"></div>
 </section>
 
 <section class="palace-live-bonus-section" id="bonus">
-  <h2 class="section-title">Palace Bonus Wheels & Live Wins</h2>
+  <h2 class="section-title">Spins & Live Wins</h2>
   <p class="section-subtitle">Spin the Daily Palace Wheel once every 24 hours. The Monthly Crown Wheel unlocks only after Aub's Palace approves your weekly play screenshot in the backend.</p>
   <div class="palace-live-bonus-grid">
     <div class="palace-box">
@@ -425,9 +776,14 @@ section, header { scroll-margin-top: 84px; }
 <div class="modal" id="needAccountModal">
   <div class="modal-box">
     <h2>Website ID Required</h2>
-    <p>You need an Aub's Palace website ID and password before you can spin. Copy this message, then send it to us on Facebook:</p>
-    <textarea id="accountRequestMessage" readonly>Hey Aub's Palace! Could you please give me my website ID and password so I can log in and claim my daily and monthly bonus?</textarea>
-    <div class="modal-actions"><button class="modal-gold" onclick="copyAccountRequest()">Copy Message</button><a class="modal-primary" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Open Facebook</a><button class="modal-close" onclick="closeNeedAccountModal()">Close</button></div>
+    <p>You need an Aub's Palace website ID and password before you can spin. Already have one? Click login. If not, copy the message and send it on Facebook.</p>
+    <textarea id="accountRequestMessage" readonly>Hey OP, could you please give me my website ID and password so I can log in and claim my daily bonus and monthly bonus?</textarea>
+    <div class="modal-actions">
+      <button class="modal-gold" onclick="copyAccountRequest()">Copy Message</button>
+      <button class="modal-primary" onclick="goToLogin()">I Have ID — Login</button>
+      <a class="modal-primary" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Open Facebook</a>
+      <button class="modal-close" onclick="closeNeedAccountModal()">Close</button>
+    </div>
   </div>
 </div>
 
@@ -449,34 +805,75 @@ section, header { scroll-margin-top: 84px; }
   <h2 class="section-title">Games</h2>
   <p class="section-subtitle">Choose your game and enter Aub's trusted game collection.</p>
   <div class="games-grid">
-    <article class="game-card"><img src="https://i.postimg.cc/tJppp1FJ/mw.webp" alt="Milkyway"><h3>Milkyway</h3><p>Space arcade shooter.</p><a href="https://milkywayapp.xyz/" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/q7x1WzMf/orion.jpg" alt="Orion Stars"><h3>Orion Stars</h3><p>Fish shooting casino game.</p><a href="http://start.orionstars.vip:8580/index.html" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/Vky46jJ5/juwa777.jpg" alt="Juwa"><h3>Juwa</h3><p>All-in-one casino app.</p><a href="https://dl.juwa777.com/" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/2jMgQL1g/vb.webp" alt="Vblink"><h3>Vblink</h3><p>Modern casino gameplay.</p><a href="https://www.vblink777.club/" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/rsrnngDb/game.jpg" alt="Game Vault"><h3>Game Vault</h3><p>Casino hub platform.</p><a href="https://download.gamevault999.com/" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/PxZY07Mz/vegas.jpg" alt="LasVegas Sweeps"><h3>LasVegas Sweeps</h3><p>Vegas-style slots.</p><a href="https://m.lasvegassweeps.com/" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/7PnT70t4/gr.jpg" alt="Gameroom"><h3>Gameroom</h3><p>Arcade + casino combo.</p><a href="https://www.gameroom777.com/" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/5tJVwYkZ/cm.jpg" alt="Cash Machine"><h3>Cash Machine</h3><p>Slot-focused game.</p><a href="https://www.cashmachine777.com/" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/yYS4tyqs/pm.jpg" alt="Panda Master"><h3>Panda Master</h3><p>Fish shooter game.</p><a href="https://pandamaster.vip:8888/index.html" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/kgsmvX3G/fire.jpg" alt="Fire Kirin"><h3>Fire Kirin</h3><p>Multiplayer fish game.</p><a href="http://start.firekirin.xyz:8580/" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/3xSqwyQW/juwa-2.jpg" alt="Juwa 2.0"><h3>Juwa 2.0</h3><p>Upgraded Juwa version.</p><a href="https://m.juwa2.com/" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/gcsHpCWq/mafia.jpg" alt="Mafia"><h3>Mafia</h3><p>Crime-themed casino.</p><a href="https://www.mafia77777.com/" target="_blank" rel="noopener">Play</a></article>
-    <article class="game-card"><img src="https://i.postimg.cc/SsDY0pMC/mr.jpg" alt="Mr. All in One"><h3>Mr. All in One</h3><p>Complete game pack.</p><a href="https://www.mrallinone777.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/tJppp1FJ/mw.webp" alt="Milkyway"><div class="game-tag">Most Popular</div><h3>Milkyway</h3><p>Space arcade shooter.</p><a href="https://milkywayapp.xyz/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/q7x1WzMf/orion.jpg" alt="Orion Stars"><div class="game-tag">Hot</div><h3>Orion Stars</h3><p>Fish shooting casino game.</p><a href="http://start.orionstars.vip:8580/index.html" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/Vky46jJ5/juwa777.jpg" alt="Juwa"><div class="game-tag">Most Hitting Today</div><h3>Juwa</h3><p>All-in-one casino app.</p><a href="https://dl.juwa777.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/2jMgQL1g/vb.webp" alt="Vblink"><div class="game-tag">New</div><h3>Vblink</h3><p>Modern casino gameplay.</p><a href="https://www.vblink777.club/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/rsrnngDb/game.jpg" alt="Game Vault"><div class="game-tag">Player Favorite</div><h3>Game Vault</h3><p>Casino hub platform.</p><a href="https://download.gamevault999.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/PxZY07Mz/vegas.jpg" alt="LasVegas Sweeps"><div class="game-tag">Hot</div><h3>LasVegas Sweeps</h3><p>Vegas-style slots.</p><a href="https://m.lasvegassweeps.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/7PnT70t4/gr.jpg" alt="Gameroom"><div class="game-tag">Fast Login</div><h3>Gameroom</h3><p>Arcade + casino combo.</p><a href="https://www.gameroom777.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/5tJVwYkZ/cm.jpg" alt="Cash Machine"><div class="game-tag">Most Hitting Today</div><h3>Cash Machine</h3><p>Slot-focused game.</p><a href="https://www.cashmachine777.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/yYS4tyqs/pm.jpg" alt="Panda Master"><div class="game-tag">Player Favorite</div><h3>Panda Master</h3><p>Fish shooter game.</p><a href="https://pandamaster.vip:8888/index.html" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/kgsmvX3G/fire.jpg" alt="Fire Kirin"><div class="game-tag">Most Popular</div><h3>Fire Kirin</h3><p>Multiplayer fish game.</p><a href="http://start.firekirin.xyz:8580/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/3xSqwyQW/juwa-2.jpg" alt="Juwa 2.0"><div class="game-tag">New</div><h3>Juwa 2.0</h3><p>Upgraded Juwa version.</p><a href="https://m.juwa2.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/gcsHpCWq/mafia.jpg" alt="Mafia"><div class="game-tag">Hot</div><h3>Mafia</h3><p>Crime-themed casino.</p><a href="https://www.mafia77777.com/" target="_blank" rel="noopener">Play</a></article>
+    <article class="game-card"><img src="https://i.postimg.cc/SsDY0pMC/mr.jpg" alt="Mr. All in One"><div class="game-tag">Player Favorite</div><h3>Mr. All in One</h3><p>Complete game pack.</p><a href="https://www.mrallinone777.com/" target="_blank" rel="noopener">Play</a></article>
   </div>
 </section>
 
-<section id="about">
+<section id="about" class="about-luxury">
   <h2 class="section-title">About Us</h2>
-  <p class="about-text">Where authenticity meets real wins.</p>
-  <div class="trust-strip"><span>💸 Fast Cashouts</span><span>🔒 Secure Payments</span><span>💬 24/7 Chat Support</span><span>👑 Real Payouts</span><span>⚖️ Fair Play</span></div>
+  <p class="section-subtitle">Where authenticity meets real wins — built for players who want fast support, clear rules, and a premium Aub's Palace experience.</p>
+
+  <div class="about-lux-grid">
+    <article class="about-lux-card">
+      <div class="about-lux-icon">⚡</div>
+      <h3>Fast Cashouts</h3>
+      <p>Quick payout support with clear review and no confusing steps.</p>
+    </article>
+    <article class="about-lux-card">
+      <div class="about-lux-icon">🔒</div>
+      <h3>Secure Payments</h3>
+      <p>Deposits and cashouts are handled with care and verified support.</p>
+    </article>
+    <article class="about-lux-card">
+      <div class="about-lux-icon">💬</div>
+      <h3>24/7 Chat Support</h3>
+      <p>Need help? Message Aub's Palace anytime through Facebook.</p>
+    </article>
+    <article class="about-lux-card">
+      <div class="about-lux-icon">👑</div>
+      <h3>Real Payouts</h3>
+      <p>Wins and claims are reviewed clearly so players know what to expect.</p>
+    </article>
+    <article class="about-lux-card">
+      <div class="about-lux-icon">⚖️</div>
+      <h3>Fair Play</h3>
+      <p>Rules, bonuses, spins, and claims stay simple and transparent.</p>
+    </article>
+  </div>
 </section>
 
-<section id="contact">
+<section id="contact" class="contact-luxury">
   <h2 class="section-title">Contact</h2>
-  <div class="contact-icons">
-    <a href="mailto:aubreyhere98@gmail.com" aria-label="Email Aub's Palace"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/1280px-Gmail_icon_%282020%29.svg.png" alt="Gmail"></a>
-    <a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Aub's Palace on Facebook"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="Facebook"></a>
-    <a href="https://venmo.com/code?user_id=4145490287396764155&created=1776192079" target="_blank" rel="noopener" aria-label="Pay with Venmo"><img src="https://i.postimg.cc/J44jPCqv/venmo.png" alt="Venmo"></a>
+  <p class="section-subtitle">Need help, a website ID, or a reward claim? Choose the fastest way to reach Aub's Palace.</p>
+
+  <div class="contact-card-grid">
+    <a class="contact-card" href="mailto:aubreyhere98@gmail.com" aria-label="Email Aub's Palace">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/1280px-Gmail_icon_%282020%29.svg.png" alt="Gmail">
+      <strong>Email</strong>
+      <span>Send claim details or support questions.</span>
+    </a>
+    <a class="contact-card primary" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" aria-label="Aub's Palace on Facebook">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="Facebook">
+      <strong>Facebook</strong>
+      <span>Fastest way to message Aub's Palace.</span>
+    </a>
+    <a class="contact-card" href="https://venmo.com/code?user_id=4145490287396764155&created=1776192079" target="_blank" rel="noopener" aria-label="Pay with Venmo">
+      <img src="https://i.postimg.cc/J44jPCqv/venmo.png" alt="Venmo">
+      <strong>Venmo</strong>
+      <span>Quick payment access when needed.</span>
+    </a>
   </div>
 </section>
 
@@ -484,24 +881,143 @@ section, header { scroll-margin-top: 84px; }
 <div class="sticky-play"><a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a></div>
 <div class="winner-toasts" id="winnerToasts"></div>
 
+<div class="modal" id="congratsModal">
+  <div class="modal-box congrats-box">
+    <h2>🎉 Congratulations!</h2>
+    <p id="congratsText">You won a Palace reward.</p>
+    <div class="claim-status" id="congratsCode"></div>
+    <div class="modal-actions">
+      <button class="modal-gold" onclick="continueToClaim()">Continue to Claim</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="adminHelperModal">
+  <div class="modal-box admin-helper-box">
+    <h2>👑 Aub's Palace Admin Helper</h2>
+    <p>This private helper is for you only. It does not change Supabase by itself — copy the SQL you need and run it in Supabase SQL Editor.</p>
+
+    <label>Approve Monthly Spin</label>
+    <textarea readonly>update public.players
+set monthly_allowed = true
+where id = 'PLAYER_UID_HERE';</textarea>
+
+    <label>Reset Daily Spin</label>
+    <textarea readonly>update public.players
+set daily_last_spin = null
+where id = 'PLAYER_UID_HERE';</textarea>
+
+    <label>Reset Monthly Spin + Approve</label>
+    <textarea readonly>update public.players
+set monthly_last_spin = null,
+    monthly_allowed = true
+where id = 'PLAYER_UID_HERE';</textarea>
+
+    <label>View Latest Claims</label>
+    <textarea readonly>select *
+from public.bonus_claims
+order by created_at desc
+limit 50;</textarea>
+
+    <label>View Players</label>
+    <textarea readonly>select *
+from public.players
+order by created_at desc;</textarea>
+
+    <div class="modal-actions">
+      <button class="modal-gold" onclick="copyAdminHelp()">Copy Main Commands</button>
+      <button class="modal-close" onclick="closeAdminHelper()">Close</button>
+    </div>
+    <div class="claim-status" id="adminHelperStatus"></div>
+  </div>
+</div>
+
+
 <script>
 const SUPABASE_URL="https://ctiyileypjciqmglhees.supabase.co";
 const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0aXlpbGV5cGpjaXFtZ2xoZWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTM4NDgsImV4cCI6MjA5NjA4OTg0OH0.nDboCmvqNMmUKTmJUBqlQi58IIvq1lI71dCYDSNMQhM";
 const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 const FORMSPREE_ENDPOINT="";
-let currentUser=null,currentPlayer=null,currentClaim={type:"",reward:""},dailySpinVisualRotation=0,monthlySpinVisualRotation=0;
+let currentUser=null,currentPlayer=null,currentClaim={type:"",reward:"",code:""},pendingClaim=null,dailySpinVisualRotation=0,monthlySpinVisualRotation=0;
 const DAILY_SEGMENTS={"$1":36,"$2":108,"$3":180,"15% Bonus":252,"Try Again Tomorrow":324};
 const MONTHLY_SEGMENTS={"$5":30,"$8":90,"Surprise Gift":150,"Rewards":210,"$10 Free Play":270,"Try Again Later":330};
 const NON_PRIZES=["Try Again Tomorrow","Try Again Later"];
 
-// Nav background on scroll
-const topNav=document.getElementById("topNav");
-if(topNav){window.addEventListener("scroll",function(){topNav.classList.toggle("scrolled",window.scrollY>40)})}
+// Lightweight click/win sounds using Web Audio — no external files.
+let audioCtx=null;
+function soundTone(freq=520,duration=0.055,type="sine",gain=0.035){
+  try{
+    audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+    const osc=audioCtx.createOscillator();
+    const g=audioCtx.createGain();
+    osc.type=type;
+    osc.frequency.value=freq;
+    g.gain.value=gain;
+    osc.connect(g);
+    g.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime+duration);
+  }catch(e){}
+}
+function playClickSound(){soundTone(520,0.045,"sine",0.028)}
+function playWinSound(){
+  soundTone(660,0.08,"triangle",0.045);
+  setTimeout(()=>soundTone(880,0.10,"triangle",0.040),90);
+  setTimeout(()=>soundTone(1046,0.12,"triangle",0.035),185);
+}
+document.addEventListener("click",function(e){
+  if(e.target.closest("button,a,.palace-bonus-btn,.game-card")){
+    playClickSound();
+  }
+},true);
+
+function makeClaimCode(type,reward){
+  const id=(currentUser&&currentUser.email)?currentUser.email:"unknown-id";
+  const cleanType=(type||"").toLowerCase().includes("monthly")?"monthly":"daily";
+  return cleanType+" | "+id+" ("+reward+")";
+}
+
+function openCongrats(type,reward,claimCode){
+  pendingClaim={type:type,reward:reward,code:claimCode};
+  document.getElementById("congratsText").innerText="You won "+reward+" from the "+type+".";
+  document.getElementById("congratsCode").innerText="Claim Code: "+claimCode;
+  document.getElementById("congratsModal").classList.add("open");
+  playWinSound();
+  fireConfetti();
+}
+function continueToClaim(){
+  document.getElementById("congratsModal").classList.remove("open");
+  if(pendingClaim){
+    openClaimModal(pendingClaim.type,pendingClaim.reward,pendingClaim.code);
+  }
+}
+
+function openAdminHelper(){document.getElementById("adminHelperModal").classList.add("open")}
+function closeAdminHelper(){document.getElementById("adminHelperModal").classList.remove("open")}
+async function copyAdminHelp(){
+  const text="Approve monthly:\\nupdate public.players set monthly_allowed = true where id = 'PLAYER_UID_HERE';\\n\\nView claims:\\nselect * from public.bonus_claims order by created_at desc limit 50;";
+  await navigator.clipboard.writeText(text);
+  document.getElementById("adminHelperStatus").innerText="✅ Admin commands copied.";
+  showCopyToast("✅ Admin commands copied!");
+}
+// Secret no-hassle admin helper: type palaceadmin anywhere on the page.
+let adminSecretBuffer="";
+document.addEventListener("keydown",function(e){
+  if(e.key.length===1){
+    adminSecretBuffer=(adminSecretBuffer+e.key.toLowerCase()).slice(-11);
+    if(adminSecretBuffer==="palaceadmin"){
+      openAdminHelper();
+      adminSecretBuffer="";
+    }
+  }
+});
+
 
 // Build crisp SVG wheels with labels + gold dividers
 const DAILY_LABELS=["$1","$2","$3","15% Bonus","Try Again"];
 const MONTHLY_LABELS=["$5","$8","Surprise Gift","Rewards","$10 Free Play","Try Again"];
-const WHEEL_FILLS=["#7d28c9","#f3dd72","#5a13a0","#e9cf63","#8b1bd8","#f7e892"];
+const WHEEL_FILLS=["#36004f","#d7a928","#6f16b8","#fff0a6","#170020","#9b39e6"];
 function buildWheel(id,labels){
   const el=document.getElementById(id);if(!el)return;
   const N=labels.length,cx=130,cy=130,r=126,seg=360/N;
@@ -510,10 +1026,10 @@ function buildWheel(id,labels){
     const a0=(i*seg-90)*Math.PI/180,a1=((i+1)*seg-90)*Math.PI/180;
     const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
     svg+='<path d="M'+cx+' '+cy+' L'+x0.toFixed(2)+' '+y0.toFixed(2)+' A'+r+' '+r+' 0 0 1 '+x1.toFixed(2)+' '+y1.toFixed(2)+' Z" fill="'+WHEEL_FILLS[i%WHEEL_FILLS.length]+'" stroke="#f5d878" stroke-width="2"/>';
-    const mid=(i*seg+seg/2-90)*Math.PI/180,tr=r*0.62;
+    const mid=(i*seg+seg/2-90)*Math.PI/180,tr=r*0.64;
     const tx=cx+tr*Math.cos(mid),ty=cy+tr*Math.sin(mid),rot=i*seg+seg/2;
-    const dark=WHEEL_FILLS[i%WHEEL_FILLS.length].toLowerCase();
-    const isLight=dark==="#f3dd72"||dark==="#e9cf63"||dark==="#f7e892";
+    const c=WHEEL_FILLS[i%WHEEL_FILLS.length].toLowerCase();
+    const isLight=c==="#d7a928"||c==="#fff0a6";
     const fill=isLight?"#2b003b":"#fff5d6";
     const fs=labels[i].length>9?9:11;
     svg+='<text x="'+tx.toFixed(2)+'" y="'+ty.toFixed(2)+'" fill="'+fill+'" font-family="Orbitron,Arial" font-size="'+fs+'" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate('+rot.toFixed(2)+' '+tx.toFixed(2)+' '+ty.toFixed(2)+')">'+labels[i]+'</text>';
@@ -523,12 +1039,28 @@ function buildWheel(id,labels){
 buildWheel("dailyWheel",DAILY_LABELS);
 buildWheel("monthlyWheel",MONTHLY_LABELS);
 
+// Highlight active nav link while scrolling
+const navLinks=document.querySelectorAll(".nav-links a");
+const navSections=["home","login","rules","bonus","games","about","contact"];
+window.addEventListener("scroll",function(){
+  let cur="home";
+  navSections.forEach(function(id){
+    const sec=document.getElementById(id);
+    if(sec&&window.scrollY>=sec.offsetTop-120)cur=id;
+  });
+  navLinks.forEach(function(a){
+    a.classList.toggle("active",a.getAttribute("href")==="#"+cur);
+  });
+});
+
 function hidePreloader(){const preloader=document.getElementById("preloader");if(preloader){preloader.classList.add("hide")}}
 document.addEventListener("DOMContentLoaded",function(){setTimeout(hidePreloader,1500)});
 setTimeout(hidePreloader,2800);
 
 // AGE GATE
-(function(){try{if(localStorage.getItem("apAgeOk")==="1"){var g=document.getElementById("ageGate");if(g)g.classList.add("hide")}}catch(e){}})();
+(function(){
+  try{ if(localStorage.getItem("apAgeOk")==="1"){var g=document.getElementById("ageGate"); if(g) g.classList.add("hide");} }catch(e){}
+})();
 function acceptAge(){try{localStorage.setItem("apAgeOk","1")}catch(e){}document.getElementById("ageGate").classList.add("hide")}
 function denyAge(){document.querySelector("#ageGate .age-box").innerHTML='<h2 class="age-deny">You must be 18 or older to enter Aub\'s Palace.</h2>'}
 
@@ -536,10 +1068,26 @@ function denyAge(){document.querySelector("#ageGate .age-box").innerHTML='<h2 cl
 function showCopyToast(msg){var t=document.getElementById("copyToast");if(!t)return;t.innerText=msg||"✅ Copied!";t.classList.add("show");clearTimeout(window._copyT);window._copyT=setTimeout(function(){t.classList.remove("show")},1800)}
 
 // CONFETTI
-function fireConfetti(){var colors=["#f5d878","#c75cff","#7CFC9B","#ffd96a","#a855f7","#fff"];for(var i=0;i<70;i++){(function(){var p=document.createElement("div");p.className="confetti-piece";p.style.left=Math.random()*100+"vw";p.style.background=colors[Math.floor(Math.random()*colors.length)];p.style.animationDuration=(Math.random()*1.5+1.8)+"s";p.style.animationDelay=(Math.random()*0.5)+"s";document.body.appendChild(p);setTimeout(function(){p.remove()},3800)})()}}
+function fireConfetti(){
+  var colors=["#f5d878","#c75cff","#7CFC9B","#ffd96a","#a855f7","#fff"];
+  for(var i=0;i<70;i++){
+    (function(i){
+      var p=document.createElement("div");
+      p.className="confetti-piece";
+      p.style.left=Math.random()*100+"vw";
+      p.style.background=colors[Math.floor(Math.random()*colors.length)];
+      p.style.animationDuration=(Math.random()*1.5+1.8)+"s";
+      p.style.animationDelay=(Math.random()*0.5)+"s";
+      document.body.appendChild(p);
+      setTimeout(function(){p.remove()},3800);
+    })(i);
+  }
+}
 
 const mobileMenuBtn=document.getElementById("mobileMenuBtn"),mobileMenu=document.getElementById("mobileMenu");
 if(mobileMenuBtn&&mobileMenu){mobileMenuBtn.addEventListener("click",function(){mobileMenu.classList.toggle("open")});document.querySelectorAll("#mobileMenu a").forEach(function(link){link.addEventListener("click",function(){mobileMenu.classList.remove("open")})})}
+
+function goToLogin(){closeNeedAccountModal();document.getElementById("login").scrollIntoView({behavior:"smooth"});setTimeout(function(){document.getElementById("loginEmail").focus()},650)}
 
 async function loginPlayer(){
   const email=document.getElementById("loginEmail").value.trim(),password=document.getElementById("loginPassword").value;
@@ -577,9 +1125,9 @@ function openNeedAccountModal(){document.getElementById("needAccountModal").clas
 function closeNeedAccountModal(){document.getElementById("needAccountModal").classList.remove("open")}
 async function copyAccountRequest(){const message=document.getElementById("accountRequestMessage").value;await navigator.clipboard.writeText(message);showCopyToast("✅ Message copied!")}
 
-function openClaimModal(type,reward){
-  currentClaim={type:type,reward:reward};
-  document.getElementById("claimSummary").innerText="You won "+reward+" from the "+type+". Fill in your details below.";
+function openClaimModal(type,reward,claimCode){
+  currentClaim={type:type,reward:reward,code:claimCode || makeClaimCode(type,reward)};
+  document.getElementById("claimSummary").innerText="You won "+reward+" from the "+type+". Your claim code is "+currentClaim.code+". Fill in your details below.";
   document.getElementById("claimName").value="";
   document.getElementById("claimContact").value="";
   document.getElementById("claimGameUsername").value="";
@@ -591,7 +1139,7 @@ function openClaimModal(type,reward){
 function closeClaimModal(){document.getElementById("claimModal").classList.remove("open")}
 function updateClaimMessage(){
   const name=document.getElementById("claimName").value.trim(),contact=document.getElementById("claimContact").value.trim(),username=document.getElementById("claimGameUsername").value.trim(),note=document.getElementById("claimNote").value.trim();
-  document.getElementById("claimMessage").value="Hi Aub's Palace, I want to claim my bonus reward.\n\n"+"Bonus Type: "+currentClaim.type+"\n"+"Reward Won: "+currentClaim.reward+"\n"+"Name / Facebook Name: "+(name||"(not filled)")+"\n"+"Contact Info: "+(contact||"(not filled)")+"\n"+"Game Username: "+(username||"(not filled)")+"\n"+"Note: "+(note||"N/A")+"\n\n"+"I will send my screenshot for verification.";
+  document.getElementById("claimMessage").value="Hi Aub's Palace, I want to claim my bonus reward.\n\n"+"Bonus Type: "+currentClaim.type+"\n"+"Reward Won: "+currentClaim.reward+"\n"+"Claim Code: "+currentClaim.code+"\n"+"Name / Facebook Name: "+(name||"(not filled)")+"\n"+"Contact Info: "+(contact||"(not filled)")+"\n"+"Game Username: "+(username||"(not filled)")+"\n"+"Note: "+(note||"N/A")+"\n\n"+"I will send my screenshot for verification.";
 }
 async function copyClaimMessage(){updateClaimMessage();await navigator.clipboard.writeText(document.getElementById("claimMessage").value);document.getElementById("claimStatus").innerText="✅ Copied! Open Facebook and send it with your screenshot.";showCopyToast("✅ Claim copied!")}
 async function sendClaimEmail(){
@@ -624,7 +1172,7 @@ async function handleDailySpin(){
   const angle=DAILY_SEGMENTS[data.reward]!==undefined?DAILY_SEGMENTS[data.reward]:Math.random()*360;
   dailySpinVisualRotation=spinTo(dailyWheel,dailySpinVisualRotation,angle);
   document.getElementById("dailyWheelResult").innerText="🎉 You won: "+data.reward;
-  if(!NON_PRIZES.includes(data.reward)){setTimeout(function(){fireConfetti()},4200);setTimeout(function(){openClaimModal("Daily Palace Wheel",data.reward)},4400)}
+  if(!NON_PRIZES.includes(data.reward)){const claimCode=data.claim_code||makeClaimCode("Daily Palace Wheel",data.reward);setTimeout(function(){openCongrats("Daily Palace Wheel",data.reward,claimCode)},4300)}
   setTimeout(loadPlayerProfile,4500);
 }
 async function handleMonthlySpin(){
@@ -637,7 +1185,7 @@ async function handleMonthlySpin(){
   const angle=MONTHLY_SEGMENTS[data.reward]!==undefined?MONTHLY_SEGMENTS[data.reward]:Math.random()*360;
   monthlySpinVisualRotation=spinTo(monthlyWheel,monthlySpinVisualRotation,angle);
   document.getElementById("monthlyWheelResult").innerText="🎉 You won: "+data.reward;
-  if(!NON_PRIZES.includes(data.reward)){setTimeout(function(){fireConfetti()},4200);setTimeout(function(){openClaimModal("Monthly Crown Wheel",data.reward)},4400)}
+  if(!NON_PRIZES.includes(data.reward)){const claimCode=data.claim_code||makeClaimCode("Monthly Crown Wheel",data.reward);setTimeout(function(){openCongrats("Monthly Crown Wheel",data.reward,claimCode)},4300)}
   setTimeout(loadPlayerProfile,4500);
 }
 
@@ -653,14 +1201,41 @@ function generateYesterdayWinners(){
 function generateLiveWin(){const actions=["won","cashed out","triggered bonus on","hit jackpot on","scored on","unlocked reward on","got multiplier on"];return{name:randomItem(palaceNames),game:randomItem(palaceGames),action:randomItem(actions),amount:rareMoney()}}
 let palaceLiveWins=[];
 function renderLiveWins(){if(palaceLiveWins.length===0){for(let i=0;i<5;i++){palaceLiveWins.push(generateLiveWin())}}document.getElementById("liveWinnerFeed").innerHTML=palaceLiveWins.map(function(win){return'<div class="palace-row"><span>🔥 '+win.name+' '+win.action+' '+win.game+'</span><strong>'+win.amount+'</strong></div>'}).join("")}
-function animateCount(el,to){if(!el)return;var from=Number((el.innerText||"0").replace(/,/g,""))||0;if(from===to){el.innerText=to.toLocaleString();return}var steps=18,i=0;clearInterval(el._ct);el._ct=setInterval(function(){i++;var v=Math.round(from+(to-from)*(i/steps));el.innerText=v.toLocaleString();if(i>=steps){clearInterval(el._ct);el.innerText=to.toLocaleString()}},22)}
+function animateCount(el,to){var from=Number((el.innerText||"0").replace(/,/g,""))||0;if(from===to){el.innerText=to.toLocaleString();return}var steps=18,i=0;clearInterval(el._ct);el._ct=setInterval(function(){i++;var v=Math.round(from+(to-from)*(i/steps));el.innerText=v.toLocaleString();if(i>=steps){clearInterval(el._ct);el.innerText=to.toLocaleString()}},22)}
 function updateLiveWinnerCount(){let count=Number(localStorage.getItem("palaceLiveWinnerCount")||128);if(count>=400){count=400}else{count=Math.min(400,count+Math.floor(Math.random()*3)+1)}localStorage.setItem("palaceLiveWinnerCount",count.toString());animateCount(document.getElementById("liveWinnerCount"),count)}
 function updateLiveWins(){palaceLiveWins.unshift(generateLiveWin());palaceLiveWins=palaceLiveWins.slice(0,5);renderLiveWins();updateLiveWinnerCount()}
 
 // WINNER TOAST POPUPS
-const TOAST_EVENTS=[{icon:"💰",verb:"cashed out",min:80,max:650},{icon:"🎰",verb:"hit a jackpot on",min:900,max:2800,jackpot:true},{icon:"🎁",verb:"won free play on",free:true},{icon:"🔥",verb:"won",min:50,max:500},{icon:"⚡",verb:"scored big on",min:120,max:780},{icon:"👑",verb:"unlocked a bonus on",min:60,max:400}];
-function showWinnerToast(){var box=document.getElementById("winnerToasts");if(!box)return;var ev=TOAST_EVENTS[Math.floor(Math.random()*TOAST_EVENTS.length)];var name=randomItem(palaceNames),game=randomItem(palaceGames),amount;if(ev.free){amount=randomItem(["$10 Free Play","$5 Free Play","15% Bonus","Free Spin"])}else{amount=money(ev.min,ev.max)}var t=document.createElement("div");t.className="winner-toast"+(ev.jackpot?" jackpot":"");t.innerHTML='<span class="wt-icon">'+ev.icon+'</span><div class="wt-body"><div class="wt-name">'+name+'</div><div class="wt-text">'+ev.verb+' '+game+'</div></div><div class="wt-amount">'+amount+'</div>';box.appendChild(t);requestAnimationFrame(function(){t.classList.add("show")});setTimeout(function(){t.classList.remove("show");setTimeout(function(){t.remove()},550)},5000);while(box.children.length>3){box.removeChild(box.firstChild)}}
-function startWinnerToasts(){setTimeout(showWinnerToast,3500);setInterval(showWinnerToast,Math.floor(Math.random()*4000)+6000)}
+const TOAST_EVENTS=[
+  {icon:"💰",verb:"cashed out",min:80,max:650},
+  {icon:"🎰",verb:"hit a jackpot on",min:900,max:2800,jackpot:true},
+  {icon:"🎁",verb:"won free play on",free:true},
+  {icon:"🔥",verb:"won",min:50,max:500},
+  {icon:"⚡",verb:"scored big on",min:120,max:780},
+  {icon:"👑",verb:"unlocked a bonus on",min:60,max:400}
+];
+function showWinnerToast(){
+  const box=document.getElementById("winnerToasts");if(!box)return;
+  const ev=TOAST_EVENTS[Math.floor(Math.random()*TOAST_EVENTS.length)];
+  const name=randomItem(palaceNames),game=randomItem(palaceGames);
+  let amount;
+  if(ev.free){amount=randomItem(["$10 Free Play","$5 Free Play","15% Bonus","Free Spin"]);}
+  else{amount=money(ev.min,ev.max);}
+  const t=document.createElement("div");
+  t.className="winner-toast"+(ev.jackpot?" jackpot":"");
+  t.innerHTML='<span class="wt-icon">'+ev.icon+'</span><div class="wt-body"><div class="wt-name">'+name+'</div><div class="wt-text">'+ev.verb+' '+game+'</div></div><div class="wt-amount">'+amount+'</div>';
+  box.appendChild(t);
+  requestAnimationFrame(function(){t.classList.add("show")});
+  setTimeout(function(){t.classList.remove("show");setTimeout(function(){t.remove()},550)},5000);
+  // keep max 3 on screen
+  while(box.children.length>3){box.removeChild(box.firstChild)}
+}
+function startWinnerToasts(){
+  setTimeout(showWinnerToast,3500);
+  setInterval(function(){
+    showWinnerToast();
+  },Math.floor(Math.random()*4000)+6000); // every 6-10s
+}
 document.addEventListener("DOMContentLoaded",async function(){
   const {data}=await supabaseClient.auth.getSession();
   if(data.session&&data.session.user){currentUser=data.session.user;await loadPlayerProfile()}
@@ -672,5 +1247,3 @@ document.addEventListener("DOMContentLoaded",async function(){
 </script>
 </body>
 </html>
-index-16.html
-Displaying index-16.html.

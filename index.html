@@ -43,7 +43,8 @@ button,input,textarea{font:inherit}
 @keyframes apFloat{from{transform:translateY(4px) scale(.97);opacity:.90}to{transform:translateY(-4px) scale(1.03);opacity:1}}
 
 /* REAL NAV OVER HERO */
-.site-nav{position:absolute;top:0;left:0;right:0;height:84px;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;background:linear-gradient(180deg,rgba(5,0,10,.86),rgba(5,0,10,.40),transparent);backdrop-filter:blur(5px)}
+.site-nav{position:fixed;top:0;left:0;right:0;height:84px;z-index:70;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;background:linear-gradient(180deg,rgba(5,0,10,.82),rgba(5,0,10,.36),transparent);backdrop-filter:blur(8px);border-bottom:1px solid rgba(245,216,120,.08);transition:background .28s ease,border-color .28s ease,box-shadow .28s ease}
+.site-nav.scrolled{background:rgba(8,0,14,.94);border-bottom-color:rgba(245,216,120,.22);box-shadow:0 8px 26px rgba(0,0,0,.24)}
 .nav-brand{display:flex;align-items:center;gap:10px;color:#f5d878;font-weight:900;font-size:22px;text-shadow:0 0 13px rgba(245,216,120,.35)}
 .nav-brand .crown{font-size:30px}
 .nav-links{display:flex;align-items:center;gap:34px;color:#fff}
@@ -237,6 +238,32 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
   .games-grid{gap:14px}
   .game-card img{height:110px}
 }
+
+/* ULTRA FINAL POLISH */
+@media(min-width:901px){
+  .palace-live-bonus-grid > .palace-box:nth-child(1),
+  .palace-live-bonus-grid > .palace-box:nth-child(2){
+    min-height:735px;
+  }
+  .palace-live-bonus-grid > .palace-box:nth-child(1) .palace-wheel-wrap,
+  .palace-live-bonus-grid > .palace-box:nth-child(2) .palace-wheel-wrap{
+    margin-top:auto;
+  }
+}
+.palace-box h2{text-align:center}
+.palace-box > p{text-align:center}
+.rules-card-frame img{background:#150020}
+.nav-brand:hover,.nav-links a:hover,.nav-cta:hover{filter:brightness(1.12)}
+.palace-bonus-btn:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.08)}
+.palace-bonus-btn{transition:transform .18s ease,filter .18s ease,opacity .18s ease}
+.game-card a:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.game-card a{transition:transform .18s ease,filter .18s ease}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+
+section,header{scroll-margin-top:92px}
 </style>
 </head>
 <body>
@@ -269,9 +296,11 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
     <a href="#home" class="nav-brand"><span class="crown">♛</span><span>Aub's Palace</span></a>
     <div class="nav-links">
       <a href="#home" class="active">Home</a>
+      <a href="#login">Login</a>
       <a href="#rules">Rules</a>
       <a href="#bonus">Spins</a>
       <a href="#games">Games</a>
+      <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
     <a class="nav-cta" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a>
@@ -293,6 +322,7 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
   <a href="#rules">Rules</a>
   <a href="#bonus">Spins</a>
   <a href="#games">Games</a>
+  <a href="#about">About</a>
   <a href="#contact">Contact</a>
   <a href="#login">Login</a>
   <a class="gold" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a>
@@ -300,11 +330,11 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
 
 <section class="hero-trust-section" id="trust">
   <div class="hero-trust">
-    <div class="trust-item"><span class="trust-icon">💸</span><div><div class="trust-title">Real payouts</div><div class="trust-desc">Fast, reliable, no hidden delays.</div></div></div>
-    <div class="trust-item"><span class="trust-icon">🛡️</span><div><div class="trust-title">Fair play</div><div class="trust-desc">Clear rules, always transparent.</div></div></div>
-    <div class="trust-item"><span class="trust-icon">🎧</span><div><div class="trust-title">24/7 support</div><div class="trust-desc">We're here anytime, day or night.</div></div></div>
-    <div class="trust-item"><span class="trust-icon">⚡</span><div><div class="trust-title">Fast cashouts</div><div class="trust-desc">Lightning-fast withdrawals.</div></div></div>
-    <div class="trust-item"><span class="trust-icon">🔒</span><div><div class="trust-title">Secure transactions</div><div class="trust-desc">Protected deposits and cashouts.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">⚡</span><div><div class="trust-title">Fast Cashouts</div><div class="trust-desc">Quick, reliable payout support.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">🔒</span><div><div class="trust-title">Secure Payments</div><div class="trust-desc">Protected deposits and cashouts.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">💬</span><div><div class="trust-title">24/7 Chat Support</div><div class="trust-desc">Message Aub's Palace anytime.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">👑</span><div><div class="trust-title">Real Payouts</div><div class="trust-desc">Trusted wins with clear review.</div></div></div>
+    <div class="trust-item"><span class="trust-icon">⚖️</span><div><div class="trust-title">Fair Play</div><div class="trust-desc">Clear rules and honest bonuses.</div></div></div>
   </div>
 </section>
 
@@ -364,7 +394,7 @@ footer{text-align:center;padding:34px 20px 95px;background:#25002e;color:rgba(25
   <div class="modal-box">
     <h2>Website ID Required</h2>
     <p>You need an Aub's Palace website ID and password before you can spin. Already have one? Click login. If not, copy the message and send it on Facebook.</p>
-    <textarea id="accountRequestMessage" readonly>Hey Aub's Palace! Could you please give me my website ID and password so I can log in and claim my daily and monthly bonus?</textarea>
+    <textarea id="accountRequestMessage" readonly>Hey OP, could you please give me my website ID and password so I can log in and claim my daily bonus and monthly bonus?</textarea>
     <div class="modal-actions">
       <button class="modal-gold" onclick="copyAccountRequest()">Copy Message</button>
       <button class="modal-primary" onclick="goToLogin()">I Have ID — Login</button>
@@ -464,12 +494,14 @@ buildWheel("monthlyWheel",MONTHLY_LABELS);
 
 // Highlight active nav link while scrolling
 const navLinks=document.querySelectorAll(".nav-links a");
-const navSections=["home","rules","bonus","games","contact"];
+const navSections=["home","login","rules","bonus","games","about","contact"];
+const siteNav=document.querySelector(".site-nav");
 window.addEventListener("scroll",function(){
+  if(siteNav){siteNav.classList.toggle("scrolled",window.scrollY>40)}
   let cur="home";
   navSections.forEach(function(id){
     const sec=document.getElementById(id);
-    if(sec&&window.scrollY>=sec.offsetTop-120)cur=id;
+    if(sec&&window.scrollY>=sec.offsetTop-130)cur=id;
   });
   navLinks.forEach(function(a){
     a.classList.toggle("active",a.getAttribute("href")==="#"+cur);
@@ -670,5 +702,5 @@ document.addEventListener("DOMContentLoaded",async function(){
 </script>
 </body>
 </html>
-index-10.html
-Displaying index-10.html.
+index-13.html
+Displaying index-13.html.

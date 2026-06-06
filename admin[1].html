@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aub's Palace — Admin Panel</title>
+<link rel="icon" type="image/png" href="ap-logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Inter",Arial,sans-serif;background:#06000f;color:#fff;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:"Inter",Arial,sans-serif}
+input,textarea,select{font-family:"Inter",Arial,sans-serif}
+:focus-visible{outline:2px solid #f5d878;outline-offset:2px}
+
+/* ── LOCK SCREEN ── */
+#lockScreen{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at center,rgba(80,20,120,.35),transparent 55%),linear-gradient(180deg,#06000f,#150020)}
+#lockScreen.hide{display:none}
+.lock-box{width:min(420px,90vw);text-align:center;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(245,216,120,.3);border-radius:24px;padding:40px 32px;box-shadow:0 0 60px rgba(199,92,255,.3)}
+.lock-logo{width:100px;height:100px;object-fit:contain;margin:0 auto 20px;display:block;filter:drop-shadow(0 0 20px rgba(199,92,255,.8))}
+.lock-title{font-family:"Orbitron",Arial,sans-serif;font-size:22px;color:#f5d878;margin-bottom:6px}
+.lock-sub{color:rgba(255,255,255,.55);font-size:14px;margin-bottom:28px}
+.lock-input{width:100%;padding:14px 18px;border-radius:14px;border:1px solid rgba(245,216,120,.22);background:rgba(0,0,0,.35);color:#fff;font-size:16px;letter-spacing:.15em;text-align:center;margin-bottom:14px}
+.lock-input::placeholder{letter-spacing:normal;color:rgba(255,255,255,.35)}
+.lock-btn{width:100%;padding:14px;border-radius:999px;border:none;background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00;font-weight:800;font-size:15px;font-family:"Orbitron",Arial,sans-serif;box-shadow:0 0 24px rgba(245,216,120,.3);transition:all .3s}
+.lock-btn:hover{box-shadow:0 0 40px rgba(245,216,120,.55)}
+.lock-error{color:#ff8a8a;font-size:13px;margin-top:10px;min-height:18px}
+
+/* ── LAYOUT ── */
+.admin-wrap{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+
+/* ── SIDEBAR ── */
+.sidebar{background:linear-gradient(180deg,#0e0020,#06000f);border-right:1px solid rgba(245,216,120,.1);padding:0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-logo{padding:28px 24px 20px;border-bottom:1px solid rgba(245,216,120,.1);display:flex;align-items:center;gap:12px}
+.sidebar-logo img{width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(199,92,255,.7))}
+.sidebar-logo span{font-family:"Orbitron",Arial,sans-serif;font-size:14px;font-weight:800;color:#f5d878;line-height:1.2}
+.sidebar-logo small{display:block;color:rgba(255,255,255,.4);font-size:10px;font-weight:400;letter-spacing:.1em;text-transform:uppercase}
+.sidebar-nav{padding:16px 12px;flex:1}
+.nav-section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:14px 12px 8px;font-weight:600}
+.nav-btn{display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;border-radius:12px;border:none;background:transparent;color:rgba(255,255,255,.65);font-size:14px;font-weight:500;text-align:left;transition:all .25s;margin-bottom:2px}
+.nav-btn .nav-icon{font-size:18px;width:24px;text-align:center;flex-shrink:0}
+.nav-btn:hover{background:rgba(245,216,120,.08);color:#f5d878}
+.nav-btn.active{background:linear-gradient(135deg,rgba(245,216,120,.15),rgba(199,92,255,.12));color:#f5d878;border:1px solid rgba(245,216,120,.18)}
+.sidebar-footer{padding:16px 24px;border-top:1px solid rgba(245,216,120,.1)}
+.logout-link{font-size:13px;color:rgba(255,255,255,.4);cursor:pointer;transition:color .2s}
+.logout-link:hover{color:#ff8a8a}
+
+/* ── MAIN ── */
+.admin-main{padding:36px 40px;background:linear-gradient(135deg,rgba(199,92,255,.04),transparent 40%),#09001a}
+.page-header{margin-bottom:32px}
+.page-title{font-family:"Orbitron",Arial,sans-serif;font-size:26px;color:#f5d878;margin-bottom:6px}
+.page-sub{color:rgba(255,255,255,.5);font-size:14px}
+
+/* ── CARDS ── */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:32px}
+.stat-card{background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.03));border:1px solid rgba(245,216,120,.13);border-radius:18px;padding:22px 20px}
+.stat-value{font-family:"Orbitron",Arial,sans-serif;font-size:32px;font-weight:800;color:#f5d878;margin-bottom:4px}
+.stat-label{font-size:12px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em}
+
+/* ── PANEL ── */
+.panel{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border:1px solid rgba(245,216,120,.12);border-radius:20px;padding:28px;margin-bottom:24px}
+.panel-title{font-family:"Orbitron",Arial,sans-serif;font-size:16px;color:#f5d878;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.panel-title span{font-size:20px}
+
+/* ── FORMS ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group.full{grid-column:span 2}
+label{font-size:12px;color:rgba(255,255,255,.6);font-weight:500;text-transform:uppercase;letter-spacing:.08em}
+input[type=text],input[type=email],input[type=password],input[type=number],select,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(245,216,120,.18);background:rgba(0,0,0,.3);color:#fff;font-size:14px;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{border-color:rgba(245,216,120,.5);box-shadow:0 0 0 3px rgba(245,216,120,.1);outline:none}
+select option{background:#1a0028;color:#fff}
+textarea{min-height:80px;resize:vertical}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:999px;border:none;font-weight:700;font-size:13px;transition:all .25s;cursor:pointer;font-family:"Inter",Arial,sans-serif}
+.btn-gold{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00;box-shadow:0 0 18px rgba(245,216,120,.25)}
+.btn-gold:hover{box-shadow:0 0 32px rgba(245,216,120,.5);transform:translateY(-1px)}
+.btn-purple{background:linear-gradient(135deg,#8b1bd8,#c85fff);color:#fff;box-shadow:0 0 18px rgba(201,94,255,.25)}
+.btn-purple:hover{box-shadow:0 0 32px rgba(201,94,255,.5);transform:translateY(-1px)}
+.btn-green{background:linear-gradient(135deg,#1a6b3a,#2ecc71);color:#fff}
+.btn-green:hover{box-shadow:0 0 24px rgba(46,204,113,.4)}
+.btn-red{background:rgba(220,50,50,.25);color:#ff8a8a;border:1px solid rgba(220,50,50,.3)}
+.btn-red:hover{background:rgba(220,50,50,.4)}
+.btn-sm{padding:7px 16px;font-size:12px}
+.btn-full{width:100%;margin-top:14px}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+/* ── TABLES ── */
+.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid rgba(245,216,120,.1)}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:12px 16px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);background:rgba(0,0,0,.25);font-weight:600;border-bottom:1px solid rgba(245,216,120,.1)}
+td{padding:13px 16px;font-size:14px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(245,216,120,.03)}
+
+/* ── BADGES ── */
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em}
+.badge-active{background:rgba(124,252,155,.15);color:#7CFC9B;border:1px solid rgba(124,252,155,.25)}
+.badge-pending{background:rgba(245,216,120,.15);color:#f5d878;border:1px solid rgba(245,216,120,.25)}
+.badge-approved{background:rgba(46,204,113,.15);color:#2ecc71;border:1px solid rgba(46,204,113,.25)}
+.badge-voided{background:rgba(220,50,50,.15);color:#ff8a8a;border:1px solid rgba(220,50,50,.25)}
+.badge-locked{background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12)}
+
+/* ── GALLERY ADMIN ── */
+.gallery-admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:20px}
+.gallery-admin-card{background:rgba(0,0,0,.3);border:1px solid rgba(245,216,120,.12);border-radius:14px;overflow:hidden;position:relative}
+.gallery-admin-card img{width:100%;height:150px;object-fit:cover;display:block}
+.gallery-admin-card .card-info{padding:10px 12px}
+.gallery-admin-card .card-caption{font-size:13px;color:rgba(255,255,255,.8);margin-bottom:6px}
+.gallery-admin-card .card-actions{display:flex;gap:6px}
+.gallery-upload-zone{border:2px dashed rgba(245,216,120,.25);border-radius:16px;padding:30px;text-align:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.gallery-upload-zone:hover,.gallery-upload-zone.drag{border-color:rgba(245,216,120,.6);background:rgba(245,216,120,.04)}
+.gallery-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.gallery-upload-zone .upload-icon{font-size:40px;margin-bottom:10px}
+.gallery-upload-zone p{color:rgba(255,255,255,.55);font-size:14px}
+.gallery-upload-zone strong{color:#f5d878}
+.img-preview{width:100%;max-height:200px;object-fit:contain;border-radius:10px;margin-top:12px;display:none;border:1px solid rgba(245,216,120,.2)}
+
+/* ── WINNERS EDITOR ── */
+.winners-row{display:grid;grid-template-columns:auto 1fr 1fr auto;gap:10px;align-items:center;margin-bottom:10px}
+.rank-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
+.rank-1{background:linear-gradient(135deg,#ffd700,#ffaa00);color:#000}
+.rank-2{background:linear-gradient(135deg,#c0c0c0,#909090);color:#000}
+.rank-3{background:linear-gradient(135deg,#cd7f32,#8b4513);color:#fff}
+
+/* ── ALERT ── */
+.alert{padding:12px 16px;border-radius:12px;font-size:13px;margin-bottom:14px;display:none}
+.alert.show{display:block}
+.alert-success{background:rgba(46,204,113,.15);border:1px solid rgba(46,204,113,.3);color:#2ecc71}
+.alert-error{background:rgba(220,50,50,.15);border:1px solid rgba(220,50,50,.3);color:#ff8a8a}
+.alert-info{background:rgba(245,216,120,.12);border:1px solid rgba(245,216,120,.25);color:#f5d878}
+
+/* ── PAGES ── */
+.admin-page{display:none}
+.admin-page.active{display:block}
+
+/* ── SEARCH ── */
+.search-bar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.search-bar input{flex:1;min-width:200px}
+.search-bar select{min-width:160px}
+
+/* ── SPINNER ── */
+.spin-icon{display:inline-block;animation:spinAnim .6s linear infinite;vertical-align:middle}
+@keyframes spinAnim{to{transform:rotate(360deg)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .admin-wrap{grid-template-columns:1fr}
+  .sidebar{position:fixed;left:-280px;top:0;bottom:0;z-index:100;width:260px;transition:left .3s}
+  .sidebar.open{left:0}
+  .admin-main{padding:20px 16px;padding-top:70px}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:span 1}
+  .mobile-nav-bar{display:flex}
+}
+.mobile-nav-bar{display:none;position:fixed;top:0;left:0;right:0;height:60px;background:rgba(6,0,15,.95);border-bottom:1px solid rgba(245,216,120,.1);align-items:center;justify-content:space-between;padding:0 16px;z-index:99}
+.mobile-nav-bar .logo{font-family:"Orbitron",Arial,sans-serif;font-size:14px;color:#f5d878}
+.hamburger{background:none;border:none;color:#f5d878;font-size:24px;cursor:pointer}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
+.sidebar-overlay.open{display:block}
+</style>
+</head>
+<body>
+
+<!-- LOCK SCREEN -->
+<div id="lockScreen">
+  <div class="lock-box">
+    <img class="lock-logo" src="ap-logo.png" alt="AP">
+    <div class="lock-title">Admin Panel</div>
+    <div class="lock-sub">Aub's Palace · Restricted Access</div>
+    <input class="lock-input" type="password" id="adminPass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')checkPassword()">
+    <button class="lock-btn" onclick="checkPassword()">🔐 Enter Admin</button>
+    <div class="lock-error" id="lockError"></div>
+  </div>
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav-bar">
+  <span class="logo">👑 AP Admin</span>
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<!-- ADMIN LAYOUT -->
+<div class="admin-wrap" id="adminWrap" style="display:none">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <img src="ap-logo.png" alt="AP">
+      <span>Aub's Palace<small>Admin Panel</small></span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <button class="nav-btn active" onclick="showPage('dashboard',this)"><span class="nav-icon">📊</span>Dashboard</button>
+
+      <div class="nav-section-label">Players</div>
+      <button class="nav-btn" onclick="showPage('players',this)"><span class="nav-icon">👥</span>All Players</button>
+      <button class="nav-btn" onclick="showPage('addPlayer',this)"><span class="nav-icon">➕</span>Add New Player</button>
+
+      <div class="nav-section-label">Spins & Claims</div>
+      <button class="nav-btn" onclick="showPage('claims',this)"><span class="nav-icon">📋</span>Claim Requests</button>
+      <button class="nav-btn" onclick="showPage('approvals',this)"><span class="nav-icon">✅</span>Monthly Approvals</button>
+
+      <div class="nav-section-label">Content</div>
+      <button class="nav-btn" onclick="showPage('winners',this)"><span class="nav-icon">🏆</span>Winners Board</button>
+      <button class="nav-btn" onclick="showPage('gallery',this)"><span class="nav-icon">📸</span>Palace Moments</button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="logout-link" onclick="adminLogout()">🚪 Lock Admin Panel</div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main">
+
+    <!-- DASHBOARD -->
+    <div class="admin-page active" id="page-dashboard">
+      <div class="page-header">
+        <div class="page-title">📊 Dashboard</div>
+        <div class="page-sub">Welcome back, Aub. Here's your Palace overview.</div>
+      </div>
+      <div class="stat-grid" id="dashStats">
+        <div class="stat-card"><div class="stat-value" id="statPlayers">—</div><div class="stat-label">Total Players</div></div>
+        <div class="stat-card"><div class="stat-value" id="statPending">—</div><div class="stat-label">Pending Claims</div></div>
+        <div class="stat-card"><div class="stat-value" id="statApproved">—</div><div class="stat-label">Approved Claims</div></div>
+        <div class="stat-card"><div class="stat-value" id="statGallery">—</div><div class="stat-label">Gallery Items</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><span>📋</span>Recent Claims</div>
+        <div class="table-wrap" id="dashRecentClaims"><div style="padding:20px;text-align:center;color:rgba(255,255,255,.4)">Loading...</div></div>
+      </div>
+    </div>
+
+    <!-- ALL PLAYERS -->
+    <div class="admin-page" id="page-players">
+      <div class="page-header">
+        <div class="page-title">👥 All Players</div>
+        <div class="page-sub">Manage player accounts, spins, and approval status.</div>
+      </div>
+      <div class="search-bar">
+        <input type="text" id="playerSearch" placeholder="🔍 Search by name or email..." oninput="filterPlayers()">
+        <select id="playerFilter" onchange="filterPlayers()">
+          <option value="all">All Players</option>
+          <option value="active">Active</option>
+          <option value="monthly_ready">Monthly Approved</option>
+        </select>
+      </div>
+      <div class="alert alert-info" id="playersAlert"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Status</th><th>Last Daily</th><th>Monthly</th><th>Actions</th></tr></thead>
+          <tbody id="playersTable"><tr><td colspan="6" style="text-align:center;padding:24px;color:rgba(255,255,255,.4)">Loading players...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ADD PLAYER -->
+    <div class="admin-page" id="page-addPlayer">
+      <div class="page-header">
+        <div class="page-title">➕ Add New Player</div>
+        <div class="page-sub">Create a player account. They'll use this email & password to log in.</div>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><span>👤</span>Player Details</div>
+        <div class="alert" id="addPlayerAlert"></div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Display Name</label>
+            <input type="text" id="newName" placeholder="e.g. Marcus J.">
+          </div>
+          <div class="form-group">
+            <label>Email / Website ID</label>
+            <input type="email" id="newEmail" placeholder="player@email.com">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="newPassword" placeholder="Min 8 characters">
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="newStatus">
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="form-group full" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,216,120,.06);border:1px solid rgba(245,216,120,.14);border-radius:12px">
+            <input type="checkbox" id="newMonthlyAllowed" style="width:auto">
+            <label style="text-transform:none;letter-spacing:0;color:#f8e6bc;font-size:14px">Approve monthly spin immediately after creation</label>
+          </div>
+        </div>
+        <button class="btn btn-gold btn-full" onclick="addPlayer()">➕ Create Player Account</button>
+      </div>
+    </div>
+
+    <!-- CLAIMS -->
+    <div class="admin-page" id="page-claims">
+      <div class="page-header">
+        <div class="page-title">📋 Claim Requests</div>
+        <div class="page-sub">Review and manage all bonus reward claims.</div>
+      </div>
+      <div class="search-bar">
+        <input type="text" id="claimSearch" placeholder="🔍 Search by name or reward..." oninput="filterClaims()">
+        <select id="claimFilter" onchange="filterClaims()">
+          <option value="all">All Claims</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="paid">Paid</option>
+          <option value="voided">Voided</option>
+        </select>
+      </div>
+      <div class="alert" id="claimsAlert"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Player</th><th>Bonus Type</th><th>Reward</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="claimsTable"><tr><td colspan="6" style="text-align:center;padding:24px;color:rgba(255,255,255,.4)">Loading claims...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MONTHLY APPROVALS -->
+    <div class="admin-page" id="page-approvals">
+      <div class="page-header">
+        <div class="page-title">✅ Monthly Approvals</div>
+        <div class="page-sub">Approve players who have sent their weekly play screenshot.</div>
+      </div>
+      <div class="alert" id="approvalsAlert"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Player</th><th>Email</th><th>Last Monthly Spin</th><th>Currently Approved</th><th>Action</th></tr></thead>
+          <tbody id="approvalsTable"><tr><td colspan="5" style="text-align:center;padding:24px;color:rgba(255,255,255,.4)">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- WINNERS BOARD -->
+    <div class="admin-page" id="page-winners">
+      <div class="page-header">
+        <div class="page-title">🏆 Winners Board</div>
+        <div class="page-sub">Update the top winners shown on the main site.</div>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><span>🏆</span>Yesterday's Top Winners</div>
+        <div class="alert" id="winnersAlert"></div>
+        <p style="color:rgba(255,255,255,.55);font-size:13px;margin-bottom:20px">These show live on aubspalace.com in the Yesterday's Winners section.</p>
+        <div class="winners-row" style="margin-bottom:6px">
+          <div style="width:32px"></div>
+          <label>Player Name · Game</label>
+          <label>Amount Won</label>
+          <div style="width:40px"></div>
+        </div>
+        <div class="winners-row">
+          <div class="rank-badge rank-1">1</div>
+          <input type="text" id="w1name" placeholder="e.g. Marcus · Fire Kirin">
+          <input type="text" id="w1amount" placeholder="e.g. $1,240">
+        </div>
+        <div class="winners-row">
+          <div class="rank-badge rank-2">2</div>
+          <input type="text" id="w2name" placeholder="e.g. Aisha · Milkyway">
+          <input type="text" id="w2amount" placeholder="e.g. $870">
+        </div>
+        <div class="winners-row">
+          <div class="rank-badge rank-3">3</div>
+          <input type="text" id="w3name" placeholder="e.g. Devon · Orion Stars">
+          <input type="text" id="w3amount" placeholder="e.g. $620">
+        </div>
+        <button class="btn btn-gold btn-full" onclick="saveWinners()">💾 Save Winners Board</button>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><span>⚙️</span>Live Winner Counter</div>
+        <p style="color:rgba(255,255,255,.55);font-size:13px;margin-bottom:16px">Override the active winners count shown on the main site.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Active Winners Count</label>
+            <input type="number" id="winnerCount" placeholder="e.g. 185" min="0" max="400">
+          </div>
+        </div>
+        <button class="btn btn-purple" style="margin-top:14px" onclick="saveWinnerCount()">📊 Update Counter</button>
+      </div>
+    </div>
+
+    <!-- GALLERY / PALACE MOMENTS -->
+    <div class="admin-page" id="page-gallery">
+      <div class="page-header">
+        <div class="page-title">📸 Palace Moments</div>
+        <div class="page-sub">Add and manage Verified Payouts and Active Payment Tags shown on the main site.</div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><span>➕</span>Add New Photo</div>
+        <div class="alert" id="galleryAlert"></div>
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Upload Photo (from your device)</label>
+            <div class="gallery-upload-zone" id="uploadZone">
+              <input type="file" id="photoFile" accept="image/*" onchange="previewPhoto(this)">
+              <div class="upload-icon">📷</div>
+              <p><strong>Tap to upload</strong> or drag & drop</p>
+              <p style="font-size:12px;margin-top:4px">JPG, PNG, WEBP — max 5MB</p>
+              <img class="img-preview" id="photoPreview" src="" alt="Preview">
+            </div>
+          </div>
+          <div class="form-group full">
+            <label>Or Paste Image URL</label>
+            <input type="text" id="photoUrl" placeholder="https://i.postimg.cc/... or Facebook photo URL" oninput="previewUrl(this.value)">
+          </div>
+          <div class="form-group">
+            <label>Caption</label>
+            <input type="text" id="photoCaption" placeholder="e.g. Marcus cashed out $420 on Fire Kirin 🔥">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="photoCategory">
+              <option value="cashout">💸 Verified Payout</option>
+              <option value="tags">🏷️ Active Payment Tag</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-gold btn-full" onclick="uploadPhoto()">📸 Add to Palace Moments</button>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><span>🖼️</span>Manage Gallery</div>
+        <div style="display:flex;gap:10px;margin-bottom:16px">
+          <button class="btn btn-purple btn-sm" onclick="loadGalleryAdmin('cashout')" id="galTabCashout">💸 Verified Payouts</button>
+          <button class="btn btn-sm" style="background:rgba(255,255,255,.1);color:#fff" onclick="loadGalleryAdmin('tags')" id="galTabTags">🏷️ Active Payment Tags</button>
+        </div>
+        <div class="gallery-admin-grid" id="adminGalleryGrid">
+          <div style="padding:20px;color:rgba(255,255,255,.4);text-align:center;grid-column:1/-1">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const SUPABASE_URL="https://ctiyileypjciqmglhees.supabase.co";
+const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0aXlpbGV5cGpjaXFtZ2xoZWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTM4NDgsImV4cCI6MjA5NjA4OTg0OH0.nDboCmvqNMmUKTmJUBqlQi58IIvq1lI71dCYDSNMQhM";
+const ADMIN_PASSWORD="AubsPalace2024!";
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+
+var allPlayers=[],allClaims=[];
+
+// ── LOCK SCREEN ──
+function checkPassword(){
+  var p=document.getElementById("adminPass").value;
+  var err=document.getElementById("lockError");
+  if(p===ADMIN_PASSWORD){
+    document.getElementById("lockScreen").classList.add("hide");
+    document.getElementById("adminWrap").style.display="grid";
+    sessionStorage.setItem("apAdmin","1");
+    initAdmin();
+  }else{
+    err.innerText="Incorrect password. Try again.";
+    document.getElementById("adminPass").value="";
+    document.getElementById("adminPass").classList.add("shake");
+    setTimeout(function(){document.getElementById("adminPass").classList.remove("shake")},500);
+  }
+}
+document.getElementById("adminPass").addEventListener("keydown",function(e){if(e.key==="Enter")checkPassword()});
+if(sessionStorage.getItem("apAdmin")==="1"){
+  document.getElementById("lockScreen").classList.add("hide");
+  document.getElementById("adminWrap").style.display="grid";
+  initAdmin();
+}
+function adminLogout(){sessionStorage.removeItem("apAdmin");location.reload()}
+
+// ── SIDEBAR ──
+function toggleSidebar(){
+  document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("sidebarOverlay").classList.toggle("open");
+}
+function showPage(name,btn){
+  document.querySelectorAll(".admin-page").forEach(function(p){p.classList.remove("active")});
+  document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.remove("active")});
+  document.getElementById("page-"+name).classList.add("active");
+  if(btn)btn.classList.add("active");
+  if(window.innerWidth<900){toggleSidebar()}
+  if(name==="dashboard")loadDashboard();
+  else if(name==="players")loadPlayers();
+  else if(name==="claims")loadClaims();
+  else if(name==="approvals")loadApprovals();
+  else if(name==="gallery")loadGalleryAdmin("cashout");
+}
+
+// ── INIT ──
+function initAdmin(){
+  loadDashboard();
+}
+
+// ── HELPERS ──
+function showAlert(id,msg,type){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.className="alert alert-"+type+" show";
+  el.innerText=msg;
+  if(type==="success")setTimeout(function(){el.classList.remove("show")},4000);
+}
+function fmtDate(ds){if(!ds)return"—";return new Date(ds).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}
+function fmtDateTime(ds){if(!ds)return"—";return new Date(ds).toLocaleDateString("en-US",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"})}
+
+// ── DASHBOARD ──
+async function loadDashboard(){
+  var [p,c,g]=await Promise.all([
+    sb.from("players").select("id",{count:"exact"}),
+    sb.from("bonus_claims").select("id,status",{count:"exact"}),
+    sb.from("gallery").select("id",{count:"exact"})
+  ]);
+  document.getElementById("statPlayers").innerText=p.count||0;
+  var pending=(c.data||[]).filter(function(x){return x.status==="pending"}).length;
+  var approved=(c.data||[]).filter(function(x){return x.status==="approved"||x.status==="paid"}).length;
+  document.getElementById("statPending").innerText=pending;
+  document.getElementById("statApproved").innerText=approved;
+  document.getElementById("statGallery").innerText=g.count||0;
+  // Recent claims
+  var {data:rc}=await sb.from("bonus_claims").select("*").order("created_at",{ascending:false}).limit(6);
+  var wrap=document.getElementById("dashRecentClaims");
+  if(!rc||rc.length===0){wrap.innerHTML='<div style="padding:20px;text-align:center;color:rgba(255,255,255,.4)">No claims yet.</div>';return}
+  wrap.innerHTML='<table><thead><tr><th>Player</th><th>Reward</th><th>Type</th><th>Date</th><th>Status</th></tr></thead><tbody>'+
+    rc.map(function(c){return'<tr><td>'+c.player_name+'</td><td style="color:#f5d878;font-weight:700">'+c.reward+'</td><td>'+c.bonus_type+'</td><td>'+fmtDateTime(c.created_at)+'</td><td><span class="badge badge-'+c.status+'">'+c.status+'</span></td></tr>'}).join("")+
+  '</tbody></table>';
+}
+
+// ── PLAYERS ──
+async function loadPlayers(){
+  var {data,error}=await sb.from("players").select("*").order("created_at",{ascending:false});
+  if(error){showAlert("playersAlert","Failed to load players: "+error.message,"error");return}
+  allPlayers=data||[];
+  renderPlayers(allPlayers);
+}
+function renderPlayers(players){
+  var tb=document.getElementById("playersTable");
+  if(!players.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:24px;color:rgba(255,255,255,.4)">No players found.</td></tr>';return}
+  tb.innerHTML=players.map(function(p){
+    var lastDaily=p.daily_last_spin?fmtDate(p.daily_last_spin):"Never";
+    var monthlyStatus=p.monthly_allowed?'<span class="badge badge-active">✅ Approved</span>':'<span class="badge badge-locked">🔒 Locked</span>';
+    return'<tr>'+
+      '<td style="font-weight:600">'+p.name+'</td>'+
+      '<td style="color:rgba(255,255,255,.55);font-size:13px">'+('—')+'</td>'+
+      '<td><span class="badge badge-'+(p.status==="active"?"active":"locked")+'">'+p.status+'</span></td>'+
+      '<td style="font-size:13px;color:rgba(255,255,255,.55)">'+lastDaily+'</td>'+
+      '<td>'+monthlyStatus+'</td>'+
+      '<td><div style="display:flex;gap:6px;flex-wrap:wrap">'+
+        (p.monthly_allowed?
+          '<button class="btn btn-red btn-sm" onclick="revokeMonthly(\''+p.id+'\')">🔒 Revoke</button>':
+          '<button class="btn btn-green btn-sm" onclick="approveMonthly(\''+p.id+'\',\''+p.name+'\')">✅ Approve</button>')+
+        '<button class="btn btn-sm" style="background:rgba(255,255,255,.08);color:#fff" onclick="resetDaily(\''+p.id+'\',\''+p.name+'\')">⏰ Reset Daily</button>'+
+        '<button class="btn btn-sm" style="background:rgba(255,255,255,.08);color:#fff" onclick="resetMonthly(\''+p.id+'\',\''+p.name+'\')">🔄 Reset Monthly</button>'+
+      '</div></td>'+
+    '</tr>';
+  }).join("");
+}
+function filterPlayers(){
+  var q=document.getElementById("playerSearch").value.toLowerCase();
+  var f=document.getElementById("playerFilter").value;
+  var filtered=allPlayers.filter(function(p){
+    var matchQ=p.name.toLowerCase().includes(q);
+    var matchF=f==="all"||(f==="active"&&p.status==="active")||(f==="monthly_ready"&&p.monthly_allowed);
+    return matchQ&&matchF;
+  });
+  renderPlayers(filtered);
+}
+async function approveMonthly(id,name){
+  var {error}=await sb.from("players").update({monthly_allowed:true}).eq("id",id);
+  if(error){showAlert("playersAlert","Failed to approve: "+error.message,"error");return}
+  showAlert("playersAlert","✅ Monthly spin approved for "+name,"success");
+  loadPlayers();
+}
+async function revokeMonthly(id){
+  var {error}=await sb.from("players").update({monthly_allowed:false}).eq("id",id);
+  if(error)return;
+  loadPlayers();
+}
+async function resetDaily(id,name){
+  if(!confirm("Reset daily spin for "+name+"?"))return;
+  var {error}=await sb.from("players").update({daily_last_spin:null}).eq("id",id);
+  if(error){showAlert("playersAlert","Error: "+error.message,"error");return}
+  showAlert("playersAlert","⏰ Daily spin reset for "+name,"success");
+  loadPlayers();
+}
+async function resetMonthly(id,name){
+  if(!confirm("Reset monthly spin + approve for "+name+"?"))return;
+  var {error}=await sb.from("players").update({monthly_last_spin:null,monthly_allowed:true}).eq("id",id);
+  if(error){showAlert("playersAlert","Error: "+error.message,"error");return}
+  showAlert("playersAlert","🔄 Monthly spin reset for "+name,"success");
+  loadPlayers();
+}
+
+// ── ADD PLAYER ──
+async function addPlayer(){
+  var name=document.getElementById("newName").value.trim();
+  var email=document.getElementById("newEmail").value.trim();
+  var password=document.getElementById("newPassword").value;
+  var status=document.getElementById("newStatus").value;
+  var monthly=document.getElementById("newMonthlyAllowed").checked;
+  if(!name||!email||!password){showAlert("addPlayerAlert","Please fill in all fields.","error");return}
+  if(password.length<8){showAlert("addPlayerAlert","Password must be at least 8 characters.","error");return}
+  showAlert("addPlayerAlert","Creating player account...","info");
+  // Create auth user via Supabase admin (using service role would be ideal, but with anon we use signUp)
+  var {data:authData,error:authError}=await sb.auth.signUp({email:email,password:password});
+  if(authError){showAlert("addPlayerAlert","Auth error: "+authError.message,"error");return}
+  var uid=authData.user?authData.user.id:null;
+  if(!uid){showAlert("addPlayerAlert","Failed to get user ID. Try again.","error");return}
+  // Insert player profile
+  var {error:dbError}=await sb.from("players").insert({id:uid,name:name,status:status,monthly_allowed:monthly});
+  if(dbError){showAlert("addPlayerAlert","Account created but profile failed: "+dbError.message,"error");return}
+  showAlert("addPlayerAlert","✅ Player "+name+" created successfully! They can now log in with their email and password.","success");
+  document.getElementById("newName").value="";
+  document.getElementById("newEmail").value="";
+  document.getElementById("newPassword").value="";
+  document.getElementById("newMonthlyAllowed").checked=false;
+}
+
+// ── CLAIMS ──
+async function loadClaims(){
+  var {data,error}=await sb.from("bonus_claims").select("*").order("created_at",{ascending:false});
+  if(error){showAlert("claimsAlert","Failed to load claims.","error");return}
+  allClaims=data||[];
+  renderClaims(allClaims);
+}
+function renderClaims(claims){
+  var tb=document.getElementById("claimsTable");
+  if(!claims.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:24px;color:rgba(255,255,255,.4)">No claims found.</td></tr>';return}
+  tb.innerHTML=claims.map(function(c){
+    return'<tr>'+
+      '<td style="font-weight:600">'+c.player_name+'</td>'+
+      '<td style="font-size:13px;color:rgba(255,255,255,.6)">'+c.bonus_type+'</td>'+
+      '<td style="color:#f5d878;font-weight:700">'+c.reward+'</td>'+
+      '<td style="font-size:13px;color:rgba(255,255,255,.5)">'+fmtDateTime(c.created_at)+'</td>'+
+      '<td><span class="badge badge-'+c.status+'">'+c.status+'</span></td>'+
+      '<td><div style="display:flex;gap:5px;flex-wrap:wrap">'+
+        (c.status==="pending"?'<button class="btn btn-green btn-sm" onclick="updateClaim(\''+c.id+'\',\'approved\')">✅ Approve</button>':'')+ 
+        (c.status==="approved"?'<button class="btn btn-purple btn-sm" onclick="updateClaim(\''+c.id+'\',\'paid\')">💸 Mark Paid</button>':'')+ 
+        (c.status!=="voided"?'<button class="btn btn-red btn-sm" onclick="updateClaim(\''+c.id+'\',\'voided\')">🚫 Void</button>':'')+ 
+      '</div></td>'+
+    '</tr>';
+  }).join("");
+}
+function filterClaims(){
+  var q=document.getElementById("claimSearch").value.toLowerCase();
+  var f=document.getElementById("claimFilter").value;
+  var filtered=allClaims.filter(function(c){
+    var matchQ=c.player_name.toLowerCase().includes(q)||c.reward.toLowerCase().includes(q);
+    var matchF=f==="all"||c.status===f;
+    return matchQ&&matchF;
+  });
+  renderClaims(filtered);
+}
+async function updateClaim(id,status){
+  var {error}=await sb.from("bonus_claims").update({status:status}).eq("id",id);
+  if(error){showAlert("claimsAlert","Error: "+error.message,"error");return}
+  showAlert("claimsAlert","✅ Claim updated to: "+status,"success");
+  loadClaims();
+}
+
+// ── APPROVALS ──
+async function loadApprovals(){
+  var {data,error}=await sb.from("players").select("*").order("name");
+  if(error){showAlert("approvalsAlert","Failed to load players.","error");return}
+  var tb=document.getElementById("approvalsTable");
+  var players=data||[];
+  if(!players.length){tb.innerHTML='<tr><td colspan="5" style="text-align:center;padding:24px;color:rgba(255,255,255,.4)">No players.</td></tr>';return}
+  tb.innerHTML=players.map(function(p){
+    return'<tr>'+
+      '<td style="font-weight:600">'+p.name+'</td>'+
+      '<td style="font-size:13px;color:rgba(255,255,255,.5)">—</td>'+
+      '<td style="font-size:13px;color:rgba(255,255,255,.5)">'+fmtDate(p.monthly_last_spin)+'</td>'+
+      '<td>'+(p.monthly_allowed?'<span class="badge badge-active">✅ Approved</span>':'<span class="badge badge-locked">🔒 Not Approved</span>')+'</td>'+
+      '<td>'+(p.monthly_allowed?
+        '<button class="btn btn-red btn-sm" onclick="revokeMonthlyApproval(\''+p.id+'\')">🔒 Revoke</button>':
+        '<button class="btn btn-green btn-sm" onclick="approveMonthlyApproval(\''+p.id+'\',\''+p.name+'\')">✅ Approve Monthly</button>')+
+      '</td></tr>';
+  }).join("");
+}
+async function approveMonthlyApproval(id,name){
+  var {error}=await sb.from("players").update({monthly_allowed:true}).eq("id",id);
+  if(error)return;
+  showAlert("approvalsAlert","✅ Monthly spin approved for "+name,"success");
+  loadApprovals();
+}
+async function revokeMonthlyApproval(id){
+  var {error}=await sb.from("players").update({monthly_allowed:false}).eq("id",id);
+  if(error)return;
+  loadApprovals();
+}
+
+// ── WINNERS BOARD ──
+async function loadWinners(){
+  try{
+    var stored=localStorage.getItem("apWinners");
+    if(stored){
+      var w=JSON.parse(stored);
+      document.getElementById("w1name").value=w[0]?.name||"";
+      document.getElementById("w1amount").value=w[0]?.amount||"";
+      document.getElementById("w2name").value=w[1]?.name||"";
+      document.getElementById("w2amount").value=w[1]?.amount||"";
+      document.getElementById("w3name").value=w[2]?.name||"";
+      document.getElementById("w3amount").value=w[2]?.amount||"";
+    }
+    var count=localStorage.getItem("palaceLiveWinnerCount");
+    if(count)document.getElementById("winnerCount").value=count;
+  }catch(e){}
+}
+function saveWinners(){
+  var winners=[
+    {name:document.getElementById("w1name").value.trim(),amount:document.getElementById("w1amount").value.trim()},
+    {name:document.getElementById("w2name").value.trim(),amount:document.getElementById("w2amount").value.trim()},
+    {name:document.getElementById("w3name").value.trim(),amount:document.getElementById("w3amount").value.trim()}
+  ];
+  localStorage.setItem("apWinners",JSON.stringify(winners));
+  showAlert("winnersAlert","✅ Winners board saved! Refresh the main site to see changes.","success");
+}
+function saveWinnerCount(){
+  var count=document.getElementById("winnerCount").value;
+  if(count&&!isNaN(count)){
+    localStorage.setItem("palaceLiveWinnerCount",Math.min(400,Math.max(0,parseInt(count))).toString());
+    showAlert("winnersAlert","📊 Live counter updated to "+count,"success");
+  }
+}
+
+// ── GALLERY ADMIN ──
+var currentAdminGalleryTab="cashout";
+async function loadGalleryAdmin(type){
+  currentAdminGalleryTab=type;
+  document.getElementById("galTabCashout").className="btn btn-sm"+(type==="cashout"?" btn-purple":"");
+  document.getElementById("galTabTags").className="btn btn-sm"+(type==="tags"?" btn-purple":"");
+  if(type==="cashout"){document.getElementById("galTabCashout").style.background="";document.getElementById("galTabCashout").className="btn btn-purple btn-sm"}
+  else{document.getElementById("galTabCashout").className="btn btn-sm";document.getElementById("galTabCashout").style.cssText="background:rgba(255,255,255,.1);color:#fff"}
+  var grid=document.getElementById("adminGalleryGrid");
+  grid.innerHTML='<div style="padding:20px;color:rgba(255,255,255,.4);text-align:center;grid-column:1/-1">Loading...</div>';
+  var {data,error}=await sb.from("gallery").select("*").eq("category",type).order("created_at",{ascending:false});
+  if(error||!data||data.length===0){
+    grid.innerHTML='<div style="padding:24px;color:rgba(255,255,255,.4);text-align:center;grid-column:1/-1">No photos yet in this category.</div>';return;
+  }
+  grid.innerHTML=data.map(function(item){
+    return'<div class="gallery-admin-card">'+
+      '<img src="'+item.image_url+'" alt="'+item.caption+'" onerror="this.src=\'ap-logo.png\'">'+
+      '<div class="card-info">'+
+      '<div class="card-caption">'+item.caption+'</div>'+
+      '<div class="card-actions">'+
+        '<button class="btn btn-red btn-sm" onclick="deleteGalleryItem(\''+item.id+'\')">🗑️ Remove</button>'+
+        '<button class="btn btn-sm" style="background:rgba(255,255,255,.1);color:#fff" onclick="toggleVisible(\''+item.id+'\','+item.visible+')">'+( item.visible?"👁️ Hide":"👁️ Show")+'</button>'+
+      '</div></div></div>';
+  }).join("");
+}
+
+function previewPhoto(input){
+  var file=input.files[0];
+  if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var prev=document.getElementById("photoPreview");
+    prev.src=e.target.result;prev.style.display="block";
+    document.getElementById("photoUrl").value="";
+  };
+  reader.readAsDataURL(file);
+}
+function previewUrl(url){
+  if(!url)return;
+  var prev=document.getElementById("photoPreview");
+  prev.src=url;prev.style.display="block";
+  document.getElementById("photoFile").value="";
+}
+
+async function uploadPhoto(){
+  var caption=document.getElementById("photoCaption").value.trim();
+  var category=document.getElementById("photoCategory").value;
+  var urlInput=document.getElementById("photoUrl").value.trim();
+  var fileInput=document.getElementById("photoFile");
+  var imageUrl="";
+
+  if(!caption){showAlert("galleryAlert","Please add a caption.","error");return}
+
+  if(urlInput){
+    imageUrl=urlInput;
+  } else if(fileInput.files&&fileInput.files[0]){
+    // Upload to Supabase Storage
+    var file=fileInput.files[0];
+    if(file.size>5*1024*1024){showAlert("galleryAlert","File too large — max 5MB.","error");return}
+    showAlert("galleryAlert","Uploading photo...","info");
+    var fileName="gallery/"+Date.now()+"-"+file.name.replace(/\s/g,"-");
+    var {data:uploadData,error:uploadError}=await sb.storage.from("palace-gallery").upload(fileName,file,{cacheControl:"3600",upsert:false});
+    if(uploadError){showAlert("galleryAlert","Upload failed: "+uploadError.message+". Try using a URL instead.","error");return}
+    var {data:urlData}=sb.storage.from("palace-gallery").getPublicUrl(fileName);
+    imageUrl=urlData.publicUrl;
+  } else {
+    showAlert("galleryAlert","Please upload a photo or paste a URL.","error");return;
+  }
+
+  var {error}=await sb.from("gallery").insert({image_url:imageUrl,caption:caption,category:category,visible:true});
+  if(error){showAlert("galleryAlert","Failed to save: "+error.message,"error");return}
+  showAlert("galleryAlert","✅ Photo added to Palace Moments!","success");
+  document.getElementById("photoCaption").value="";
+  document.getElementById("photoUrl").value="";
+  document.getElementById("photoFile").value="";
+  document.getElementById("photoPreview").style.display="none";
+  loadGalleryAdmin(category);
+}
+
+async function deleteGalleryItem(id){
+  if(!confirm("Remove this photo from the gallery?"))return;
+  var {error}=await sb.from("gallery").delete().eq("id",id);
+  if(error){alert("Error: "+error.message);return}
+  loadGalleryAdmin(currentAdminGalleryTab);
+}
+async function toggleVisible(id,current){
+  await sb.from("gallery").update({visible:!current}).eq("id",id);
+  loadGalleryAdmin(currentAdminGalleryTab);
+}
+
+// Load winners on init
+document.addEventListener("DOMContentLoaded",function(){
+  if(sessionStorage.getItem("apAdmin")==="1"){loadWinners()}
+});
+// Load winners when page is shown
+document.querySelector('[onclick*="winners"]').addEventListener("click",loadWinners);
+</script>
+</body>
+</html>

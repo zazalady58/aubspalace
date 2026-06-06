@@ -51,252 +51,6 @@ document.addEventListener("DOMContentLoaded",function(){
   makeClickable(monthlyWrap,"monthlySpinBtn","Spin Monthly Crown Wheel");
 });
 
-
-/* =========================================================
-   AUB'S PALACE FINAL DEPLOY JS PATCH — UI ONLY
-========================================================= */
-
-// Automatic footer year
-(function(){
-  const y=document.getElementById("currentYear");
-  if(y) y.textContent=new Date().getFullYear();
-})();
-
-// Keep welcome message short without touching login backend
-(function(){
-  const originalSetPlayerStatus=window.setPlayerStatus;
-  if(typeof originalSetPlayerStatus==="function"){
-    window.setPlayerStatus=function(message){
-      if(typeof message==="string" && message.includes("Welcome,")){
-        message=message
-          .replace(/\.?\s*Your bonus wheels are loaded below\.?/i,"")
-          .replace(/\.?\s*Your Palace rewards are ready.*$/i,"");
-      }
-      return originalSetPlayerStatus(message);
-    };
-  }
-})();
-
-// Format timers in a more wheel-style way
-function formatAubCountdown(ms,monthly){
-  if(ms<=0) return "READY";
-  const total=Math.floor(ms/1000);
-  const d=Math.floor(total/86400);
-  const h=Math.floor((total%86400)/3600);
-  const m=Math.floor((total%3600)/60);
-  const s=total%60;
-  const pad=n=>String(n).padStart(2,"0");
-  if(monthly || d>0) return `${d}D ${pad(h)}:${pad(m)}:${pad(s)}`;
-  return `${pad(h)}:${pad(m)}:${pad(s)}`;
-}
-
-function updateWheelCountdownBadges(){
-  try{
-    const dailyBadge=document.getElementById("dailyCountdownBadge");
-    const monthlyBadge=document.getElementById("monthlyCountdownBadge");
-    const dailyWrap=document.getElementById("dailyWheelWrap");
-    const monthlyWrap=document.getElementById("monthlyWheelWrap");
-
-    if(window.currentPlayer){
-      if(dailyBadge && currentPlayer.daily_last_spin){
-        const end=new Date(currentPlayer.daily_last_spin).getTime()+24*60*60*1000;
-        const left=end-Date.now();
-        if(left>0){
-          dailyBadge.textContent="NEXT DAILY · "+formatAubCountdown(left,false);
-          dailyBadge.classList.add("is-visible");
-          if(dailyWrap) dailyWrap.classList.add("is-locked");
-        }else{
-          dailyBadge.textContent="READY TO SPIN";
-          dailyBadge.classList.add("is-visible");
-          if(dailyWrap) dailyWrap.classList.remove("is-locked");
-        }
-      }else if(dailyBadge){
-        dailyBadge.textContent="READY TO SPIN";
-        dailyBadge.classList.add("is-visible");
-      }
-
-      if(monthlyBadge && currentPlayer.monthly_last_spin){
-        const end=new Date(currentPlayer.monthly_last_spin).getTime()+30*24*60*60*1000;
-        const left=end-Date.now();
-        if(left>0){
-          monthlyBadge.textContent="NEXT MONTHLY · "+formatAubCountdown(left,true);
-          monthlyBadge.classList.add("is-visible");
-          if(monthlyWrap) monthlyWrap.classList.add("is-locked");
-        }else{
-          monthlyBadge.textContent=currentPlayer.monthly_allowed ? "READY TO SPIN" : "AWAITING APPROVAL";
-          monthlyBadge.classList.add("is-visible");
-          if(monthlyWrap) monthlyWrap.classList.toggle("is-locked",!currentPlayer.monthly_allowed);
-        }
-      }else if(monthlyBadge){
-        monthlyBadge.textContent=currentPlayer.monthly_allowed ? "READY TO SPIN" : "AWAITING APPROVAL";
-        monthlyBadge.classList.add("is-visible");
-      }
-    }
-  }catch(e){}
-}
-setInterval(updateWheelCountdownBadges,1000);
-document.addEventListener("DOMContentLoaded",updateWheelCountdownBadges);
-
-// Make wheels clickable by triggering the existing buttons
-document.addEventListener("DOMContentLoaded",function(){
-  const wraps=document.querySelectorAll(".palace-wheel-wrap");
-  const dailyWrap=document.getElementById("dailyWheelWrap") || wraps[0];
-  const monthlyWrap=document.getElementById("monthlyWheelWrap") || wraps[1];
-
-  function makeClickable(wrap,btnId,label){
-    if(!wrap || wrap.dataset.clickWheelBound==="true") return;
-    wrap.dataset.clickWheelBound="true";
-    wrap.setAttribute("role","button");
-    wrap.setAttribute("tabindex","0");
-    wrap.setAttribute("aria-label",label);
-    const spin=function(e){
-      if(e && e.target && e.target.closest("button,a,input,label")) return;
-      const btn=document.getElementById(btnId);
-      if(btn) btn.click();
-    };
-    wrap.addEventListener("click",spin);
-    wrap.addEventListener("keydown",function(e){
-      if(e.key==="Enter"||e.key===" "){e.preventDefault();spin(e);}
-    });
-  }
-
-  makeClickable(dailyWrap,"dailySpinBtn","Spin Daily Palace Wheel");
-  makeClickable(monthlyWrap,"monthlySpinBtn","Spin Monthly Crown Wheel");
-});
-
-// Full screen focus while wheel spins.
-// This uses cloned wheel visuals, so it does not break the existing spin/backend logic.
-function openSpinFocus(wheelId){
-  const overlay=document.getElementById("spinFocusOverlay");
-  const stage=document.getElementById("spinFocusStage");
-  const src=document.getElementById(wheelId);
-  if(!overlay || !stage || !src) return;
-  const old=stage.querySelector(".palace-wheel-wrap");
-  if(old) old.remove();
-  const clone=src.cloneNode(true);
-  clone.removeAttribute("id");
-  clone.querySelectorAll("[id]").forEach(el=>el.removeAttribute("id"));
-  clone.dataset.clickWheelBound="true";
-  stage.insertBefore(clone,stage.firstChild);
-  overlay.classList.add("open");
-  overlay.setAttribute("aria-hidden","false");
-}
-function closeSpinFocus(){
-  const overlay=document.getElementById("spinFocusOverlay");
-  if(!overlay) return;
-  overlay.classList.remove("open");
-  overlay.setAttribute("aria-hidden","true");
-}
-
-(function(){
-  const dailyBtn=document.getElementById("dailySpinBtn");
-  const monthlyBtn=document.getElementById("monthlySpinBtn");
-  if(dailyBtn && !dailyBtn.dataset.focusPatch){
-    dailyBtn.dataset.focusPatch="true";
-    dailyBtn.addEventListener("click",function(){
-      if(!dailyBtn.disabled){
-        openSpinFocus("dailyWheelWrap");
-        setTimeout(closeSpinFocus,4300);
-      }
-    },true);
-  }
-  if(monthlyBtn && !monthlyBtn.dataset.focusPatch){
-    monthlyBtn.dataset.focusPatch="true";
-    monthlyBtn.addEventListener("click",function(){
-      if(!monthlyBtn.disabled){
-        openSpinFocus("monthlyWheelWrap");
-        setTimeout(closeSpinFocus,4300);
-      }
-    },true);
-  }
-})();
-
-// Luxury congrats popup format
-(function(){
-  const oldOpenCongrats=window.openCongrats;
-  if(typeof oldOpenCongrats==="function"){
-    window.openCongrats=function(type,reward,claimCode){
-      const modal=document.getElementById("congratsModal");
-      const txt=document.getElementById("congratsText");
-      const code=document.getElementById("congratsCode");
-      window.pendingClaim={type:type,reward:reward,code:claimCode};
-      if(txt) txt.textContent=`You won ${reward} from the ${type}.`;
-      if(code) code.textContent=`Claim Code: ${claimCode}`;
-      if(modal) modal.classList.add("open");
-      if(typeof playWinSound==="function") playWinSound();
-      if(typeof fireConfetti==="function") fireConfetti();
-    };
-  }
-})();
-
-// Simplify claim modal fields and message format without changing backend
-function simplifyClaimForm(){
-  const modal=document.getElementById("claimModal");
-  if(!modal) return;
-
-  const labels=[...modal.querySelectorAll("label")];
-  labels.forEach(label=>{
-    const text=(label.textContent||"").toLowerCase();
-    if(text.includes("name / facebook") || text.includes("contact info")){
-      const input=label.nextElementSibling;
-      label.style.display="none";
-      if(input) input.style.display="none";
-    }
-  });
-
-  const emailBtn=[...modal.querySelectorAll("button,a")].find(el=>(el.textContent||"").toLowerCase().includes("email"));
-  if(emailBtn) emailBtn.style.display="none";
-
-  const claimSummary=document.getElementById("claimSummary");
-  if(claimSummary && window.currentClaim){
-    claimSummary.textContent=`You won ${currentClaim.reward} from the ${currentClaim.type}. Claim code: ${currentClaim.code}`;
-  }
-}
-function buildCleanClaimMessage(){
-  if(!window.currentClaim) return "";
-  const gameUser=(document.getElementById("claimGameUser")||document.getElementById("gameUsername")||{}).value || "";
-  const game=(document.getElementById("claimGame")||document.getElementById("gameName")||{}).value || "";
-  const note=(document.getElementById("claimNote")||{}).value || "";
-  return `Hi Aub’s Palace, I want to claim my bonus reward.\n\n`+
-    `Bonus Type: ${currentClaim.type}\n`+
-    `Reward Won: ${currentClaim.reward}\n`+
-    `Claim Code: ${currentClaim.code}\n`+
-    `Game Username: ${gameUser || "[filled by user]"}\n`+
-    `Game: ${game || "[filled by user]"}\n`+
-    `Extra Note: ${note || "[optional]"}`;
-}
-function updateCleanClaimMessage(){
-  const box=document.getElementById("claimMessage");
-  if(box) box.value=buildCleanClaimMessage();
-}
-(function(){
-  const oldOpenClaim=window.openClaimModal;
-  if(typeof oldOpenClaim==="function"){
-    window.openClaimModal=function(type,reward,claimCode){
-      oldOpenClaim(type,reward,claimCode);
-      setTimeout(function(){
-        simplifyClaimForm();
-        updateCleanClaimMessage();
-      },50);
-    };
-  }
-  document.addEventListener("input",function(e){
-    if(e.target && ["claimGameUser","gameUsername","claimGame","gameName","claimNote"].includes(e.target.id)){
-      updateCleanClaimMessage();
-    }
-  });
-})();
-
-// Make live count label exact when possible
-document.addEventListener("DOMContentLoaded",function(){
-  document.querySelectorAll("small").forEach(s=>{
-    const t=(s.textContent||"").toLowerCase();
-    if(t.includes("active winners") && t.includes("400")){
-      s.textContent="ACTIVE WINNERS TODAY · MAX 400";
-    }
-  });
-});
-
 </script>
 
 <style>
@@ -1078,532 +832,15 @@ section,header{
 }
 
 
-/* PATCH: simple username login note */
-.login-help-note{
-  grid-column:1/-1;
-  text-align:center;
-  margin-top:10px;
-  color:rgba(255,255,255,.74);
-  font-family:Arial,sans-serif;
-  font-size:14px;
-}
-.login-help-note strong{
-  color:#f5d878;
-  font-family:inherit;
-}
-
-
-/* =========================================================
-   AUB'S PALACE FINAL DEPLOY PATCH — UI/POLISH ONLY
-   Keeps backend/reward/timer logic intact.
-========================================================= */
-
-:root{
-  --aub-gold:#f5d878;
-  --aub-gold2:#c9972d;
-  --aub-purple:#3a004b;
-  --aub-deep:#08000d;
-  --aub-soft:#d8c5ff;
-}
-
-/* Hero + nav polish */
-.site-nav{
-  height:72px !important;
-  background:linear-gradient(180deg,rgba(7,0,12,.90),rgba(7,0,12,.52),rgba(7,0,12,.08)) !important;
-  border-bottom:1px solid rgba(245,216,120,.14) !important;
-  backdrop-filter:blur(12px) !important;
-}
-.nav-brand img{width:52px !important;height:52px !important;object-fit:contain !important;}
-.nav-brand span{font-size:clamp(28px,2.6vw,42px) !important;}
-.home-hero{
-  padding-top:72px !important;
-  background-position:center top !important;
-}
-.hero-actions,.home-actions,.cta-row{
-  gap:14px !important;
-}
-.hero-actions a,.home-actions a,.cta-row a,.hero-actions button,.home-actions button{
-  min-height:50px !important;
-  min-width:168px !important;
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  border-radius:18px !important;
-}
-.sticky-play{
-  z-index:80 !important;
-}
-
-/* Login cleanup */
-.login-card,.login-panel,.login-grid{
-  max-width:1120px !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-}
-.login-grid{
-  align-items:end !important;
-  gap:14px !important;
-}
-.login-help-note{
-  grid-column:1/-1;
-  text-align:center;
-  margin-top:8px;
-  color:rgba(255,255,255,.70);
-  font:14px/1.45 Arial,sans-serif;
-}
-.login-help-note strong{color:var(--aub-gold);}
-#playerStatus,.player-status,.login-status{
-  max-width:900px !important;
-  margin:14px auto 0 !important;
-  text-align:center !important;
-  color:var(--aub-gold) !important;
-  font-weight:800 !important;
-  line-height:1.35 !important;
-}
-
-/* Rules upgrade */
-.rules-section-upgraded{
-  padding-top:80px !important;
-}
-.rules-premium-card{
-  max-width:1080px;
-  margin:0 auto 26px;
-  padding:26px;
-  border-radius:28px;
-  border:1px solid rgba(245,216,120,.26);
-  background:
-    radial-gradient(circle at top left,rgba(245,216,120,.12),transparent 35%),
-    linear-gradient(135deg,rgba(32,0,45,.90),rgba(8,0,15,.94));
-  box-shadow:0 0 42px rgba(199,92,255,.14), inset 0 0 26px rgba(245,216,120,.04);
-}
-.rules-card-head{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  margin-bottom:20px;
-  padding-bottom:16px;
-  border-bottom:1px solid rgba(245,216,120,.16);
-}
-.rules-crown{
-  width:58px;height:58px;
-  display:grid;place-items:center;
-  border-radius:18px;
-  background:linear-gradient(135deg,rgba(245,216,120,.20),rgba(157,59,214,.15));
-  border:1px solid rgba(245,216,120,.22);
-  font-size:28px;
-}
-.rules-card-head h3{
-  color:var(--aub-gold);
-  margin:0;
-  font-size:clamp(25px,3vw,38px);
-}
-.rules-card-head p{
-  margin:5px 0 0;
-  color:rgba(255,255,255,.72);
-  font-family:Arial,sans-serif;
-}
-.rules-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
-.rule-point{
-  display:flex;
-  gap:12px;
-  padding:15px;
-  border-radius:18px;
-  background:rgba(255,255,255,.035);
-  border:1px solid rgba(245,216,120,.12);
-}
-.rule-point.wide{grid-column:1/-1;}
-.rule-point span{font-size:22px;line-height:1;}
-.rule-point p{
-  margin:0;
-  color:rgba(255,255,255,.84);
-  font-family:Arial,sans-serif;
-  line-height:1.45;
-}
-.rule-point strong{color:#fff0a8;}
-.rules-card-frame{
-  max-width:980px !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-}
-.rules-card-frame img{
-  width:100% !important;
-  height:auto !important;
-  display:block !important;
-}
-
-/* Spin cards and wheels */
-.palace-live-bonus-grid{
-  align-items:stretch !important;
-  gap:26px !important;
-}
-.palace-live-bonus-grid > .palace-box{
-  display:flex !important;
-  flex-direction:column !important;
-  justify-content:flex-start !important;
-  overflow:visible !important;
-}
-.palace-live-bonus-grid > .palace-box h2{
-  text-align:center !important;
-  font-family:"Great Vibes",cursive !important;
-  font-weight:400 !important;
-  font-size:clamp(48px,4.8vw,76px) !important;
-  line-height:1 !important;
-  letter-spacing:.01em !important;
-  background:linear-gradient(135deg,#fff7ce,#f5d878,#d49b28) !important;
-  -webkit-background-clip:text !important;
-  background-clip:text !important;
-  -webkit-text-fill-color:transparent !important;
-  text-shadow:0 0 22px rgba(245,216,120,.16) !important;
-}
-.palace-live-bonus-grid > .palace-box > p{
-  text-align:center !important;
-  max-width:760px !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-}
-.reward-list{
-  justify-content:center !important;
-  gap:10px !important;
-  margin:18px auto !important;
-}
-.reward-list span{
-  border:1px solid rgba(245,216,120,.30) !important;
-  background:linear-gradient(135deg,rgba(245,216,120,.08),rgba(80,0,108,.36)) !important;
-}
-.palace-wheel-wrap{
-  position:relative !important;
-  width:min(380px,82vw) !important;
-  height:min(380px,82vw) !important;
-  margin:24px auto 22px !important;
-  cursor:pointer !important;
-  user-select:none !important;
-  -webkit-tap-highlight-color:transparent !important;
-}
-.palace-wheel-wrap::before{
-  inset:-22px !important;
-  background:
-    radial-gradient(circle,rgba(245,216,120,.23),transparent 47%),
-    radial-gradient(circle,rgba(157,59,214,.20),transparent 63%) !important;
-  filter:blur(16px) !important;
-  opacity:.76 !important;
-}
-.palace-wheel-wrap::after{
-  top:-7px !important;
-  border-left-width:22px !important;
-  border-right-width:22px !important;
-  border-top-width:40px !important;
-  border-top-color:#fff0a8 !important;
-  filter:drop-shadow(0 0 10px rgba(245,216,120,.65)) !important;
-}
-.palace-wheel{
-  width:calc(min(380px,82vw) - 28px) !important;
-  height:calc(min(380px,82vw) - 28px) !important;
-  border:7px solid var(--aub-gold) !important;
-  box-shadow:
-    0 0 0 5px rgba(33,0,45,.96),
-    0 0 28px rgba(245,216,120,.30),
-    0 0 54px rgba(199,92,255,.28),
-    inset 0 0 30px rgba(0,0,0,.40) !important;
-  transition:transform .22s ease, filter .22s ease !important;
-}
-.palace-wheel-wrap:hover .palace-wheel{
-  transform:scale(1.018) !important;
-  filter:brightness(1.08) !important;
-}
-.palace-wheel-center{
-  width:118px !important;
-  height:118px !important;
-  border:3px solid #fff0a8 !important;
-  background:
-    radial-gradient(circle at 38% 30%,rgba(245,216,120,.26),transparent 30%),
-    radial-gradient(circle,rgba(35,0,48,.96),rgba(7,0,13,1) 75%) !important;
-}
-.palace-wheel-center img{width:96px !important;height:96px !important;object-fit:contain !important;}
-.wheel-tap-hint{
-  text-align:center;
-  margin:-4px auto 12px;
-  color:rgba(255,240,168,.82);
-  font-size:13px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-.palace-bonus-btn{
-  max-width:640px !important;
-  min-height:58px !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-  border-radius:22px !important;
-}
-.palace-status{
-  text-align:center !important;
-  min-height:44px !important;
-}
-.spin-countdown-badge{
-  display:none;
-  width:max-content;
-  max-width:92%;
-  margin:10px auto 14px;
-  padding:10px 18px;
-  border-radius:999px;
-  color:#fff6c9;
-  font-weight:900;
-  letter-spacing:.08em;
-  background:linear-gradient(135deg,rgba(245,216,120,.10),rgba(70,0,92,.64));
-  border:1px solid rgba(245,216,120,.22);
-  box-shadow:0 0 22px rgba(199,92,255,.12);
-}
-.palace-wheel-wrap.is-locked .spin-countdown-badge,
-.spin-countdown-badge.is-visible{display:block;}
-.monthly-requirement,.weekly-confirm,.bonus-help-card{
-  max-width:740px !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-}
-.monthly-lock-card{
-  max-width:740px;
-  margin:14px auto 0;
-  padding:16px 18px;
-  border-radius:20px;
-  border:1px solid rgba(245,216,120,.18);
-  background:linear-gradient(135deg,rgba(245,216,120,.08),rgba(33,0,48,.72));
-  text-align:center;
-}
-.monthly-lock-card strong{display:block;color:var(--aub-gold);font-size:18px;margin-bottom:5px;}
-.monthly-lock-card span{color:rgba(255,255,255,.72);font-size:14px;}
-@media(min-width:901px){
-  .palace-live-bonus-grid > .palace-box:nth-child(1),
-  .palace-live-bonus-grid > .palace-box:nth-child(2){min-height:800px !important;}
-}
-
-/* Full-screen spin focus overlay */
-.spin-focus-overlay{
-  position:fixed;
-  inset:0;
-  z-index:9990;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:22px;
-  background:rgba(6,0,12,.74);
-  backdrop-filter:blur(12px);
-}
-.spin-focus-overlay.open{display:flex;}
-.spin-focus-stage{
-  width:min(620px,94vw);
-  min-height:min(620px,94vw);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-}
-.spin-focus-stage .palace-wheel-wrap{
-  width:min(560px,86vw) !important;
-  height:min(560px,86vw) !important;
-  margin:0 !important;
-  transform:scale(1) !important;
-}
-.spin-focus-stage .palace-wheel{
-  width:calc(min(560px,86vw) - 34px) !important;
-  height:calc(min(560px,86vw) - 34px) !important;
-  animation:premiumSpinPulse .95s ease-in-out infinite alternate;
-}
-.spin-focus-label{
-  position:absolute;
-  bottom:-10px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:10px 20px;
-  border-radius:999px;
-  color:#fff6c9;
-  font-weight:900;
-  background:linear-gradient(135deg,rgba(245,216,120,.16),rgba(67,0,90,.78));
-  border:1px solid rgba(245,216,120,.26);
-  box-shadow:0 0 28px rgba(245,216,120,.18);
-}
-@keyframes premiumSpinPulse{
-  from{filter:brightness(1) drop-shadow(0 0 16px rgba(245,216,120,.28));}
-  to{filter:brightness(1.16) drop-shadow(0 0 34px rgba(199,92,255,.46));}
-}
-
-/* Congratulations popup */
-#congratsModal .modal-box,
-.congrats-box{
-  width:min(760px,92vw) !important;
-  max-height:92vh !important;
-  overflow:auto !important;
-  text-align:center !important;
-  border-radius:32px !important;
-  padding:34px 28px !important;
-  background:
-    radial-gradient(circle at 50% 0%,rgba(245,216,120,.18),transparent 35%),
-    linear-gradient(180deg,#3b004c,#120018) !important;
-  border:1px solid rgba(245,216,120,.28) !important;
-  box-shadow:0 0 60px rgba(199,92,255,.22), inset 0 0 26px rgba(245,216,120,.05) !important;
-}
-.congrats-box h2,
-#congratsModal h2{
-  font-family:"Great Vibes",cursive !important;
-  font-weight:400 !important;
-  font-size:clamp(58px,9vw,92px) !important;
-  margin:0 0 10px !important;
-  background:linear-gradient(135deg,#fff9d7,#f5d878,#d09a2a) !important;
-  -webkit-background-clip:text !important;
-  background-clip:text !important;
-  -webkit-text-fill-color:transparent !important;
-}
-#congratsText{
-  font-family:Arial,sans-serif !important;
-  color:rgba(255,255,255,.83) !important;
-  font-size:clamp(17px,2.4vw,22px) !important;
-  margin:0 auto 18px !important;
-}
-#congratsCode{
-  margin:0 auto 20px !important;
-  max-width:620px !important;
-  border-radius:18px !important;
-  padding:14px 16px !important;
-  color:#fff0a8 !important;
-  border:1px solid rgba(245,216,120,.22) !important;
-  background:rgba(0,0,0,.24) !important;
-}
-#congratsModal .modal-actions{
-  justify-content:center !important;
-}
-#congratsModal .modal-gold{
-  width:min(560px,100%) !important;
-  min-height:58px !important;
-  border-radius:22px !important;
-}
-
-/* Claim form simplification */
-#claimModal .modal-box{
-  width:min(820px,94vw) !important;
-  max-height:92vh !important;
-  overflow:auto !important;
-  border-radius:28px !important;
-  padding:28px !important;
-}
-#claimModal h2{
-  font-size:clamp(28px,4vw,42px) !important;
-  color:var(--aub-gold) !important;
-}
-#claimModal label{
-  color:#fff0a8 !important;
-}
-#claimModal input,
-#claimModal textarea,
-#claimModal select{
-  border-radius:18px !important;
-  border:1px solid rgba(245,216,120,.18) !important;
-  background:rgba(8,0,15,.68) !important;
-}
-#claimMessage{
-  min-height:170px !important;
-}
-#claimModal .modal-actions{
-  display:grid !important;
-  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-  gap:14px !important;
-}
-#claimModal .modal-actions button,
-#claimModal .modal-actions a{
-  min-width:unset !important;
-  min-height:58px !important;
-  border-radius:22px !important;
-}
-
-/* Winners */
-.palace-list,.winner-board,.live-winner-feed{
-  display:grid;
-  gap:10px;
-}
-.palace-list > div,
-.winner-item,.live-win-item{
-  border-radius:16px;
-  border:1px solid rgba(245,216,120,.12);
-  background:rgba(255,255,255,.035);
-  padding:11px 13px;
-}
-.palace-live-count small{
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
-
-/* Contact */
-.contact-icons a{
-  transition:transform .2s ease, filter .2s ease;
-}
-.contact-icons a:hover{
-  transform:translateY(-3px) scale(1.03);
-  filter:drop-shadow(0 0 14px rgba(245,216,120,.36));
-}
-.contact-icons a[aria-label*="Facebook"],
-.contact-icons a[href*="facebook"]{
+/* PATCH ONLY: Telegram contact icon */
+.contact-icons a.telegram-contact{
   outline:1px solid rgba(245,216,120,.28);
   border-radius:22px;
-  box-shadow:0 0 22px rgba(245,216,120,.12);
-}
-
-/* Mobile final polish */
-@media(max-width:900px){
-  .site-nav{height:64px !important;}
-  .home-hero{padding-top:64px !important;min-height:78vh !important;}
-  .nav-brand img{width:42px !important;height:42px !important;}
-  .nav-brand span{font-size:27px !important;}
-  .hero-actions,.home-actions,.cta-row{
-    flex-direction:column !important;
-    width:min(330px,92vw) !important;
-    margin-left:auto !important;
-    margin-right:auto !important;
-  }
-  .hero-actions a,.home-actions a,.cta-row a,.hero-actions button,.home-actions button{
-    width:100% !important;
-  }
-  .sticky-play{
-    left:14px !important;
-    right:14px !important;
-    bottom:12px !important;
-  }
-  .sticky-play a{width:100% !important;text-align:center !important;}
-  .rules-grid{grid-template-columns:1fr;}
-  .rule-point.wide{grid-column:auto;}
-  .login-grid{grid-template-columns:1fr !important;}
-  .palace-live-bonus-grid{grid-template-columns:1fr !important;}
-  .palace-live-bonus-grid > .palace-box h2{font-size:48px !important;}
-  .palace-wheel-wrap{width:min(350px,88vw) !important;height:min(350px,88vw) !important;}
-  .palace-wheel{width:calc(min(350px,88vw) - 28px) !important;height:calc(min(350px,88vw) - 28px) !important;}
-  .winner-toasts{left:12px !important;right:12px !important;bottom:72px !important;}
-  .winner-toast{max-width:100% !important;}
-  #claimModal .modal-actions{grid-template-columns:1fr !important;}
-  #claimModal .modal-box{padding:22px !important;}
-}
-@media(max-width:430px){
-  .palace-live-bonus-grid > .palace-box h2{font-size:42px !important;}
-  .reward-list span{font-size:12px !important;padding:7px 10px !important;}
-  .palace-wheel-center{width:94px !important;height:94px !important;}
-  .palace-wheel-center img{width:74px !important;height:74px !important;}
-  .spin-focus-stage .palace-wheel-wrap{width:92vw !important;height:92vw !important;}
-  .spin-focus-stage .palace-wheel{width:calc(92vw - 30px) !important;height:calc(92vw - 30px) !important;}
-}
-
-
-/* PATCH: Telegram contact button */
-.contact-icons a.telegram-contact{
-  outline:1px solid rgba(245,216,120,.32);
-  border-radius:22px;
-  box-shadow:0 0 24px rgba(74,163,255,.18), 0 0 18px rgba(245,216,120,.10);
-  background:linear-gradient(135deg,rgba(74,163,255,.12),rgba(245,216,120,.06));
+  box-shadow:0 0 18px rgba(74,163,255,.18),0 0 16px rgba(245,216,120,.08);
 }
 .contact-icons a.telegram-contact img{
   padding:8px;
   border-radius:18px;
-}
-.contact-icons a.telegram-contact:hover{
-  filter:drop-shadow(0 0 16px rgba(74,163,255,.42)) drop-shadow(0 0 12px rgba(245,216,120,.22));
 }
 
 </style>
@@ -1685,7 +922,7 @@ section,header{
   <p class="section-subtitle">Already have your website ID and password? Log in here first, then spin below.</p>
   <div class="login-card" id="loginCard">
     <div class="login-grid">
-      <div><label for="loginEmail">Website ID / Username</label><input id="loginEmail" type="email" autocomplete="username" placeholder="example@aubspalace.com"></div>
+      <div><label for="loginEmail">Website ID / Email</label><input id="loginEmail" type="email" autocomplete="username" placeholder="example@aubspalace.com"></div>
       <div><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password"></div>
       <button onclick="loginPlayer()">Login</button>
     </div>
@@ -1694,35 +931,15 @@ section,header{
   </div>
 </section>
 
-
-<section id="rules" class="rules-section-upgraded">
+<section id="rules">
   <h2 class="section-title">Rules</h2>
 
-  <div class="rules-premium-card">
-    <div class="rules-card-head">
-      <span class="rules-crown">👑</span>
-      <div>
-        <h3>Aub’s Palace Rules</h3>
-        <p>Please read before deposits, bonuses, rewards, and cashouts.</p>
-      </div>
-    </div>
-
-    <div class="rules-grid">
-      <div class="rule-point"><span>💵</span><p>Minimum cashout starts at <strong>$40</strong>.</p></div>
-      <div class="rule-point"><span>⚠️</span><p>Winnings exceeding the maximum cashout limit <strong>are voided</strong>.</p></div>
-      <div class="rule-point"><span>✅</span><p>Bonuses and rewards must be verified before being added.</p></div>
-      <div class="rule-point"><span>🚫</span><p>Duplicate, fake, or unverifiable claims <strong>are voided</strong>.</p></div>
-      <div class="rule-point wide"><span>🔁</span><p>If account balance reaches <strong>$0</strong>, a new qualifying deposit is required to continue using in-game bonuses or promotional rewards.</p></div>
-      <div class="rule-point"><span>🎁</span><p>Referral Bonus is awarded up to <strong>$10</strong>.</p></div>
-      <div class="rule-point"><span>🏷️</span><p>Same deposit tag cannot be used again for a new referral.</p></div>
-    </div>
+  <div class="rules-summary">
+    <strong>Quick Rules Summary</strong>
+    <span>Please read before playing. Max cashout rules apply. Bonuses and rewards must be verified. Duplicate, fake, or unverifiable claims may be voided. Rewards are reviewed before being added.</span>
   </div>
-
-  <div class="rules-card-frame">
-    <img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub’s Palace full rules">
-  </div>
+  <div class="rules-card-frame"><img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub's Palace Rules"></div>
 </section>
-
 
 <section class="palace-live-bonus-section" id="bonus">
   <h2 class="section-title">Spins & Live Wins</h2>
@@ -1732,8 +949,7 @@ section,header{
       <h2>🎡 Daily Palace Wheel</h2>
       <p>Spin once every 24 hours for instant cash rewards or bonus offers.</p>
       <div class="reward-list"><span>$1</span><span>$2</span><span>$3</span><span>15% Bonus</span><span>Try Again Tomorrow</span></div>
-      <div class="palace-wheel-wrap" id="dailyWheelWrap">
-        <div class="spin-countdown-badge" id="dailyCountdownBadge">READY</div><div class="palace-wheel" id="dailyWheel"></div><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div>
+      <div class="palace-wheel-wrap" id="dailyWheelWrap"><div class="palace-wheel" id="dailyWheel"></div><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div>
       <div class="wheel-tap-hint">Tap the wheel or button to spin</div>
       <button class="palace-bonus-btn" id="dailySpinBtn" onclick="handleDailySpin()" aria-label="Spin the daily wheel">SPIN DAILY WHEEL</button>
       <div class="palace-result" id="dailyWheelResult">Log in to spin your daily bonus.</div>
@@ -1745,8 +961,7 @@ section,header{
       <h2>👑 Monthly Crown Wheel</h2>
       <p>Qualified players spin once every 30 days after Aub's Palace backend approval.</p>
       <div class="reward-list"><span>$5</span><span>$8</span><span>Surprise Gift</span><span>Rewards</span><span>$10 Free Play</span><span>Try Again Later</span></div>
-      <div class="palace-wheel-wrap" id="monthlyWheelWrap">
-        <div class="spin-countdown-badge" id="monthlyCountdownBadge">LOCKED</div><div class="palace-wheel" id="monthlyWheel"></div><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div>
+      <div class="palace-wheel-wrap" id="monthlyWheelWrap"><div class="palace-wheel" id="monthlyWheel"></div><div class="palace-wheel-center"><img src="https://i.postimg.cc/9QFrd6Kj/Chat-GPT-Image-Jun-3-2026-06-27-02-PM-removebg-preview.png" alt="AP"></div></div>
       <div class="wheel-tap-hint">Tap the wheel or button after approval</div>
       <button class="palace-bonus-btn gold" id="monthlySpinBtn" onclick="handleMonthlySpin()" aria-label="Spin the monthly wheel">SPIN MONTHLY WHEEL</button>
       <div class="palace-result" id="monthlyWheelResult">Log in to check monthly approval.</div>
@@ -1755,7 +970,7 @@ section,header{
       <div class="monthly-requirement">Play at least <strong>5 times this week</strong>, send your screenshot to Facebook, then Aub's Palace unlocks your monthly spin.</div>
     </div>
 
-    <div class="palace-box wide"><h2>📲 How to Claim Rewards</h2><div class="claim-note">After winning, enter your game username, game name, and optional note. Your claim message will be prepared automatically. Copy it or send it to Aub’s Palace on Facebook with your screenshot. Rewards are reviewed before being added. Duplicate or unverifiable claims are voided.</div></div>
+    <div class="palace-box wide"><h2>📲 How to Claim Rewards</h2><div class="claim-note">After winning, fill in your name, contact info, game username, and any notes. Your claim message is auto-prepared — copy it and send it with your screenshot to Aub's Palace on Facebook. Rewards are reviewed before being added. Duplicate or unverifiable claims may be voided.</div></div>
     <div class="palace-box wide"><h2>🏆 Yesterday's Winners</h2><p>Top winners from the last completed reward cycle.</p><div class="palace-list" id="yesterdayWinners"></div></div>
     <div class="palace-box wide"><h2>🔥 Live Winners</h2><p>Live activity updates every 30 seconds.</p><div class="palace-live-count"><span id="liveWinnerCount">128</span><small>active winners today · max 400</small></div><div class="palace-list" id="liveWinnerFeed"></div></div>
   </div>
@@ -1780,7 +995,7 @@ section,header{
     <h2>👑 Claim Your Palace Reward</h2>
     <p id="claimSummary">Enter your info below. Your claim message will be auto-prepared.</p>
     <label for="claimName">Name / Facebook Name</label><input id="claimName" type="text" placeholder="Your name or Facebook name" oninput="updateClaimMessage()">
-    <label for="claimContact">Contact Info</label><input id="claimContact" type="text" placeholder="Game contact or note" oninput="updateClaimMessage()">
+    <label for="claimContact">Contact Info</label><input id="claimContact" type="text" placeholder="Email, phone, or Facebook name" oninput="updateClaimMessage()">
     <label for="claimGameUsername">Game Username</label><input id="claimGameUsername" type="text" placeholder="Your game username" oninput="updateClaimMessage()">
     <label for="claimNote">Extra Note</label><textarea id="claimNote" placeholder="Optional: game played, screenshot info, or anything else..." oninput="updateClaimMessage()"></textarea>
     <label for="claimMessage">Your Claim Message</label><textarea id="claimMessage" readonly style="min-height:130px"></textarea>
@@ -1867,13 +1082,6 @@ section,header{
 
 <footer>© 2023 Aub's Palace — Come for the spins... stay for Aub.<br><span style="display:block;margin-top:10px;font-size:11px;opacity:.7;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.5">For entertainment purposes. 18+ only. Play responsibly. Bonuses and rewards are subject to verification and approval. Aub's Palace reserves the right to void duplicate or fraudulent claims.</span></footer>
 <div class="sticky-play"><a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a></div>
-
-<div class="spin-focus-overlay" id="spinFocusOverlay" aria-hidden="true">
-  <div class="spin-focus-stage" id="spinFocusStage">
-    <div class="spin-focus-label">Spinning...</div>
-  </div>
-</div>
-
 <div class="winner-toasts" id="winnerToasts"></div>
 
 <div class="modal" id="congratsModal">
@@ -2084,18 +1292,6 @@ if(mobileMenuBtn&&mobileMenu){mobileMenuBtn.addEventListener("click",function(){
 
 function goToLogin(){closeNeedAccountModal();document.getElementById("login").scrollIntoView({behavior:"smooth"});setTimeout(function(){document.getElementById("loginEmail").focus()},650)}
 
-
-// PATCH: simple player username login
-function normalizeAubsLogin(value){
-  const raw=(value||"").trim().toLowerCase();
-  if(!raw) return raw;
-  if(raw.includes("@")) return raw;
-  return raw.replace(/\s+/g,"")+"@aubspalace.com";
-}
-function cleanWebsiteUsername(value){
-  return (value||"").trim().toLowerCase().replace(/[^a-z0-9._-]/g,"");
-}
-
 async function loginPlayer(){
   const email=document.getElementById("loginEmail").value.trim(),password=document.getElementById("loginPassword").value;
   if(!email||!password){setPlayerStatus("Please enter your website ID/email and password.");return}
@@ -2146,7 +1342,7 @@ function openClaimModal(type,reward,claimCode){
 function closeClaimModal(){document.getElementById("claimModal").classList.remove("open")}
 function updateClaimMessage(){
   const name=document.getElementById("claimName").value.trim(),contact=document.getElementById("claimContact").value.trim(),username=document.getElementById("claimGameUsername").value.trim(),note=document.getElementById("claimNote").value.trim();
-  document.getElementById("claimMessage").value="Hi Aub's Palace, I want to claim my bonus reward.\n\n"+"Bonus Type: "+currentClaim.type+"\n"+"Reward Won: "+currentClaim.reward+"\n"+"Claim Code: "+currentClaim.code+"\n"+"Game Username: "+(username||"(not filled)")+"\n"+"Note: "+(note||"N/A")+"\n\n"+"I will send my screenshot for verification.";
+  document.getElementById("claimMessage").value="Hi Aub's Palace, I want to claim my bonus reward.\n\n"+"Bonus Type: "+currentClaim.type+"\n"+"Reward Won: "+currentClaim.reward+"\n"+"Claim Code: "+currentClaim.code+"\n"+"Name / Facebook Name: "+(name||"(not filled)")+"\n"+"Contact Info: "+(contact||"(not filled)")+"\n"+"Game Username: "+(username||"(not filled)")+"\n"+"Note: "+(note||"N/A")+"\n\n"+"I will send my screenshot for verification.";
 }
 async function copyClaimMessage(){updateClaimMessage();await navigator.clipboard.writeText(document.getElementById("claimMessage").value);document.getElementById("claimStatus").innerText="✅ Copied! Open Facebook and send it with your screenshot.";showCopyToast("✅ Claim copied!")}
 async function sendClaimEmail(){

@@ -304,6 +304,116 @@ footer small{display:block;margin-top:8px;font-size:11px;color:rgba(255,255,255,
 .support-submit{margin:18px auto 0;display:flex}
 @media(max-width:700px){.support-grid{grid-template-columns:1fr}}
 
+
+/* ── FINAL NAV / HERO / WHEEL FIX ── */
+html{scroll-padding-top:82px}
+section,#home{scroll-margin-top:82px}
+nav{
+  height:68px!important;
+  padding:0 3.2vw!important;
+}
+.nav-brand{
+  min-width:210px!important;
+  flex-shrink:0!important;
+  overflow:visible!important;
+}
+.nav-brand img{
+  width:48px!important;
+  height:48px!important;
+  flex-shrink:0!important;
+}
+.nav-brand span{
+  font-size:32px!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-transform:none!important;
+}
+.nav-links{
+  gap:22px!important;
+  flex-wrap:nowrap!important;
+  overflow:visible!important;
+}
+.nav-links a{
+  font-size:15px!important;
+  font-weight:800!important;
+  white-space:nowrap!important;
+}
+.nav-enter{
+  padding:10px 22px!important;
+  font-size:14px!important;
+}
+#home{
+  margin-top:68px!important;
+  min-height:calc(100vh - 68px)!important;
+  padding-top:0!important;
+  background-position:center top!important;
+}
+#home::before{
+  background:linear-gradient(180deg,rgba(6,0,14,.04) 0%,rgba(6,0,14,.03) 52%,rgba(6,0,14,.82) 100%)!important;
+}
+.hero-clickmap{
+  top:0!important;
+}
+#bonus{
+  padding-top:96px!important;
+}
+.wheel-box{
+  padding-top:34px!important;
+  overflow:visible!important;
+}
+.wheel-box h3{
+  font-size:38px!important;
+  line-height:1.18!important;
+  margin-top:0!important;
+  margin-bottom:10px!important;
+}
+.wheel-wrap{
+  width:270px!important;
+  height:270px!important;
+}
+.wheel-svg{
+  width:258px!important;
+  height:258px!important;
+}
+.wheel-center{
+  width:112px!important;
+  height:112px!important;
+}
+.wheel-center img{
+  width:108px!important;
+  height:108px!important;
+}
+.sticky-cta{
+  z-index:850!important;
+}
+@media(max-width:1100px){
+  .nav-links{gap:16px!important}
+  .nav-links a{font-size:14px!important}
+  .nav-brand{min-width:190px!important}
+  .nav-brand span{font-size:30px!important}
+}
+@media(max-width:900px){
+  .nav-links{display:none!important}
+  .hamburger{display:block!important}
+  .nav-brand{min-width:0!important}
+}
+@media(max-width:700px){
+  nav{height:64px!important}
+  .mob-menu{top:64px!important}
+  #home{
+    margin-top:64px!important;
+    min-height:72vh!important;
+    background-position:center top!important;
+  }
+  .nav-brand span{font-size:28px!important}
+  .nav-brand img{width:44px!important;height:44px!important}
+  .wheel-wrap{width:230px!important;height:230px!important}
+  .wheel-svg{width:218px!important;height:218px!important}
+  .wheel-center{width:96px!important;height:96px!important}
+  .wheel-center img{width:92px!important;height:92px!important}
+}
+
 </style>
 </head>
 <body>
@@ -581,7 +691,7 @@ footer small{display:block;margin-top:8px;font-size:11px;color:rgba(255,255,255,
 
 <!-- FOOTER -->
 <footer>
-  <p>© <span id="year"></span> <span>Aub's Palace</span> — Come for the spins... stay for Aub.</p>
+  <p>© 2023 <span>Aub's Palace</span> — Come for the spins... stay for Aub.</p>
   <small>For entertainment purposes. 18+ only. Play responsibly. Bonuses and rewards are subject to verification and approval. Aub's Palace reserves the right to void duplicate or fraudulent claims.</small>
 </footer>
 
@@ -623,8 +733,6 @@ footer small{display:block;margin-top:8px;font-size:11px;color:rgba(255,255,255,
 </div>
 
 <script>
-document.getElementById("year").textContent=new Date().getFullYear();
-
 // ── SUPABASE ──
 const SB_URL="https://ctiyileypjciqmglhees.supabase.co";
 const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0aXlpbGV5cGpjaXFtZ2xoZWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTM4NDgsImV4cCI6MjA5NjA4OTg0OH0.nDboCmvqNMmUKTmJUBqlQi58IIvq1lI71dCYDSNMQhM";
@@ -649,7 +757,7 @@ function denyAge(){document.querySelector("#ageGate .age-box").innerHTML='<h2 st
 // ── NAV ──
 window.addEventListener("scroll",function(){
   var n=document.getElementById("mainNav");if(n)n.classList.toggle("scrolled",scrollY>10);
-  var secs=["home","login","rules","bonus","games","contact","gallery"];var cur="home";
+  var secs=["home","rules","bonus","games","contact","support","gallery"];var cur="home";
   secs.forEach(function(id){var s=document.getElementById(id);if(s&&scrollY>=s.offsetTop-100)cur=id});
   document.querySelectorAll(".nav-links a:not(.nav-enter)").forEach(function(a){a.classList.toggle("active",a.getAttribute("href")==="#"+cur)});
 },{passive:true});
@@ -907,5 +1015,7 @@ document.addEventListener("DOMContentLoaded",async function(){
 </script>
 
 <!-- AUBS_PALACE_SAFE_MERGE_HERO_KEPT_FROM_UPLOADED_FILE -->
+
+<!-- AUBS_FINAL_NAV_HERO_WHEEL_FIXED_2023 -->
 </body>
 </html>

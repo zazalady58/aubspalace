@@ -73,7 +73,7 @@ input,textarea,select{width:100%;border:1px solid rgba(245,216,120,.18);border-r
 </div>
 <script>
 const SUPABASE_URL="https://ctiyileypjciqmglhees.supabase.co";
-const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjdGl5aWxlWXBqY2lxbWdsaGVlcyIsInJlZiI6ImN0aXlpbGV5cGpjaXFtZ2xoZWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTM4NDgsImV4cCI6MjA5NjA4OTg0OH0.nDboCmvqNMmUKTmJUBqlQi58IIvq1lI71dCYDSNMQhM";
+const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIUzI1NiIsInJlZiI6ImN0aXlpbGV5cGpjaXFtZ2xoZWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTM4NDgsImV4cCI6MjA5NjA4OTg0OH0.nDboCmvqNMmUKTmJUBqlQi58IIvq1lI71dCYDSNMQhM";
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 let adminUser=null, adminProfile=null, allPlayers=[], allClaims=[], allSupport=[], currentGalleryTab="cashout";
 const pageInfo={dashboard:["Dashboard","Welcome back. Manage Aub's Palace from one place."],players:["All Members","View members, reset spins, and manage monthly access."],addPlayer:["Create Login","Create simple website IDs for members."],approvals:["Monthly Approvals","Approve or revoke monthly wheel access."],support:["Support Requests","Review issues, reasons, and uploaded proof images."],claims:["Bonus Claims","Manage bonus wheel reward claims."],gallery:["Palace Moments","Upload verified payouts and current tags."],winners:["Winners Board","Manage believable winners and activity numbers."]};

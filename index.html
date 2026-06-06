@@ -2,249 +2,910 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Aub's Palace 👑</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Aub's Palace — trusted fish games, bonus wheels, verified rewards, support, and Palace Moments.">
-<meta name="theme-color" content="#170020">
+<title>Aub's Palace 👑 — Come for the spins, stay for Aub</title>
+<meta name="description" content="Aub's Palace — Real payouts, fair play, fast cashouts. Spin daily and monthly wheels for real bonuses.">
 <meta property="og:title" content="Aub's Palace 👑">
 <meta property="og:description" content="Come for the spins... stay for Aub.">
 <meta property="og:image" content="https://i.postimg.cc/mrpFJ53L/Chat-GPT-Image-Jun-6-2026-03-07-45-PM.png">
+<meta property="og:url" content="https://aubspalace.com">
 <link rel="icon" type="image/png" href="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Orbitron:wght@500;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Orbitron:wght@500;700;800&family=Inter:wght@300;400;500;600&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--deep:#07000e;--bg:#180021;--bg2:#30003a;--gold:#f5d878;--gold2:#be8520;--purple:#c75cff;--soft:#f4dcff;--muted:rgba(255,255,255,.68);--line:rgba(245,216,120,.18);--green:#56e39f;--red:#ff7380}
 html{scroll-behavior:smooth}
-body{font-family:Inter,Arial,sans-serif;background:#160020;color:#fff;overflow-x:hidden}
-a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit}button{cursor:pointer}:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-body.no-scroll{overflow:hidden}
-.section{position:relative;padding:78px 6vw;background:radial-gradient(circle at top,rgba(199,92,255,.13),transparent 34%),linear-gradient(180deg,#180021,#2b0034)}
-.section.alt{background:radial-gradient(circle at top right,rgba(245,216,120,.09),transparent 34%),linear-gradient(180deg,#23002d,#13001d)}
-.section-title{font-family:Great Vibes,cursive;font-weight:400;text-align:center;font-size:clamp(46px,6.6vw,78px);line-height:.95;color:var(--gold);text-shadow:0 0 26px rgba(245,216,120,.22);margin-bottom:18px}
-.section-sub{max-width:850px;margin:0 auto 32px;text-align:center;color:var(--soft);line-height:1.65;font-size:16px}
-.gold{color:var(--gold)}
-.btn{border:0;border-radius:999px;padding:14px 22px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;transition:.22s ease;text-align:center}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
-.btn:disabled{opacity:.50;cursor:not-allowed;transform:none}
-.btn-gold{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#180900;box-shadow:0 0 24px rgba(245,216,120,.26)}
-.btn-purple{background:linear-gradient(135deg,#7510bd,#c75cff);color:#fff;box-shadow:0 0 24px rgba(199,92,255,.28)}
-.btn-ghost{background:rgba(255,255,255,.08);border:1px solid rgba(245,216,120,.18);color:#fff}
-.card{background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.032));border:1px solid rgba(245,216,120,.15);border-radius:30px;box-shadow:0 0 42px rgba(199,92,255,.12)}
-#preloader{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:radial-gradient(circle,rgba(199,92,255,.18),transparent 48%),linear-gradient(180deg,#040008,#160020)}
-#preloader.hide{opacity:0;visibility:hidden;transition:.7s}
-.loader{text-align:center}.loader img{width:min(190px,54vw);filter:drop-shadow(0 0 24px rgba(199,92,255,.8)) drop-shadow(0 0 14px rgba(245,216,120,.5));animation:float 1.4s infinite alternate ease-in-out}.loader div{margin-top:10px;color:var(--gold);letter-spacing:.35em;font-size:11px;text-transform:uppercase}@keyframes float{to{transform:translateY(-8px) scale(1.03)}}
-.navbar{position:fixed;top:0;left:0;right:0;z-index:100;height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:linear-gradient(180deg,rgba(7,0,12,.88),rgba(7,0,12,.18));border-bottom:1px solid rgba(245,216,120,.10);backdrop-filter:blur(12px)}
-.brand{display:flex;align-items:center;gap:10px;font-family:Great Vibes,cursive;color:var(--gold);font-size:34px;line-height:1}.brand img{width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(199,92,255,.75))}
-.navlinks{display:flex;align-items:center;gap:18px;list-style:none}.navlinks a{font-family:Orbitron,Arial,sans-serif;font-size:12px;color:rgba(255,255,255,.86);padding:8px 0;position:relative}.navlinks a:hover{color:var(--gold)}.navlinks a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--purple));transform:scaleX(0);transition:.25s}.navlinks a:hover::after{transform:scaleX(1)}.nav-cta{padding:10px 16px!important;border-radius:999px;background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1c0b00!important}.nav-cta::after{display:none}
-.mobile-toggle{display:none;background:none;border:0;color:var(--gold);font-size:34px}.mobile-menu{display:none;position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(8,0,14,.97);border-bottom:1px solid var(--line)}.mobile-menu.open{display:block}.mobile-menu a{display:block;padding:15px 22px;border-top:1px solid rgba(255,255,255,.08)}
-.hero{position:relative;min-height:100vh;display:grid;place-items:center;padding:96px 6vw 60px;background:linear-gradient(90deg,rgba(7,0,14,.82),rgba(7,0,14,.20),rgba(7,0,14,.74)),url("https://i.postimg.cc/mrpFJ53L/Chat-GPT-Image-Jun-6-2026-03-07-45-PM.png") center/cover no-repeat;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,transparent 20%,rgba(7,0,14,.35) 82%);pointer-events:none}
-.hero-content{position:relative;z-index:2;text-align:center;max-width:820px;margin:auto}.hero-logo{width:132px;height:132px;object-fit:contain;filter:drop-shadow(0 0 24px rgba(199,92,255,.8));margin-bottom:8px}
-.hero h1{font-family:Great Vibes,cursive;font-size:clamp(76px,13vw,150px);font-weight:400;line-height:.85;color:var(--gold);text-shadow:0 0 28px rgba(245,216,120,.22),0 0 50px rgba(199,92,255,.24)}.hero p{max-width:660px;margin:18px auto;color:#fff4d8;line-height:1.65;font-size:clamp(15px,2vw,19px)}.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px}.hero-actions .btn{min-width:170px}.sticky-enter{position:fixed;right:18px;bottom:18px;z-index:80}
-.trust-plates{padding:34px 5vw;background:linear-gradient(180deg,#100018,#21002a);border-top:1px solid rgba(245,216,120,.12);border-bottom:1px solid rgba(245,216,120,.12)}
-.plates-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.plate{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;padding:16px 12px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(245,216,120,.16);color:#fff0b8;font-family:Orbitron,Arial,sans-serif;font-size:12px;font-weight:800;letter-spacing:.03em;box-shadow:0 0 20px rgba(199,92,255,.08)}
-.login-card,.support-form{max-width:980px;margin:0 auto;padding:26px}.login-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
-label{display:block;color:#fff0b8;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
-input,textarea,select{width:100%;border:1px solid rgba(245,216,120,.20);border-radius:16px;background:rgba(0,0,0,.32);color:#fff;padding:13px 14px}textarea{min-height:105px;resize:vertical}input::placeholder,textarea::placeholder{color:rgba(255,255,255,.36)}.status{margin-top:14px;text-align:center;color:var(--gold);line-height:1.5}#logoutBtn{display:none;margin:14px auto 0}.logged-in #logoutBtn{display:flex}
-.wheel-grid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:24px}.wheel-card{padding:28px;text-align:center;position:relative;overflow:visible}.wheel-card h3{font-family:Great Vibes,cursive;color:var(--gold);font-size:clamp(46px,5vw,72px);font-weight:400;line-height:1;margin-bottom:8px}.wheel-card p{color:var(--muted);line-height:1.55;margin-bottom:14px}.rewards{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:14px 0 18px}.rewards span{font-size:12px;color:#fff0b8;border:1px solid rgba(245,216,120,.22);background:rgba(0,0,0,.26);border-radius:999px;padding:8px 10px}
-.wheel-wrap{width:min(390px,82vw);height:min(390px,82vw);margin:18px auto 0;position:relative;display:grid;place-items:center;cursor:pointer}.wheel-wrap::before{content:"";position:absolute;inset:-18px;border-radius:50%;background:conic-gradient(var(--gold),var(--purple),var(--gold),#6e14b6,var(--gold));filter:blur(14px);opacity:.54;animation:glow 6s linear infinite}@keyframes glow{to{transform:rotate(360deg)}}
-.wheel{width:calc(min(390px,82vw) - 26px);height:calc(min(390px,82vw) - 26px);border-radius:50%;border:7px solid var(--gold);box-shadow:0 0 0 5px rgba(20,0,30,.95),0 0 32px rgba(245,216,120,.30),0 0 60px rgba(199,92,255,.28),inset 0 0 28px rgba(0,0,0,.38);position:relative;transition:transform 4.6s cubic-bezier(.13,.78,.20,1)}.wheel svg{width:100%;height:100%;border-radius:50%;display:block}.pointer{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-top:42px solid #fff0a8;z-index:8;filter:drop-shadow(0 0 10px rgba(245,216,120,.8))}.wheel-center{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;display:grid;place-items:center;z-index:10;border:3px solid #fff0a8;background:radial-gradient(circle,rgba(50,0,70,.98),rgba(8,0,14,1) 72%);box-shadow:0 0 24px rgba(245,216,120,.34),inset 0 0 20px rgba(199,92,255,.42)}.wheel-center img{width:92px;height:92px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(199,92,255,.9))}.timer-badge{position:relative;z-index:12;display:inline-flex;align-items:center;justify-content:center;margin:-5px auto 16px;padding:10px 18px;border-radius:999px;border:1px solid rgba(245,216,120,.28);background:linear-gradient(135deg,rgba(245,216,120,.10),rgba(58,0,83,.72));color:#fff6c8;font-family:Orbitron,Arial,sans-serif;font-weight:800;font-size:13px;min-width:220px}.wheel-result{min-height:26px;color:var(--muted);font-size:14px;margin-top:8px}.locked-wheel .wheel{filter:grayscale(.55) brightness(.70)}.lock-icon{position:absolute;z-index:11;font-size:34px;display:none}.locked-wheel .lock-icon{display:block}
-.spin-stage{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(4,0,10,.76);backdrop-filter:blur(14px)}.spin-stage.open{display:flex}.spin-panel{width:min(680px,96vw);text-align:center;position:relative}.spin-close{position:absolute;right:4px;top:-4px;z-index:20;background:rgba(255,255,255,.10);border:1px solid rgba(245,216,120,.22);color:#fff;border-radius:50%;width:42px;height:42px;font-weight:900}.spin-title{font-family:Great Vibes,cursive;color:var(--gold);font-size:clamp(52px,9vw,88px);line-height:.95;margin-bottom:12px}.spin-help{color:#fff0b8;margin:8px 0 18px;font-weight:700}.stage-wheel{width:min(560px,88vw);height:min(560px,88vw);margin:auto}.stage-wheel .wheel{width:calc(min(560px,88vw) - 32px);height:calc(min(560px,88vw) - 32px)}.stage-wheel .wheel-center{width:148px;height:148px;animation:pulseCenter 1.2s infinite alternate ease-in-out}.stage-wheel .wheel-center img{width:118px;height:118px}@keyframes pulseCenter{to{transform:translate(-50%,-50%) scale(1.04);box-shadow:0 0 40px rgba(245,216,120,.42)}}.stage-wheel.spinning .wheel-center{animation:none;pointer-events:none}.sound-toggle{margin-top:16px}
-.modal{position:fixed;inset:0;z-index:1100;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(4,0,10,.78);backdrop-filter:blur(10px)}.modal.open{display:flex}.modal-box{width:min(720px,94vw);max-height:92vh;overflow:auto;padding:28px;border-radius:30px;border:1px solid rgba(245,216,120,.26);background:radial-gradient(circle at top,rgba(245,216,120,.13),transparent 34%),linear-gradient(180deg,#370048,#130019);box-shadow:0 0 60px rgba(199,92,255,.25);text-align:center}.modal-box h2{font-family:Great Vibes,cursive;color:var(--gold);font-size:clamp(58px,9vw,88px);font-weight:400;line-height:.9;margin-bottom:12px}.modal-box p{color:var(--muted);line-height:1.55;margin:9px 0}.claim-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;margin-top:16px}.claim-grid .full{grid-column:1/-1}.modal-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}#claimMessage{min-height:180px}
-.info-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.info-card{padding:20px;border-radius:22px;background:rgba(255,255,255,.045);border:1px solid rgba(245,216,120,.12)}.info-card b{display:block;color:var(--gold);margin-bottom:8px}.info-card p{color:var(--muted);line-height:1.55}
-.rules-frame{max-width:980px;margin:0 auto;padding:12px;border-radius:32px;background:linear-gradient(135deg,var(--gold),var(--purple),var(--gold));box-shadow:0 0 50px rgba(199,92,255,.35)}.rules-frame img{width:100%;display:block;border-radius:23px}
-.list-card{max-width:1120px;margin:0 auto;padding:24px}.winner-row{display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid rgba(245,216,120,.12);background:rgba(0,0,0,.22);border-radius:16px;padding:13px 15px;margin-bottom:10px}.winner-row strong{color:var(--gold);white-space:nowrap}.live-count{text-align:center;margin:20px 0}.live-count span{display:block;font-family:Orbitron,Arial,sans-serif;font-size:clamp(52px,8vw,82px);font-weight:900;color:var(--gold)}.live-count small{text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.55)}
-.games-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}.game{padding:16px;text-align:center;overflow:hidden}.game img{width:100%;height:180px;object-fit:cover;border-radius:20px}.game h3{color:var(--gold);font-family:Orbitron,Arial,sans-serif;margin:13px 0 6px}.game p{color:var(--muted);margin-bottom:12px}
-.about-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:center}.about-logo-box{padding:28px;text-align:center}.about-logo{width:min(220px,70vw);filter:drop-shadow(0 0 28px rgba(199,92,255,.75));display:block;margin:0 auto}.about-copy{padding:28px}.about-copy h3{font-family:Great Vibes,cursive;color:var(--gold);font-size:60px;font-weight:400;line-height:1;margin-bottom:12px}.about-copy p{color:var(--muted);line-height:1.78;margin:12px 0}
-.support-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.support-grid .full{grid-column:1/-1}.upload-mini{border:1px dashed rgba(245,216,120,.30);border-radius:18px;padding:18px;text-align:center;position:relative;background:rgba(0,0,0,.20)}.upload-mini input{position:absolute;inset:0;opacity:0;cursor:pointer}.upload-name{font-size:12px;color:var(--muted);margin-top:8px}
-.contact-grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.contact-card{padding:20px;text-align:center;border-radius:24px;background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.13)}.contact-card img{width:62px;height:62px;object-fit:contain;margin-bottom:10px}.contact-card.facebook{border-color:rgba(245,216,120,.35);box-shadow:0 0 28px rgba(245,216,120,.10)}
-.gallery-tabs{display:flex;justify-content:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}.gallery-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}.gallery-item{overflow:hidden}.gallery-item img{width:100%;height:220px;object-fit:cover;display:block}.gallery-info{padding:13px;color:var(--muted);line-height:1.45}
-footer{text-align:center;padding:34px 20px 92px;background:#0d0016;color:rgba(255,255,255,.55);line-height:1.6}
-.toast-wrap{position:fixed;left:16px;bottom:18px;z-index:70;display:grid;gap:10px;max-width:330px}.toast{padding:12px 14px;border-radius:16px;background:linear-gradient(135deg,rgba(40,8,60,.96),rgba(10,0,18,.96));border:1px solid rgba(245,216,120,.32);box-shadow:0 0 24px rgba(199,92,255,.22);font-size:13px;transform:translateX(-120%);opacity:0;transition:.45s}.toast.show{transform:translateX(0);opacity:1}.toast b{color:var(--gold)}
-@media(max-width:1080px){.navlinks{gap:12px}.navlinks a{font-size:11px}}
-@media(max-width:980px){.navlinks{display:none}.mobile-toggle{display:block}.navbar{height:66px}.mobile-menu{top:66px}.hero{min-height:84vh;background-position:center top}.login-grid,.wheel-grid,.about-wrap{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}.contact-grid{grid-template-columns:repeat(2,1fr)}.plates-grid{grid-template-columns:repeat(2,1fr)}.sticky-enter{left:14px;right:14px;bottom:12px}.sticky-enter .btn{width:100%}}
-@media(max-width:560px){.section{padding:64px 18px}.hero{padding-top:88px;min-height:76vh;background-position:center top}.hero-logo{width:96px;height:96px}.hero-actions{flex-direction:column}.hero-actions .btn{width:100%}.info-grid,.games-grid,.support-grid,.claim-grid{grid-template-columns:1fr}.plates-grid{grid-template-columns:1fr}.wheel-wrap{width:min(335px,88vw);height:min(335px,88vw)}.wheel{width:calc(min(335px,88vw) - 26px);height:calc(min(335px,88vw) - 26px)}.wheel-center{width:94px;height:94px}.wheel-center img{width:74px;height:74px}.toast-wrap{left:10px;right:10px;bottom:74px;max-width:none}}
+body{font-family:"Inter",Arial,sans-serif;background:#06000f;color:#fff;overflow-x:hidden}
+:root{--gold:#f5d878;--gold2:#e8b84a;--purple:#7c3aed;--purple2:#a855f7;--dark:#06000f;--dark2:#0e0020}
 
-/* FIXED CLEAN HERO: hero image already contains logo/title/buttons, so no duplicate overlay */
-.clean-hero{
-  min-height:100vh;
-  background:
-    linear-gradient(180deg,rgba(7,0,14,.10),rgba(7,0,14,.18)),
-    url("__HERO__") center center/cover no-repeat;
-}
-.hero-safe-spacer{min-height:100vh;width:100%}
-@media(max-width:980px){
-  .clean-hero{min-height:72vh;background-position:center top}
-  .hero-safe-spacer{min-height:72vh}
-}
-@media(max-width:560px){
-  .clean-hero{min-height:62vh;background-size:cover;background-position:center top}
-  .hero-safe-spacer{min-height:62vh}
-}
+/* ── PRELOADER ── */
+#preloader{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(circle at 50% 40%,rgba(124,58,237,.2),transparent 55%),#06000f;transition:opacity .6s,visibility .6s}
+#preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.pre-logo{width:min(160px,44vw);filter:drop-shadow(0 0 28px rgba(124,58,237,.8)) drop-shadow(0 0 14px rgba(245,216,120,.5));animation:preFloat 1.8s ease-in-out infinite alternate}
+@keyframes preFloat{from{transform:translateY(4px)}to{transform:translateY(-4px)}}
+.pre-text{font-family:"Orbitron",sans-serif;font-size:11px;letter-spacing:.5em;color:rgba(245,216,120,.7);text-transform:uppercase}
+.pre-bar{width:180px;height:5px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+.pre-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--purple2),var(--gold));animation:preLoad 1.8s ease forwards}
+@keyframes preLoad{to{width:100%}}
 
+/* ── AGE GATE ── */
+#ageGate{position:fixed;inset:0;z-index:99998;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,0,15,.97)}
+#ageGate.hide{display:none}
+.age-box{width:min(420px,100%);text-align:center;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(245,216,120,.3);border-radius:24px;padding:36px 28px;box-shadow:0 0 60px rgba(124,58,237,.3)}
+.age-box img{width:90px;height:90px;object-fit:contain;margin:0 auto 16px;display:block;filter:drop-shadow(0 0 16px rgba(124,58,237,.8))}
+.age-box h2{font-family:"Great Vibes",cursive;font-size:38px;color:var(--gold);margin-bottom:8px}
+.age-box p{font-size:14px;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:24px}
+.age-btns{display:flex;gap:12px}
+.age-btns button{flex:1;padding:13px;border:none;border-radius:999px;font-weight:700;font-family:"Orbitron",sans-serif;font-size:13px;cursor:pointer;transition:all .3s}
+.age-yes{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00;box-shadow:0 0 20px rgba(245,216,120,.3)}
+.age-no{background:rgba(255,255,255,.1);color:#fff}
 
-/* NAV FIX: bigger readable menu + hero not hidden behind fixed nav */
-.navbar{
-  height:84px!important;
-  padding:0 5.5vw!important;
-  background:linear-gradient(180deg,rgba(7,0,12,.94),rgba(7,0,12,.72))!important;
-}
-.brand{
-  font-size:40px!important;
-  text-transform:none!important;
-}
-.brand img{
-  width:62px!important;
-  height:62px!important;
-}
-.navlinks{
-  gap:22px!important;
-}
-.navlinks a{
-  font-size:15px!important;
-  font-weight:800!important;
-  letter-spacing:.02em!important;
-}
-.nav-cta{
-  padding:12px 20px!important;
-  font-size:15px!important;
-}
-.clean-hero{
-  margin-top:84px!important;
-  min-height:calc(100vh - 84px)!important;
-  background-position:center top!important;
-}
-.hero-safe-spacer{
-  min-height:calc(100vh - 84px)!important;
-}
-@media(max-width:980px){
-  .navbar{height:72px!important}
-  .brand{font-size:34px!important}
-  .brand img{width:54px!important;height:54px!important}
-  .mobile-menu{top:72px!important}
-  .clean-hero{margin-top:72px!important;min-height:70vh!important;background-position:center top!important}
-  .hero-safe-spacer{min-height:70vh!important}
-}
-@media(max-width:560px){
-  .navbar{height:68px!important;padding:0 16px!important}
-  .brand{font-size:30px!important}
-  .brand img{width:48px!important;height:48px!important}
-  .mobile-menu{top:68px!important}
-  .clean-hero{margin-top:68px!important;min-height:58vh!important;background-position:center top!important}
-  .hero-safe-spacer{min-height:58vh!important}
-}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;height:68px;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;background:rgba(6,0,14,.92);border-bottom:1px solid rgba(245,216,120,.12);backdrop-filter:blur(18px);transition:background .3s}
+nav.scrolled{background:rgba(3,0,8,.97)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-brand img{width:46px;height:46px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(124,58,237,.8))}
+.nav-brand span{font-family:"Great Vibes",cursive;font-size:28px;background:linear-gradient(135deg,#ffe9a8,#f5d878,#e8b84a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.nav-links{display:flex;align-items:center;gap:24px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.8);font-size:14px;text-decoration:none;transition:color .2s;position:relative;padding-bottom:2px}
+.nav-links a::after{content:"";position:absolute;bottom:-2px;left:0;right:0;height:1.5px;background:var(--gold);transform:scaleX(0);transform-origin:center;transition:transform .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-enter{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00!important;padding:9px 20px!important;border-radius:999px;font-weight:800;font-size:13px;box-shadow:0 0 18px rgba(245,216,120,.3)}
+.nav-enter::after{display:none!important}
+.hamburger{display:none;background:none;border:none;color:var(--gold);font-size:26px;cursor:pointer;line-height:1}
+.mob-menu{display:none;position:fixed;top:68px;left:0;right:0;z-index:899;background:rgba(4,0,10,.97);border-bottom:1px solid rgba(245,216,120,.12);backdrop-filter:blur(18px)}
+.mob-menu.open{display:block}
+.mob-menu a{display:block;padding:15px 24px;color:rgba(255,255,255,.85);font-size:15px;border-bottom:1px solid rgba(255,255,255,.05);text-decoration:none;transition:color .2s}
+.mob-menu a:hover{color:var(--gold)}
+.mob-menu .mob-enter{color:var(--gold);font-weight:700}
+@media(max-width:820px){.nav-links{display:none}.hamburger{display:block}}
 
+/* ── HERO ── */
+#home{position:relative;min-height:100vh;background:url("https://i.postimg.cc/mrpFJ53L/Chat-GPT-Image-Jun-6-2026-03-07-45-PM.png") center top/cover no-repeat;display:flex;align-items:flex-end;padding-top:68px}
+#home::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,0,14,.15) 0%,rgba(6,0,14,.05) 50%,rgba(6,0,14,.85) 100%)}
+.hero-inner{position:relative;z-index:2;width:100%;padding:0 0 0}
+.hero-clickmap{position:absolute;inset:0;z-index:3}
+.hero-clickmap a{position:absolute;display:block;text-indent:-9999px;border-radius:999px}
+.click-play{top:52%;left:22%;width:22%;height:8%}
+.click-rules{top:52%;left:49%;width:26%;height:8%}
+.click-enter{top:1.8%;right:6%;width:20%;height:6%}
 
-.contact-emoji{
-  width:62px;
-  height:62px;
-  display:grid;
-  place-items:center;
-  margin:0 auto 10px;
-  font-size:44px;
-  border-radius:18px;
-  background:rgba(245,216,120,.10);
-  border:1px solid rgba(245,216,120,.16);
-}
+/* TRUST BAR */
+.trust-bar{position:relative;z-index:2;background:rgba(6,0,14,.92);border-top:1px solid rgba(245,216,120,.15);border-bottom:1px solid rgba(245,216,120,.15);display:flex;justify-content:center;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:10px;padding:14px 20px;border-right:1px solid rgba(245,216,120,.08);flex:1;min-width:160px}
+.trust-item:last-child{border-right:none}
+.trust-item span{font-size:20px}
+.trust-item strong{display:block;font-family:"Orbitron",sans-serif;font-size:11px;font-weight:700;color:var(--gold);margin-bottom:2px}
+.trust-item small{display:block;font-size:11px;color:rgba(255,255,255,.5);line-height:1.3}
+@media(max-width:700px){.trust-item{min-width:45%;border-right:none;border-bottom:1px solid rgba(245,216,120,.06)}}
+
+/* ── SECTIONS ── */
+section{padding:72px 5vw}
+.sec-title{font-family:"Great Vibes",cursive;font-size:clamp(44px,7vw,72px);text-align:center;background:linear-gradient(135deg,#ffe9a8,#f5d878,#e8b84a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;filter:drop-shadow(0 0 16px rgba(245,216,120,.3));line-height:1.2}
+.sec-sub{text-align:center;color:rgba(255,255,255,.55);font-size:15px;margin-bottom:40px;max-width:640px;margin-left:auto;margin-right:auto}
+
+/* ── LOGIN ── */
+#login{background:linear-gradient(180deg,#0a0018,#0e0020)}
+.login-card{max-width:820px;margin:0 auto;background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.14);border-radius:24px;padding:28px}
+.login-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+.form-label{display:block;font-size:12px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.form-input{width:100%;padding:13px 16px;border-radius:12px;border:1px solid rgba(245,216,120,.18);background:rgba(0,0,0,.3);color:#fff;font-size:14px;font-family:"Inter",sans-serif;transition:border-color .2s,box-shadow .2s}
+.form-input:focus{border-color:rgba(245,216,120,.5);box-shadow:0 0 0 3px rgba(245,216,120,.1);outline:none}
+.login-status{margin-top:14px;text-align:center;color:var(--gold);font-size:14px;min-height:20px}
+.btn{border:none;border-radius:999px;font-weight:800;font-family:"Orbitron",sans-serif;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-gold{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00;padding:13px 24px;font-size:13px;box-shadow:0 0 18px rgba(245,216,120,.25)}
+.btn-gold:hover{box-shadow:0 0 30px rgba(245,216,120,.5);transform:translateY(-1px)}
+.btn-purple{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;padding:13px 24px;font-size:13px}
+.btn-logout{display:none;margin:14px auto 0;padding:10px 24px;font-size:12px;background:rgba(255,255,255,.1);color:#fff;border-radius:999px;border:none;cursor:pointer;font-family:"Orbitron",sans-serif}
+.logged-in .btn-logout{display:block}
+.btn-spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.25);border-top-color:#1b0c00;border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes loginShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.shake{animation:loginShake .45s ease}
+@media(max-width:700px){.login-grid{grid-template-columns:1fr}}
+
+/* ── RULES ── */
+#rules{background:linear-gradient(180deg,#0e0020,#160030)}
+.rules-frame{max-width:900px;margin:0 auto;padding:10px;border-radius:28px;background:linear-gradient(135deg,#f5d878,#a855f7,#f5d878);box-shadow:0 0 50px rgba(168,85,247,.5)}
+.rules-frame img{width:100%;border-radius:20px;display:block}
+
+/* ── WHEELS ── */
+#bonus{background:linear-gradient(180deg,#160030,#0e0020)}
+.wheels-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:0 auto}
+.wheel-box{background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.14);border-radius:24px;padding:28px;display:flex;flex-direction:column;align-items:center}
+.wheel-box h3{font-family:"Great Vibes",cursive;font-size:32px;color:var(--gold);margin-bottom:6px;text-align:center}
+.wheel-box p{font-size:13px;color:rgba(255,255,255,.55);text-align:center;margin-bottom:14px;line-height:1.5}
+.reward-pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:16px;min-height:58px;align-items:center}
+.reward-pills span{font-size:11px;color:var(--gold);background:rgba(245,216,120,.08);border:1px solid rgba(245,216,120,.2);border-radius:999px;padding:6px 12px}
+.wheel-wrap{position:relative;width:240px;height:240px;margin:0 auto 10px;display:grid;place-items:center}
+.wheel-glow{position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(from 0deg,var(--gold),var(--purple2),var(--gold),var(--purple),var(--gold));filter:blur(10px);opacity:.5;animation:glowSpin 6s linear infinite}
+@keyframes glowSpin{to{transform:rotate(360deg)}}
+.wheel-pointer{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-top:26px solid var(--gold);z-index:5;filter:drop-shadow(0 0 10px rgba(245,216,120,.9))}
+.wheel-svg{width:228px;height:228px;border-radius:50%;border:4px solid var(--gold);box-shadow:0 0 24px rgba(245,216,120,.25),0 0 40px rgba(124,58,237,.3);transition:transform 4.5s cubic-bezier(.16,.84,.28,1);position:relative;z-index:2}
+.wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90px;height:90px;border-radius:50%;z-index:4;background:radial-gradient(circle,rgba(30,6,50,.98),rgba(6,0,14,.99));border:2.5px solid var(--gold);box-shadow:0 0 16px rgba(245,216,120,.35),inset 0 0 14px rgba(124,58,237,.3);display:grid;place-items:center;overflow:hidden}
+.wheel-center img{width:80px;height:80px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(124,58,237,.8))}
+.wheel-timer{font-family:"Orbitron",sans-serif;font-size:12px;font-weight:700;color:var(--gold);background:rgba(0,0,0,.4);border:1px solid rgba(245,216,120,.25);border-radius:999px;padding:8px 18px;text-align:center;margin-bottom:12px;min-width:200px;letter-spacing:.05em}
+.wheel-timer.ready{color:#7CFC9B;border-color:rgba(124,252,155,.35)}
+.wheel-btn{width:100%;padding:13px;font-size:13px;letter-spacing:.08em;border-radius:999px;border:none;font-weight:800;font-family:"Orbitron",sans-serif;cursor:pointer;transition:all .3s}
+.wheel-btn-daily{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;box-shadow:0 0 18px rgba(124,58,237,.3)}
+.wheel-btn-monthly{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00;box-shadow:0 0 18px rgba(245,216,120,.25)}
+.wheel-btn:disabled{opacity:.45;cursor:not-allowed}
+.wheel-btn.available{animation:btnPulse 2s ease-in-out infinite}
+@keyframes btnPulse{0%,100%{box-shadow:0 0 18px rgba(124,58,237,.3)}50%{box-shadow:0 0 40px rgba(124,58,237,.65),0 0 20px rgba(245,216,120,.2)}}
+.wheel-result{margin-top:10px;font-size:14px;color:rgba(255,255,255,.7);text-align:center;min-height:20px;font-family:"Inter",sans-serif}
+.wheel-lock-badge{font-size:28px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:6;display:none}
+.wheel-wrap.locked .wheel-svg{filter:grayscale(.65) brightness(.6)}
+.wheel-wrap.locked .wheel-lock-badge{display:block}
+.wheel-wrap.ready .wheel-svg{animation:wheelWiggle 2.5s ease-in-out infinite}
+@keyframes wheelWiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-3deg)}40%{transform:rotate(3deg)}60%{transform:rotate(-2deg)}80%{transform:rotate(2deg)}}
+.monthly-arc{text-align:center;margin-bottom:10px}
+.monthly-arc small{font-size:11px;color:rgba(255,255,255,.4);display:block;margin-top:3px}
+.weekly-check{margin-top:10px;background:rgba(245,216,120,.06);border:1px solid rgba(245,216,120,.15);border-radius:14px;padding:12px 14px}
+.weekly-check label{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.75);font-size:13px;cursor:pointer}
+.weekly-check input{width:auto}
+.need-id-card{margin-top:14px;background:rgba(124,58,237,.1);border:1px solid rgba(168,85,247,.2);border-radius:14px;padding:14px;text-align:center}
+.need-id-card strong{display:block;color:var(--gold);font-family:"Orbitron",sans-serif;font-size:12px;margin-bottom:4px}
+.need-id-card span{color:rgba(255,255,255,.6);font-size:13px}
+@media(max-width:700px){.wheels-grid{grid-template-columns:1fr}.wheel-wrap{width:210px;height:210px}.wheel-svg{width:198px;height:198px}}
+
+/* ── LIVE SECTION ── */
+#live{background:linear-gradient(180deg,#0e0020,#0a0018)}
+.live-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:0 auto}
+.live-box{background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.12);border-radius:20px;padding:24px}
+.live-box h3{font-family:"Great Vibes",cursive;font-size:28px;color:var(--gold);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.live-box p{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:16px}
+.live-count{text-align:center;margin-bottom:16px}
+.live-count span{display:block;font-family:"Orbitron",sans-serif;font-size:52px;font-weight:900;color:var(--gold);filter:drop-shadow(0 0 14px rgba(245,216,120,.3))}
+.live-count small{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.15em;text-transform:uppercase}
+.live-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.05);border-radius:12px;margin-bottom:8px}
+.live-row span{font-size:13px;color:rgba(255,255,255,.7)}
+.live-row strong{color:var(--gold);font-weight:800;font-size:14px;white-space:nowrap}
+.live-row.new{animation:rowSlide .4s ease}
+@keyframes rowSlide{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:700px){.live-grid{grid-template-columns:1fr}}
+
+/* ── GAMES ── */
+#games{background:linear-gradient(180deg,#0a0018,#0e0020)}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;max-width:1180px;margin:0 auto}
+.game-card{background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.1);border-radius:20px;overflow:hidden;transition:all .3s}
+.game-card:hover{transform:translateY(-5px);border-color:rgba(245,216,120,.4);box-shadow:0 0 28px rgba(124,58,237,.25)}
+.game-card img{width:100%;height:170px;object-fit:cover;display:block;transition:transform .4s}
+.game-card:hover img{transform:scale(1.05)}
+.game-card-body{padding:14px 16px}
+.game-card h3{font-family:"Orbitron",sans-serif;font-size:14px;font-weight:700;color:var(--gold);margin-bottom:4px}
+.game-card p{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:12px}
+.game-card a{display:inline-block;padding:9px 20px;border-radius:999px;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;font-size:12px;font-weight:700;text-decoration:none;transition:all .25s}
+.game-card a:hover{box-shadow:0 0 20px rgba(168,85,247,.5)}
+
+/* ── HOW TO CLAIM ── */
+#claim{background:linear-gradient(180deg,#0e0020,#0a0018)}
+.claim-note{max-width:820px;margin:0 auto;background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.14);border-radius:20px;padding:24px;font-size:14px;color:rgba(255,255,255,.7);line-height:1.7;text-align:center}
+
+/* ── ABOUT ── */
+#about{background:linear-gradient(180deg,#0a0018,#0e0020)}
+.about-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.about-story{text-align:center}
+.about-story img{width:100px;height:100px;object-fit:contain;margin:0 auto 18px;display:block;filter:drop-shadow(0 0 18px rgba(124,58,237,.8))}
+.about-intro{font-family:"Orbitron",sans-serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,216,120,.55);margin-bottom:10px}
+.about-headline{font-family:"Great Vibes",cursive;font-size:clamp(28px,3.5vw,40px);color:var(--gold);margin-bottom:16px;line-height:1.2}
+.about-story p{font-size:14px;color:rgba(255,255,255,.7);line-height:1.8;margin-bottom:12px;text-align:left}
+.about-cta{display:inline-block;margin-top:16px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00;font-weight:800;font-size:14px;text-decoration:none;transition:all .3s}
+.about-cta:hover{box-shadow:0 0 30px rgba(245,216,120,.45);transform:translateY(-2px)}
+.about-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.about-card{background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.12);border-radius:18px;padding:20px;text-align:center;transition:all .3s}
+.about-card:hover{border-color:rgba(245,216,120,.35);transform:translateY(-3px)}
+.about-card-icon{font-size:28px;margin-bottom:8px;filter:drop-shadow(0 0 6px rgba(245,216,120,.4))}
+.about-card-title{font-family:"Orbitron",sans-serif;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px}
+.about-card-desc{font-size:12px;color:rgba(255,255,255,.6);line-height:1.5}
+@media(max-width:700px){.about-wrap{grid-template-columns:1fr}.about-cards{grid-template-columns:1fr 1fr}}
+
+/* ── CONTACT ── */
+#contact{background:linear-gradient(180deg,#0e0020,#0a0018)}
+.contact-grid{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;max-width:900px;margin:0 auto}
+.contact-card{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 26px;background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.14);border-radius:20px;text-decoration:none;transition:all .3s;min-width:170px;text-align:center}
+.contact-card:hover{transform:translateY(-4px);border-color:rgba(245,216,120,.4);box-shadow:0 0 24px rgba(124,58,237,.2)}
+.contact-card img{width:52px;height:52px;object-fit:contain}
+.contact-card-label{font-family:"Orbitron",sans-serif;font-size:12px;font-weight:700;color:var(--gold)}
+.contact-card-sub{font-size:12px;color:rgba(255,255,255,.5)}
+
+/* ── GALLERY ── */
+#gallery{background:linear-gradient(180deg,#0a0018,#0e0020)}
+.gallery-tabs{display:flex;justify-content:center;gap:12px;margin-bottom:28px}
+.gallery-tab{padding:11px 28px;border-radius:999px;border:1px solid rgba(245,216,120,.22);background:rgba(0,0,0,.3);color:rgba(255,255,255,.6);font-family:"Orbitron",sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .3s}
+.gallery-tab.active{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00;border-color:transparent;box-shadow:0 0 20px rgba(245,216,120,.35)}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;max-width:1180px;margin:0 auto}
+.gallery-card{background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.1);border-radius:18px;overflow:hidden;cursor:pointer;transition:all .3s}
+.gallery-card:hover{transform:translateY(-4px);border-color:rgba(245,216,120,.35);box-shadow:0 0 24px rgba(124,58,237,.2)}
+.gallery-card img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .4s}
+.gallery-card:hover img{transform:scale(1.04)}
+.gallery-card-body{padding:12px 14px}
+.gallery-card-caption{font-size:13px;color:rgba(255,255,255,.8);margin-bottom:6px}
+.gallery-card-meta{display:flex;justify-content:space-between;align-items:center}
+.gallery-card-date{font-size:11px;color:rgba(255,255,255,.4)}
+.gallery-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:999px;font-family:"Orbitron",sans-serif}
+.badge-cashout{background:rgba(124,252,155,.12);color:#7CFC9B;border:1px solid rgba(124,252,155,.25)}
+.badge-tags{background:rgba(245,216,120,.12);color:var(--gold);border:1px solid rgba(245,216,120,.25)}
+.gallery-empty{text-align:center;padding:48px;color:rgba(255,255,255,.4);grid-column:1/-1}
+.gallery-empty span{display:block;font-size:44px;margin-bottom:10px}
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(900px,100%);max-height:85vh;object-fit:contain;border-radius:12px}
+.lightbox-close{position:absolute;top:18px;right:22px;font-size:32px;color:#fff;cursor:pointer;background:none;border:none;opacity:.7;transition:opacity .2s}
+.lightbox-close:hover{opacity:1}
+.lightbox-caption{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:14px;background:rgba(0,0,0,.6);padding:8px 20px;border-radius:999px;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
+
+/* ── FOOTER ── */
+footer{background:#04000a;border-top:1px solid rgba(245,216,120,.1);padding:28px 20px;text-align:center}
+footer p{font-size:13px;color:rgba(255,255,255,.35)}
+footer span{color:var(--gold)}
+footer small{display:block;margin-top:8px;font-size:11px;color:rgba(255,255,255,.2);max-width:680px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+/* ── STICKY CTA ── */
+.sticky-cta{position:fixed;right:18px;bottom:18px;z-index:800}
+.sticky-cta a{display:block;padding:13px 22px;border-radius:999px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;font-weight:800;font-size:14px;font-family:"Orbitron",sans-serif;box-shadow:0 0 24px rgba(124,58,237,.5);text-decoration:none;border:1px solid rgba(245,216,120,.4);transition:all .3s}
+.sticky-cta a:hover{box-shadow:0 0 40px rgba(168,85,247,.7);transform:translateY(-2px)}
+@media(max-width:700px){.sticky-cta{left:12px;right:12px;bottom:12px}.sticky-cta a{text-align:center}}
+
+/* ── MODALS ── */
+.modal{position:fixed;inset:0;z-index:9998;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(6,0,14,.85);backdrop-filter:blur(8px)}
+.modal.open{display:flex}
+.modal-box{width:min(560px,100%);background:linear-gradient(180deg,#1e0030,#0e0020);border:1px solid rgba(245,216,120,.25);border-radius:22px;padding:28px;box-shadow:0 0 50px rgba(124,58,237,.3);max-height:90vh;overflow-y:auto}
+.modal-box h2{font-family:"Great Vibes",cursive;font-size:36px;color:var(--gold);margin-bottom:8px}
+.modal-box p{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:14px;line-height:1.6}
+.modal-input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(245,216,120,.18);background:rgba(0,0,0,.3);color:#fff;font-size:14px;margin-bottom:10px;font-family:"Inter",sans-serif}
+.modal-input:focus{border-color:rgba(245,216,120,.5);outline:none}
+.modal-textarea{min-height:80px;resize:vertical}
+.modal-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.modal-actions button,.modal-actions a{flex:1;min-width:120px;padding:12px 16px;border-radius:999px;border:none;font-weight:800;cursor:pointer;font-family:"Orbitron",sans-serif;font-size:12px;text-align:center;text-decoration:none;transition:all .25s}
+.m-gold{background:linear-gradient(135deg,#b98616,#ffd96a,#fff4b8);color:#1b0c00}
+.m-purple{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff}
+.m-green{background:linear-gradient(135deg,#1a6b3a,#2ecc71);color:#fff}
+.m-close{background:rgba(255,255,255,.1);color:#fff}
+.claim-status{text-align:center;font-size:13px;color:var(--gold);margin-top:10px;min-height:18px}
+
+/* ── TOASTS ── */
+.copy-toast{position:fixed;left:50%;bottom:36px;transform:translateX(-50%) translateY(16px);z-index:99999;background:linear-gradient(135deg,#1a6b3a,#2ecc71);color:#fff;font-family:"Orbitron",sans-serif;font-weight:800;font-size:13px;padding:12px 24px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap}
+.copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.welcome-toast{position:fixed;top:82px;right:18px;z-index:9000;background:linear-gradient(135deg,rgba(30,0,48,.97),rgba(14,0,32,.97));border:1px solid rgba(245,216,120,.4);border-radius:16px;padding:14px 18px;box-shadow:0 8px 28px rgba(0,0,0,.5);transform:translateX(120%);opacity:0;transition:all .45s;pointer-events:none;max-width:270px}
+.welcome-toast.show{transform:translateX(0);opacity:1}
+.welcome-toast strong{display:block;color:var(--gold);font-family:"Orbitron",sans-serif;font-size:12px;margin-bottom:3px}
+.welcome-toast span{font-size:13px;color:rgba(255,255,255,.75)}
+.winner-toasts{position:fixed;left:16px;bottom:16px;z-index:950;display:flex;flex-direction:column;gap:8px;max-width:320px;pointer-events:none}
+.winner-toast{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,rgba(30,4,50,.96),rgba(14,0,24,.96));border:1px solid rgba(245,216,120,.35);box-shadow:0 6px 24px rgba(0,0,0,.5);transform:translateX(-120%);opacity:0;transition:all .45s;font-family:"Inter",sans-serif}
+.winner-toast.show{transform:translateX(0);opacity:1}
+.wt-icon{font-size:22px;flex-shrink:0}
+.wt-name{color:var(--gold);font-weight:700;font-size:13px}
+.wt-text{color:rgba(255,255,255,.7);font-size:12px}
+.wt-amount{color:#7CFC9B;font-weight:900;font-size:14px;white-space:nowrap;margin-left:auto}
+.winner-toast.jackpot{border-color:#ffd96a;box-shadow:0 6px 24px rgba(0,0,0,.5),0 0 22px rgba(255,217,106,.45)}
+.winner-toast.jackpot .wt-amount{color:#ffd96a}
+@media(max-width:700px){.winner-toasts{left:10px;right:10px;bottom:80px;max-width:none}.welcome-toast{right:10px;left:10px;max-width:none}}
+
+/* ── CONFETTI ── */
+.confetti-piece{position:fixed;top:-12px;width:9px;height:13px;z-index:99990;pointer-events:none;border-radius:2px;animation:confettiFall linear forwards}
+@keyframes confettiFall{to{transform:translateY(105vh) rotate(720deg);opacity:.8}}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── SUPPORT REQUEST ── */
+#support{background:linear-gradient(180deg,#0a0018,#0e0020)}
+.support-card{max-width:900px;margin:0 auto;background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.14);border-radius:24px;padding:28px}
+.support-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.support-grid .full{grid-column:1/-1}
+.support-textarea{min-height:120px;resize:vertical}
+.upload-mini{position:relative;border:1px dashed rgba(245,216,120,.28);border-radius:16px;padding:22px;text-align:center;background:rgba(0,0,0,.24);color:var(--gold);font-weight:700;overflow:hidden}
+.upload-mini input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.upload-name{margin-top:8px;color:rgba(255,255,255,.55);font-size:12px;font-weight:400}
+.support-status{text-align:center;color:var(--gold);font-size:14px;margin-bottom:14px;min-height:20px}
+.support-submit{margin:18px auto 0;display:flex}
+@media(max-width:700px){.support-grid{grid-template-columns:1fr}}
 
 </style>
 </head>
 <body>
-<div id="preloader"><div class="loader"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"><div>Loading the Palace</div></div></div>
-<nav class="navbar">
-  <a class="brand" href="#home"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP">Aub's Palace</a>
-  <ul class="navlinks">
-    <li><a href="#home">Home</a></li><li><a href="#login">Login</a></li><li><a href="#bonus">Spins</a></li><li><a href="#claim">Claim</a></li><li><a href="#rules">Rules</a></li><li><a href="#games">Games</a></li><li><a href="#about">About</a></li><li><a href="#support">Support</a></li><li><a href="#contact">Contact</a></li><li><a href="#gallery">Moments</a></li><li><a class="nav-cta" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">Enter</a></li>
-  </ul>
-  <button class="mobile-toggle" id="mobileToggle">☰</button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#home">Home</a><a href="#login">Login</a><a href="#bonus">Spins</a><a href="#claim">How to Claim</a><a href="#rules">Rules</a><a href="#games">Games</a><a href="#about">About</a><a href="#support">Support</a><a href="#contact">Contact</a><a href="#gallery">Palace Moments</a><a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">Enter the Palace</a>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <img class="pre-logo" src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP">
+  <div class="pre-text">Loading the Palace</div>
+  <div class="pre-bar"><span></span></div>
 </div>
-<header class="hero clean-hero" id="home" aria-label="Aub's Palace hero banner">
-  <div class="hero-safe-spacer"></div>
-</header>
-<div class="sticky-enter"><a class="btn btn-purple" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">♛ Enter the Palace</a></div>
-<section class="trust-plates" aria-label="Aub's Palace trust points"><div class="plates-grid"><div class="plate">💸 Real Payouts</div><div class="plate">⚖️ Fair Play</div><div class="plate">💬 24/7 Support</div><div class="plate">⚡ Fast Cashouts</div><div class="plate">🔒 Secure Transactions</div></div></section>
-<section class="section" id="login"><h2 class="section-title">Player Login</h2><p class="section-sub">Log in with your Aub's Palace website ID and password. You can type only your username, or the full email.</p><div class="login-card card" id="loginCard"><div class="login-grid"><div><label>Website ID / Email</label><input id="loginEmail" placeholder="example: samy or samy@aubspalace.com"></div><div><label>Password</label><input id="loginPassword" type="password" placeholder="Enter password" onkeydown="if(event.key==='Enter')loginPlayer()"></div><button class="btn btn-gold" onclick="loginPlayer()">Login</button></div><div class="status" id="playerStatus">Need a website ID? Message Aub's Palace to request your login.</div><button id="logoutBtn" class="btn btn-ghost" onclick="logoutPlayer()">Logout</button></div></section>
-<section class="section alt" id="bonus"><h2 class="section-title">Bonus Wheels</h2><p class="section-sub">Click the wheel or button to open the full-screen spin. Tap the AP logo in the middle to start the spin. Rewards only show after the wheel stops.</p><div class="wheel-grid"><div class="wheel-card card"><h3>Daily Palace Wheel</h3><p>Spin once every 24 hours.</p><div class="rewards"><span>$1</span><span>$2</span><span>$3</span><span>15% Bonus</span><span>Try Again Tomorrow</span></div><div class="wheel-wrap" id="dailyWheelWrap" onclick="openWheelStage('daily')"><span class="pointer"></span><div class="wheel" id="dailyWheel"></div><span class="lock-icon">🔒</span><div class="wheel-center"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div></div><div class="timer-badge" id="dailyTimer">Checking...</div><button class="btn btn-purple" id="dailyBtn" onclick="event.stopPropagation();openWheelStage('daily')">Spin Daily Wheel</button><div class="wheel-result" id="dailyResult">Log in to check your daily spin.</div></div><div class="wheel-card card"><h3>Monthly Crown Wheel</h3><p>Unlocks after Aub's Palace backend approval.</p><div class="rewards"><span>$5</span><span>$8</span><span>Surprise Gift</span><span>Rewards</span><span>$10 Free Play</span><span>Try Again Later</span></div><div class="wheel-wrap locked-wheel" id="monthlyWheelWrap" onclick="openWheelStage('monthly')"><span class="pointer"></span><div class="wheel" id="monthlyWheel"></div><span class="lock-icon">🔒</span><div class="wheel-center"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div></div><div class="timer-badge" id="monthlyTimer">Checking...</div><button class="btn btn-gold" id="monthlyBtn" onclick="event.stopPropagation();openWheelStage('monthly')">Spin Monthly Wheel</button><div class="wheel-result" id="monthlyResult">Log in to check monthly approval.</div></div></div></section>
-<section class="section" id="claim"><h2 class="section-title">How to Claim</h2><div class="info-grid"><div class="info-card"><b>1. Log In</b><p>Use your Aub's Palace website ID and password.</p></div><div class="info-card"><b>2. Spin</b><p>Open your wheel, tap the AP logo, and wait for the final result.</p></div><div class="info-card"><b>3. Claim</b><p>Enter your game username, game name, and optional note. Copy it or send it to Aub's Palace on Facebook.</p></div></div></section>
-<section class="section alt" id="rules"><h2 class="section-title">Rules</h2><p class="section-sub">Please review the official rules before claiming bonuses, rewards, and cashouts.</p><div class="rules-frame"><img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub's Palace Rules"></div></section>
-<section class="section" id="winners"><h2 class="section-title">Winners</h2><div class="list-card card"><h3 class="gold">🏆 Yesterday's Winners</h3><div id="yesterdayList"></div><div class="live-count"><span id="liveCount">128</span><small>ACTIVE WINNERS TODAY · MAX 400</small></div><div id="liveList"></div></div></section>
-<section class="section alt" id="games"><h2 class="section-title">Games</h2><p class="section-sub">Choose your favorite fish game and enter Aub's trusted game collection.</p><div class="games-grid" id="gamesGrid"></div></section>
-<section class="section" id="about"><h2 class="section-title">About Us</h2><div class="about-wrap"><div class="about-logo-box card"><img class="about-logo" src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div><div class="about-copy card"><h3>Welcome to Aub's Palace</h3><p>Aub's Palace was built for those who value trust, excitement, and real rewards. The Palace experience is designed to feel clear, smooth, and rewarding from the moment you enter.</p><p>Every game is selected with care, every reward is reviewed, and every member is handled with respect. No confusion. No empty promises. Just real games, real support, and a community that keeps growing stronger.</p><p class="gold">Come for the spins... stay for Aub. 👑</p></div></div></section>
-<section class="section alt" id="support"><h2 class="section-title">Support Request</h2><p class="section-sub">Submit an issue directly to Aub's Palace. Include your real personal email and up to 2 images.</p><div class="support-form card"><div class="status" id="supportStatus"></div><div class="support-grid"><div><label>Name</label><input id="supportName" placeholder="Your name"></div><div><label>Personal Email</label><input id="supportEmail" type="email" placeholder="your personal email"></div><div class="full"><label>Issue</label><input id="supportIssue" placeholder="Short issue title"></div><div class="full"><label>Reason / Details</label><textarea id="supportReason" placeholder="Explain what happened..."></textarea></div><div class="upload-mini">📷 Image 1<input id="supportImg1" type="file" accept="image/*" onchange="showFileName(this,'supportFile1')"><div class="upload-name" id="supportFile1">Optional proof image</div></div><div class="upload-mini">📷 Image 2<input id="supportImg2" type="file" accept="image/*" onchange="showFileName(this,'supportFile2')"><div class="upload-name" id="supportFile2">Optional proof image</div></div></div><button class="btn btn-gold" style="margin-top:16px" onclick="submitSupport()">Submit Request</button></div></section>
-<section class="section" id="contact"><h2 class="section-title">Contact</h2><p class="section-sub">Facebook is the fastest way to reach Aub's Palace for loads, redeems, and support.</p><div class="contact-grid"><a class="contact-card" href="mailto:aubreyhere98@gmail.com"><span style="font-size:54px;display:block;margin-bottom:10px">✉️</span><b>Email</b></a><a class="contact-card facebook" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png"><b>Facebook</b></a><a class="contact-card" href="https://t.me/aubspalaceofficial" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"><b>Telegram</b></a><a class="contact-card" href="https://venmo.com/code?user_id=4145490287396764155&created=1776192079" target="_blank"><img src="https://i.postimg.cc/J44jPCqv/venmo.png"><b>Venmo</b></a></div></section>
-<section class="section alt" id="gallery"><h2 class="section-title">Palace Moments</h2><p class="section-sub">Verified payouts and current tags updated from the Aub's Palace admin panel.</p><div class="gallery-tabs"><button class="btn btn-purple" onclick="loadGallery('cashout')">Verified Payouts</button><button class="btn btn-ghost" onclick="loadGallery('tags')">Current Tags</button></div><div class="gallery-grid" id="galleryGrid"></div></section>
-<footer>© <span id="year"></span> Aub's Palace — Come for the spins... stay for Aub.<br><small>18+ only. Play responsibly. Bonuses and rewards are subject to verification and approval.</small></footer>
-<div class="toast-wrap" id="toastWrap"></div>
-<div class="spin-stage" id="spinStage"><div class="spin-panel"><button class="spin-close" id="spinClose" onclick="closeWheelStage()">×</button><div class="spin-title" id="stageTitle">Daily Palace Wheel</div><div class="spin-help" id="stageHelp">Tap AP to Spin</div><div class="wheel-wrap stage-wheel" id="stageWheelWrap"><span class="pointer"></span><div class="wheel" id="stageWheel"></div><div class="wheel-center" id="stageCenter" onclick="spinFromStage()"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div></div><button class="btn btn-ghost sound-toggle" onclick="toggleSound()" id="soundBtn">🔊 Sound On</button></div></div>
-<div class="modal" id="winModal"><div class="modal-box"><h2>Congratulations!</h2><p id="winText">You won $1 from the Daily Palace Wheel.</p><p class="gold" id="winCode">Claim Code:</p><div class="modal-actions"><button class="btn btn-gold" onclick="openClaimForm()">Continue to Claim</button><button class="btn btn-ghost" onclick="closeModal('winModal')">Close</button></div></div></div>
-<div class="modal" id="claimModal"><div class="modal-box"><h2>Claim Reward</h2><p id="claimSummary">Fill in your game details below.</p><div class="claim-grid"><div><label>Game Username</label><input id="claimGameUser" oninput="updateClaimMessage()" placeholder="Your game username"></div><div><label>Game</label><input id="claimGame" oninput="updateClaimMessage()" placeholder="Example: Juwa, Fire Kirin"></div><div class="full"><label>Extra Note</label><textarea id="claimNote" oninput="updateClaimMessage()" placeholder="Optional note"></textarea></div><div class="full"><label>Claim Message</label><textarea id="claimMessage" readonly></textarea></div></div><div class="status" id="claimStatus"></div><div class="modal-actions"><button class="btn btn-gold" onclick="copyClaim()">Copy Claim</button><a class="btn btn-purple" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">Claim on Facebook</a><button class="btn btn-ghost" onclick="closeModal('claimModal')">Close</button></div></div></div>
-<div class="modal" id="msgModal"><div class="modal-box"><h2 id="msgTitle">Notice</h2><p id="msgBody"></p><div class="modal-actions"><button class="btn btn-gold" onclick="closeModal('msgModal')">Okay</button><a class="btn btn-purple" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">Open Facebook</a></div></div></div>
+
+<!-- AGE GATE -->
+<div id="ageGate">
+  <div class="age-box">
+    <img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP">
+    <h2>Aub's Palace</h2>
+    <p>This site is for entertainment and intended for adults only. You must be 18+ to enter. Please play responsibly.</p>
+    <div class="age-btns">
+      <button class="age-no" onclick="denyAge()">Exit</button>
+      <button class="age-yes" onclick="acceptAge()">I'm 18+ — Enter</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div class="copy-toast" id="copyToast">✅ Copied!</div>
+<div class="welcome-toast" id="welcomeToast"><strong>👑 Welcome back!</strong><span id="welcomeMsg">Your Palace rewards are ready.</span></div>
+<div class="winner-toasts" id="winnerToasts"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#home" class="nav-brand">
+    <img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP">
+    <span>Aub's Palace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#rules">Rules</a></li>
+    <li><a href="#bonus">Spins</a></li>
+    <li><a href="#games">Games</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#support">Support</a></li>
+    <li><a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" class="nav-enter">♛ Enter</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleNav()">☰</button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#home" onclick="closeNav()">Home</a>
+  <a href="#rules" onclick="closeNav()">Rules</a>
+  <a href="#bonus" onclick="closeNav()">Spins</a>
+  <a href="#games" onclick="closeNav()">Games</a>
+  <a href="#contact" onclick="closeNav()">Contact</a>
+  <a href="#support" onclick="closeNav()">Support</a>
+  <a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" class="mob-enter" onclick="closeNav()">♛ Enter the Palace</a>
+</div>
+
+<!-- HERO -->
+<div id="home">
+  <div class="hero-clickmap">
+    <a class="click-enter" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Enter</a>
+    <a class="click-play" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Play Now</a>
+    <a class="click-rules" href="#rules">View Rules</a>
+  </div>
+  <div class="hero-inner"></div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span>💸</span><div><strong>Real Payouts</strong><small>Fast, reliable, no hidden delays.</small></div></div>
+  <div class="trust-item"><span>⚖️</span><div><strong>Fair Play</strong><small>Provably fair games. Always transparent.</small></div></div>
+  <div class="trust-item"><span>🎧</span><div><strong>24/7 Support</strong><small>We're here anytime, day or night.</small></div></div>
+  <div class="trust-item"><span>⚡</span><div><strong>Fast Cashouts</strong><small>Lightning-fast withdrawals.</small></div></div>
+  <div class="trust-item"><span>🔒</span><div><strong>Secure Transactions</strong><small>Bank-level security for your peace of mind.</small></div></div>
+</div>
+
+<!-- LOGIN -->
+<section id="login" class="reveal">
+  <h2 class="sec-title">Player Login</h2>
+  <p class="sec-sub">Log in with your Aub's Palace website ID and password to unlock your Daily and Monthly Wheels.</p>
+  <div class="login-card" id="loginCard">
+    <div class="login-grid">
+      <div><label class="form-label">Website ID / Email</label><input class="form-input" id="loginEmail" type="text" autocomplete="username" placeholder="example: samy or samy@aubspalace.com"></div>
+      <div><label class="form-label">Password</label><input class="form-input" id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password" onkeydown="if(event.key==='Enter')loginPlayer()"></div>
+      <button class="btn btn-gold" onclick="loginPlayer()" id="loginBtn">Login</button>
+    </div>
+    <div class="login-status" id="loginStatus">Need a website ID? Tap a Spin button below to request one on Facebook.</div>
+    <button class="btn-logout" id="logoutBtn" onclick="logoutPlayer()">Logout</button>
+  </div>
+</section>
+
+<!-- RULES -->
+<section id="rules" class="reveal">
+  <h2 class="sec-title">Palace Rules</h2>
+  <div class="rules-frame"><img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub's Palace Rules"></div>
+</section>
+
+<!-- WHEELS -->
+<section id="bonus" class="reveal">
+  <h2 class="sec-title">Bonus Wheels</h2>
+  <p class="sec-sub">Spin the Daily Palace Wheel once every 24 hours. The Monthly Crown Wheel unlocks after Aub's Palace approves your weekly play screenshot.</p>
+  <div class="wheels-grid">
+
+    <!-- DAILY -->
+    <div class="wheel-box">
+      <h3>🎡 Daily Palace Wheel</h3>
+      <p>Spin once every 24 hours for instant cash rewards or bonus offers.</p>
+      <div class="reward-pills"><span>$1</span><span>$2</span><span>$3</span><span>15% Bonus</span><span>Try Again Tomorrow</span></div>
+      <div class="wheel-timer ready" id="dailyTimer">✅ READY TO SPIN</div>
+      <div class="wheel-wrap" id="dailyWheelWrap">
+        <div class="wheel-glow"></div>
+        <div class="wheel-pointer"></div>
+        <svg class="wheel-svg" id="dailyWheel" viewBox="0 0 260 260"></svg>
+        <div class="wheel-lock-badge">🔒</div>
+        <div class="wheel-center"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div>
+      </div>
+      <button class="wheel-btn wheel-btn-daily available" id="dailySpinBtn" onclick="handleDailySpin()">SPIN DAILY WHEEL</button>
+      <div class="wheel-result" id="dailyResult">Log in to spin your daily bonus.</div>
+      <div class="need-id-card" id="dailyNeedId"><strong>Need a Website ID?</strong><span>Tap Spin and we'll prepare a Facebook message for your login request.</span></div>
+    </div>
+
+    <!-- MONTHLY -->
+    <div class="wheel-box">
+      <h3>👑 Monthly Crown Wheel</h3>
+      <p>Qualified players spin once every 30 days after Aub's Palace backend approval.</p>
+      <div class="reward-pills"><span>$5</span><span>$8</span><span>Surprise Gift</span><span>Rewards</span><span>$10 Free Play</span><span>Try Again Later</span></div>
+      <div class="wheel-timer" id="monthlyTimer">⏳ Checking...</div>
+      <div class="wheel-wrap" id="monthlyWheelWrap">
+        <div class="wheel-glow"></div>
+        <div class="wheel-pointer"></div>
+        <svg class="wheel-svg" id="monthlyWheel" viewBox="0 0 260 260"></svg>
+        <div class="wheel-lock-badge">🔒</div>
+        <div class="wheel-center"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div>
+      </div>
+      <button class="wheel-btn wheel-btn-monthly" id="monthlySpinBtn" onclick="handleMonthlySpin()">SPIN MONTHLY WHEEL</button>
+      <div class="wheel-result" id="monthlyResult">Log in to check monthly approval.</div>
+      <div class="monthly-arc" id="monthlyArc"></div>
+      <div class="weekly-check">
+        <label><input type="checkbox" id="weeklyConfirm"> I confirm I played at least 5 times this week</label>
+      </div>
+      <p style="font-size:12px;color:rgba(255,255,255,.45);margin-top:8px;text-align:center">Play at least 5 times this week, send your screenshot to Facebook, then Aub's Palace unlocks your monthly spin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE -->
+<section id="live" class="reveal">
+  <h2 class="sec-title">Live Palace Action</h2>
+  <div class="live-grid">
+    <div class="live-box">
+      <h3>🏆 Yesterday's Winners</h3>
+      <p>Top winners from the last completed reward cycle.</p>
+      <div id="yesterdayWinners"></div>
+    </div>
+    <div class="live-box">
+      <h3>🔥 Live Winners</h3>
+      <p>Live activity — updates every 30 seconds.</p>
+      <div class="live-count"><span id="liveCount">128</span><small>active winners today</small></div>
+      <div id="liveFeed"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO CLAIM -->
+<section id="claim" class="reveal">
+  <h2 class="sec-title">How to Claim Rewards</h2>
+  <div class="claim-note">After winning, fill in your name, contact info, game username, and any notes. Your claim message is auto-prepared — copy it and send with your screenshot to Aub's Palace on Facebook, or send directly by email. Rewards are reviewed before being added. Duplicate or unverifiable claims may be voided.</div>
+</section>
+
+<!-- GAMES -->
+<section id="games" class="reveal">
+  <h2 class="sec-title">Our Games</h2>
+  <p class="sec-sub">Choose your game and enter Aub's trusted collection.</p>
+  <div class="games-grid">
+    <div class="game-card"><img src="https://i.postimg.cc/tJppp1FJ/mw.webp" alt="Milkyway"><div class="game-card-body"><h3>Milkyway</h3><p>Space arcade shooter.</p><a href="https://milkywayapp.xyz/" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/q7x1WzMf/orion.jpg" alt="Orion Stars"><div class="game-card-body"><h3>Orion Stars</h3><p>Fish shooting casino game.</p><a href="http://start.orionstars.vip:8580/index.html" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/Vky46jJ5/juwa777.jpg" alt="Juwa"><div class="game-card-body"><h3>Juwa</h3><p>All-in-one casino app.</p><a href="https://dl.juwa777.com/" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/2jMgQL1g/vb.webp" alt="Vblink"><div class="game-card-body"><h3>Vblink</h3><p>Modern casino gameplay.</p><a href="https://www.vblink777.club/" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/rsrnngDb/game.jpg" alt="Game Vault"><div class="game-card-body"><h3>Game Vault</h3><p>Casino hub platform.</p><a href="https://download.gamevault999.com/" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/PxZY07Mz/vegas.jpg" alt="LasVegas Sweeps"><div class="game-card-body"><h3>LasVegas Sweeps</h3><p>Vegas-style slots.</p><a href="https://m.lasvegassweeps.com/" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/7PnT70t4/gr.jpg" alt="Gameroom"><div class="game-card-body"><h3>Gameroom</h3><p>Arcade + casino combo.</p><a href="https://www.gameroom777.com/" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/5tJVwYkZ/cm.jpg" alt="Cash Machine"><div class="game-card-body"><h3>Cash Machine</h3><p>Slot-focused game.</p><a href="https://www.cashmachine777.com/" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/yYS4tyqs/pm.jpg" alt="Panda Master"><div class="game-card-body"><h3>Panda Master</h3><p>Fish shooter game.</p><a href="https://pandamaster.vip:8888/index.html" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/kgsmvX3G/fire.jpg" alt="Fire Kirin"><div class="game-card-body"><h3>Fire Kirin</h3><p>Multiplayer fish game.</p><a href="http://start.firekirin.xyz:8580/" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/3xSqwyQW/juwa-2.jpg" alt="Juwa 2.0"><div class="game-card-body"><h3>Juwa 2.0</h3><p>Upgraded Juwa version.</p><a href="https://m.juwa2.com/" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/gcsHpCWq/mafia.jpg" alt="Mafia"><div class="game-card-body"><h3>Mafia</h3><p>Crime-themed casino.</p><a href="https://www.mafia77777.com/" target="_blank" rel="noopener">Play Now</a></div></div>
+    <div class="game-card"><img src="https://i.postimg.cc/SsDY0pMC/mr.jpg" alt="Mr. All in One"><div class="game-card-body"><h3>Mr. All in One</h3><p>Complete game pack.</p><a href="https://www.mrallinone777.com/" target="_blank" rel="noopener">Play Now</a></div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="reveal">
+  <h2 class="sec-title">About Aub's Palace</h2>
+  <div class="about-wrap">
+    <div class="about-story">
+      <img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP">
+      <div class="about-intro">Introduction</div>
+      <h3 class="about-headline">Built on Trust. Driven by Real Wins.</h3>
+      <p>Welcome to Aub's Palace — where trust, excitement, and real rewards come together.</p>
+      <p>Aub's Palace was built for those who want a smoother, more reliable gaming experience with clear rules, fast support, verified rewards, and real payouts. Everything inside the Palace is handled with transparency, care, and respect.</p>
+      <p>From exciting fish games to exclusive bonuses, every part of Aub's Palace is designed to feel simple, fair, and rewarding. No confusion. No empty promises. Just real games, real wins, and a community that keeps growing stronger.</p>
+      <p>Come for the spins… stay for Aub. 👑</p>
+      <a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" class="about-cta">👑 Join the Palace on Facebook</a>
+    </div>
+    <div class="about-cards">
+      <div class="about-card"><div class="about-card-icon">💸</div><div class="about-card-title">Real Payouts</div><div class="about-card-desc">Every verified win gets paid. Fast, reliable, no runaround.</div></div>
+      <div class="about-card"><div class="about-card-icon">⚖️</div><div class="about-card-title">Fair Play</div><div class="about-card-desc">Clear rules, honest bonuses, and a platform you can trust.</div></div>
+      <div class="about-card"><div class="about-card-icon">🕐</div><div class="about-card-title">24/7 Support</div><div class="about-card-desc">Aub is always reachable — day or night, weekends included.</div></div>
+      <div class="about-card"><div class="about-card-icon">⚡</div><div class="about-card-title">Fast Cashouts</div><div class="about-card-desc">Once your win is verified, you won't wait long for your money.</div></div>
+      <div class="about-card"><div class="about-card-icon">🔒</div><div class="about-card-title">Secure Transactions</div><div class="about-card-desc">Bank-level security on every transaction, every time.</div></div>
+      <div class="about-card"><div class="about-card-icon">👑</div><div class="about-card-title">Palace Standard</div><div class="about-card-desc">You're not just a player — you're Palace royalty.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="reveal">
+  <h2 class="sec-title">Contact</h2>
+  <p class="sec-sub">Reach out any time — Aub's Palace is always here for you.</p>
+  <div class="contact-grid">
+    <a href="mailto:aubreyhere98@gmail.com" class="contact-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/1280px-Gmail_icon_%282020%29.svg.png" alt="Gmail">
+      <div class="contact-card-label">Email Us</div><div class="contact-card-sub">aubreyhere98@gmail.com</div>
+    </a>
+    <a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" class="contact-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="Facebook">
+      <div class="contact-card-label">Facebook</div><div class="contact-card-sub">Message us on Facebook</div>
+    </a>
+    <a href="https://t.me/aubspalaceofficial" target="_blank" rel="noopener" class="contact-card">
+      <div style="width:52px;height:52px;background:#229ED9;border-radius:50%;display:flex;align-items:center;justify-content:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg></div>
+      <div class="contact-card-label">Telegram</div><div class="contact-card-sub">@aubspalaceofficial</div>
+    </a>
+    <a href="https://venmo.com/code?user_id=4145490287396764155&created=1776192079" target="_blank" rel="noopener" class="contact-card">
+      <img src="https://i.postimg.cc/J44jPCqv/venmo.png" alt="Venmo">
+      <div class="contact-card-label">Venmo</div><div class="contact-card-sub">Fast & secure payments</div>
+    </a>
+  </div>
+</section>
+
+
+<!-- SUPPORT -->
+<section id="support" class="reveal">
+  <h2 class="sec-title">Support Request</h2>
+  <p class="sec-sub">Submit an issue directly to Aub's Palace. Include your real personal email and up to 2 images.</p>
+  <div class="support-card">
+    <div class="support-status" id="supportStatus"></div>
+    <div class="support-grid">
+      <div><label class="form-label">Name</label><input class="form-input" id="supportName" placeholder="Your name"></div>
+      <div><label class="form-label">Personal Email</label><input class="form-input" id="supportEmail" type="email" placeholder="your personal email"></div>
+      <div class="full"><label class="form-label">Issue</label><input class="form-input" id="supportIssue" placeholder="Short issue title"></div>
+      <div class="full"><label class="form-label">Reason / Details</label><textarea class="form-input support-textarea" id="supportReason" placeholder="Explain what happened..."></textarea></div>
+      <div class="upload-mini">📷 Image 1<input id="supportImg1" type="file" accept="image/*" onchange="showFileName(this,'supportFile1')"><div class="upload-name" id="supportFile1">Optional proof image</div></div>
+      <div class="upload-mini">📷 Image 2<input id="supportImg2" type="file" accept="image/*" onchange="showFileName(this,'supportFile2')"><div class="upload-name" id="supportFile2">Optional proof image</div></div>
+    </div>
+    <button class="btn btn-gold support-submit" onclick="submitSupport()">Submit Request</button>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="reveal">
+  <h2 class="sec-title">Palace Moments</h2>
+  <p class="sec-sub">Real wins. Real players. Real proof.</p>
+  <div class="gallery-tabs">
+    <button class="gallery-tab active" onclick="switchGallery('cashout',this)">💸 Verified Payouts</button>
+    <button class="gallery-tab" onclick="switchGallery('tags',this)">🏷️ Active Payment Tags</button>
+  </div>
+  <div class="gallery-grid" id="galleryGrid"><div class="gallery-empty"><span>📸</span>Loading...</div></div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close">✕</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© <span id="year"></span> <span>Aub's Palace</span> — Come for the spins... stay for Aub.</p>
+  <small>For entertainment purposes. 18+ only. Play responsibly. Bonuses and rewards are subject to verification and approval. Aub's Palace reserves the right to void duplicate or fraudulent claims.</small>
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta"><a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a></div>
+
+<!-- MODALS -->
+<div class="modal" id="needIdModal">
+  <div class="modal-box">
+    <h2>Website ID Required</h2>
+    <p>You need an Aub's Palace website ID and password to spin. Copy this message and send it to us on Facebook:</p>
+    <textarea class="modal-input modal-textarea" id="needIdMsg" readonly>Hey OP, could you give us our website ID and password to log in and claim our daily bonus and monthly bonus?</textarea>
+    <div class="modal-actions">
+      <button class="m-gold" onclick="copyNeedId()">Copy Message</button>
+      <a class="m-purple" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Open Facebook</a>
+      <button class="m-close" onclick="closeModal('needIdModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="claimModal">
+  <div class="modal-box">
+    <h2>Claim Your Reward</h2>
+    <p id="claimSummary">Fill in your details to claim your reward.</p>
+    <input class="modal-input" id="claimName" type="text" placeholder="Name / Facebook Name" oninput="updateClaim()">
+    <input class="modal-input" id="claimContact" type="text" placeholder="Contact info (email or phone)" oninput="updateClaim()">
+    <input class="modal-input" id="claimGame" type="text" placeholder="Game username" oninput="updateClaim()">
+    <textarea class="modal-input modal-textarea" id="claimNote" placeholder="Extra note (optional)" oninput="updateClaim()"></textarea>
+    <label style="font-size:12px;color:rgba(255,255,255,.5);display:block;margin-bottom:6px">Auto-generated claim message:</label>
+    <textarea class="modal-input modal-textarea" id="claimMsg" readonly></textarea>
+    <div class="claim-status" id="claimStatus"></div>
+    <div class="modal-actions">
+      <button class="m-gold" onclick="copyClaim()">Copy Claim</button>
+      <button class="m-green" onclick="emailClaim()">Send by Email</button>
+      <a class="m-purple" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Facebook</a>
+      <button class="m-close" onclick="closeModal('claimModal')">Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
-const SUPABASE_URL="https://ctiyileypjciqmglhees.supabase.co";
-const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0aXlpbGV5cGpjaXFtZ2xoZWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTM4NDgsImV4cCI6MjA5NjA4OTg0OH0.nDboCmvqNMmUKTmJUBqlQi58IIvq1lI71dCYDSNMQhM";
-const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-const DAY=24*60*60*1000, MONTH=30*24*60*60*1000;
-let currentUser=null,currentPlayer=null,stageType=null,stageSpinning=false,soundOn=true,pendingClaim={type:"",reward:"",code:""};
-const dailyMap={"$1":36,"$2":108,"$3":180,"15% Bonus":252,"Try Again Tomorrow":324};
-const monthlyMap={"$5":30,"$8":90,"Surprise Gift":150,"Rewards":210,"$10 Free Play":270,"Try Again Later":330};
-const nonPrizes=["Try Again Tomorrow","Try Again Later"];
-const dailyRewards=["$1","$2","$3","15% Bonus","Try Again"];
-const monthlyRewards=["$5","$8","Surprise Gift","Rewards","$10 Free Play","Try Again"];
 document.getElementById("year").textContent=new Date().getFullYear();
-setTimeout(()=>document.getElementById("preloader").classList.add("hide"),1200);
-document.getElementById("mobileToggle").onclick=()=>document.getElementById("mobileMenu").classList.toggle("open");
-document.querySelectorAll(".mobile-menu a").forEach(a=>a.onclick=()=>document.getElementById("mobileMenu").classList.remove("open"));
-function normalizeLogin(v){v=(v||"").trim().toLowerCase();return v.includes("@")?v:v+"@aubspalace.com"}
-function clean(s){return (s||"").toString().replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+// ── SUPABASE ──
+const SB_URL="https://ctiyileypjciqmglhees.supabase.co";
+const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0aXlpbGV5cGpjaXFtZ2xoZWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTM4NDgsImV4cCI6MjA5NjA4OTg0OH0.nDboCmvqNMmUKTmJUBqlQi58IIvq1lI71dCYDSNMQhM";
+const sb=window.supabase.createClient(SB_URL,SB_KEY);
+const FORMSPREE="";
+const DAY=86400000,MONTH=2592000000;
+const DAILY_SEGS={"$1":36,"$2":108,"$3":180,"15% Bonus":252,"Try Again Tomorrow":324};
+const MONTHLY_SEGS={"$5":30,"$8":90,"Surprise Gift":150,"Rewards":210,"$10 Free Play":270,"Try Again Later":330};
+const NON_PRIZE=["Try Again Tomorrow","Try Again Later"];
+const COLORS=["#7c3aed","#f3dd72","#5a13a0","#e9cf63","#8b1bd8","#f7e892"];
+let currentUser=null,currentPlayer=null,currentClaim={type:"",reward:""},dRot=0,mRot=0;
+
+// ── PRELOADER ──
+function hidePreloader(){var p=document.getElementById("preloader");if(p)p.classList.add("hide")}
+setTimeout(()=>hidePreloader(),2500);
+
+// ── AGE GATE ──
+(function(){try{if(localStorage.getItem("apAge")==="1"){var g=document.getElementById("ageGate");if(g)g.style.display="none"}}catch(e){}})();
+function acceptAge(){try{localStorage.setItem("apAge","1")}catch(e){}document.getElementById("ageGate").style.display="none"}
+function denyAge(){document.querySelector("#ageGate .age-box").innerHTML='<h2 style="font-family:Great Vibes,cursive;font-size:36px;color:#f5d878;margin-bottom:10px">18+ Only</h2><p style="color:rgba(255,255,255,.7)">You must be 18 or older to enter Aub\'s Palace.</p>'}
+
+// ── NAV ──
+window.addEventListener("scroll",function(){
+  var n=document.getElementById("mainNav");if(n)n.classList.toggle("scrolled",scrollY>10);
+  var secs=["home","login","rules","bonus","games","contact","gallery"];var cur="home";
+  secs.forEach(function(id){var s=document.getElementById(id);if(s&&scrollY>=s.offsetTop-100)cur=id});
+  document.querySelectorAll(".nav-links a:not(.nav-enter)").forEach(function(a){a.classList.toggle("active",a.getAttribute("href")==="#"+cur)});
+},{passive:true});
+function toggleNav(){var m=document.getElementById("mobMenu"),h=document.getElementById("hamburger");m.classList.toggle("open");h.innerText=m.classList.contains("open")?"✕":"☰"}
+function closeNav(){var m=document.getElementById("mobMenu"),h=document.getElementById("hamburger");m.classList.remove("open");h.innerText="☰"}
+
+// ── WHEEL BUILDER ──
+function buildWheel(id,labels){
+  var el=document.getElementById(id);if(!el)return;
+  var N=labels.length,cx=130,cy=130,r=126,seg=360/N,svg="";
+  for(var i=0;i<N;i++){
+    var a0=(i*seg-90)*Math.PI/180,a1=((i+1)*seg-90)*Math.PI/180;
+    var x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+    svg+='<path d="M'+cx+' '+cy+' L'+x0.toFixed(1)+' '+y0.toFixed(1)+' A'+r+' '+r+' 0 0 1 '+x1.toFixed(1)+' '+y1.toFixed(1)+' Z" fill="'+COLORS[i%COLORS.length]+'" stroke="#f5d878" stroke-width="2"/>';
+    var mid=(i*seg+seg/2-90)*Math.PI/180,tr=r*.63,tx=cx+tr*Math.cos(mid),ty=cy+tr*Math.sin(mid);
+    var raw=i*seg+seg/2,rot=(raw>90&&raw<270)?raw+180:raw;
+    var light=COLORS[i%COLORS.length]==="#f3dd72"||COLORS[i%COLORS.length]==="#e9cf63"||COLORS[i%COLORS.length]==="#f7e892";
+    var fs=labels[i].length>9?9:11;
+    svg+='<text x="'+tx.toFixed(1)+'" y="'+ty.toFixed(1)+'" fill="'+(light?"#2b003b":"#fff5d6")+'" font-family="Orbitron,Arial" font-size="'+fs+'" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate('+rot.toFixed(1)+' '+tx.toFixed(1)+' '+ty.toFixed(1)+'">'+labels[i]+'</text>';
+  }
+  el.innerHTML=svg;
+}
+buildWheel("dailyWheel",["$1","$2","$3","15% Bonus","Try Again"]);
+buildWheel("monthlyWheel",["$5","$8","Surprise Gift","Rewards","$10 Free Play","Try Again"]);
+
+// ── AUTH ──
+async function loginPlayer(){
+  var email=document.getElementById("loginEmail").value.trim().toLowerCase(),pw=document.getElementById("loginPassword").value;if(email && !email.includes("@"))email=email+"@aubspalace.com";
+  if(!email||!pw){setStatus("Please enter your email and password.");return}
+  var btn=document.getElementById("loginBtn"),old=btn.innerHTML;
+  btn.disabled=true;btn.innerHTML='<span class="btn-spinner"></span> Logging in...';
+  var {data,error}=await sb.auth.signInWithPassword({email,password:pw});
+  btn.disabled=false;btn.innerHTML=old;
+  if(error){
+    setStatus(error.message.includes("Invalid")?"Wrong email or password — try again.":"Login failed. Contact Aub's Palace.");
+    var c=document.getElementById("loginCard");c.classList.remove("shake");void c.offsetWidth;c.classList.add("shake");
+    setTimeout(()=>c.classList.remove("shake"),500);return;
+  }
+  currentUser=data.user;await loadProfile(false);
+}
+async function logoutPlayer(){
+  await sb.auth.signOut();currentUser=null;currentPlayer=null;
+  document.getElementById("loginCard").classList.remove("logged-in");
+  document.getElementById("logoutBtn").style.display="none";
+  setStatus("Logged out. Log in to spin your bonus wheels.");
+  setWheelUI(false);
+}
+function setStatus(m){document.getElementById("loginStatus").innerText=m}
+async function loadProfile(auto){
+  var {data:{user}}=await sb.auth.getUser();currentUser=user;
+  if(!user){setStatus("Need a website ID? Tap Spin below to request one on Facebook.");return}
+  var {data,error}=await sb.from("players").select("*").eq("id",user.id).single();
+  if(error||!data){setStatus("Logged in, but profile not found. Contact Aub's Palace.");return}
+  currentPlayer=data;
+  document.getElementById("loginCard").classList.add("logged-in");
+  document.getElementById("logoutBtn").style.display="block";
+  setStatus("Welcome, "+data.name+" 👑 — Your bonus wheels are ready.");
+  showWelcomeToast(data.name);
+  if(!auto){setTimeout(()=>{var b=document.getElementById("bonus");if(b)b.scrollIntoView({behavior:"smooth"})},600)}
+  setWheelUI(true);updateTimers();
+}
+function setWheelUI(loggedIn){
+  var d=document.getElementById("dailyNeedId");
+  if(d)d.style.display=loggedIn?"none":"block";
+}
+
+// ── TIMERS ──
 function pad(n){return String(n).padStart(2,"0")}
-function timer(ms){if(ms<=0)return"READY";let s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor((s%86400)/3600),m=Math.floor((s%3600)/60),sec=s%60;return d>0?`${d}D ${pad(h)}:${pad(m)}:${pad(sec)}`:`${pad(h)}:${pad(m)}:${pad(sec)}`}
-function showMsg(title,msg){document.getElementById("msgTitle").textContent=title;document.getElementById("msgBody").textContent=msg;openModal("msgModal")}
-function openModal(id){document.getElementById(id).classList.add("open");document.body.classList.add("no-scroll")}
-function closeModal(id){document.getElementById(id).classList.remove("open");if(!document.querySelector(".modal.open")&&!document.getElementById("spinStage").classList.contains("open"))document.body.classList.remove("no-scroll")}
-function buildWheel(id,labels){const el=document.getElementById(id);if(!el)return;let N=labels.length,cx=130,cy=130,r=126,seg=360/N,colors=["#7421c3","#f2d86e","#4d0d8c","#dcb94b","#8b1bd8","#fff0a8"];let svg='<svg viewBox="0 0 260 260">';for(let i=0;i<N;i++){let a0=(i*seg-90)*Math.PI/180,a1=((i+1)*seg-90)*Math.PI/180,x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);svg+=`<path d="M${cx} ${cy} L${x0} ${y0} A${r} ${r} 0 0 1 ${x1} ${y1} Z" fill="${colors[i%colors.length]}" stroke="#f5d878" stroke-width="2"/>`;let mid=(i*seg+seg/2-90)*Math.PI/180,tx=cx+r*.62*Math.cos(mid),ty=cy+r*.62*Math.sin(mid),rot=i*seg+seg/2;if(rot>90&&rot<270)rot+=180;let light=i%colors.length===1||i%colors.length===3||i%colors.length===5;svg+=`<text x="${tx}" y="${ty}" fill="${light?'#240030':'#fff6d6'}" font-family="Orbitron,Arial" font-size="${labels[i].length>9?8.5:11}" font-weight="900" text-anchor="middle" dominant-baseline="middle" transform="rotate(${rot} ${tx} ${ty})">${labels[i]}</text>`}svg+='</svg>';el.innerHTML=svg}
-buildWheel("dailyWheel",dailyRewards);buildWheel("monthlyWheel",monthlyRewards);
-async function loginPlayer(){let email=normalizeLogin(document.getElementById("loginEmail").value),password=document.getElementById("loginPassword").value;if(!email||!password){setStatus("Enter your website ID/email and password.");return}setStatus("Logging in...");let {data,error}=await sb.auth.signInWithPassword({email,password});if(error){setStatus("Login failed: "+error.message);return}currentUser=data.user;await loadPlayer(false)}
-async function logoutPlayer(){await sb.auth.signOut();currentUser=null;currentPlayer=null;document.getElementById("loginCard").classList.remove("logged-in");setStatus("Logged out. Log in to spin your bonus wheels.");updateSpinUI()}
-function setStatus(t){document.getElementById("playerStatus").textContent=t}
-async function loadPlayer(auto=true){let {data:{user}}=await sb.auth.getUser();currentUser=user;if(!user){updateSpinUI();return}let {data,error}=await sb.from("players").select("*").eq("id",user.id).single();if(error||!data){setStatus("Logged in, but player profile was not found. Contact Aub's Palace.");return}currentPlayer=data;document.getElementById("loginCard").classList.add("logged-in");setStatus(`Welcome, ${data.name} 👑 | Website ID: ${user.email}`);updateSpinUI();if(!auto)setTimeout(()=>document.getElementById("bonus").scrollIntoView({behavior:"smooth"}),400)}
-function updateSpinUI(){let dT=document.getElementById("dailyTimer"),mT=document.getElementById("monthlyTimer"),dR=document.getElementById("dailyResult"),mR=document.getElementById("monthlyResult"),dW=document.getElementById("dailyWheelWrap"),mW=document.getElementById("monthlyWheelWrap"),dB=document.getElementById("dailyBtn"),mB=document.getElementById("monthlyBtn");if(!currentPlayer){dT.textContent="LOGIN REQUIRED";mT.textContent="LOGIN REQUIRED";dR.textContent="Log in to spin your daily bonus.";mR.textContent="Log in to check monthly approval.";dB.disabled=false;mB.disabled=false;return}let dr=currentPlayer.daily_last_spin?DAY-(Date.now()-new Date(currentPlayer.daily_last_spin).getTime()):0;let mr=currentPlayer.monthly_last_spin?MONTH-(Date.now()-new Date(currentPlayer.monthly_last_spin).getTime()):0;if(dr>0){dT.textContent="NEXT DAILY: "+timer(dr);dR.textContent="Last daily reward: "+(currentPlayer.last_daily_reward||"used");dW.classList.add("locked-wheel")}else{dT.textContent="READY TO SPIN";dR.textContent="Daily spin available.";dW.classList.remove("locked-wheel")}if(mr>0){mT.textContent="NEXT MONTHLY: "+timer(mr);mR.textContent="Last monthly reward: "+(currentPlayer.last_monthly_reward||"used");mW.classList.add("locked-wheel")}else if(!currentPlayer.monthly_allowed){mT.textContent="AWAITING APPROVAL";mR.textContent="Monthly wheel is locked. Send weekly play screenshot to Aub's Palace for approval.";mW.classList.add("locked-wheel")}else{mT.textContent="APPROVED & READY";mR.textContent="Monthly spin approved.";mW.classList.remove("locked-wheel")}}
-setInterval(()=>{if(currentPlayer)updateSpinUI()},1000);
-async function openWheelStage(type){if(!currentUser){showMsg("Website ID Required","You need an Aub's Palace website ID and password before spinning. Message us on Facebook to request your login.");return}await loadPlayer(true);let now=Date.now();if(type==="daily"&&currentPlayer.daily_last_spin&&now-new Date(currentPlayer.daily_last_spin).getTime()<DAY){showMsg("Daily Wheel Locked","Your daily wheel is still on cooldown. Check the timer under the wheel.");return}if(type==="monthly"){if(currentPlayer.monthly_last_spin&&now-new Date(currentPlayer.monthly_last_spin).getTime()<MONTH){showMsg("Monthly Wheel Locked","Your monthly wheel is still on cooldown. Check the timer under the wheel.");return}if(!currentPlayer.monthly_allowed){showMsg("Monthly Wheel Locked","Send your weekly play screenshot to Aub's Palace for backend approval.");return}}stageType=type;stageSpinning=false;document.getElementById("stageTitle").textContent=type==="daily"?"Daily Palace Wheel":"Monthly Crown Wheel";document.getElementById("stageHelp").textContent="Tap AP to Spin";buildWheel("stageWheel",type==="daily"?dailyRewards:monthlyRewards);document.getElementById("stageWheel").style.transform="rotate(0deg)";document.getElementById("spinStage").classList.add("open");document.body.classList.add("no-scroll");document.getElementById("spinClose").disabled=false}
-function closeWheelStage(){if(stageSpinning)return;document.getElementById("spinStage").classList.remove("open");if(!document.querySelector(".modal.open"))document.body.classList.remove("no-scroll")}
-function spinAngle(reward){return stageType==="daily"?(dailyMap[reward]??Math.random()*360):(monthlyMap[reward]??Math.random()*360)}
-async function spinFromStage(){if(stageSpinning)return;stageSpinning=true;document.getElementById("spinClose").disabled=true;document.getElementById("stageHelp").textContent="Spinning...";document.getElementById("stageWheelWrap").classList.add("spinning");if(soundOn)clickSound();let rpc=stageType==="daily"?"spin_daily_wheel":"spin_monthly_wheel";let {data,error}=await sb.rpc(rpc);if(error||!data?.success){stageSpinning=false;document.getElementById("stageWheelWrap").classList.remove("spinning");document.getElementById("spinClose").disabled=false;document.getElementById("stageHelp").textContent=(data&&data.message)||"Spin unavailable. Try again.";await loadPlayer(true);return}let angle=spinAngle(data.reward),target=1800+(360-angle);document.getElementById("stageWheel").style.transform=`rotate(${target}deg)`;setTimeout(async()=>{document.getElementById("stageHelp").textContent="You won: "+data.reward;if(soundOn&&!nonPrizes.includes(data.reward))winSound();if(!nonPrizes.includes(data.reward))fireConfetti();await loadPlayer(true);closeWheelStage();showWin(data.reward)},4700)}
-function showWin(reward){let wheelName=stageType==="daily"?"Daily Palace Wheel":"Monthly Crown Wheel";let prefix=stageType==="daily"?"daily":"monthly";let uname=currentPlayer?.name||"username";pendingClaim={type:wheelName,reward,code:`${prefix} | ${uname}/game (${reward})`};document.getElementById("winText").textContent=`You won ${reward} from the ${wheelName}.`;document.getElementById("winCode").textContent="Claim Code: "+pendingClaim.code;openModal("winModal")}
-function openClaimForm(){closeModal("winModal");document.getElementById("claimGameUser").value="";document.getElementById("claimGame").value="";document.getElementById("claimNote").value="";updateClaimMessage();openModal("claimModal")}
-function updateClaimMessage(){let gu=document.getElementById("claimGameUser").value.trim(),g=document.getElementById("claimGame").value.trim(),n=document.getElementById("claimNote").value.trim();let prefix=pendingClaim.type.includes("Daily")?"daily":"monthly";let code=`${prefix} | ${gu||"username"}/${g||"game"} (${pendingClaim.reward})`;pendingClaim.code=code;document.getElementById("claimMessage").value=`Hi Aub's Palace, I want to claim my bonus reward.\n\nBonus Type: ${pendingClaim.type}\nReward Won: ${pendingClaim.reward}\nClaim Code: ${code}\nGame Username: ${gu||"[filled by user]"}\nGame: ${g||"[filled by user]"}\nExtra Note: ${n||"[optional]"}`;document.getElementById("claimSummary").textContent=`Reward: ${pendingClaim.reward} · ${pendingClaim.type}`}
-async function copyClaim(){updateClaimMessage();await navigator.clipboard.writeText(document.getElementById("claimMessage").value);document.getElementById("claimStatus").textContent="Copied. Send it to Aub's Palace on Facebook.";try{await sb.from("bonus_claims").insert({player_name:currentPlayer?.name||"Member",bonus_type:pendingClaim.type,reward:pendingClaim.reward,claim_code:pendingClaim.code,status:"pending"})}catch(e){}}
-async function submitSupport(){let name=document.getElementById("supportName").value.trim(),email=document.getElementById("supportEmail").value.trim(),issue=document.getElementById("supportIssue").value.trim(),reason=document.getElementById("supportReason").value.trim();if(!name||!email||!issue||!reason){document.getElementById("supportStatus").textContent="Please fill name, personal email, issue, and details.";return}document.getElementById("supportStatus").textContent="Submitting...";try{let img1=await uploadSupportImg(document.getElementById("supportImg1").files[0]);let img2=await uploadSupportImg(document.getElementById("supportImg2").files[0]);let {error}=await sb.from("support_requests").insert({name,personal_email:email,issue,reason_details:reason,image_1_url:img1,image_2_url:img2,status:"pending"});if(error)throw error;document.getElementById("supportStatus").textContent="Support request submitted. Aub's Palace will review it.";["supportName","supportEmail","supportIssue","supportReason"].forEach(id=>document.getElementById(id).value="");["supportImg1","supportImg2"].forEach(id=>document.getElementById(id).value="");document.getElementById("supportFile1").textContent="Optional proof image";document.getElementById("supportFile2").textContent="Optional proof image"}catch(e){document.getElementById("supportStatus").textContent="Error: "+e.message}}
-async function uploadSupportImg(file){if(!file)return null;if(file.size>6*1024*1024)throw new Error("Image too large");let path=`support/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g,"-")}`;let {error}=await sb.storage.from("support-uploads").upload(path,file);if(error)throw error;let {data}=sb.storage.from("support-uploads").getPublicUrl(path);return data.publicUrl}
-function showFileName(input,id){document.getElementById(id).textContent=input.files[0]?.name||"Optional proof image"}
-async function loadGallery(type="cashout"){let grid=document.getElementById("galleryGrid");grid.innerHTML='<div class="section-sub">Loading...</div>';let {data,error}=await sb.from("gallery").select("*").eq("category",type).eq("visible",true).order("created_at",{ascending:false}).limit(24);if(error||!data?.length){grid.innerHTML='<div class="section-sub">No Palace Moments posted yet.</div>';return}grid.innerHTML=data.map(x=>`<div class="gallery-item card"><img src="${clean(x.image_url)}" alt=""><div class="gallery-info">${clean(x.caption)}</div></div>`).join("")}
-const games=[["Milkyway","Space arcade shooter","https://i.postimg.cc/tJppp1FJ/mw.webp","https://milkywayapp.xyz/"],["Orion Stars","Fish shooting casino game","https://i.postimg.cc/q7x1WzMf/orion.jpg","http://start.orionstars.vip:8580/index.html"],["Juwa","All-in-one casino app","https://i.postimg.cc/Vky46jJ5/juwa777.jpg","https://dl.juwa777.com/"],["Vblink","Modern casino gameplay","https://i.postimg.cc/2jMgQL1g/vb.webp","https://www.vblink777.club/"],["Game Vault","Casino hub platform","https://i.postimg.cc/rsrnngDb/game.jpg","https://download.gamevault999.com/"],["LasVegas Sweeps","Vegas-style slots","https://i.postimg.cc/PxZY07Mz/vegas.jpg","https://m.lasvegassweeps.com/"],["Gameroom","Arcade + casino combo","https://i.postimg.cc/7PnT70t4/gr.jpg","https://www.gameroom777.com/"],["Cash Machine","Slot-focused game","https://i.postimg.cc/5tJVwYkZ/cm.jpg","https://www.cashmachine777.com/"],["Panda Master","Fish shooter game","https://i.postimg.cc/yYS4tyqs/pm.jpg","https://pandamaster.vip:8888/index.html"],["Fire Kirin","Multiplayer fish game","https://i.postimg.cc/kgsmvX3G/fire.jpg","http://start.firekirin.xyz:8580/"],["Juwa 2.0","Upgraded Juwa version","https://i.postimg.cc/3xSqwyQW/juwa-2.jpg","https://m.juwa2.com/"],["Mafia","Crime-themed casino","https://i.postimg.cc/gcsHpCWq/mafia.jpg","https://www.mafia77777.com/"],["Mr. All in One","Complete game pack","https://i.postimg.cc/SsDY0pMC/mr.jpg","https://www.mrallinone777.com/"]];
-document.getElementById("gamesGrid").innerHTML=games.map(g=>`<article class="game card"><img src="${g[2]}" alt="${g[0]}"><h3>${g[0]}</h3><p>${g[1]}</p><a class="btn btn-purple" href="${g[3]}" target="_blank">Play</a></article>`).join("");
-function genWinners(){let names=["Samy","Crai","Mia","Jay","Nina","Alex","Luna","Mark","Zara","Chris"],gs=["Juwa","Fire Kirin","Game Vault","Milkyway","Orion"],list=document.getElementById("yesterdayList");list.innerHTML=[1,2,3].map((r,i)=>`<div class="winner-row"><span>${["🥇","🥈","🥉"][i]} ${names[Math.floor(Math.random()*names.length)]} · ${gs[Math.floor(Math.random()*gs.length)]}</span><strong>$${[220,145,88][i]}</strong></div>`).join("");updateLive()}
-function updateLive(){let count=Number(localStorage.getItem("apLiveCount")||128);count+=Math.random()<.65?1:0;if(count>389)count=177+Math.floor(Math.random()*50);localStorage.setItem("apLiveCount",count);document.getElementById("liveCount").textContent=count;let acts=["won on","cashed out from","hit bonus on","claimed reward from"],names=["Samy","Crai","Mia","Jay","Nina","Alex"],gs=["Juwa","Fire Kirin","Game Vault","Milkyway"],live=document.getElementById("liveList");live.innerHTML=Array.from({length:5},()=>`<div class="winner-row"><span>🔥 ${names[Math.floor(Math.random()*names.length)]} ${acts[Math.floor(Math.random()*acts.length)]} ${gs[Math.floor(Math.random()*gs.length)]}</span><strong>$${40+Math.floor(Math.random()*260)}</strong></div>`).join("")}
-setInterval(updateLive,30000);genWinners();
-function addToast(){let wrap=document.getElementById("toastWrap"),names=["Samy","Crai","Mia","Jay","Nina"],games=["Juwa","Fire Kirin","Game Vault"],t=document.createElement("div");t.className="toast";t.innerHTML=`<b>${names[Math.floor(Math.random()*names.length)]}</b> just won on ${games[Math.floor(Math.random()*games.length)]} · <b>$${25+Math.floor(Math.random()*175)}</b>`;wrap.appendChild(t);requestAnimationFrame(()=>t.classList.add("show"));setTimeout(()=>{t.classList.remove("show");setTimeout(()=>t.remove(),500)},4800);while(wrap.children.length>3)wrap.firstChild.remove()}setTimeout(()=>{addToast();setInterval(addToast,9000)},3500);
-function fireConfetti(){let colors=["#f5d878","#c75cff","#fff","#7CFC9B"];for(let i=0;i<70;i++){let p=document.createElement("div");p.style.cssText=`position:fixed;z-index:1200;left:${Math.random()*100}vw;top:-10px;width:9px;height:13px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:2px;animation:fall ${1.8+Math.random()*1.5}s linear forwards`;document.body.appendChild(p);setTimeout(()=>p.remove(),3600)}}let st=document.createElement("style");st.textContent="@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.85}}";document.head.appendChild(st);
-function clickSound(){try{let a=new AudioContext(),o=a.createOscillator(),g=a.createGain();o.frequency.value=620;g.gain.value=.05;o.connect(g);g.connect(a.destination);o.start();setTimeout(()=>{o.stop();a.close()},70)}catch(e){}}
-function winSound(){try{let a=new AudioContext();[520,660,820].forEach((f,i)=>setTimeout(()=>{let o=a.createOscillator(),g=a.createGain();o.frequency.value=f;g.gain.value=.06;o.connect(g);g.connect(a.destination);o.start();setTimeout(()=>o.stop(),120)},i*140));setTimeout(()=>a.close(),700)}catch(e){}}
-function toggleSound(){soundOn=!soundOn;document.getElementById("soundBtn").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off"}
-(async()=>{let {data}=await sb.auth.getSession();if(data.session?.user){currentUser=data.session.user;await loadPlayer(true)}else updateSpinUI();loadGallery("cashout")})();
+function formatMs(ms){if(ms<=0)return"READY";var s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor((s%86400)/3600),m=Math.floor((s%3600)/60),sec=s%60;return d>0?d+"D "+pad(h)+":"+pad(m)+":"+pad(sec):pad(h)+":"+pad(m)+":"+pad(sec)}
+function fmtReset(ds,interval){if(!ds)return"";var next=new Date(new Date(ds).getTime()+interval),h=next.getHours(),m=next.getMinutes(),ap=h>=12?"PM":"AM",hh=h%12||12;return"Resets at "+hh+":"+pad(m)+" "+ap}
+function timeSince(ds){return ds?Date.now()-new Date(ds).getTime():Infinity}
+
+function updateTimers(){
+  if(!currentPlayer)return;
+  var dr=currentPlayer.daily_last_spin?DAY-timeSince(currentPlayer.daily_last_spin):0;
+  var mr=currentPlayer.monthly_last_spin?MONTH-timeSince(currentPlayer.monthly_last_spin):0;
+  var dt=document.getElementById("dailyTimer"),mt=document.getElementById("monthlyTimer");
+  var dw=document.getElementById("dailyWheelWrap"),mw=document.getElementById("monthlyWheelWrap");
+  var db=document.getElementById("dailySpinBtn"),mb=document.getElementById("monthlySpinBtn");
+  if(dr>0){
+    dt.className="wheel-timer";dt.innerText="⏳ "+formatMs(dr)+" — "+fmtReset(currentPlayer.daily_last_spin,DAY);
+    dw.classList.add("locked");dw.classList.remove("ready");db.disabled=true;db.classList.remove("available");
+  }else{
+    dt.className="wheel-timer ready";dt.innerText="✅ READY TO SPIN";
+    dw.classList.remove("locked");dw.classList.add("ready");db.disabled=false;db.classList.add("available");
+  }
+  if(mr>0){
+    mt.className="wheel-timer";mt.innerText="⏳ "+formatMs(mr)+" — "+fmtReset(currentPlayer.monthly_last_spin,MONTH);
+    mw.classList.add("locked");mw.classList.remove("ready");mb.disabled=true;mb.classList.remove("available");
+  }else if(!currentPlayer.monthly_allowed){
+    mt.className="wheel-timer";mt.innerText="🔒 Awaiting Aub's Approval";
+    mw.classList.add("locked");mw.classList.remove("ready");mb.disabled=true;mb.classList.remove("available");
+  }else{
+    mt.className="wheel-timer ready";mt.innerText="✅ APPROVED — READY TO SPIN";
+    mw.classList.remove("locked");mw.classList.add("ready");mb.disabled=false;mb.classList.add("available");
+  }
+  drawArc(mr>0?Math.min(1,timeSince(currentPlayer.monthly_last_spin)/MONTH):0);
+}
+
+function drawArc(progress){
+  var wrap=document.getElementById("monthlyArc");if(!wrap)return;
+  var r=36,circ=2*Math.PI*r,filled=circ*Math.max(0,Math.min(1,progress));
+  wrap.innerHTML='<svg width="84" height="84" viewBox="0 0 84 84"><circle cx="42" cy="42" r="'+r+'" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="5"/><circle cx="42" cy="42" r="'+r+'" fill="none" stroke="#f5d878" stroke-width="5" stroke-linecap="round" stroke-dasharray="'+filled.toFixed(1)+' '+circ.toFixed(1)+'" transform="rotate(-90 42 42)"/></svg><small>'+Math.round(progress*100)+'% of 30 days</small>';
+}
+
+// ── SLOT REVEAL ──
+function slotReveal(el,reward,done){
+  var fakes=["$1","$5","$2","$10","Bonus","$3","Gift","$8","$1","$2"],i=0;
+  el.classList.add("slot-ticking");
+  var iv=setInterval(()=>{el.innerText="🎰 "+fakes[i++%fakes.length]},110);
+  setTimeout(()=>{clearInterval(iv);el.innerText="🎉 "+reward;if(done)done()},3600);
+}
+
+// ── SPIN ──
+function spinTo(el,cur,seg){var target=cur+1800+(360-seg);el.style.transform="rotate("+target+"deg)";return target}
+
+async function handleDailySpin(){
+  if(!currentUser){openModal("needIdModal");return}
+  document.getElementById("dailySpinBtn").disabled=true;
+  document.getElementById("dailyResult").innerText="Spinning...";
+  var {data,error}=await sb.rpc("spin_daily_wheel");
+  if(error||!data.success){document.getElementById("dailyResult").innerText=data?.message||"Spin error. Try again.";await loadProfile(true);return}
+  var seg=DAILY_SEGS[data.reward]??Math.random()*360;
+  dRot=spinTo(document.getElementById("dailyWheel"),dRot,seg);
+  slotReveal(document.getElementById("dailyResult"),data.reward,()=>{
+    if(!NON_PRIZE.includes(data.reward)){fireConfetti();setTimeout(()=>openClaimModal("Daily Palace Wheel",data.reward),400)}
+  });
+  setTimeout(()=>loadProfile(true),4800);
+}
+
+async function handleMonthlySpin(){
+  if(!currentUser){openModal("needIdModal");return}
+  if(!document.getElementById("weeklyConfirm").checked){document.getElementById("monthlyResult").innerText="Please confirm you played 5+ times this week first.";return}
+  document.getElementById("monthlySpinBtn").disabled=true;
+  document.getElementById("monthlyResult").innerText="Checking...";
+  var {data,error}=await sb.rpc("spin_monthly_wheel");
+  if(error||!data.success){document.getElementById("monthlyResult").innerText=data?.message||"Spin error. Try again.";await loadProfile(true);return}
+  var seg=MONTHLY_SEGS[data.reward]??Math.random()*360;
+  mRot=spinTo(document.getElementById("monthlyWheel"),mRot,seg);
+  slotReveal(document.getElementById("monthlyResult"),data.reward,()=>{
+    if(!NON_PRIZE.includes(data.reward)){fireConfetti();setTimeout(()=>openClaimModal("Monthly Crown Wheel",data.reward),400)}
+  });
+  setTimeout(()=>loadProfile(true),4800);
+}
+
+// ── MODALS ──
+function openModal(id){document.getElementById(id).classList.add("open")}
+function closeModal(id){document.getElementById(id).classList.remove("open")}
+function openClaimModal(type,reward){
+  currentClaim={type,reward};
+  document.getElementById("claimSummary").innerText="You won "+reward+" from the "+type+". Fill in your details:";
+  ["claimName","claimContact","claimGame","claimNote"].forEach(id=>document.getElementById(id).value="");
+  document.getElementById("claimStatus").innerText="";
+  updateClaim();openModal("claimModal");
+}
+function updateClaim(){
+  var n=document.getElementById("claimName").value.trim(),c=document.getElementById("claimContact").value.trim(),g=document.getElementById("claimGame").value.trim(),no=document.getElementById("claimNote").value.trim();
+  document.getElementById("claimMsg").value="Hi Aub's Palace, I want to claim my bonus reward.\n\nBonus Type: "+currentClaim.type+"\nReward Won: "+currentClaim.reward+"\nName: "+(n||"(not filled)")+"\nContact: "+(c||"(not filled)")+"\nGame Username: "+(g||"(not filled)")+"\nNote: "+(no||"N/A")+"\n\nI will send my screenshot for verification.";
+}
+async function copyClaim(){await navigator.clipboard.writeText(document.getElementById("claimMsg").value);showToast("✅ Claim copied!");document.getElementById("claimStatus").innerText="Copied! Send it on Facebook with your screenshot."}
+async function copyNeedId(){await navigator.clipboard.writeText(document.getElementById("needIdMsg").value);showToast("✅ Message copied!")}
+function emailClaim(){
+  updateClaim();var n=document.getElementById("claimName").value.trim()||"Player";
+  var sub=encodeURIComponent("Palace Reward Claim – "+currentClaim.reward+" – "+n);
+  var body=encodeURIComponent(document.getElementById("claimMsg").value);
+  window.location.href="mailto:aubreyhere98@gmail.com?subject="+sub+"&body="+body;
+}
+
+// ── TOASTS ──
+function showToast(msg){var t=document.getElementById("copyToast");t.innerText=msg;t.classList.add("show");clearTimeout(window._ct);window._ct=setTimeout(()=>t.classList.remove("show"),1800)}
+function showWelcomeToast(name){var t=document.getElementById("welcomeToast"),m=document.getElementById("welcomeMsg");if(m)m.innerText="Welcome back, "+name+"! Your Palace rewards are ready.";t.classList.add("show");setTimeout(()=>t.classList.remove("show"),4000)}
+
+// ── CONFETTI ──
+function fireConfetti(){var cols=["#f5d878","#a855f7","#7CFC9B","#ffd96a","#7c3aed","#fff"];for(var i=0;i<65;i++){(function(){var p=document.createElement("div");p.className="confetti-piece";p.style.left=Math.random()*100+"vw";p.style.background=cols[Math.floor(Math.random()*cols.length)];p.style.animationDuration=(Math.random()*1.4+1.8)+"s";p.style.animationDelay=(Math.random()*.5)+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),3600)})()}}
+
+// ── LIVE WINNERS ──
+var names=["Marcus","Jordan","Tyler","Aisha","Devon","Zara","Chris","Monique","Jake","Destiny","Andre","Kyla","Brian","Jasmine","Mike","Tasha","Carlos","Brittany","Darius","Simone","Kevin","Ashley","Damon","Ariana"];
+var games=["Milkyway","Orion Stars","Juwa","Vblink","Game Vault","LasVegas Sweeps","Gameroom","Cash Machine","Panda Master","Fire Kirin","Juwa 2.0","Mafia","Mr. All in One"];
+var toastTypes=[{icon:"💰",verb:"cashed out on",jackpot:false},{icon:"🎰",verb:"hit a jackpot on",jackpot:true},{icon:"🎁",verb:"won free play on",free:true},{icon:"🔥",verb:"just won on",jackpot:false},{icon:"⚡",verb:"scored big on",jackpot:false},{icon:"👑",verb:"unlocked a bonus on",jackpot:false},{icon:"💎",verb:"hit the jackpot on",jackpot:true},{icon:"🏆",verb:"claimed a reward on",jackpot:false}];
+function rnd(a){return a[Math.floor(Math.random()*a.length)]}
+function money(min,max){return"$"+(Math.floor(Math.random()*(max-min))+min).toLocaleString()}
+function genWin(){return{name:rnd(names),game:rnd(games),amount:Math.random()<.08?money(1200,2800):money(50,650)}}
+var liveWins=[];
+function renderLive(){if(!liveWins.length)for(var i=0;i<5;i++)liveWins.push(genWin());document.getElementById("liveFeed").innerHTML=liveWins.map((w,i)=>'<div class="live-row'+(i===0?' new':'')+'"><span>🔥 '+w.name+' won on '+w.game+'</span><strong>'+w.amount+'</strong></div>').join("")}
+function updateLive(){liveWins.unshift(genWin());liveWins=liveWins.slice(0,5);renderLive();var c=document.getElementById("liveCount"),cur=Number(c.innerText.replace(/,/g,"")),next=Math.max(120,Math.min(320,cur+(Math.random()<.2?-1:1)*Math.floor(Math.random()*3+1)));animCount(c,next)}
+function animCount(el,to){var from=Number(el.innerText.replace(/,/g,""))||0,steps=16,i=0;clearInterval(el._ct);el._ct=setInterval(()=>{i++;el.innerText=Math.round(from+(to-from)*(i/steps)).toLocaleString();if(i>=steps){clearInterval(el._ct);el.innerText=to.toLocaleString()}},20)}
+function genYesterday(){var w=[{r:"#1",n:rnd(names),g:rnd(games),a:money(650,1200)},{r:"#2",n:rnd(names),g:rnd(games),a:money(400,850)},{r:"#3",n:rnd(names),g:rnd(games),a:money(200,650)}];document.getElementById("yesterdayWinners").innerHTML=w.map(x=>'<div class="live-row"><span>'+x.r+' '+x.n+' · '+x.g+'</span><strong>'+x.a+'</strong></div>').join("")}
+function showWinnerToast(){var t=rnd(toastTypes),n=rnd(names),g=rnd(games),a=t.free?rnd(["$10 Free Play","$5 Free Play","15% Bonus"]):t.jackpot?money(1000,2800):money(50,650),box=document.getElementById("winnerToasts");var el=document.createElement("div");el.className="winner-toast"+(t.jackpot?" jackpot":"");el.innerHTML='<span class="wt-icon">'+t.icon+'</span><div><div class="wt-name">'+n+'</div><div class="wt-text">'+t.verb+' '+g+'</div></div><div class="wt-amount">'+a+'</div>';box.appendChild(el);requestAnimationFrame(()=>el.classList.add("show"));setTimeout(()=>{el.classList.remove("show");setTimeout(()=>el.remove(),500)},5000);while(box.children.length>3)box.removeChild(box.firstChild)}
+function scheduleToast(){setTimeout(()=>{showWinnerToast();scheduleToast()},Math.floor(Math.random()*6000)+5000)}
+
+// ── GALLERY ──
+var galTab="cashout";
+async function loadGallery(type){
+  galTab=type;var grid=document.getElementById("galleryGrid");
+  grid.innerHTML='<div class="gallery-empty"><span>⏳</span>Loading...</div>';
+  try{
+    var {data,error}=await sb.from("gallery").select("*").eq("category",type).eq("visible",true).order("created_at",{ascending:false}).limit(20);
+    if(error||!data||!data.length){grid.innerHTML='<div class="gallery-empty"><span>'+(type==="cashout"?"💸":"🏷️")+'</span>No '+(type==="cashout"?"verified payouts":"active payment tags")+' yet. Check back soon!</div>';return}
+    grid.innerHTML=data.map(item=>{var d=new Date(item.created_at).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});return'<div class="gallery-card" onclick="openLightbox(\''+item.image_url.replace(/'/g,"\\'")+'\',\''+item.caption.replace(/'/g,"\\'")+'\')"><img src="'+item.image_url+'" alt="'+item.caption+'" loading="lazy" onerror="this.src=\'https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png\'"><div class="gallery-card-body"><div class="gallery-card-caption">'+item.caption+'</div><div class="gallery-card-meta"><span class="gallery-card-date">'+d+'</span><span class="gallery-badge '+(type==="cashout"?"badge-cashout":"badge-tags")+'">'+(type==="cashout"?"💸 Verified":"🏷️ Active Tag")+'</span></div></div></div>'}).join("");
+  }catch(e){grid.innerHTML='<div class="gallery-empty"><span>⚠️</span>Could not load gallery.</div>'}
+}
+function switchGallery(type,btn){document.querySelectorAll(".gallery-tab").forEach(t=>t.classList.remove("active"));btn.classList.add("active");loadGallery(type)}
+function openLightbox(url,cap){document.getElementById("lightboxImg").src=url;document.getElementById("lightboxCaption").innerText=cap||"";document.getElementById("lightbox").classList.add("open");document.body.style.overflow="hidden"}
+function closeLightbox(){document.getElementById("lightbox").classList.remove("open");document.body.style.overflow=""}
+
+
+// ── SUPPORT REQUESTS ──
+function showFileName(input,id){document.getElementById(id).innerText=input.files[0]?.name||"Optional proof image"}
+async function uploadSupportImg(file){
+  if(!file)return null;
+  if(file.size>6*1024*1024)throw new Error("Image too large. Keep images under 6MB.");
+  var path="support/"+Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"-");
+  var {error}=await sb.storage.from("support-uploads").upload(path,file);
+  if(error)throw error;
+  var {data}=sb.storage.from("support-uploads").getPublicUrl(path);
+  return data.publicUrl;
+}
+async function submitSupport(){
+  var name=document.getElementById("supportName").value.trim(),
+      email=document.getElementById("supportEmail").value.trim(),
+      issue=document.getElementById("supportIssue").value.trim(),
+      reason=document.getElementById("supportReason").value.trim(),
+      status=document.getElementById("supportStatus");
+  if(!name||!email||!issue||!reason){status.innerText="Please fill name, personal email, issue, and details.";return}
+  status.innerText="Submitting...";
+  try{
+    var img1=await uploadSupportImg(document.getElementById("supportImg1").files[0]);
+    var img2=await uploadSupportImg(document.getElementById("supportImg2").files[0]);
+    var {error}=await sb.from("support_requests").insert({name:name,personal_email:email,issue:issue,reason_details:reason,image_1_url:img1,image_2_url:img2,status:"pending"});
+    if(error)throw error;
+    status.innerText="Support request submitted. Aub's Palace will review it.";
+    ["supportName","supportEmail","supportIssue","supportReason"].forEach(id=>document.getElementById(id).value="");
+    ["supportImg1","supportImg2"].forEach(id=>document.getElementById(id).value="");
+    document.getElementById("supportFile1").innerText="Optional proof image";
+    document.getElementById("supportFile2").innerText="Optional proof image";
+  }catch(e){status.innerText="Error: "+e.message}
+}
+
+// ── SCROLL REVEAL ──
+var ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");ro.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll(".reveal").forEach(el=>ro.observe(el));
+
+// ── INIT ──
+document.addEventListener("DOMContentLoaded",async function(){
+  var {data}=await sb.auth.getSession();
+  if(data.session?.user){currentUser=data.session.user;await loadProfile(true)}
+  genYesterday();renderLive();
+  setInterval(updateTimers,1000);
+  setInterval(updateLive,30000);
+  loadGallery("cashout");
+  setTimeout(()=>{showWinnerToast();scheduleToast()},4000);
+  var lc=document.getElementById("liveCount");
+  if(lc){new IntersectionObserver(entries=>{if(entries[0].isIntersecting){animCount(lc,148);ro.disconnect()}}).observe(lc)}
+});
 </script>
 
-<!-- AUBS_CUSTOMER_HERO_CLEAN_FIXED_NO_DUPLICATE_TEXT -->
-
-<!-- AUBS_CUSTOMER_NAV_HERO_EMAIL_FIXED -->
+<!-- AUBS_PALACE_SAFE_MERGE_HERO_KEPT_FROM_UPLOADED_FILE -->
 </body>
 </html>
-
-<style>.section-title{font-size:clamp(46px,6.6vw,78px)!important;line-height:.95!important}.about-copy h3{font-size:clamp(44px,5.5vw,62px)!important}.wheel-card h3{font-size:clamp(42px,5vw,66px)!important}</style>

@@ -23,17 +23,7 @@ a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit}b
 body.no-scroll{overflow:hidden}
 .section{position:relative;padding:78px 6vw;background:radial-gradient(circle at top,rgba(199,92,255,.13),transparent 34%),linear-gradient(180deg,#180021,#2b0034)}
 .section.alt{background:radial-gradient(circle at top right,rgba(245,216,120,.09),transparent 34%),linear-gradient(180deg,#23002d,#13001d)}
-.section-title{
-  font-family:Great Vibes,cursive;
-  font-weight:400;
-  text-transform:capitalize;
-  text-align:center;
-  font-size:clamp(58px,8.5vw,104px);
-  line-height:.92;
-  color:var(--gold);
-  text-shadow:0 0 26px rgba(245,216,120,.22),0 0 42px rgba(199,92,255,.16);
-  margin-bottom:18px;
-}
+.section-title{font-family:Great Vibes,cursive;font-weight:400;text-align:center;font-size:clamp(46px,6.6vw,78px);line-height:.95;color:var(--gold);text-shadow:0 0 26px rgba(245,216,120,.22);margin-bottom:18px}
 .section-sub{max-width:850px;margin:0 auto 32px;text-align:center;color:var(--soft);line-height:1.65;font-size:16px}
 .gold{color:var(--gold)}
 .btn{border:0;border-radius:999px;padding:14px 22px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;transition:.22s ease;text-align:center}
@@ -60,41 +50,16 @@ body.no-scroll{overflow:hidden}
 .login-card,.support-form{max-width:980px;margin:0 auto;padding:26px}.login-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
 label{display:block;color:#fff0b8;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
 input,textarea,select{width:100%;border:1px solid rgba(245,216,120,.20);border-radius:16px;background:rgba(0,0,0,.32);color:#fff;padding:13px 14px}textarea{min-height:105px;resize:vertical}input::placeholder,textarea::placeholder{color:rgba(255,255,255,.36)}.status{margin-top:14px;text-align:center;color:var(--gold);line-height:1.5}#logoutBtn{display:none;margin:14px auto 0}.logged-in #logoutBtn{display:flex}
-.wheel-grid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:24px}.wheel-card{padding:28px;text-align:center;position:relative;overflow:visible}.wheel-card h3{
-  font-family:Great Vibes,cursive;
-  text-transform:capitalize;
-  color:var(--gold);
-  font-size:clamp(50px,5.4vw,78px);
-  font-weight:400;
-  line-height:1;
-  margin-bottom:8px;
-  text-shadow:0 0 22px rgba(245,216,120,.16);
-}.wheel-card p{color:var(--muted);line-height:1.55;margin-bottom:14px}.rewards{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:14px 0 18px}.rewards span{font-size:12px;color:#fff0b8;border:1px solid rgba(245,216,120,.22);background:rgba(0,0,0,.26);border-radius:999px;padding:8px 10px}
+.wheel-grid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:24px}.wheel-card{padding:28px;text-align:center;position:relative;overflow:visible}.wheel-card h3{font-family:Great Vibes,cursive;color:var(--gold);font-size:clamp(46px,5vw,72px);font-weight:400;line-height:1;margin-bottom:8px}.wheel-card p{color:var(--muted);line-height:1.55;margin-bottom:14px}.rewards{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:14px 0 18px}.rewards span{font-size:12px;color:#fff0b8;border:1px solid rgba(245,216,120,.22);background:rgba(0,0,0,.26);border-radius:999px;padding:8px 10px}
 .wheel-wrap{width:min(390px,82vw);height:min(390px,82vw);margin:18px auto 0;position:relative;display:grid;place-items:center;cursor:pointer}.wheel-wrap::before{content:"";position:absolute;inset:-18px;border-radius:50%;background:conic-gradient(var(--gold),var(--purple),var(--gold),#6e14b6,var(--gold));filter:blur(14px);opacity:.54;animation:glow 6s linear infinite}@keyframes glow{to{transform:rotate(360deg)}}
 .wheel{width:calc(min(390px,82vw) - 26px);height:calc(min(390px,82vw) - 26px);border-radius:50%;border:7px solid var(--gold);box-shadow:0 0 0 5px rgba(20,0,30,.95),0 0 32px rgba(245,216,120,.30),0 0 60px rgba(199,92,255,.28),inset 0 0 28px rgba(0,0,0,.38);position:relative;transition:transform 4.6s cubic-bezier(.13,.78,.20,1)}.wheel svg{width:100%;height:100%;border-radius:50%;display:block}.pointer{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-top:42px solid #fff0a8;z-index:8;filter:drop-shadow(0 0 10px rgba(245,216,120,.8))}.wheel-center{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;display:grid;place-items:center;z-index:10;border:3px solid #fff0a8;background:radial-gradient(circle,rgba(50,0,70,.98),rgba(8,0,14,1) 72%);box-shadow:0 0 24px rgba(245,216,120,.34),inset 0 0 20px rgba(199,92,255,.42)}.wheel-center img{width:92px;height:92px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(199,92,255,.9))}.timer-badge{position:relative;z-index:12;display:inline-flex;align-items:center;justify-content:center;margin:-5px auto 16px;padding:10px 18px;border-radius:999px;border:1px solid rgba(245,216,120,.28);background:linear-gradient(135deg,rgba(245,216,120,.10),rgba(58,0,83,.72));color:#fff6c8;font-family:Orbitron,Arial,sans-serif;font-weight:800;font-size:13px;min-width:220px}.wheel-result{min-height:26px;color:var(--muted);font-size:14px;margin-top:8px}.locked-wheel .wheel{filter:grayscale(.55) brightness(.70)}.lock-icon{position:absolute;z-index:11;font-size:34px;display:none}.locked-wheel .lock-icon{display:block}
-.spin-stage{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(4,0,10,.76);backdrop-filter:blur(14px)}.spin-stage.open{display:flex}.spin-panel{width:min(680px,96vw);text-align:center;position:relative}.spin-close{position:absolute;right:4px;top:-4px;z-index:20;background:rgba(255,255,255,.10);border:1px solid rgba(245,216,120,.22);color:#fff;border-radius:50%;width:42px;height:42px;font-weight:900}.spin-title{
-  font-family:Great Vibes,cursive;
-  text-transform:capitalize;
-  color:var(--gold);
-  font-size:clamp(56px,9.5vw,94px);
-  line-height:.95;
-  margin-bottom:12px;
-  text-shadow:0 0 24px rgba(245,216,120,.18);
-}.spin-help{color:#fff0b8;margin:8px 0 18px;font-weight:700}.stage-wheel{width:min(560px,88vw);height:min(560px,88vw);margin:auto}.stage-wheel .wheel{width:calc(min(560px,88vw) - 32px);height:calc(min(560px,88vw) - 32px)}.stage-wheel .wheel-center{width:148px;height:148px;animation:pulseCenter 1.2s infinite alternate ease-in-out}.stage-wheel .wheel-center img{width:118px;height:118px}@keyframes pulseCenter{to{transform:translate(-50%,-50%) scale(1.04);box-shadow:0 0 40px rgba(245,216,120,.42)}}.stage-wheel.spinning .wheel-center{animation:none;pointer-events:none}.sound-toggle{margin-top:16px}
+.spin-stage{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(4,0,10,.76);backdrop-filter:blur(14px)}.spin-stage.open{display:flex}.spin-panel{width:min(680px,96vw);text-align:center;position:relative}.spin-close{position:absolute;right:4px;top:-4px;z-index:20;background:rgba(255,255,255,.10);border:1px solid rgba(245,216,120,.22);color:#fff;border-radius:50%;width:42px;height:42px;font-weight:900}.spin-title{font-family:Great Vibes,cursive;color:var(--gold);font-size:clamp(52px,9vw,88px);line-height:.95;margin-bottom:12px}.spin-help{color:#fff0b8;margin:8px 0 18px;font-weight:700}.stage-wheel{width:min(560px,88vw);height:min(560px,88vw);margin:auto}.stage-wheel .wheel{width:calc(min(560px,88vw) - 32px);height:calc(min(560px,88vw) - 32px)}.stage-wheel .wheel-center{width:148px;height:148px;animation:pulseCenter 1.2s infinite alternate ease-in-out}.stage-wheel .wheel-center img{width:118px;height:118px}@keyframes pulseCenter{to{transform:translate(-50%,-50%) scale(1.04);box-shadow:0 0 40px rgba(245,216,120,.42)}}.stage-wheel.spinning .wheel-center{animation:none;pointer-events:none}.sound-toggle{margin-top:16px}
 .modal{position:fixed;inset:0;z-index:1100;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(4,0,10,.78);backdrop-filter:blur(10px)}.modal.open{display:flex}.modal-box{width:min(720px,94vw);max-height:92vh;overflow:auto;padding:28px;border-radius:30px;border:1px solid rgba(245,216,120,.26);background:radial-gradient(circle at top,rgba(245,216,120,.13),transparent 34%),linear-gradient(180deg,#370048,#130019);box-shadow:0 0 60px rgba(199,92,255,.25);text-align:center}.modal-box h2{font-family:Great Vibes,cursive;color:var(--gold);font-size:clamp(58px,9vw,88px);font-weight:400;line-height:.9;margin-bottom:12px}.modal-box p{color:var(--muted);line-height:1.55;margin:9px 0}.claim-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;margin-top:16px}.claim-grid .full{grid-column:1/-1}.modal-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}#claimMessage{min-height:180px}
 .info-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.info-card{padding:20px;border-radius:22px;background:rgba(255,255,255,.045);border:1px solid rgba(245,216,120,.12)}.info-card b{display:block;color:var(--gold);margin-bottom:8px}.info-card p{color:var(--muted);line-height:1.55}
 .rules-frame{max-width:980px;margin:0 auto;padding:12px;border-radius:32px;background:linear-gradient(135deg,var(--gold),var(--purple),var(--gold));box-shadow:0 0 50px rgba(199,92,255,.35)}.rules-frame img{width:100%;display:block;border-radius:23px}
 .list-card{max-width:1120px;margin:0 auto;padding:24px}.winner-row{display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid rgba(245,216,120,.12);background:rgba(0,0,0,.22);border-radius:16px;padding:13px 15px;margin-bottom:10px}.winner-row strong{color:var(--gold);white-space:nowrap}.live-count{text-align:center;margin:20px 0}.live-count span{display:block;font-family:Orbitron,Arial,sans-serif;font-size:clamp(52px,8vw,82px);font-weight:900;color:var(--gold)}.live-count small{text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.55)}
 .games-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}.game{padding:16px;text-align:center;overflow:hidden}.game img{width:100%;height:180px;object-fit:cover;border-radius:20px}.game h3{color:var(--gold);font-family:Orbitron,Arial,sans-serif;margin:13px 0 6px}.game p{color:var(--muted);margin-bottom:12px}
-.about-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:center}.about-logo-box{padding:28px;text-align:center}.about-logo{width:min(220px,70vw);filter:drop-shadow(0 0 28px rgba(199,92,255,.75));display:block;margin:0 auto}.about-copy{padding:28px}.about-copy h3{
-  font-family:Great Vibes,cursive;
-  text-transform:capitalize;
-  color:var(--gold);
-  font-size:64px;
-  font-weight:400;
-  line-height:1;
-  margin-bottom:12px;
-}.about-copy p{color:var(--muted);line-height:1.78;margin:12px 0}
+.about-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:center}.about-logo-box{padding:28px;text-align:center}.about-logo{width:min(220px,70vw);filter:drop-shadow(0 0 28px rgba(199,92,255,.75));display:block;margin:0 auto}.about-copy{padding:28px}.about-copy h3{font-family:Great Vibes,cursive;color:var(--gold);font-size:60px;font-weight:400;line-height:1;margin-bottom:12px}.about-copy p{color:var(--muted);line-height:1.78;margin:12px 0}
 .support-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.support-grid .full{grid-column:1/-1}.upload-mini{border:1px dashed rgba(245,216,120,.30);border-radius:18px;padding:18px;text-align:center;position:relative;background:rgba(0,0,0,.20)}.upload-mini input{position:absolute;inset:0;opacity:0;cursor:pointer}.upload-name{font-size:12px;color:var(--muted);margin-top:8px}
 .contact-grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.contact-card{padding:20px;text-align:center;border-radius:24px;background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.13)}.contact-card img{width:62px;height:62px;object-fit:contain;margin-bottom:10px}.contact-card.facebook{border-color:rgba(245,216,120,.35);box-shadow:0 0 28px rgba(245,216,120,.10)}
 .gallery-tabs{display:flex;justify-content:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}.gallery-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}.gallery-item{overflow:hidden}.gallery-item img{width:100%;height:220px;object-fit:cover;display:block}.gallery-info{padding:13px;color:var(--muted);line-height:1.45}
@@ -103,6 +68,89 @@ footer{text-align:center;padding:34px 20px 92px;background:#0d0016;color:rgba(25
 @media(max-width:1080px){.navlinks{gap:12px}.navlinks a{font-size:11px}}
 @media(max-width:980px){.navlinks{display:none}.mobile-toggle{display:block}.navbar{height:66px}.mobile-menu{top:66px}.hero{min-height:84vh;background-position:center top}.login-grid,.wheel-grid,.about-wrap{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}.contact-grid{grid-template-columns:repeat(2,1fr)}.plates-grid{grid-template-columns:repeat(2,1fr)}.sticky-enter{left:14px;right:14px;bottom:12px}.sticky-enter .btn{width:100%}}
 @media(max-width:560px){.section{padding:64px 18px}.hero{padding-top:88px;min-height:76vh;background-position:center top}.hero-logo{width:96px;height:96px}.hero-actions{flex-direction:column}.hero-actions .btn{width:100%}.info-grid,.games-grid,.support-grid,.claim-grid{grid-template-columns:1fr}.plates-grid{grid-template-columns:1fr}.wheel-wrap{width:min(335px,88vw);height:min(335px,88vw)}.wheel{width:calc(min(335px,88vw) - 26px);height:calc(min(335px,88vw) - 26px)}.wheel-center{width:94px;height:94px}.wheel-center img{width:74px;height:74px}.toast-wrap{left:10px;right:10px;bottom:74px;max-width:none}}
+
+/* FIXED CLEAN HERO: hero image already contains logo/title/buttons, so no duplicate overlay */
+.clean-hero{
+  min-height:100vh;
+  background:
+    linear-gradient(180deg,rgba(7,0,14,.10),rgba(7,0,14,.18)),
+    url("__HERO__") center center/cover no-repeat;
+}
+.hero-safe-spacer{min-height:100vh;width:100%}
+@media(max-width:980px){
+  .clean-hero{min-height:72vh;background-position:center top}
+  .hero-safe-spacer{min-height:72vh}
+}
+@media(max-width:560px){
+  .clean-hero{min-height:62vh;background-size:cover;background-position:center top}
+  .hero-safe-spacer{min-height:62vh}
+}
+
+
+/* NAV FIX: bigger readable menu + hero not hidden behind fixed nav */
+.navbar{
+  height:84px!important;
+  padding:0 5.5vw!important;
+  background:linear-gradient(180deg,rgba(7,0,12,.94),rgba(7,0,12,.72))!important;
+}
+.brand{
+  font-size:40px!important;
+  text-transform:none!important;
+}
+.brand img{
+  width:62px!important;
+  height:62px!important;
+}
+.navlinks{
+  gap:22px!important;
+}
+.navlinks a{
+  font-size:15px!important;
+  font-weight:800!important;
+  letter-spacing:.02em!important;
+}
+.nav-cta{
+  padding:12px 20px!important;
+  font-size:15px!important;
+}
+.clean-hero{
+  margin-top:84px!important;
+  min-height:calc(100vh - 84px)!important;
+  background-position:center top!important;
+}
+.hero-safe-spacer{
+  min-height:calc(100vh - 84px)!important;
+}
+@media(max-width:980px){
+  .navbar{height:72px!important}
+  .brand{font-size:34px!important}
+  .brand img{width:54px!important;height:54px!important}
+  .mobile-menu{top:72px!important}
+  .clean-hero{margin-top:72px!important;min-height:70vh!important;background-position:center top!important}
+  .hero-safe-spacer{min-height:70vh!important}
+}
+@media(max-width:560px){
+  .navbar{height:68px!important;padding:0 16px!important}
+  .brand{font-size:30px!important}
+  .brand img{width:48px!important;height:48px!important}
+  .mobile-menu{top:68px!important}
+  .clean-hero{margin-top:68px!important;min-height:58vh!important;background-position:center top!important}
+  .hero-safe-spacer{min-height:58vh!important}
+}
+
+
+.contact-emoji{
+  width:62px;
+  height:62px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 10px;
+  font-size:44px;
+  border-radius:18px;
+  background:rgba(245,216,120,.10);
+  border:1px solid rgba(245,216,120,.16);
+}
+
 </style>
 </head>
 <body>
@@ -115,27 +163,22 @@ footer{text-align:center;padding:34px 20px 92px;background:#0d0016;color:rgba(25
   <button class="mobile-toggle" id="mobileToggle">☰</button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#home">Home</a><a href="#login">Login</a><a href="#bonus">Spins</a><a href="#claim">How To Claim</a><a href="#rules">Rules</a><a href="#games">Games</a><a href="#about">About</a><a href="#support">Support</a><a href="#contact">Contact</a><a href="#gallery">Palace Moments</a><a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">Enter the Palace</a>
+  <a href="#home">Home</a><a href="#login">Login</a><a href="#bonus">Spins</a><a href="#claim">How to Claim</a><a href="#rules">Rules</a><a href="#games">Games</a><a href="#about">About</a><a href="#support">Support</a><a href="#contact">Contact</a><a href="#gallery">Palace Moments</a><a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">Enter the Palace</a>
 </div>
-<header class="hero" id="home">
-  <div class="hero-content">
-    <img class="hero-logo" src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP logo">
-    <h1>Aub's Palace</h1>
-    <p>Where trust, excitement, and real rewards come together. Clear rules, verified wins, fast support, and a Palace community built around real results.</p>
-    <div class="hero-actions"><a class="btn btn-gold" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">Play Now</a><a class="btn btn-purple" href="#rules">View Rules</a></div>
-  </div>
+<header class="hero clean-hero" id="home" aria-label="Aub's Palace hero banner">
+  <div class="hero-safe-spacer"></div>
 </header>
 <div class="sticky-enter"><a class="btn btn-purple" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank">♛ Enter the Palace</a></div>
 <section class="trust-plates" aria-label="Aub's Palace trust points"><div class="plates-grid"><div class="plate">💸 Real Payouts</div><div class="plate">⚖️ Fair Play</div><div class="plate">💬 24/7 Support</div><div class="plate">⚡ Fast Cashouts</div><div class="plate">🔒 Secure Transactions</div></div></section>
 <section class="section" id="login"><h2 class="section-title">Player Login</h2><p class="section-sub">Log in with your Aub's Palace website ID and password. You can type only your username, or the full email.</p><div class="login-card card" id="loginCard"><div class="login-grid"><div><label>Website ID / Email</label><input id="loginEmail" placeholder="example: samy or samy@aubspalace.com"></div><div><label>Password</label><input id="loginPassword" type="password" placeholder="Enter password" onkeydown="if(event.key==='Enter')loginPlayer()"></div><button class="btn btn-gold" onclick="loginPlayer()">Login</button></div><div class="status" id="playerStatus">Need a website ID? Message Aub's Palace to request your login.</div><button id="logoutBtn" class="btn btn-ghost" onclick="logoutPlayer()">Logout</button></div></section>
 <section class="section alt" id="bonus"><h2 class="section-title">Bonus Wheels</h2><p class="section-sub">Click the wheel or button to open the full-screen spin. Tap the AP logo in the middle to start the spin. Rewards only show after the wheel stops.</p><div class="wheel-grid"><div class="wheel-card card"><h3>Daily Palace Wheel</h3><p>Spin once every 24 hours.</p><div class="rewards"><span>$1</span><span>$2</span><span>$3</span><span>15% Bonus</span><span>Try Again Tomorrow</span></div><div class="wheel-wrap" id="dailyWheelWrap" onclick="openWheelStage('daily')"><span class="pointer"></span><div class="wheel" id="dailyWheel"></div><span class="lock-icon">🔒</span><div class="wheel-center"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div></div><div class="timer-badge" id="dailyTimer">Checking...</div><button class="btn btn-purple" id="dailyBtn" onclick="event.stopPropagation();openWheelStage('daily')">Spin Daily Wheel</button><div class="wheel-result" id="dailyResult">Log in to check your daily spin.</div></div><div class="wheel-card card"><h3>Monthly Crown Wheel</h3><p>Unlocks after Aub's Palace backend approval.</p><div class="rewards"><span>$5</span><span>$8</span><span>Surprise Gift</span><span>Rewards</span><span>$10 Free Play</span><span>Try Again Later</span></div><div class="wheel-wrap locked-wheel" id="monthlyWheelWrap" onclick="openWheelStage('monthly')"><span class="pointer"></span><div class="wheel" id="monthlyWheel"></div><span class="lock-icon">🔒</span><div class="wheel-center"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div></div><div class="timer-badge" id="monthlyTimer">Checking...</div><button class="btn btn-gold" id="monthlyBtn" onclick="event.stopPropagation();openWheelStage('monthly')">Spin Monthly Wheel</button><div class="wheel-result" id="monthlyResult">Log in to check monthly approval.</div></div></div></section>
-<section class="section" id="claim"><h2 class="section-title">How To Claim</h2><div class="info-grid"><div class="info-card"><b>1. Log In</b><p>Use your Aub's Palace website ID and password.</p></div><div class="info-card"><b>2. Spin</b><p>Open your wheel, tap the AP logo, and wait for the final result.</p></div><div class="info-card"><b>3. Claim</b><p>Enter your game username, game name, and optional note. Copy it or send it to Aub's Palace on Facebook.</p></div></div></section>
+<section class="section" id="claim"><h2 class="section-title">How to Claim</h2><div class="info-grid"><div class="info-card"><b>1. Log In</b><p>Use your Aub's Palace website ID and password.</p></div><div class="info-card"><b>2. Spin</b><p>Open your wheel, tap the AP logo, and wait for the final result.</p></div><div class="info-card"><b>3. Claim</b><p>Enter your game username, game name, and optional note. Copy it or send it to Aub's Palace on Facebook.</p></div></div></section>
 <section class="section alt" id="rules"><h2 class="section-title">Rules</h2><p class="section-sub">Please review the official rules before claiming bonuses, rewards, and cashouts.</p><div class="rules-frame"><img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub's Palace Rules"></div></section>
 <section class="section" id="winners"><h2 class="section-title">Winners</h2><div class="list-card card"><h3 class="gold">🏆 Yesterday's Winners</h3><div id="yesterdayList"></div><div class="live-count"><span id="liveCount">128</span><small>ACTIVE WINNERS TODAY · MAX 400</small></div><div id="liveList"></div></div></section>
 <section class="section alt" id="games"><h2 class="section-title">Games</h2><p class="section-sub">Choose your favorite fish game and enter Aub's trusted game collection.</p><div class="games-grid" id="gamesGrid"></div></section>
 <section class="section" id="about"><h2 class="section-title">About Us</h2><div class="about-wrap"><div class="about-logo-box card"><img class="about-logo" src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div><div class="about-copy card"><h3>Welcome to Aub's Palace</h3><p>Aub's Palace was built for those who value trust, excitement, and real rewards. The Palace experience is designed to feel clear, smooth, and rewarding from the moment you enter.</p><p>Every game is selected with care, every reward is reviewed, and every member is handled with respect. No confusion. No empty promises. Just real games, real support, and a community that keeps growing stronger.</p><p class="gold">Come for the spins... stay for Aub. 👑</p></div></div></section>
 <section class="section alt" id="support"><h2 class="section-title">Support Request</h2><p class="section-sub">Submit an issue directly to Aub's Palace. Include your real personal email and up to 2 images.</p><div class="support-form card"><div class="status" id="supportStatus"></div><div class="support-grid"><div><label>Name</label><input id="supportName" placeholder="Your name"></div><div><label>Personal Email</label><input id="supportEmail" type="email" placeholder="your personal email"></div><div class="full"><label>Issue</label><input id="supportIssue" placeholder="Short issue title"></div><div class="full"><label>Reason / Details</label><textarea id="supportReason" placeholder="Explain what happened..."></textarea></div><div class="upload-mini">📷 Image 1<input id="supportImg1" type="file" accept="image/*" onchange="showFileName(this,'supportFile1')"><div class="upload-name" id="supportFile1">Optional proof image</div></div><div class="upload-mini">📷 Image 2<input id="supportImg2" type="file" accept="image/*" onchange="showFileName(this,'supportFile2')"><div class="upload-name" id="supportFile2">Optional proof image</div></div></div><button class="btn btn-gold" style="margin-top:16px" onclick="submitSupport()">Submit Request</button></div></section>
-<section class="section" id="contact"><h2 class="section-title">Contact</h2><p class="section-sub">Facebook is the fastest way to reach Aub's Palace for loads, redeems, and support.</p><div class="contact-grid"><a class="contact-card" href="mailto:aubreyhere98@gmail.com"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/512px-Gmail_icon_%282020%29.svg.png"><b>Email</b></a><a class="contact-card facebook" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png"><b>Facebook</b></a><a class="contact-card" href="https://t.me/aubspalaceofficial" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"><b>Telegram</b></a><a class="contact-card" href="https://venmo.com/code?user_id=4145490287396764155&created=1776192079" target="_blank"><img src="https://i.postimg.cc/J44jPCqv/venmo.png"><b>Venmo</b></a></div></section>
+<section class="section" id="contact"><h2 class="section-title">Contact</h2><p class="section-sub">Facebook is the fastest way to reach Aub's Palace for loads, redeems, and support.</p><div class="contact-grid"><a class="contact-card" href="mailto:aubreyhere98@gmail.com"><span style="font-size:54px;display:block;margin-bottom:10px">✉️</span><b>Email</b></a><a class="contact-card facebook" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png"><b>Facebook</b></a><a class="contact-card" href="https://t.me/aubspalaceofficial" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"><b>Telegram</b></a><a class="contact-card" href="https://venmo.com/code?user_id=4145490287396764155&created=1776192079" target="_blank"><img src="https://i.postimg.cc/J44jPCqv/venmo.png"><b>Venmo</b></a></div></section>
 <section class="section alt" id="gallery"><h2 class="section-title">Palace Moments</h2><p class="section-sub">Verified payouts and current tags updated from the Aub's Palace admin panel.</p><div class="gallery-tabs"><button class="btn btn-purple" onclick="loadGallery('cashout')">Verified Payouts</button><button class="btn btn-ghost" onclick="loadGallery('tags')">Current Tags</button></div><div class="gallery-grid" id="galleryGrid"></div></section>
 <footer>© <span id="year"></span> Aub's Palace — Come for the spins... stay for Aub.<br><small>18+ only. Play responsibly. Bonuses and rewards are subject to verification and approval.</small></footer>
 <div class="toast-wrap" id="toastWrap"></div>
@@ -198,6 +241,10 @@ function toggleSound(){soundOn=!soundOn;document.getElementById("soundBtn").text
 (async()=>{let {data}=await sb.auth.getSession();if(data.session?.user){currentUser=data.session.user;await loadPlayer(true)}else updateSpinUI();loadGallery("cashout")})();
 </script>
 
-<!-- AUBS_CUSTOMER_FINAL_CURSIVE_TITLE_CASE -->
+<!-- AUBS_CUSTOMER_HERO_CLEAN_FIXED_NO_DUPLICATE_TEXT -->
+
+<!-- AUBS_CUSTOMER_NAV_HERO_EMAIL_FIXED -->
 </body>
 </html>
+
+<style>.section-title{font-size:clamp(46px,6.6vw,78px)!important;line-height:.95!important}.about-copy h3{font-size:clamp(44px,5.5vw,62px)!important}.wheel-card h3{font-size:clamp(42px,5vw,66px)!important}</style>

@@ -741,6 +741,130 @@ section,#home{scroll-margin-top:82px!important}
   color:rgba(255,255,255,.75);
 }
 </style>
+<style>
+/* ─────────────────────────────────────────────
+   FINAL AP CENTER FIX — ONLY WHEEL CENTER
+   Uses the clean filled-circle AP style, without changing hero/nav/site.
+   ───────────────────────────────────────────── */
+
+/* Timer already shows lock, so do not cover AP with the lock emoji */
+.wheel-lock-badge{
+  display:none!important;
+}
+
+/* Main wheel AP center */
+.wheel-center{
+  width:150px!important;
+  height:150px!important;
+  border-radius:50%!important;
+  z-index:55!important;
+  background:transparent!important;
+  border:3px solid var(--gold)!important;
+  overflow:hidden!important;
+  box-shadow:
+    0 0 22px rgba(245,216,120,.45),
+    0 0 34px rgba(124,58,237,.45)!important;
+  display:grid!important;
+  place-items:center!important;
+}
+
+/* This is the important part from the style you liked */
+.wheel-center img{
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  transform:none!important;
+  display:block!important;
+  filter:drop-shadow(0 0 8px rgba(124,58,237,.8))!important;
+}
+
+/* Full-screen spin AP center */
+.spin-stage-center{
+  width:170px!important;
+  height:170px!important;
+  background:transparent!important;
+  border:3px solid var(--gold)!important;
+  overflow:hidden!important;
+  z-index:60!important;
+}
+
+.spin-stage-center img{
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  transform:none!important;
+  display:block!important;
+}
+
+/* Keep pointer above wheel */
+.wheel-pointer{
+  z-index:70!important;
+}
+
+/* Mobile sizes */
+@media(max-width:700px){
+  .wheel-center{
+    width:132px!important;
+    height:132px!important;
+  }
+  .spin-stage-center{
+    width:132px!important;
+    height:132px!important;
+  }
+}
+
+@media(max-width:420px){
+  .wheel-center{
+    width:120px!important;
+    height:120px!important;
+  }
+  .spin-stage-center{
+    width:118px!important;
+    height:118px!important;
+  }
+}
+</style>
+<style>
+/* ── 18+ RESPONSIBLE PLAY BADGE ── */
+.age-badge-mini{
+  position:fixed;
+  left:18px;
+  bottom:18px;
+  z-index:801;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(6,0,14,.88);
+  border:1px solid rgba(245,216,120,.28);
+  color:#fff0bf;
+  font-family:"Orbitron",sans-serif;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.04em;
+  box-shadow:0 0 18px rgba(124,58,237,.24);
+  backdrop-filter:blur(10px);
+}
+@media(max-width:700px){
+  .age-badge-mini{
+    left:12px;
+    bottom:66px;
+    font-size:10px;
+    padding:8px 12px;
+  }
+}
+</style>
+<style>
+/* ── REMOVE MONTHLY 30-DAY PERCENT CIRCLE ── */
+.monthly-arc,
+#monthlyArc{
+  display:none!important;
+}
+</style>
 </head>
 <body>
 
@@ -876,7 +1000,6 @@ section,#home{scroll-margin-top:82px!important}
       </div>
       <button class="wheel-btn wheel-btn-monthly" id="monthlySpinBtn" onclick="handleMonthlySpin()">SPIN MONTHLY WHEEL</button>
       <div class="wheel-result" id="monthlyResult">Log in to check monthly approval.</div>
-      <div class="monthly-arc" id="monthlyArc"></div>
       <div class="weekly-check">
         <label><input type="checkbox" id="weeklyConfirm"> I confirm I played at least 5 times this week</label>
       </div>
@@ -1019,8 +1142,10 @@ section,#home{scroll-margin-top:82px!important}
 <!-- FOOTER -->
 <footer>
   <p>© 2023 <span>Aub's Palace</span> — Come for the spins... stay for Aub.</p>
-  <small>For entertainment purposes. 18+ only. Play responsibly. Bonuses and rewards are subject to verification and approval. Aub's Palace reserves the right to void duplicate or fraudulent claims.</small>
+  <small>18+ Only | Play Responsibly. For entertainment purposes. Bonuses and rewards are subject to verification and approval. Aub's Palace reserves the right to void duplicate or fraudulent claims.</small>
 </footer>
+
+<div class="age-badge-mini">18+ Only | Play Responsibly</div>
 
 <!-- STICKY CTA -->
 <div class="sticky-cta"><a href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">♛ Enter the Palace</a></div>
@@ -1182,11 +1307,7 @@ function updateTimers(){
   drawArc(mr>0?Math.min(1,timeSince(currentPlayer.monthly_last_spin)/MONTH):0);
 }
 
-function drawArc(progress){
-  var wrap=document.getElementById("monthlyArc");if(!wrap)return;
-  var r=36,circ=2*Math.PI*r,filled=circ*Math.max(0,Math.min(1,progress));
-  wrap.innerHTML='<svg width="84" height="84" viewBox="0 0 84 84"><circle cx="42" cy="42" r="'+r+'" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="5"/><circle cx="42" cy="42" r="'+r+'" fill="none" stroke="#f5d878" stroke-width="5" stroke-linecap="round" stroke-dasharray="'+filled.toFixed(1)+' '+circ.toFixed(1)+'" transform="rotate(-90 42 42)"/></svg><small>'+Math.round(progress*100)+'% of 30 days</small>';
-}
+function drawArc(progress){return;}
 
 // ── SLOT REVEAL ──
 function slotReveal(el,reward,done){
@@ -1586,7 +1707,12 @@ async function handleMonthlySpin(){
 <!-- AUBS_INDEX_29_READY_TO_DEPLOY_JS_FIXED -->
 
 <!-- AUBS_INDEX_24_READY_DEPLOY_FINAL_CHECKED -->
+
+<!-- AUBS_FINAL_AP_CENTER_CLAUDE_STYLE_ONLY -->
+
+<!-- AUBS_FINAL_AP_CENTER_WITH_18_PLUS_READY -->
+
+<!-- AUBS_FINAL_NO_MONTHLY_PROGRESS_CIRCLE -->
 </body>
 </html>
-
 

@@ -290,9 +290,49 @@ footer small{display:block;margin-top:8px;font-size:11px;color:rgba(255,255,255,
 /* ── SCROLL REVEAL ── */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-
-/* ── SUPPORT REQUEST ── */
-#support{background:linear-gradient(180deg,#0a0018,#0e0020)}
+</style>
+<style>
+/* ── LAST CHANCE STABILITY FIX ── */
+html{scroll-padding-top:74px!important}
+section,#home{scroll-margin-top:74px!important}
+.reveal{opacity:1!important;transform:none!important}
+.reveal.visible{opacity:1!important;transform:none!important}
+nav{height:68px!important;padding:0 3.2vw!important;overflow:visible!important}
+.nav-brand{min-width:210px!important;flex-shrink:0!important;overflow:visible!important}
+.nav-brand img{width:48px!important;height:48px!important;flex-shrink:0!important}
+.nav-brand span{font-size:32px!important;line-height:1!important;white-space:nowrap!important;overflow:visible!important;text-transform:none!important}
+.nav-links{gap:22px!important;flex-wrap:nowrap!important;overflow:visible!important}
+.nav-links a{font-size:15px!important;font-weight:800!important;white-space:nowrap!important}
+.nav-enter{padding:10px 22px!important;font-size:14px!important}
+#home{
+  position:relative!important;
+  margin-top:68px!important;
+  min-height:calc(100vh - 68px)!important;
+  padding-top:0!important;
+  overflow:hidden!important;
+  background:url("https://i.postimg.cc/mrpFJ53L/Chat-GPT-Image-Jun-6-2026-03-07-45-PM.png") center top/cover no-repeat!important;
+}
+.hero-real-img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center top!important;
+  z-index:0!important;
+  display:block!important;
+  pointer-events:none!important;
+}
+#home::before{z-index:1!important;background:linear-gradient(180deg,rgba(6,0,14,.04) 0%,rgba(6,0,14,.03) 52%,rgba(6,0,14,.82) 100%)!important}
+.hero-clickmap{z-index:4!important}
+.hero-inner{position:relative!important;z-index:2!important}
+#bonus{padding-top:96px!important}
+.wheel-box{padding-top:38px!important;overflow:visible!important}
+.wheel-box h3{font-size:38px!important;line-height:1.18!important;margin-top:0!important;margin-bottom:10px!important;white-space:normal!important}
+.wheel-wrap{width:270px!important;height:270px!important}
+.wheel-svg{width:258px!important;height:258px!important}
+.wheel-center{width:122px!important;height:122px!important}
+.wheel-center img{width:120px!important;height:120px!important;object-fit:contain!important}
 .support-card{max-width:900px;margin:0 auto;background:rgba(255,255,255,.05);border:1px solid rgba(245,216,120,.14);border-radius:24px;padding:28px}
 .support-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .support-grid .full{grid-column:1/-1}
@@ -302,91 +342,6 @@ footer small{display:block;margin-top:8px;font-size:11px;color:rgba(255,255,255,
 .upload-name{margin-top:8px;color:rgba(255,255,255,.55);font-size:12px;font-weight:400}
 .support-status{text-align:center;color:var(--gold);font-size:14px;margin-bottom:14px;min-height:20px}
 .support-submit{margin:18px auto 0;display:flex}
-@media(max-width:700px){.support-grid{grid-template-columns:1fr}}
-
-
-/* ── FINAL NAV / HERO / WHEEL FIX ── */
-html{scroll-padding-top:82px}
-section,#home{scroll-margin-top:82px}
-nav{
-  height:68px!important;
-  padding:0 3.2vw!important;
-}
-.nav-brand{
-  min-width:210px!important;
-  flex-shrink:0!important;
-  overflow:visible!important;
-}
-.nav-brand img{
-  width:48px!important;
-  height:48px!important;
-  flex-shrink:0!important;
-}
-.nav-brand span{
-  font-size:32px!important;
-  line-height:1!important;
-  white-space:nowrap!important;
-  overflow:visible!important;
-  text-transform:none!important;
-}
-.nav-links{
-  gap:22px!important;
-  flex-wrap:nowrap!important;
-  overflow:visible!important;
-}
-.nav-links a{
-  font-size:15px!important;
-  font-weight:800!important;
-  white-space:nowrap!important;
-}
-.nav-enter{
-  padding:10px 22px!important;
-  font-size:14px!important;
-}
-#home{
-  margin-top:68px!important;
-  min-height:calc(100vh - 68px)!important;
-  padding-top:0!important;
-  background-position:center top!important;
-}
-#home::before{
-  background:linear-gradient(180deg,rgba(6,0,14,.04) 0%,rgba(6,0,14,.03) 52%,rgba(6,0,14,.82) 100%)!important;
-}
-.hero-clickmap{
-  top:0!important;
-}
-#bonus{
-  padding-top:96px!important;
-}
-.wheel-box{
-  padding-top:34px!important;
-  overflow:visible!important;
-}
-.wheel-box h3{
-  font-size:38px!important;
-  line-height:1.18!important;
-  margin-top:0!important;
-  margin-bottom:10px!important;
-}
-.wheel-wrap{
-  width:270px!important;
-  height:270px!important;
-}
-.wheel-svg{
-  width:258px!important;
-  height:258px!important;
-}
-.wheel-center{
-  width:112px!important;
-  height:112px!important;
-}
-.wheel-center img{
-  width:108px!important;
-  height:108px!important;
-}
-.sticky-cta{
-  z-index:850!important;
-}
 @media(max-width:1100px){
   .nav-links{gap:16px!important}
   .nav-links a{font-size:14px!important}
@@ -401,19 +356,390 @@ nav{
 @media(max-width:700px){
   nav{height:64px!important}
   .mob-menu{top:64px!important}
-  #home{
-    margin-top:64px!important;
-    min-height:72vh!important;
-    background-position:center top!important;
-  }
+  #home{margin-top:64px!important;min-height:72vh!important;background-position:center top!important}
   .nav-brand span{font-size:28px!important}
   .nav-brand img{width:44px!important;height:44px!important}
   .wheel-wrap{width:230px!important;height:230px!important}
   .wheel-svg{width:218px!important;height:218px!important}
-  .wheel-center{width:96px!important;height:96px!important}
-  .wheel-center img{width:92px!important;height:92px!important}
+  .wheel-center{width:106px!important;height:106px!important}
+  .wheel-center img{width:104px!important;height:104px!important}
+  .support-grid{grid-template-columns:1fr}
+}
+</style>
+<style>
+/* ─────────────────────────────────────────────
+   WHEEL ONLY FINAL FIX — HERO UNTOUCHED
+   ───────────────────────────────────────────── */
+
+/* Never hide sections if JS reveal fails */
+.reveal,
+.reveal.visible{
+  opacity:1!important;
+  transform:none!important;
+  visibility:visible!important;
 }
 
+/* Keep section clicks from hiding under nav */
+html{scroll-padding-top:82px!important}
+section,#home{scroll-margin-top:82px!important}
+
+/* Wheels section stable spacing */
+#bonus{
+  padding-top:92px!important;
+  padding-bottom:92px!important;
+  overflow:hidden!important;
+}
+
+/* Keep the two wheel cards clean and not clipped */
+.wheels-grid{
+  max-width:1180px!important;
+  width:100%!important;
+  margin:0 auto!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:28px!important;
+  align-items:stretch!important;
+  overflow:visible!important;
+}
+
+.wheel-box{
+  position:relative!important;
+  overflow:visible!important;
+  padding:42px 32px 34px!important;
+  min-height:760px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+}
+
+/* Wheel headings should never be cut */
+.wheel-box h3{
+  display:block!important;
+  width:100%!important;
+  min-height:58px!important;
+  overflow:visible!important;
+  white-space:normal!important;
+  text-align:center!important;
+  font-size:40px!important;
+  line-height:1.15!important;
+  margin:0 0 12px!important;
+  padding:0 8px!important;
+  position:relative!important;
+  z-index:3!important;
+}
+
+.wheel-box p{
+  min-height:44px!important;
+  margin-bottom:18px!important;
+  line-height:1.5!important;
+}
+
+.reward-pills{
+  min-height:64px!important;
+  margin-bottom:18px!important;
+}
+
+/* Bigger cleaner wheels */
+.wheel-wrap{
+  width:310px!important;
+  height:310px!important;
+  margin:8px auto 18px!important;
+  overflow:visible!important;
+  flex:0 0 auto!important;
+}
+
+.wheel-glow{
+  inset:-18px!important;
+  opacity:.42!important;
+  filter:blur(12px)!important;
+}
+
+.wheel-svg{
+  width:296px!important;
+  height:296px!important;
+  border-width:5px!important;
+  overflow:visible!important;
+}
+
+/* Bigger AP center that covers the middle properly */
+.wheel-center{
+  width:146px!important;
+  height:146px!important;
+  border-width:3px!important;
+  z-index:20!important;
+  overflow:hidden!important;
+  background:radial-gradient(circle,rgba(55,0,78,.98),rgba(6,0,14,1) 72%)!important;
+  box-shadow:
+    0 0 24px rgba(245,216,120,.42),
+    0 0 38px rgba(124,58,237,.40),
+    inset 0 0 22px rgba(124,58,237,.40)!important;
+}
+
+.wheel-center img{
+  width:142px!important;
+  height:142px!important;
+  object-fit:contain!important;
+  display:block!important;
+}
+
+/* Keep pointer on top */
+.wheel-pointer{
+  top:-10px!important;
+  border-left-width:17px!important;
+  border-right-width:17px!important;
+  border-top-width:34px!important;
+  z-index:30!important;
+}
+
+/* Lock icon should sit above the AP if locked */
+.wheel-lock-badge{
+  z-index:32!important;
+  text-shadow:0 0 12px rgba(0,0,0,.8)!important;
+}
+
+/* Timer/button spacing */
+.wheel-timer{
+  margin:10px auto 14px!important;
+  min-width:230px!important;
+}
+
+.wheel-btn{
+  margin-top:6px!important;
+  min-height:54px!important;
+  font-size:14px!important;
+}
+
+/* Need ID card tighter and centered */
+.need-id-card{
+  width:100%!important;
+  max-width:430px!important;
+  margin-top:18px!important;
+}
+
+/* Mobile: stack cleanly */
+@media(max-width:900px){
+  .wheels-grid{
+    grid-template-columns:1fr!important;
+    max-width:620px!important;
+  }
+  .wheel-box{
+    min-height:auto!important;
+    padding:40px 22px 30px!important;
+  }
+}
+
+@media(max-width:700px){
+  #bonus{
+    padding-left:16px!important;
+    padding-right:16px!important;
+  }
+
+  .wheel-box h3{
+    font-size:34px!important;
+    min-height:auto!important;
+  }
+
+  .wheel-wrap{
+    width:270px!important;
+    height:270px!important;
+  }
+
+  .wheel-svg{
+    width:258px!important;
+    height:258px!important;
+  }
+
+  .wheel-center{
+    width:128px!important;
+    height:128px!important;
+  }
+
+  .wheel-center img{
+    width:124px!important;
+    height:124px!important;
+  }
+
+  .wheel-timer{
+    min-width:210px!important;
+    font-size:11px!important;
+  }
+}
+
+@media(max-width:420px){
+  .wheel-wrap{
+    width:246px!important;
+    height:246px!important;
+  }
+
+  .wheel-svg{
+    width:234px!important;
+    height:234px!important;
+  }
+
+  .wheel-center{
+    width:118px!important;
+    height:118px!important;
+  }
+
+  .wheel-center img{
+    width:114px!important;
+    height:114px!important;
+  }
+}
+</style>
+<style>
+/* ── FULL SCREEN SPIN FLOW FIX — HERO UNTOUCHED ── */
+.spin-stage-modal{
+  background:rgba(5,0,13,.82)!important;
+  backdrop-filter:blur(14px)!important;
+  z-index:120000!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:18px!important;
+}
+.spin-stage-box{
+  width:min(680px,96vw);
+  min-height:min(760px,94vh);
+  border:1px solid rgba(245,216,120,.28);
+  border-radius:32px;
+  background:radial-gradient(circle at top,rgba(168,85,247,.24),transparent 38%),linear-gradient(180deg,#250033,#08000f);
+  box-shadow:0 0 70px rgba(168,85,247,.28), inset 0 0 34px rgba(245,216,120,.05);
+  position:relative;
+  text-align:center;
+  padding:34px 22px 28px;
+  overflow:hidden;
+}
+.spin-stage-close{
+  position:absolute;
+  right:16px;
+  top:14px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid rgba(245,216,120,.26);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-size:26px;
+  font-weight:900;
+  z-index:5;
+}
+.spin-stage-box h2{
+  font-family:"Great Vibes",cursive;
+  font-weight:400;
+  color:var(--gold);
+  font-size:clamp(48px,8vw,80px);
+  line-height:1;
+  margin:6px 0 8px;
+  text-shadow:0 0 28px rgba(245,216,120,.22);
+}
+#spinStageStatus{
+  color:#fff0c9;
+  font-weight:800;
+  min-height:28px;
+  margin:10px 0 18px;
+  letter-spacing:.02em;
+}
+.spin-stage-wheel-wrap{
+  width:min(500px,84vw);
+  height:min(500px,84vw);
+  margin:0 auto;
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:visible;
+}
+.spin-stage-wheel-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-22px;
+  border-radius:50%;
+  background:conic-gradient(from 0deg,var(--gold),var(--purple2),var(--gold),var(--purple),var(--gold));
+  filter:blur(17px);
+  opacity:.44;
+  animation:glowSpin 6s linear infinite;
+}
+.spin-stage-wheel{
+  width:calc(min(500px,84vw) - 28px)!important;
+  height:calc(min(500px,84vw) - 28px)!important;
+  position:relative;
+  z-index:1;
+  transition:transform 4.8s cubic-bezier(.12,.82,.18,1)!important;
+}
+.spin-stage-center{
+  width:166px!important;
+  height:166px!important;
+  z-index:4!important;
+  cursor:pointer!important;
+  animation:apPulse 1.1s infinite alternate ease-in-out;
+}
+.spin-stage-center img{
+  width:160px!important;
+  height:160px!important;
+}
+.spin-stage-wheel-wrap.spinning .spin-stage-center{
+  animation:none!important;
+  pointer-events:none!important;
+  opacity:.82;
+}
+.spin-stage-pointer{
+  top:-5px!important;
+  z-index:8!important;
+  border-left-width:22px!important;
+  border-right-width:22px!important;
+  border-top-width:42px!important;
+}
+.spin-stage-hint{
+  color:rgba(255,255,255,.62);
+  font-size:13px;
+  margin-top:18px;
+  line-height:1.45;
+}
+@keyframes apPulse{
+  to{transform:translate(-50%,-50%) scale(1.045);filter:brightness(1.08)}
+}
+@media(max-width:560px){
+  .spin-stage-box{min-height:auto;padding:30px 14px 22px}
+  .spin-stage-wheel-wrap{width:min(350px,90vw);height:min(350px,90vw)}
+  .spin-stage-wheel{width:calc(min(350px,90vw) - 24px)!important;height:calc(min(350px,90vw) - 24px)!important}
+  .spin-stage-center{width:126px!important;height:126px!important}
+  .spin-stage-center img{width:122px!important;height:122px!important}
+}
+</style>
+<style>
+/* ── RESULT MUSIC + CELEBRATION PATCH — HERO UNTOUCHED ── */
+.spin-stage-box.win-flash{
+  animation:winFlashGlow 1.1s ease-in-out 2;
+}
+.spin-stage-box.try-flash{
+  animation:tryFlashGlow 1.1s ease-in-out 2;
+}
+@keyframes winFlashGlow{
+  0%,100%{box-shadow:0 0 70px rgba(168,85,247,.28), inset 0 0 34px rgba(245,216,120,.05)}
+  50%{box-shadow:0 0 95px rgba(245,216,120,.55),0 0 110px rgba(168,85,247,.38), inset 0 0 48px rgba(245,216,120,.12)}
+}
+@keyframes tryFlashGlow{
+  0%,100%{box-shadow:0 0 70px rgba(168,85,247,.28), inset 0 0 34px rgba(245,216,120,.05)}
+  50%{box-shadow:0 0 70px rgba(120,120,160,.24), inset 0 0 48px rgba(120,120,160,.10)}
+}
+.result-pop{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin:8px auto 0;
+  padding:10px 18px;
+  border-radius:999px;
+  background:rgba(245,216,120,.10);
+  border:1px solid rgba(245,216,120,.26);
+  color:#fff4c4;
+  font-weight:900;
+  box-shadow:0 0 22px rgba(245,216,120,.16);
+}
+.result-pop.sad{
+  background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.16);
+  color:rgba(255,255,255,.75);
+}
 </style>
 </head>
 <body>
@@ -472,6 +798,7 @@ nav{
 
 <!-- HERO -->
 <div id="home">
+  <img class="hero-real-img" src="https://i.postimg.cc/mrpFJ53L/Chat-GPT-Image-Jun-6-2026-03-07-45-PM.png" alt="Aub's Palace hero image">
   <div class="hero-clickmap">
     <a class="click-enter" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Enter</a>
     <a class="click-play" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Play Now</a>
@@ -579,7 +906,7 @@ nav{
 <!-- HOW TO CLAIM -->
 <section id="claim" class="reveal">
   <h2 class="sec-title">How to Claim Rewards</h2>
-  <div class="claim-note">After winning, fill in your name, contact info, game username, and any notes. Your claim message is auto-prepared — copy it and send with your screenshot to Aub's Palace on Facebook, or send directly by email. Rewards are reviewed before being added. Duplicate or unverifiable claims may be voided.</div>
+  <div class="claim-note">After winning, enter your game username, game name, and any extra note if needed. Your claim message is auto-prepared — copy it and send it with your screenshot to Aub's Palace on Facebook. Rewards are reviewed before being added. Duplicate or unverifiable claims may be voided.</div>
 </section>
 
 <!-- GAMES -->
@@ -654,7 +981,7 @@ nav{
 
 
 <!-- SUPPORT -->
-<section id="support" class="reveal">
+<section id="support" class="reveal visible">
   <h2 class="sec-title">Support Request</h2>
   <p class="sec-sub">Submit an issue directly to Aub's Palace. Include your real personal email and up to 2 images.</p>
   <div class="support-card">
@@ -715,18 +1042,16 @@ nav{
 <div class="modal" id="claimModal">
   <div class="modal-box">
     <h2>Claim Your Reward</h2>
-    <p id="claimSummary">Fill in your details to claim your reward.</p>
-    <input class="modal-input" id="claimName" type="text" placeholder="Name / Facebook Name" oninput="updateClaim()">
-    <input class="modal-input" id="claimContact" type="text" placeholder="Contact info (email or phone)" oninput="updateClaim()">
-    <input class="modal-input" id="claimGame" type="text" placeholder="Game username" oninput="updateClaim()">
-    <textarea class="modal-input modal-textarea" id="claimNote" placeholder="Extra note (optional)" oninput="updateClaim()"></textarea>
+    <p id="claimSummary">Fill in your game details to claim your reward.</p>
+    <input class="modal-input" id="claimGameUser" type="text" placeholder="Game Username" oninput="updateClaim()">
+    <input class="modal-input" id="claimGameName" type="text" placeholder="Game Name" oninput="updateClaim()">
+    <textarea class="modal-input modal-textarea" id="claimNote" placeholder="Extra Note (optional)" oninput="updateClaim()"></textarea>
     <label style="font-size:12px;color:rgba(255,255,255,.5);display:block;margin-bottom:6px">Auto-generated claim message:</label>
     <textarea class="modal-input modal-textarea" id="claimMsg" readonly></textarea>
     <div class="claim-status" id="claimStatus"></div>
     <div class="modal-actions">
       <button class="m-gold" onclick="copyClaim()">Copy Claim</button>
-      <button class="m-green" onclick="emailClaim()">Send by Email</button>
-      <a class="m-purple" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Facebook</a>
+      <a class="m-purple" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Claim on Facebook</a>
       <button class="m-close" onclick="closeModal('claimModal')">Close</button>
     </div>
   </div>
@@ -904,26 +1229,61 @@ async function handleMonthlySpin(){
 }
 
 // ── MODALS ──
+
+function copyNeedId(){
+  var msg=document.getElementById("needIdMsg").value;
+  navigator.clipboard.writeText(msg).then(function(){
+    showToast("✅ Website ID message copied!");
+  }).catch(function(){
+    var box=document.getElementById("needIdMsg");
+    box.focus();
+    box.select();
+    try{document.execCommand("copy");showToast("✅ Website ID message copied!")}catch(e){showToast("Copy failed — please copy manually.")}
+  });
+}
+
 function openModal(id){document.getElementById(id).classList.add("open")}
 function closeModal(id){document.getElementById(id).classList.remove("open")}
 function openClaimModal(type,reward){
   currentClaim={type,reward};
   document.getElementById("claimSummary").innerText="You won "+reward+" from the "+type+". Fill in your details:";
-  ["claimName","claimContact","claimGame","claimNote"].forEach(id=>document.getElementById(id).value="");
+  ["claimGameUser","claimGameName","claimNote"].forEach(id=>document.getElementById(id).value="");
   document.getElementById("claimStatus").innerText="";
   updateClaim();openModal("claimModal");
 }
 function updateClaim(){
-  var n=document.getElementById("claimName").value.trim(),c=document.getElementById("claimContact").value.trim(),g=document.getElementById("claimGame").value.trim(),no=document.getElementById("claimNote").value.trim();
-  document.getElementById("claimMsg").value="Hi Aub's Palace, I want to claim my bonus reward.\n\nBonus Type: "+currentClaim.type+"\nReward Won: "+currentClaim.reward+"\nName: "+(n||"(not filled)")+"\nContact: "+(c||"(not filled)")+"\nGame Username: "+(g||"(not filled)")+"\nNote: "+(no||"N/A")+"\n\nI will send my screenshot for verification.";
+  var gu=document.getElementById("claimGameUser").value.trim(),
+      gn=document.getElementById("claimGameName").value.trim(),
+      no=document.getElementById("claimNote").value.trim();
+  var prefix=currentClaim.type && currentClaim.type.includes("Daily") ? "daily" : "monthly";
+  var code=prefix+" | "+(gu||"username")+"/"+(gn||"game")+" ("+currentClaim.reward+")";
+  document.getElementById("claimMsg").value =
+    "Hi Aub's Palace, I want to claim my bonus reward.\n\n" +
+    "Bonus Type: " + currentClaim.type + "\n" +
+    "Reward Won: " + currentClaim.reward + "\n" +
+    "Claim Code: " + code + "\n" +
+    "Game Username: " + (gu||"[filled by user]") + "\n" +
+    "Game: " + (gn||"[filled by user]") + "\n" +
+    "Extra Note: " + (no||"[optional]");
 }
-async function copyClaim(){await navigator.clipboard.writeText(document.getElementById("claimMsg").value);showToast("✅ Claim copied!");document.getElementById("claimStatus").innerText="Copied! Send it on Facebook with your screenshot."}
-async function copyNeedId(){await navigator.clipboard.writeText(document.getElementById("needIdMsg").value);showToast("✅ Message copied!")}
-function emailClaim(){
-  updateClaim();var n=document.getElementById("claimName").value.trim()||"Player";
-  var sub=encodeURIComponent("Palace Reward Claim – "+currentClaim.reward+" – "+n);
-  var body=encodeURIComponent(document.getElementById("claimMsg").value);
-  window.location.href="mailto:aubreyhere98@gmail.com?subject="+sub+"&body="+body;
+async function copyClaim(){
+  updateClaim();
+  await navigator.clipboard.writeText(document.getElementById("claimMsg").value);
+  showToast("✅ Claim copied!");
+  document.getElementById("claimStatus").innerText="Copied! Send it on Facebook with your screenshot.";
+  try{
+    var gu=document.getElementById("claimGameUser").value.trim(),
+        gn=document.getElementById("claimGameName").value.trim();
+    var prefix=currentClaim.type && currentClaim.type.includes("Daily") ? "daily" : "monthly";
+    var code=prefix+" | "+(gu||"username")+"/"+(gn||"game")+" ("+currentClaim.reward+")";
+    await sb.from("bonus_claims").insert({
+      player_name: currentPlayer?.name || "Member",
+      bonus_type: currentClaim.type,
+      reward: currentClaim.reward,
+      claim_code: code,
+      status: "pending"
+    });
+  }catch(e){}
 }
 
 // ── TOASTS ──
@@ -1014,8 +1374,219 @@ document.addEventListener("DOMContentLoaded",async function(){
 });
 </script>
 
-<!-- AUBS_PALACE_SAFE_MERGE_HERO_KEPT_FROM_UPLOADED_FILE -->
+<!-- AUBS_LAST_CHANCE_STABLE_HERO_SECTIONS_VISIBLE -->
 
-<!-- AUBS_FINAL_NAV_HERO_WHEEL_FIXED_2023 -->
+<!-- AUBS_WHEEL_ONLY_FIX_HERO_UNTOUCHED -->
+
+<!-- FULL SCREEN WHEEL SPIN STAGE -->
+<div class="modal spin-stage-modal" id="spinStageModal">
+  <div class="spin-stage-box">
+    <button class="spin-stage-close" id="spinStageClose" onclick="closeSpinStage()">×</button>
+    <h2 id="spinStageTitle">Bonus Wheel</h2>
+    <p id="spinStageStatus">Tap the AP logo to start.</p>
+
+    <div class="spin-stage-wheel-wrap" id="spinStageWheelWrap">
+      <div class="wheel-pointer spin-stage-pointer"></div>
+      <svg class="wheel-svg spin-stage-wheel" id="spinStageWheel" viewBox="0 0 260 260"></svg>
+      <div class="wheel-center spin-stage-center" id="spinStageCenter" onclick="startStageSpin()">
+        <img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP">
+      </div>
+    </div>
+
+    <div class="spin-stage-hint" id="spinStageHint">Reward will show only after the wheel stops.</div>
+  </div>
+</div>
+
+<script>
+
+/* ── RESULT SOUNDS — HERO UNTOUCHED ── */
+var apAudioCtx=null;
+function apTone(freq, start, dur, gain, type){
+  try{
+    if(!apAudioCtx) apAudioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    var ctx=apAudioCtx;
+    if(ctx.state==="suspended") ctx.resume();
+    var o=ctx.createOscillator();
+    var g=ctx.createGain();
+    o.type=type||"sine";
+    o.frequency.setValueAtTime(freq,ctx.currentTime+start);
+    g.gain.setValueAtTime(0.0001,ctx.currentTime+start);
+    g.gain.exponentialRampToValueAtTime(gain,ctx.currentTime+start+.02);
+    g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+start+dur);
+    o.connect(g);g.connect(ctx.destination);
+    o.start(ctx.currentTime+start);
+    o.stop(ctx.currentTime+start+dur+.03);
+  }catch(e){}
+}
+function playSpinClickMusic(){
+  try{
+    for(var i=0;i<10;i++){
+      apTone(360+(i*18), i*.09, .055, .025, "square");
+    }
+  }catch(e){}
+}
+function playWinMusic(){
+  try{
+    var notes=[523,659,784,1046,784,1046,1318];
+    notes.forEach(function(n,i){apTone(n,i*.115,.16,.055,"sine")});
+  }catch(e){}
+}
+function playSadMusic(){
+  try{
+    var notes=[392,349,330,294];
+    notes.forEach(function(n,i){apTone(n,i*.18,.25,.045,"triangle")});
+  }catch(e){}
+}
+function showStageResultMessage(isWin,reward){
+  var status=document.getElementById("spinStageStatus");
+  var hint=document.getElementById("spinStageHint");
+  var box=document.querySelector(".spin-stage-box");
+  if(box){
+    box.classList.remove("win-flash","try-flash");
+    void box.offsetWidth;
+    box.classList.add(isWin?"win-flash":"try-flash");
+  }
+  if(status){
+    status.innerHTML = isWin
+      ? '<span class="result-pop">Congratulations 🎊 You won: '+reward+'</span>'
+      : '<span class="result-pop sad">Try Again 😔 '+reward+'</span>';
+  }
+  if(hint){
+    hint.innerText = isWin
+      ? "Your timer has started. Continue to claim after this message."
+      : "Your timer has started. Please try again after the countdown ends.";
+  }
+}
+
+/* ── FULL SCREEN SPIN FLOW OVERRIDE — HERO UNTOUCHED ── */
+var stageSpinType=null;
+var stageSpinning=false;
+var stageRotation=0;
+
+function cloneWheelToStage(type){
+  var source = document.getElementById(type==="daily" ? "dailyWheel" : "monthlyWheel");
+  var target = document.getElementById("spinStageWheel");
+  if(source && target){
+    target.innerHTML = source.innerHTML;
+    target.style.transform = "rotate(0deg)";
+  }
+}
+
+function openStageWheel(type){
+  if(!currentUser){openModal("needIdModal");return;}
+  if(type==="monthly" && !document.getElementById("weeklyConfirm").checked){
+    document.getElementById("monthlyResult").innerText="Please confirm you played 5+ times this week first.";
+    return;
+  }
+
+  stageSpinType=type;
+  stageSpinning=false;
+  stageRotation=0;
+  cloneWheelToStage(type);
+
+  document.getElementById("spinStageTitle").innerText = type==="daily" ? "Daily Palace Wheel" : "Monthly Crown Wheel";
+  document.getElementById("spinStageStatus").innerText = "Tap the AP logo to start.";
+  document.getElementById("spinStageHint").innerText = "Reward will show only after the wheel stops.";
+  document.getElementById("spinStageClose").disabled=false;
+  document.getElementById("spinStageWheelWrap").classList.remove("spinning");
+  openModal("spinStageModal");
+}
+
+function closeSpinStage(){
+  if(stageSpinning)return;
+  closeModal("spinStageModal");
+}
+
+async function startStageSpin(){
+  if(stageSpinning || !stageSpinType)return;
+  stageSpinning=true;
+
+  var isDaily = stageSpinType==="daily";
+  var resultEl = document.getElementById(isDaily ? "dailyResult" : "monthlyResult");
+  var btn = document.getElementById(isDaily ? "dailySpinBtn" : "monthlySpinBtn");
+  var wheel = document.getElementById("spinStageWheel");
+
+  document.getElementById("spinStageClose").disabled=true;
+  document.getElementById("spinStageWheelWrap").classList.add("spinning");
+  document.getElementById("spinStageStatus").innerText="Spinning...";
+  document.getElementById("spinStageHint").innerText="Please wait. Reward will not show until the wheel stops.";
+  playSpinClickMusic();
+  if(resultEl) resultEl.innerText="Wheel is spinning...";
+  if(btn) btn.disabled=true;
+
+  var rpc = isDaily ? "spin_daily_wheel" : "spin_monthly_wheel";
+  var segMap = isDaily ? DAILY_SEGS : MONTHLY_SEGS;
+
+  var data, error;
+  try{
+    var res = await sb.rpc(rpc);
+    data=res.data; error=res.error;
+  }catch(e){
+    error=e;
+  }
+
+  if(error || !data || !data.success){
+    stageSpinning=false;
+    document.getElementById("spinStageWheelWrap").classList.remove("spinning");
+    document.getElementById("spinStageClose").disabled=false;
+    document.getElementById("spinStageStatus").innerText=(data && data.message) || "Spin error. Try again.";
+    if(resultEl) resultEl.innerText=(data && data.message) || "Spin error. Try again.";
+    await loadProfile(true);
+    return;
+  }
+
+  var seg = segMap[data.reward] ?? Math.random()*360;
+  var target = stageRotation + 2160 + (360-seg);
+  stageRotation = target;
+  wheel.style.transform = "rotate("+target+"deg)";
+
+  setTimeout(async function(){
+    var isWin = !NON_PRIZE.includes(data.reward);
+
+    showStageResultMessage(isWin, data.reward);
+    if(resultEl) resultEl.innerText = isWin ? "🎉 "+data.reward : "😔 "+data.reward;
+
+    if(isWin){
+      playWinMusic();
+      fireConfetti();
+      showToast("🎊 Congratulations! You won "+data.reward);
+    }else{
+      playSadMusic();
+      showToast("😔 Try again next time.");
+    }
+
+    await loadProfile(true); // this updates timer remaining after spin
+    updateTimers();
+
+    setTimeout(function(){
+      stageSpinning=false;
+      document.getElementById("spinStageClose").disabled=false;
+      document.getElementById("spinStageWheelWrap").classList.remove("spinning");
+      closeModal("spinStageModal");
+      if(isWin){
+        openClaimModal(isDaily ? "Daily Palace Wheel" : "Monthly Crown Wheel", data.reward);
+      }
+    }, isWin ? 1300 : 1600);
+  },4900);
+}
+
+/* Override old direct-spin buttons. They now open the full-screen wheel first. */
+async function handleDailySpin(){
+  openStageWheel("daily");
+}
+async function handleMonthlySpin(){
+  openStageWheel("monthly");
+}
+</script>
+
+<!-- AUBS_FULL_SCREEN_SPIN_AP_CLICK_TIMER_REWARD_AFTER_STOP -->
+
+<!-- AUBS_SOUND_CELEBRATION_TRY_AGAIN_PATCH_HERO_UNTOUCHED -->
+
+<!-- AUBS_INDEX_29_READY_TO_DEPLOY_JS_FIXED -->
+
+<!-- AUBS_INDEX_24_READY_DEPLOY_FINAL_CHECKED -->
 </body>
 </html>
+
+

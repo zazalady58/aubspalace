@@ -71,7 +71,7 @@ nav.scrolled{background:rgba(3,0,8,.97)}
 .click-play{top:3.5%;left:28.6%;width:15.9%;height:15.5%}
 .click-rules{top:3.5%;left:55.6%;width:15.8%;height:15.5%}
 .click-enter{top:1.8%;right:6%;width:20%;height:6%}
-.click-games{top:24%;left:34%;width:27%;height:58%}
+.click-games{top:43%;left:34%;width:31%;height:43%}
 
 /* TRUST BAR */
 .trust-bar{position:relative;z-index:2;background:rgba(6,0,14,.92);border-top:1px solid rgba(245,216,120,.15);border-bottom:1px solid rgba(245,216,120,.15);display:flex;justify-content:center;flex-wrap:wrap}
@@ -109,7 +109,8 @@ section{padding:72px 5vw}
 
 /* ── RULES ── */
 #rules{background:linear-gradient(180deg,#0e0020,#160030)}
-.rules-frame{max-width:900px;margin:0 auto;padding:10px;border-radius:28px;background:linear-gradient(135deg,#f5d878,#a855f7,#f5d878);box-shadow:0 0 50px rgba(168,85,247,.5)}
+.rules-frame{max-width:900px;margin:0 auto;padding:10px;border-radius:28px;background:linear-gradient(135deg,#f5d878,#a855f7,#f5d878);box-shadow:0 0 50px rgba(168,85,247,.5);position:relative}
+.rules-share-hit{position:absolute;top:3.5%;left:4.5%;width:11%;height:8.5%;z-index:6;text-indent:-9999px;border-radius:18px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .rules-frame img{width:100%;border-radius:20px;display:block}
 
 /* ── WHEELS ── */
@@ -877,9 +878,9 @@ section,#home{scroll-margin-top:82px!important}
   touch-action:manipulation!important;
 }
 @media(max-width:700px){
-  .click-games{top:28%!important;left:28%!important;width:44%!important;height:48%!important}
-  .click-play{top:4%!important;left:17%!important;width:32%!important;height:12%!important}
-  .click-rules{top:4%!important;left:53%!important;width:32%!important;height:12%!important}
+  .click-games{top:45%!important;left:22%!important;width:56%!important;height:40%!important}
+  .click-play{top:2.8%!important;left:13%!important;width:38%!important;height:15.5%!important}
+  .click-rules{top:2.8%!important;left:50%!important;width:39%!important;height:15.5%!important}
 }
 </style>
 
@@ -982,7 +983,7 @@ section,#home{scroll-margin-top:82px!important}
   <p class="sec-sub">Log in with your Aub's Palace website ID and password to unlock your Palace rewards.</p>
   <div class="login-card" id="loginCard">
     <div class="login-grid">
-      <div><label class="form-label">Website ID / Email</label><input class="form-input" id="loginEmail" type="text" autocomplete="username" placeholder="example: samy or samy@aubspalace.com"></div>
+      <div><label class="form-label">Website ID / Email</label><input class="form-input" id="loginEmail" type="text" autocomplete="username" placeholder="example: testaub or testaub@aubspalace.com"></div>
       <div><label class="form-label">Password</label><input class="form-input" id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password" onkeydown="if(event.key==='Enter')loginPlayer()"></div>
       <button class="btn btn-gold" onclick="loginPlayer()" id="loginBtn">Login</button>
     </div>
@@ -994,7 +995,10 @@ section,#home{scroll-margin-top:82px!important}
 <!-- RULES -->
 <section id="rules" class="reveal">
   <h2 class="sec-title">Palace Rules</h2>
-  <div class="rules-frame"><img src="https://i.postimg.cc/fTGrXC1D/final-rules.png" alt="Aub's Palace Rules"></div>
+  <div class="rules-frame">
+    <a class="rules-share-hit" href="https://i.postimg.cc/mg4jpcSB/Chat-GPT-Image-Jun-10-2026-05-02-36-PM.png" target="_blank" rel="noopener" onclick="shareRulesImage(event)">Share Rules</a>
+    <img src="https://i.postimg.cc/mg4jpcSB/Chat-GPT-Image-Jun-10-2026-05-02-36-PM.png" alt="Aub's Palace Rules">
+  </div>
 </section>
 
 <!-- WHEELS -->
@@ -1057,7 +1061,7 @@ section,#home{scroll-margin-top:82px!important}
   <div class="live-grid">
     <div class="live-box">
       <h3>🏆 Yesterday's Winners</h3>
-      <p>Top verified winners from the last completed reward cycle.</p>
+      <p>Top 5 verified winners, refreshed every 24 hours.</p>
       <div id="yesterdayWinners"></div>
     </div>
     <div class="live-box">
@@ -1261,10 +1265,18 @@ function buildWheel(id,labels){
   var el=document.getElementById(id);if(!el)return;
   var N=labels.length,cx=130,cy=130,r=126,seg=360/N,svg="";
   labels.forEach(function(label,i){
-    var a0=i*seg,a1=(i+1)*seg,mid=a0+seg/2,pt=polar(cx,cy,78,mid);
-    var text=label.replace(" Deposit Bonus"," Bonus").replace("Try Again Tomorrow","Try Again").replace("Try Again Later","Try Again");
+    var a0=i*seg,a1=(i+1)*seg,mid=a0+seg/2;
+    var text=label
+      .replace("15% Deposit Bonus","15% Bonus")
+      .replace("20% Deposit Bonus","20% Bonus")
+      .replace("Try Again Tomorrow","Try Again")
+      .replace("Try Again Later","Try Again");
+    var textR=N>8?94:88,pt=polar(cx,cy,textR,mid);
+    var fontSize=N>8?8.4:10.5;
+    var textLength=text.length>7?(N>8?50:62):null;
+    var lengthAttr=textLength?` textLength="${textLength}" lengthAdjust="spacingAndGlyphs"`:"";
     svg+=`<path d="${arcPath(cx,cy,r,a0,a1)}" fill="${COLORS[i%COLORS.length]}" stroke="rgba(6,0,14,.78)" stroke-width="1.5"></path>`;
-    svg+=`<text x="${pt.x}" y="${pt.y}" fill="${i%2?'#180900':'#fff'}" font-size="${N>8?10:11}" font-family="Orbitron,Arial" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate(${mid},${pt.x},${pt.y})">${text}</text>`;
+    svg+=`<text x="${pt.x}" y="${pt.y}" fill="${i%2?'#180900':'#fff'}" font-size="${fontSize}" font-family="Orbitron,Arial" font-weight="900" text-anchor="middle" dominant-baseline="middle" transform="rotate(${mid},${pt.x},${pt.y})"${lengthAttr}>${text}</text>`;
   });
   el.innerHTML=svg;
 }
@@ -1444,6 +1456,12 @@ function closeModal(id,force){var el=document.getElementById(id);if(!el)return;i
   el.remove();return
 }el.classList.remove("open")}
 function copyText(txt){navigator.clipboard?.writeText(txt).then(()=>showCopyToast()).catch(()=>{var t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();showCopyToast()})}
+function shareRulesImage(e){
+  if(e)e.preventDefault();
+  var url="https://i.postimg.cc/mg4jpcSB/Chat-GPT-Image-Jun-10-2026-05-02-36-PM.png";
+  if(navigator.share){navigator.share({title:"Aub's Palace Rules",url:url}).catch(function(){})}
+  else{copyText(url);showCopyToast()}
+}
 function showCopyToast(){var el=document.getElementById("copyToast");el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
 
 // ── TOASTS / EFFECTS ──
@@ -1459,16 +1477,37 @@ function playSadSound(){try{var ctx=new (window.AudioContext||window.webkitAudio
 const sampleNames=["Maria","Jason","Anna","Kelly","Sophie","Alex","Rachel","Diana","Tony","Brandon","Nina","Chris","Preston","Samantha","Kevin","Ashley","Daniel","Monica","Jordan","Brianna"];
 const palaceGames=["Milkyway","Orion Stars","Juwa","Vblink","Game Vault","LasVegas Sweeps","Gameroom","Cash Machine","Panda Master","Fire Kirin","Juwa 2.0","Mafia","Mr. All in One"];
 const liveAmounts=["$45","$65","$80","$95","$120","$145","$175","$220","$260","$300","$330","$385","$400","$15 Bonus","$10 Free Play","15% Bonus"];
-const yesterdayWinners=[
-  {name:"Maria",amount:"$385 Cashout",game:"Game Vault"},
-  {name:"Jason",amount:"$220 Cashout",game:"Fire Kirin"},
-  {name:"Anna",amount:"$400 Cashout",game:"Milkyway"},
-  {name:"Kelly",amount:"$145 Cashout",game:"Orion Stars"},
-  {name:"Sophie",amount:"$95 Cashout",game:"Panda Master"}
-];
+const cashoutAmounts=[95,120,145,175,220,260,300,330,385,400];
+function seededRandom(seed){
+  var x=Math.sin(seed)*10000;
+  return x-Math.floor(x);
+}
+function dateSeed(){
+  var d=new Date();
+  return Number(`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`);
+}
+function dailyPick(arr,seed,used){
+  var index=Math.floor(seededRandom(seed)*arr.length);
+  var guard=0;
+  while(used&&used.has(index)&&guard<arr.length){index=(index+1)%arr.length;guard++}
+  if(used)used.add(index);
+  return arr[index];
+}
+function getYesterdayWinners(){
+  var seed=dateSeed(),usedNames=new Set(),usedGames=new Set(),rows=[];
+  for(var i=0;i<5;i++){
+    rows.push({
+      name:dailyPick(sampleNames,seed+i*17,usedNames),
+      game:dailyPick(palaceGames,seed+i*31,usedGames),
+      amount:"$"+dailyPick(cashoutAmounts,seed+i*43)+" Cashout"
+    });
+  }
+  return rows;
+}
 function loadLive(){
   var y=document.getElementById("yesterdayWinners"),l=document.getElementById("liveFeed"),c=document.getElementById("liveCount");
-  if(y)y.innerHTML=yesterdayWinners.map(function(w){return `<div class="live-row"><span><b>${w.name}</b><small>${w.game}</small></span><strong>${w.amount}</strong></div>`}).join("");
+  var todayTop5=getYesterdayWinners();
+  if(y)y.innerHTML=todayTop5.map(function(w){return `<div class="live-row"><span><b>${w.name}</b><small>${w.game}</small></span><strong>${w.amount}</strong></div>`}).join("");
   function addLive(){
     if(!l)return;
     var n=sampleNames[Math.floor(Math.random()*sampleNames.length)],game=palaceGames[Math.floor(Math.random()*palaceGames.length)],amount=liveAmounts[Math.floor(Math.random()*liveAmounts.length)];

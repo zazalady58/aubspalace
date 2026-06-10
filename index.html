@@ -68,10 +68,10 @@ nav.scrolled{background:rgba(3,0,8,.97)}
 .hero-inner{position:relative;z-index:2;width:100%;padding:0 0 0}
 .hero-clickmap{position:absolute;inset:0;z-index:3}
 .hero-clickmap a{position:absolute;display:block;text-indent:-9999px;border-radius:999px}
-.click-play{top:52%;left:22%;width:22%;height:8%}
-.click-rules{top:52%;left:49%;width:26%;height:8%}
+.click-play{top:3.5%;left:28.6%;width:15.9%;height:15.5%}
+.click-rules{top:3.5%;left:55.6%;width:15.8%;height:15.5%}
 .click-enter{top:1.8%;right:6%;width:20%;height:6%}
-.click-games{top:38%;left:39%;width:22%;height:50%}
+.click-games{top:24%;left:34%;width:27%;height:58%}
 
 /* TRUST BAR */
 .trust-bar{position:relative;z-index:2;background:rgba(6,0,14,.92);border-top:1px solid rgba(245,216,120,.15);border-bottom:1px solid rgba(245,216,120,.15);display:flex;justify-content:center;flex-wrap:wrap}
@@ -166,6 +166,9 @@ section{padding:72px 5vw}
 .live-row.new{animation:rowSlide .4s ease}
 @keyframes rowSlide{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 @media(max-width:700px){.live-grid{grid-template-columns:1fr}}
+.live-row span b{color:#fff;font-weight:800}
+.live-row span small{display:block;margin-top:3px;color:rgba(255,255,255,.45);font-size:11px}
+
 
 /* ── GAMES ── */
 #games{background:linear-gradient(180deg,#0a0018,#0e0020)}
@@ -874,8 +877,28 @@ section,#home{scroll-margin-top:82px!important}
   touch-action:manipulation!important;
 }
 @media(max-width:700px){
-  .click-games{top:34%!important;left:34%!important;width:32%!important;height:50%!important}
+  .click-games{top:28%!important;left:28%!important;width:44%!important;height:48%!important}
+  .click-play{top:4%!important;left:17%!important;width:32%!important;height:12%!important}
+  .click-rules{top:4%!important;left:53%!important;width:32%!important;height:12%!important}
 }
+</style>
+
+<style>
+/* ── FINAL MOBILE TOUCH AREA + LIVE ROW POLISH ── */
+.hero-clickmap a{cursor:pointer}
+.live-row span{min-width:0}
+.live-row span b{display:block;color:rgba(255,255,255,.86);font-size:13px;line-height:1.15}
+.live-row span small{display:block;margin-top:3px;color:rgba(255,255,255,.45);font-size:11px;line-height:1.2}
+@media(max-width:700px){
+  .live-row{gap:10px;align-items:flex-start}
+  .live-row strong{font-size:13px;text-align:right}
+}
+</style>
+
+<style>
+/* ── AP CENTER BUTTON RESET ── */
+.spin-stage-center{appearance:none!important;-webkit-appearance:none!important;padding:0!important;cursor:pointer!important}
+.spin-stage-center:focus{outline:none!important;box-shadow:0 0 26px rgba(245,216,120,.55),0 0 34px rgba(124,58,237,.45)!important}
 </style>
 </head>
 <body>
@@ -1021,28 +1044,29 @@ section,#home{scroll-margin-top:82px!important}
   </div>
 </section>
 
+<!-- HOW TO CLAIM -->
+<section id="claim" class="reveal">
+  <h2 class="sec-title">How to Claim Rewards</h2>
+  <div class="claim-note">After winning, enter your game username, selected game, and any extra note. A claim message will be prepared automatically. Copy the claim, send it with your screenshot to Aub’s Palace on Facebook, and wait for review. Unverified, duplicate, or edited claims may be voided.</div>
+</section>
+
+
 <!-- LIVE -->
 <section id="live" class="reveal">
   <h2 class="sec-title">Live Palace Action</h2>
   <div class="live-grid">
     <div class="live-box">
       <h3>🏆 Yesterday's Winners</h3>
-      <p>Top winners from the last completed reward cycle.</p>
+      <p>Top verified winners from the last completed reward cycle.</p>
       <div id="yesterdayWinners"></div>
     </div>
     <div class="live-box">
       <h3>🔥 Live Winners</h3>
-      <p>Live activity — updates every 30 seconds.</p>
+      <p>Real wins, real games, live Palace action — updates every 30 seconds.</p>
       <div class="live-count"><span id="liveCount">128</span><small>active winners today</small></div>
       <div id="liveFeed"></div>
     </div>
   </div>
-</section>
-
-<!-- HOW TO CLAIM -->
-<section id="claim" class="reveal">
-  <h2 class="sec-title">How to Claim Rewards</h2>
-  <div class="claim-note">After winning, enter your game username, selected game, and any extra note. A claim message will be prepared automatically. Copy the claim, send it with your screenshot to Aub’s Palace on Facebook, and wait for review. Unverified, duplicate, or edited claims may be voided.</div>
 </section>
 
 <!-- GAMES -->
@@ -1198,7 +1222,7 @@ section,#home{scroll-margin-top:82px!important}
 <script>
 // ── SUPABASE ──
 const SB_URL="https://ctiyileypjciqmglhees.supabase.co";
-const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjdGl5aWxleXBqY2lxbWdoZWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTM4NDgsImV4cCI6MjA5NjA4OTg0OH0.nDboCmvqNMmUKTmJUBqlQi58IIvq1lI71dCYDSNMQhM";
+const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0aXlpbGV5cGpjaXFtZ2xoZWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTM4NDgsImV4cCI6MjA5NjA4OTg0OH0.nDboCmvqNMmUKTmJUBqlQi58IIvq1lI71dCYDSNMQhM";
 const sb=window.supabase.createClient(SB_URL,SB_KEY);
 const FORMSPREE="";
 const DAY=86400000,MONTH=2592000000;
@@ -1208,7 +1232,7 @@ const DAILY_REWARDS=["$3","$4","$5","15% Deposit Bonus","Try Again Tomorrow","$3
 const MONTHLY_REWARDS=["$5","$8","Surprise Gift","Rewards","$10 Free Play","Try Again Later"];
 const NON_PRIZE=["Try Again Tomorrow","Try Again Later"];
 const COLORS=["#7c3aed","#f3dd72","#5a13a0","#e9cf63","#8b1bd8","#f7e892"];
-let currentUser=null,currentPlayer=null,currentClaim={type:"",reward:""},dRot=0,mRot=0;
+let currentUser=null,currentPlayer=null,currentClaim={type:"",reward:""},dRot=0,mRot=0,pendingSpin=null;
 
 // ── PRELOADER ──
 function hidePreloader(){var p=document.getElementById("preloader");if(p)p.classList.add("hide")}
@@ -1289,7 +1313,7 @@ function lastMonthly(){return firstField(currentPlayer,["last_monthly_spin","mon
 function canSpin(last,ms){if(!last)return true;var t=new Date(last).getTime();return !t || Date.now()-t>=ms}
 function remaining(last,ms){var t=new Date(last).getTime();var left=ms-(Date.now()-t);return Math.max(0,left)}
 function fmt(ms){var s=Math.ceil(ms/1000),h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(sec).padStart(2,"0")}`}
-function dailyApproved(){return !!(currentPlayer && currentPlayer.daily_allowed===true && Number(currentPlayer.daily_deposit_amount||10)>=10)}
+function dailyApproved(){return !!(currentPlayer && currentPlayer.daily_allowed===true && Number(currentPlayer.daily_deposit_amount ?? 0)>=10)}
 function monthlyApproved(){return !!(currentPlayer && (currentPlayer.monthly_allowed===true || currentPlayer.monthly_approved===true))}
 
 // ── UI STATE ──
@@ -1341,30 +1365,57 @@ function handleMonthlySpin(){
 function spinReward(type){
   var list=type==="daily"?DAILY_REWARDS:MONTHLY_REWARDS;
   var wheel=document.getElementById(type==="daily"?"dailyWheel":"monthlyWheel"),resultEl=document.getElementById(type==="daily"?"dailyResult":"monthlyResult"),btn=document.getElementById(type==="daily"?"dailySpinBtn":"monthlySpinBtn");
-  var picked=randomReward(list),N=list.length,seg=360/N;
+  var picked=randomReward(list),N=list.length;
   var rotBase=type==="daily"?dRot:mRot;
   var target=360-picked.angle;
   var finalRot=rotBase+1800+target;
   if(type==="daily")dRot=finalRot;else mRot=finalRot;
-  btn.disabled=true;resultEl.innerText="Spinning...";playTickSound();
-  wheel.style.transform=`rotate(${finalRot}deg)`;
+  btn.disabled=true;
+  resultEl.innerText="Tap the AP logo to start your spin.";
+  pendingSpin={type,list,picked,finalRot,wheel,resultEl,btn,started:false};
   openSpinStage(type,list,picked,finalRot);
+}
+function startStageSpin(){
+  if(!pendingSpin||pendingSpin.started)return;
+  pendingSpin.started=true;
+  var type=pendingSpin.type,picked=pendingSpin.picked,reward=picked.reward,finalRot=pendingSpin.finalRot;
+  var stageWheel=document.getElementById("spinStageWheel");
+  var status=document.getElementById("spinStageStatus");
+  var wrap=document.querySelector(".spin-stage-wheel-wrap");
+  if(status)status.innerText="Spinning...";
+  if(wrap)wrap.classList.add("spinning");
+  if(pendingSpin.resultEl)pendingSpin.resultEl.innerText="Spinning...";
+  playTickSound();
+  if(pendingSpin.wheel)pendingSpin.wheel.style.transform=`rotate(${finalRot}deg)`;
+  if(stageWheel)stageWheel.style.transform=`rotate(${finalRot}deg)`;
+  setTimeout(function(){
+    var box=document.querySelector(".spin-stage-box");
+    if(status)status.innerHTML=NON_PRIZE.includes(reward)?'<span class="result-pop sad">Try Again Tomorrow</span>':`<span class="result-pop">🎉 Congratulations — ${reward}</span>`;
+    if(wrap)wrap.classList.remove("spinning");
+    if(box)box.classList.add(NON_PRIZE.includes(reward)?"try-flash":"win-flash");
+    if(NON_PRIZE.includes(reward)){playSadSound();}
+    else{playWinSound();showConfetti();}
+  },4900);
   setTimeout(async function(){
-    var reward=picked.reward;
     await saveSpin(type,reward);
-    resultEl.innerText=NON_PRIZE.includes(reward)?"Try again next time.":"You won: "+reward;
-    if(!NON_PRIZE.includes(reward)){openClaim(type,reward);showConfetti();showWinnerToast(currentPlayer?.name||"Palace Player",reward,type==="monthly")}
-    else showResultToast("Try Again Tomorrow",true);
+    if(pendingSpin&&pendingSpin.resultEl)pendingSpin.resultEl.innerText=NON_PRIZE.includes(reward)?"Try again next time.":"You won: "+reward;
+    if(!NON_PRIZE.includes(reward)){
+      showWinnerToast(currentPlayer?.name||"Palace Player",reward,type==="monthly");
+      closeModal("spinStageModal",true);
+      openClaim(type,reward);
+    }else{
+      showResultToast("Try Again Tomorrow",true);
+      closeModal("spinStageModal",true);
+    }
+    pendingSpin=null;
     updateRewardUI();
-  },5000);
+  },6600);
 }
 function openSpinStage(type,list,picked,finalRot){
-  closeModal("spinStageModal");
+  closeModal("spinStageModal",true);
   var div=document.createElement("div");div.className="modal spin-stage-modal open";div.id="spinStageModal";
-  div.innerHTML=`<div class="spin-stage-box"><button class="spin-stage-close" onclick="closeModal('spinStageModal')">×</button><h2>${type==="daily"?"Daily Palace Wheel":"Monthly Crown Wheel"}</h2><div id="spinStageStatus">Tap the AP center and watch your reward land.</div><div class="spin-stage-wheel-wrap spinning"><div class="wheel-pointer spin-stage-pointer"></div><svg class="wheel-svg spin-stage-wheel" id="spinStageWheel" viewBox="0 0 260 260"></svg><div class="wheel-center spin-stage-center"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div></div><div class="spin-stage-hint">All winning claims are reviewed before rewards are added.</div></div>`;
+  div.innerHTML=`<div class="spin-stage-box"><button class="spin-stage-close" onclick="closeModal('spinStageModal')">×</button><h2>${type==="daily"?"Daily Palace Wheel":"Monthly Crown Wheel"}</h2><div id="spinStageStatus">Tap the AP center to start your spin.</div><div class="spin-stage-wheel-wrap"><div class="wheel-pointer spin-stage-pointer"></div><svg class="wheel-svg spin-stage-wheel" id="spinStageWheel" viewBox="0 0 260 260"></svg><button class="wheel-center spin-stage-center" type="button" onclick="startStageSpin()" aria-label="Start spin"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></button></div><div class="spin-stage-hint">All winning claims are reviewed before rewards are added.</div></div>`;
   document.body.appendChild(div);buildWheel("spinStageWheel",list);
-  requestAnimationFrame(()=>{document.getElementById("spinStageWheel").style.transform=`rotate(${finalRot}deg)`});
-  setTimeout(()=>{document.getElementById("spinStageStatus").innerHTML=NON_PRIZE.includes(picked.reward)?'<span class="result-pop sad">Try Again Tomorrow</span>':`<span class="result-pop">🎉 ${picked.reward}</span>`;document.querySelector(".spin-stage-wheel-wrap")?.classList.remove("spinning");document.querySelector(".spin-stage-box")?.classList.add(NON_PRIZE.includes(picked.reward)?"try-flash":"win-flash")},4900);
 }
 async function saveSpin(type,reward){
   var now=new Date().toISOString();
@@ -1388,7 +1439,10 @@ function copyClaim(){updateClaim();copyText(document.getElementById("claimMsg").
 function openNeedId(){openModal("needIdModal")}
 function copyNeedId(){copyText(document.getElementById("needIdMsg").value)}
 function openModal(id){var el=document.getElementById(id);if(el)el.classList.add("open")}
-function closeModal(id){var el=document.getElementById(id);if(!el)return;if(id==="spinStageModal"){el.remove();return}el.classList.remove("open")}
+function closeModal(id,force){var el=document.getElementById(id);if(!el)return;if(id==="spinStageModal"){
+  if(pendingSpin&&!pendingSpin.started&&!force){pendingSpin.btn.disabled=false;pendingSpin.resultEl.innerText="Spin cancelled.";pendingSpin=null;updateRewardUI();}
+  el.remove();return
+}el.classList.remove("open")}
 function copyText(txt){navigator.clipboard?.writeText(txt).then(()=>showCopyToast()).catch(()=>{var t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();showCopyToast()})}
 function showCopyToast(){var el=document.getElementById("copyToast");el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
 
@@ -1398,15 +1452,32 @@ function showWinnerToast(name,amount,jackpot){var box=document.getElementById("w
 function showResultToast(txt,sad){var box=document.getElementById("winnerToasts");if(!box)return;var el=document.createElement("div");el.className="winner-toast";el.innerHTML=`<div class="wt-icon">${sad?"🍀":"🎉"}</div><div><div class="wt-name">${txt}</div><div class="wt-text">Palace reward update</div></div>`;box.appendChild(el);setTimeout(()=>el.classList.add("show"),50);setTimeout(()=>{el.classList.remove("show");setTimeout(()=>el.remove(),500)},5000)}
 function showConfetti(){for(let i=0;i<70;i++){var c=document.createElement("div");c.className="confetti-piece";c.style.left=Math.random()*100+"vw";c.style.background=["#f5d878","#a855f7","#fff4b8","#7c3aed","#7CFC9B"][Math.floor(Math.random()*5)];c.style.animationDuration=(2.4+Math.random()*2.2)+"s";c.style.animationDelay=(Math.random()*.35)+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),5200)}}
 function playTickSound(){try{var ctx=new (window.AudioContext||window.webkitAudioContext)();let t=ctx.currentTime;for(let i=0;i<18;i++){let o=ctx.createOscillator(),g=ctx.createGain();o.type="triangle";o.frequency.value=560+i*8;g.gain.setValueAtTime(.025,t+i*.075);g.gain.exponentialRampToValueAtTime(.001,t+i*.075+.045);o.connect(g);g.connect(ctx.destination);o.start(t+i*.075);o.stop(t+i*.075+.055)}}catch(e){}}
+function playWinSound(){try{var ctx=new (window.AudioContext||window.webkitAudioContext)();var t=ctx.currentTime;[523,659,784,1046].forEach(function(freq,i){var o=ctx.createOscillator(),g=ctx.createGain();o.type="sine";o.frequency.value=freq;g.gain.setValueAtTime(.001,t+i*.13);g.gain.exponentialRampToValueAtTime(.08,t+i*.13+.025);g.gain.exponentialRampToValueAtTime(.001,t+i*.13+.22);o.connect(g);g.connect(ctx.destination);o.start(t+i*.13);o.stop(t+i*.13+.25)});}catch(e){}}
+function playSadSound(){try{var ctx=new (window.AudioContext||window.webkitAudioContext)();var t=ctx.currentTime;[392,330,262].forEach(function(freq,i){var o=ctx.createOscillator(),g=ctx.createGain();o.type="triangle";o.frequency.value=freq;g.gain.setValueAtTime(.001,t+i*.22);g.gain.exponentialRampToValueAtTime(.06,t+i*.22+.035);g.gain.exponentialRampToValueAtTime(.001,t+i*.22+.35);o.connect(g);g.connect(ctx.destination);o.start(t+i*.22);o.stop(t+i*.22+.38)});}catch(e){}}
 
 // ── LIVE SECTION ──
-const sampleNames=["M***a","J***7","A***n","K***y","S***p","L***x","R***e","D***a","T***o","B***s"];
-const sampleWins=["$3","$4","$5","15% Bonus","$10 Free Play","$8","Surprise Gift"];
+const sampleNames=["Maria","Jason","Anna","Kelly","Sophie","Alex","Rachel","Diana","Tony","Brandon","Nina","Chris","Preston","Samantha","Kevin","Ashley","Daniel","Monica","Jordan","Brianna"];
+const palaceGames=["Milkyway","Orion Stars","Juwa","Vblink","Game Vault","LasVegas Sweeps","Gameroom","Cash Machine","Panda Master","Fire Kirin","Juwa 2.0","Mafia","Mr. All in One"];
+const liveAmounts=["$45","$65","$80","$95","$120","$145","$175","$220","$260","$300","$330","$385","$400","$15 Bonus","$10 Free Play","15% Bonus"];
+const yesterdayWinners=[
+  {name:"Maria",amount:"$385 Cashout",game:"Game Vault"},
+  {name:"Jason",amount:"$220 Cashout",game:"Fire Kirin"},
+  {name:"Anna",amount:"$400 Cashout",game:"Milkyway"},
+  {name:"Kelly",amount:"$145 Cashout",game:"Orion Stars"},
+  {name:"Sophie",amount:"$95 Cashout",game:"Panda Master"}
+];
 function loadLive(){
   var y=document.getElementById("yesterdayWinners"),l=document.getElementById("liveFeed"),c=document.getElementById("liveCount");
-  if(y)y.innerHTML=["M***a|$45 Cashout","J***7|$3 Daily","A***n|$10 Free Play","K***y|$8 Monthly"].map(x=>{let [n,w]=x.split("|");return `<div class="live-row"><span>${n}</span><strong>${w}</strong></div>`}).join("");
-  function addLive(){if(!l)return;var n=sampleNames[Math.floor(Math.random()*sampleNames.length)],w=sampleWins[Math.floor(Math.random()*sampleWins.length)];var row=document.createElement("div");row.className="live-row new";row.innerHTML=`<span>${n}</span><strong>${w}</strong>`;l.prepend(row);while(l.children.length>5)l.lastChild.remove();if(c)c.innerText=String(120+Math.floor(Math.random()*35));}
-  l&&(l.innerHTML="");for(let i=0;i<4;i++)addLive();setInterval(addLive,30000);
+  if(y)y.innerHTML=yesterdayWinners.map(function(w){return `<div class="live-row"><span><b>${w.name}</b><small>${w.game}</small></span><strong>${w.amount}</strong></div>`}).join("");
+  function addLive(){
+    if(!l)return;
+    var n=sampleNames[Math.floor(Math.random()*sampleNames.length)],game=palaceGames[Math.floor(Math.random()*palaceGames.length)],amount=liveAmounts[Math.floor(Math.random()*liveAmounts.length)];
+    var row=document.createElement("div");row.className="live-row new";
+    row.innerHTML=`<span><b>${n}</b><small>${game}</small></span><strong>${amount}</strong>`;
+    l.prepend(row);while(l.children.length>5)l.lastChild.remove();
+    if(c)c.innerText=String(120+Math.floor(Math.random()*35));
+  }
+  l&&(l.innerHTML="");for(let i=0;i<5;i++)addLive();setInterval(addLive,30000);
 }
 
 // ── SUPPORT ──
@@ -1420,18 +1491,9 @@ function submitSupport(){
 }
 
 // ── GALLERY ──
-const galleryData={
-  cashout:[
-    {img:"https://i.postimg.cc/J44jPCqv/venmo.png",cap:"Verified payout proof",date:"Recent",type:"cashout"},
-    {img:"https://i.postimg.cc/fTGrXC1D/final-rules.png",cap:"Palace rules and reward verification",date:"Official",type:"cashout"}
-  ],
-  tags:[
-    {img:"https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png",cap:"Aub's Palace active tag",date:"Official",type:"tags"},
-    {img:"https://i.postimg.cc/mrpFJ53L/Chat-GPT-Image-Jun-6-2026-03-07-45-PM.png",cap:"Aub's Palace official page",date:"Official",type:"tags"}
-  ]
-};
+const galleryData={cashout:[],tags:[]};
 function switchGallery(type,btn){document.querySelectorAll(".gallery-tab").forEach(b=>b.classList.remove("active"));if(btn)btn.classList.add("active");renderGallery(type)}
-function renderGallery(type){var grid=document.getElementById("galleryGrid");if(!grid)return;var items=galleryData[type]||[];if(!items.length){grid.innerHTML='<div class="gallery-empty"><span>📸</span>No images yet.</div>';return}grid.innerHTML=items.map((it,i)=>`<div class="gallery-card" onclick="openLightbox('${it.img}','${it.cap.replace(/'/g,"&#39;")}')"><img src="${it.img}" alt="${it.cap}"><div class="gallery-card-body"><div class="gallery-card-caption">${it.cap}</div><div class="gallery-card-meta"><span class="gallery-card-date">${it.date}</span><span class="gallery-badge ${it.type==='cashout'?'badge-cashout':'badge-tags'}">${it.type==='cashout'?'PAYOUT':'TAG'}</span></div></div></div>`).join("")}
+function renderGallery(type){var grid=document.getElementById("galleryGrid");if(!grid)return;var items=galleryData[type]||[];if(!items.length){grid.innerHTML='<div class="gallery-empty"><span>📸</span>Verified payout screenshots and active tags will be added here soon.</div>';return}grid.innerHTML=items.map((it,i)=>`<div class="gallery-card" onclick="openLightbox('${it.img}','${it.cap.replace(/'/g,"&#39;")}')"><img src="${it.img}" alt="${it.cap}"><div class="gallery-card-body"><div class="gallery-card-caption">${it.cap}</div><div class="gallery-card-meta"><span class="gallery-card-date">${it.date}</span><span class="gallery-badge ${it.type==='cashout'?'badge-cashout':'badge-tags'}">${it.type==='cashout'?'PAYOUT':'TAG'}</span></div></div></div>`).join("")}
 function openLightbox(img,cap){document.getElementById("lightboxImg").src=img;document.getElementById("lightboxCaption").innerText=cap;document.getElementById("lightbox").classList.add("open")}
 function closeLightbox(){document.getElementById("lightbox").classList.remove("open")}
 

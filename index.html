@@ -1217,7 +1217,7 @@ section,#home{scroll-margin-top:82px!important}
     <div class="claim-status" id="claimStatus"></div>
     <div class="modal-actions">
       <button class="m-gold" onclick="copyClaim()">Copy Claim</button>
-      <a class="m-purple" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Claim on Facebook</a>
+      <a class="m-purple" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener" onclick="saveCurrentClaimBeforeLeaving()">Claim on Facebook</a>
       <button class="m-close" onclick="closeModal('claimModal')">Close</button>
     </div>
   </div>
@@ -1236,7 +1236,7 @@ const DAILY_REWARDS=["$3","$4","$5","15% Deposit Bonus","Try Again Tomorrow","$3
 const MONTHLY_REWARDS=["$5","$8","Surprise Gift","Rewards","$10 Free Play","Try Again Later"];
 const NON_PRIZE=["Try Again Tomorrow","Try Again Later"];
 const COLORS=["#7c3aed","#f3dd72","#5a13a0","#e9cf63","#8b1bd8","#f7e892"];
-let currentUser=null,currentPlayer=null,currentClaim={type:"",reward:""},dRot=0,mRot=0,pendingSpin=null;
+let currentUser=null,currentPlayer=null,currentClaim={type:"",reward:"",code:"",saved:false},dRot=0,mRot=0,pendingSpin=null;
 
 // ── PRELOADER ──
 function hidePreloader(){var p=document.getElementById("preloader");if(p)p.classList.add("hide")}
@@ -1438,16 +1438,67 @@ async function saveSpin(type,reward){
 }
 
 // ── CLAIMS ──
-function openClaim(type,reward){currentClaim={type,reward};document.getElementById("claimSummary").innerText=`You won ${reward}. Fill in your game details to prepare your claim.`;updateClaim();openModal("claimModal")}
+function makeClaimCode(type){
+  var prefix=type==="monthly"?"APM":"APD";
+  return prefix+"-"+String(Date.now()).slice(-6)+"-"+Math.random().toString(36).slice(2,5).toUpperCase();
+}
+function displayWheelName(type){return type==="monthly"?"Monthly Crown Wheel":"Daily Palace Wheel"}
+function openClaim(type,reward){
+  currentClaim={type,reward,code:makeClaimCode(type),saved:false};
+  var st=document.getElementById("claimStatus");if(st)st.innerText="";
+  document.getElementById("claimSummary").innerText=`You won ${reward}. Fill in your game details to prepare your claim.`;
+  updateClaim();openModal("claimModal");
+}
 function updateClaim(){
   var user=(document.getElementById("claimGameUser")?.value||"").trim()||"[Game Username]";
   var game=(document.getElementById("claimGameName")?.value||"").trim()||"[Game Name]";
   var note=(document.getElementById("claimNote")?.value||"").trim();
-  var code="AP-"+String(Date.now()).slice(-6);
-  var msg=`Aub's Palace Claim\nReward: ${currentClaim.reward||"[Reward]"}\nWheel: ${currentClaim.type||"[Wheel]"}\nGame Username: ${user}\nGame: ${game}\nClaim Code: ${code}\n${note?"Note: "+note+"\n":""}I am sending my screenshot for review.`;
+  if(!currentClaim.code)currentClaim.code=makeClaimCode(currentClaim.type||"daily");
+  var msg=`Aub's Palace Claim
+Reward: ${currentClaim.reward||"[Reward]"}
+Wheel: ${displayWheelName(currentClaim.type)||"[Wheel]"}
+Game Username: ${user}
+Game: ${game}
+Claim Code: ${currentClaim.code}
+${note?"Note: "+note+"\n":""}I am sending my screenshot for review.`;
   var out=document.getElementById("claimMsg");if(out)out.value=msg;
 }
-function copyClaim(){updateClaim();copyText(document.getElementById("claimMsg").value);document.getElementById("claimStatus").innerText="Claim copied. Send it with your screenshot on Facebook."}
+async function saveCurrentClaim(){
+  if(!currentUser||!currentClaim||!currentClaim.reward)return {ok:false,msg:"Login required before saving claim."};
+  if(currentClaim.saved)return {ok:true,msg:"Claim already saved."};
+  updateClaim();
+  var gameUser=(document.getElementById("claimGameUser")?.value||"").trim();
+  var gameName=(document.getElementById("claimGameName")?.value||"").trim();
+  var note=(document.getElementById("claimNote")?.value||"").trim();
+  var wheelName=displayWheelName(currentClaim.type);
+  var claimLine=`${currentClaim.type} | ${currentUser.email} (${currentClaim.reward}) | ${currentClaim.code}${gameUser?" | user: "+gameUser:""}${gameName?" | game: "+gameName:""}${note?" | note: "+note:""}`;
+  var payload={
+    player_id:currentUser.id,
+    player_name:(currentPlayer?.name||currentUser.email?.split("@")[0]||"Palace Player"),
+    bonus_type:wheelName,
+    reward:currentClaim.reward,
+    claim_code:claimLine,
+    status:"pending"
+  };
+  try{
+    const {error}=await sb.from("bonus_claims").insert(payload);
+    if(error)throw error;
+    currentClaim.saved=true;
+    return {ok:true,msg:"Claim saved for admin review."};
+  }catch(e){
+    console.warn("Claim save failed",e);
+    return {ok:false,msg:"Claim copied, but admin save failed. Please send screenshot + claim code for manual review."};
+  }
+}
+async function copyClaim(){
+  updateClaim();
+  var st=document.getElementById("claimStatus");
+  if(st)st.innerText="Saving claim for admin review...";
+  var saved=await saveCurrentClaim();
+  copyText(document.getElementById("claimMsg").value);
+  if(st)st.innerText=saved.ok?"Claim saved and copied. Send it with your screenshot on Facebook.":saved.msg;
+}
+function saveCurrentClaimBeforeLeaving(){saveCurrentClaim().then(function(res){var st=document.getElementById("claimStatus");if(st)st.innerText=res.msg;})}
 function openNeedId(){openModal("needIdModal")}
 function copyNeedId(){copyText(document.getElementById("needIdMsg").value)}
 function openModal(id){var el=document.getElementById(id);if(el)el.classList.add("open")}

@@ -901,6 +901,70 @@ section,#home{scroll-margin-top:82px!important}
 .spin-stage-center{appearance:none!important;-webkit-appearance:none!important;padding:0!important;cursor:pointer!important}
 .spin-stage-center:focus{outline:none!important;box-shadow:0 0 26px rgba(245,216,120,.55),0 0 34px rgba(124,58,237,.45)!important}
 </style>
+
+<style>
+/* ── PROFESSIONAL CASINO WHEEL POLISH — VISUAL ONLY ── */
+.wheel-box{
+  background:
+    radial-gradient(circle at top,rgba(245,216,120,.065),transparent 34%),
+    linear-gradient(180deg,rgba(255,255,255,.058),rgba(255,255,255,.028))!important;
+  border-color:rgba(245,216,120,.22)!important;
+  box-shadow:0 0 34px rgba(124,58,237,.16), inset 0 0 28px rgba(245,216,120,.035)!important;
+}
+.wheel-wrap::after{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border-radius:50%;
+  z-index:3;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 35% 22%,rgba(255,255,255,.22),transparent 20%),
+    radial-gradient(circle at center,transparent 56%,rgba(0,0,0,.18) 72%,rgba(245,216,120,.20) 100%);
+  mix-blend-mode:screen;
+  opacity:.42;
+}
+.wheel-svg{
+  background:radial-gradient(circle,rgba(255,255,255,.10),rgba(0,0,0,.10) 58%,rgba(0,0,0,.34) 100%)!important;
+  border:6px solid #f4d36b!important;
+  box-shadow:
+    0 0 0 3px rgba(87,22,132,.65),
+    0 0 26px rgba(245,216,120,.36),
+    0 0 55px rgba(124,58,237,.32),
+    inset 0 0 22px rgba(0,0,0,.25)!important;
+}
+.wheel-glow{
+  opacity:.56!important;
+  filter:blur(14px)!important;
+}
+.wheel-pointer{
+  border-top-color:#ffe28a!important;
+  filter:drop-shadow(0 0 12px rgba(245,216,120,1)) drop-shadow(0 2px 8px rgba(0,0,0,.65))!important;
+}
+.wheel-center,
+.spin-stage-center{
+  box-shadow:
+    0 0 0 3px rgba(87,22,132,.72),
+    0 0 25px rgba(245,216,120,.58),
+    0 0 44px rgba(124,58,237,.55)!important;
+}
+.spin-stage-wheel{
+  border:7px solid #f4d36b!important;
+  filter:drop-shadow(0 0 22px rgba(245,216,120,.36)) drop-shadow(0 0 42px rgba(124,58,237,.35));
+}
+.spin-stage-wheel-wrap::after{
+  content:"";
+  position:absolute;
+  inset:18px;
+  border-radius:50%;
+  z-index:2;
+  pointer-events:none;
+  background:radial-gradient(circle at 35% 22%,rgba(255,255,255,.20),transparent 18%),radial-gradient(circle at center,transparent 56%,rgba(245,216,120,.18) 100%);
+  mix-blend-mode:screen;
+  opacity:.38;
+}
+</style>
+
 </head>
 <body>
 
@@ -987,7 +1051,7 @@ section,#home{scroll-margin-top:82px!important}
       <div><label class="form-label">Password</label><input class="form-input" id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password" onkeydown="if(event.key==='Enter')loginPlayer()"></div>
       <button class="btn btn-gold" onclick="loginPlayer()" id="loginBtn">Login</button>
     </div>
-    <div class="login-status" id="loginStatus">Don’t have a website ID yet? Tap any Spin button and we’ll prepare a message for you to request your Aub’s Palace login.</div>
+    <div class="login-status" id="loginStatus">Don’t have a website ID yet? Tap any Spin button and we’ll prepare a Telegram message for your Aub’s Palace login request.</div>
     <button class="btn-logout" id="logoutBtn" onclick="logoutPlayer()">Logout</button>
   </div>
 </section>
@@ -1010,7 +1074,7 @@ section,#home{scroll-margin-top:82px!important}
     <!-- DAILY -->
     <div class="wheel-box">
       <h3>🎡 Daily Palace Wheel</h3>
-      <p>$10 deposit + approval required. Resets every 24 hours.</p>
+      <p>$10 deposit verification required. Resets every 24 hours.</p>
       <div class="reward-pills"><span>$3</span><span>$4</span><span>$5</span><span>15% Deposit Bonus</span><span>20% Deposit Bonus</span><span>Try Again Tomorrow</span></div>
       <div class="wheel-timer ready" id="dailyTimer">✅ READY TO SPIN</div>
       <div class="wheel-wrap" id="dailyWheelWrap">
@@ -1021,15 +1085,15 @@ section,#home{scroll-margin-top:82px!important}
         <div class="wheel-center"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div>
       </div>
       <button class="wheel-btn wheel-btn-daily available" id="dailySpinBtn" onclick="handleDailySpin()">SPIN DAILY WHEEL</button>
-      <div class="wheel-result" id="dailyResult">Log in to check your Daily Wheel approval.</div>
-      <div class="need-id-card" id="dailyNeedId"><strong>Need a Website ID?</strong><span>Tap Spin and we'll prepare a Facebook message for your login request.</span></div>
+      <div class="wheel-result" id="dailyResult">Log in to check your Daily Wheel verification.</div>
+      <div class="need-id-card" id="dailyNeedId"><strong>Need a Website ID?</strong><span>Tap Spin and we’ll prepare a Telegram message for your login request.</span></div>
     </div>
 
     <!-- MONTHLY -->
     <div class="wheel-box">
       <h3>👑 Monthly Crown Wheel</h3>
-      <p>The Monthly Crown Wheel is reserved for qualified members who stay active with Aub’s Palace. Approval is handled through the backend after activity is verified.</p>
-      <div class="reward-pills"><span>$5</span><span>$8</span><span>Surprise Gift</span><span>Rewards</span><span>$10 Free Play</span><span>Try Again Later</span></div>
+      <p>The Monthly Crown Wheel is reserved for qualified members who stay active with Aub’s Palace. Verification is handled through the backend after activity is reviewed.</p>
+      <div class="reward-pills"><span>$5</span><span>$8</span><span>Surprise Gift</span><span>Rewards</span><span>$10</span><span>Try Again Later</span></div>
       <div class="wheel-timer" id="monthlyTimer">⏳ Checking...</div>
       <div class="wheel-wrap" id="monthlyWheelWrap">
         <div class="wheel-glow"></div>
@@ -1039,11 +1103,11 @@ section,#home{scroll-margin-top:82px!important}
         <div class="wheel-center"><img src="https://i.postimg.cc/WzgPrPFt/ap-logo-1-removebg-preview.png" alt="AP"></div>
       </div>
       <button class="wheel-btn wheel-btn-monthly" id="monthlySpinBtn" onclick="handleMonthlySpin()">SPIN MONTHLY WHEEL</button>
-      <div class="wheel-result" id="monthlyResult">Log in to check monthly approval.</div>
+      <div class="wheel-result" id="monthlyResult">Log in to check monthly verification.</div>
       <div class="weekly-check">
-        <label><input type="checkbox" id="weeklyConfirm"> I confirm I played at least 5 times this week</label>
+        <label><input type="checkbox" id="weeklyConfirm"> I confirm I completed 21 verified Daily Wheel qualifying deposits this monthly cycle</label>
       </div>
-      <p style="font-size:12px;color:rgba(255,255,255,.45);margin-top:8px;text-align:center">Play at least 5 times this week, send your screenshot to Facebook, then Aub's Palace unlocks your monthly spin.</p>
+      <p style="font-size:12px;color:rgba(255,255,255,.45);margin-top:8px;text-align:center">Complete 21 verified Daily Wheel qualifying deposits within your monthly cycle. After activity is reviewed, Aub's Palace can unlock your Monthly Crown Wheel.</p>
     </div>
   </div>
 </section>
@@ -1195,11 +1259,11 @@ section,#home{scroll-margin-top:82px!important}
 <div class="modal" id="needIdModal">
   <div class="modal-box">
     <h2>Website ID Required</h2>
-    <p>You need an Aub's Palace website ID and password to spin. Copy this message and send it to us on Facebook:</p>
-    <textarea class="modal-input modal-textarea" id="needIdMsg" readonly>Hey OP, could you give us our website ID and password to log in and claim our daily bonus and monthly bonus?</textarea>
+    <p>You need an Aub's Palace website ID and password to spin. Website IDs are issued only through Telegram. Join @aubspalaceofficial for updates, then message @aubspalace to request your login:</p>
+    <textarea class="modal-input modal-textarea" id="needIdMsg" readonly>Hello Aub's Palace, I would like to request my website ID and password. My name is: [Your Name]. My Facebook name/profile is: [Your Facebook Name/Profile].</textarea>
     <div class="modal-actions">
       <button class="m-gold" onclick="copyNeedId()">Copy Message</button>
-      <a class="m-purple" href="https://www.facebook.com/share/1C4aY1zm1e/" target="_blank" rel="noopener">Open Facebook</a>
+      <a class="m-purple" href="https://t.me/aubspalace" target="_blank" rel="noopener">Message @aubspalace</a>
       <button class="m-close" onclick="closeModal('needIdModal')">Close</button>
     </div>
   </div>
@@ -1230,12 +1294,16 @@ const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZ
 const sb=window.supabase.createClient(SB_URL,SB_KEY);
 const FORMSPREE="";
 const DAY=86400000,MONTH=2592000000;
+const SPIN_DURATION=4800;
+const RESULT_DELAY=SPIN_DURATION+120;
+const CLOSE_DELAY=SPIN_DURATION+1800;
+let apAudioCtx=null;
 
 // Daily wheel ratio: everything repeats twice except rare 20% Deposit Bonus.
 const DAILY_REWARDS=["$3","$4","$5","15% Deposit Bonus","Try Again Tomorrow","$3","$4","$5","15% Deposit Bonus","Try Again Tomorrow","20% Deposit Bonus"];
-const MONTHLY_REWARDS=["$5","$8","Surprise Gift","Rewards","$10 Free Play","Try Again Later"];
+const MONTHLY_REWARDS=["$5","$8","Surprise Gift","Rewards","$10","Try Again Later"];
 const NON_PRIZE=["Try Again Tomorrow","Try Again Later"];
-const COLORS=["#7c3aed","#f3dd72","#5a13a0","#e9cf63","#8b1bd8","#f7e892"];
+const COLORS=["#6d28d9","#f6d365","#2b0a45","#d9a441","#8b1bd8","#fff0a8"];
 let currentUser=null,currentPlayer=null,currentClaim={type:"",reward:"",code:"",saved:false},dRot=0,mRot=0,pendingSpin=null;
 
 // ── PRELOADER ──
@@ -1275,7 +1343,7 @@ function buildWheel(id,labels){
     var fontSize=N>8?8.4:10.5;
     var textLength=text.length>7?(N>8?50:62):null;
     var lengthAttr=textLength?` textLength="${textLength}" lengthAdjust="spacingAndGlyphs"`:"";
-    svg+=`<path d="${arcPath(cx,cy,r,a0,a1)}" fill="${COLORS[i%COLORS.length]}" stroke="rgba(6,0,14,.78)" stroke-width="1.5"></path>`;
+    svg+=`<path d="${arcPath(cx,cy,r,a0,a1)}" fill="${COLORS[i%COLORS.length]}" stroke="rgba(245,216,120,.58)" stroke-width="1.8"></path>`;
     svg+=`<text x="${pt.x}" y="${pt.y}" fill="${i%2?'#180900':'#fff'}" font-size="${fontSize}" font-family="Orbitron,Arial" font-weight="900" text-anchor="middle" dominant-baseline="middle" transform="rotate(${mid},${pt.x},${pt.y})"${lengthAttr}>${text}</text>`;
   });
   el.innerHTML=svg;
@@ -1301,11 +1369,11 @@ async function loginPlayer(){
     showWelcome(currentPlayer?.name||email.split("@")[0]);
     updateRewardUI();
   }catch(e){
-    setLoginStatus("Login failed. Check your ID/password or request access on Facebook.");
+    setLoginStatus("Login failed. Check your ID/password or request access through Telegram.");
     if(card){card.classList.add("shake");setTimeout(()=>card.classList.remove("shake"),500)}
   }finally{setBtnLoading(btn,false,"Login")}
 }
-async function logoutPlayer(){try{await sb.auth.signOut()}catch(e){}currentUser=null;currentPlayer=null;document.body.classList.remove("logged-in");setLoginStatus("Don’t have a website ID yet? Tap any Spin button and we’ll prepare a message for you to request your Aub’s Palace login.");updateRewardUI()}
+async function logoutPlayer(){try{await sb.auth.signOut()}catch(e){}currentUser=null;currentPlayer=null;document.body.classList.remove("logged-in");setLoginStatus("Don’t have a website ID yet? Tap any Spin button and we’ll prepare a Telegram message for your Aub’s Palace login request.");updateRewardUI()}
 async function loadPlayer(){
   if(!currentUser)return;
   const {data,error}=await sb.from("players").select("*").eq("id",currentUser.id).maybeSingle();
@@ -1334,13 +1402,13 @@ function updateRewardUI(){
   if(!currentUser){
     if(dTimer){dTimer.className="wheel-timer";dTimer.innerText="🔐 LOGIN REQUIRED"} if(mTimer){mTimer.className="wheel-timer";mTimer.innerText="🔐 LOGIN REQUIRED"}
     if(dBtn){dBtn.disabled=false;dBtn.classList.add("available")} if(mBtn){mBtn.disabled=false;mBtn.classList.remove("available")}
-    if(dRes)dRes.innerText="Log in to check your Daily Wheel approval."; if(mRes)mRes.innerText="Log in to check monthly approval.";
+    if(dRes)dRes.innerText="Log in to check your Daily Wheel verification."; if(mRes)mRes.innerText="Log in to check monthly verification.";
     if(dWrap)dWrap.classList.remove("ready","locked"); if(mWrap)mWrap.classList.add("locked");
     return;
   }
   if(!dailyApproved()){
-    if(dTimer){dTimer.className="wheel-timer";dTimer.innerText="🔒 APPROVAL REQUIRED"} if(dBtn){dBtn.disabled=false;dBtn.classList.remove("available")} if(dWrap)dWrap.classList.add("locked");
-    if(dRes)dRes.innerText="$10 deposit + approval required. Resets every 24 hours.";
+    if(dTimer){dTimer.className="wheel-timer";dTimer.innerText="🔒 VERIFICATION REQUIRED"} if(dBtn){dBtn.disabled=false;dBtn.classList.remove("available")} if(dWrap)dWrap.classList.add("locked");
+    if(dRes)dRes.innerText="$10 deposit verification required. Resets every 24 hours.";
   }else if(canSpin(lastDaily(),DAY)){
     if(dTimer){dTimer.className="wheel-timer ready";dTimer.innerText="✅ READY TO SPIN"} if(dBtn){dBtn.disabled=false;dBtn.classList.add("available")} if(dWrap){dWrap.classList.add("ready");dWrap.classList.remove("locked")}
     if(dRes)dRes.innerText="Daily reward is ready.";
@@ -1349,8 +1417,8 @@ function updateRewardUI(){
     if(dRes)dRes.innerText="Your Daily Wheel resets every 24 hours.";
   }
   if(!monthlyApproved()){
-    if(mTimer){mTimer.className="wheel-timer";mTimer.innerText="🔒 APPROVAL REQUIRED"} if(mBtn){mBtn.disabled=false;mBtn.classList.remove("available")} if(mWrap)mWrap.classList.add("locked");
-    if(mRes)mRes.innerText="Monthly approval is required before spinning.";
+    if(mTimer){mTimer.className="wheel-timer";mTimer.innerText="🔒 VERIFICATION REQUIRED"} if(mBtn){mBtn.disabled=false;mBtn.classList.remove("available")} if(mWrap)mWrap.classList.add("locked");
+    if(mRes)mRes.innerText="Monthly verification is required before spinning.";
   }else if(canSpin(lastMonthly(),MONTH)){
     if(mTimer){mTimer.className="wheel-timer ready";mTimer.innerText="✅ READY TO SPIN"} if(mBtn){mBtn.disabled=false;mBtn.classList.add("available")} if(mWrap){mWrap.classList.add("ready");mWrap.classList.remove("locked")}
     if(mRes)mRes.innerText="Monthly reward is ready.";
@@ -1362,15 +1430,19 @@ function updateRewardUI(){
 setInterval(updateRewardUI,1000);
 
 // ── SPIN FLOW ──
-function handleDailySpin(){
+async function handleDailySpin(){
   if(!currentUser){openNeedId();return}
-  if(!dailyApproved()){document.getElementById("dailyResult").innerText="$10 deposit + approval required before spinning.";document.getElementById("dailyTimer").innerText="🔒 APPROVAL REQUIRED";return}
+  await loadPlayer();
+  updateRewardUI();
+  if(!dailyApproved()){document.getElementById("dailyResult").innerText="$10 deposit verification required before spinning.";document.getElementById("dailyTimer").innerText="🔒 VERIFICATION REQUIRED";return}
   if(!canSpin(lastDaily(),DAY)){updateRewardUI();return}
   spinReward("daily");
 }
-function handleMonthlySpin(){
+async function handleMonthlySpin(){
   if(!currentUser){openNeedId();return}
-  if(!monthlyApproved()){document.getElementById("monthlyResult").innerText="Monthly backend approval required before spinning.";document.getElementById("monthlyTimer").innerText="🔒 APPROVAL REQUIRED";return}
+  await loadPlayer();
+  updateRewardUI();
+  if(!monthlyApproved()){document.getElementById("monthlyResult").innerText="Monthly backend verification required before spinning.";document.getElementById("monthlyTimer").innerText="🔒 VERIFICATION REQUIRED";return}
   if(!canSpin(lastMonthly(),MONTH)){updateRewardUI();return}
   spinReward("monthly");
 }
@@ -1387,19 +1459,39 @@ function spinReward(type){
   pendingSpin={type,list,picked,finalRot,wheel,resultEl,btn,started:false};
   openSpinStage(type,list,picked,finalRot);
 }
-function startStageSpin(){
+async function startStageSpin(){
   if(!pendingSpin||pendingSpin.started)return;
   pendingSpin.started=true;
+  resumeSpinAudio();
   var type=pendingSpin.type,picked=pendingSpin.picked,reward=picked.reward,finalRot=pendingSpin.finalRot;
   var stageWheel=document.getElementById("spinStageWheel");
   var status=document.getElementById("spinStageStatus");
   var wrap=document.querySelector(".spin-stage-wheel-wrap");
+
+  // Server-side safety lock: reserve the spin BEFORE showing the win/result.
+  // This prevents double spins from stale browser data, refreshes, fast clicks, or another device.
+  if(status)status.innerText="Verifying spin access...";
+  try{
+    await saveSpin(type,reward);
+  }catch(e){
+    var msg=(e&&e.message)?e.message:"Spin access already used or not verified.";
+    if(status)status.innerText=msg;
+    if(pendingSpin&&pendingSpin.resultEl)pendingSpin.resultEl.innerText=msg;
+    try{await loadPlayer()}catch(_e){}
+    updateRewardUI();
+    pendingSpin=null;
+    setTimeout(function(){closeModal("spinStageModal",true)},1800);
+    return;
+  }
+
   if(status)status.innerText="Spinning...";
   if(wrap)wrap.classList.add("spinning");
   if(pendingSpin.resultEl)pendingSpin.resultEl.innerText="Spinning...";
-  playTickSound();
-  if(pendingSpin.wheel)pendingSpin.wheel.style.transform=`rotate(${finalRot}deg)`;
-  if(stageWheel)stageWheel.style.transform=`rotate(${finalRot}deg)`;
+  requestAnimationFrame(function(){
+    playSpinSound(SPIN_DURATION);
+    if(pendingSpin&&pendingSpin.wheel)pendingSpin.wheel.style.transform=`rotate(${finalRot}deg)`;
+    if(stageWheel)stageWheel.style.transform=`rotate(${finalRot}deg)`;
+  });
   setTimeout(function(){
     var box=document.querySelector(".spin-stage-box");
     if(status)status.innerHTML=NON_PRIZE.includes(reward)?'<span class="result-pop sad">Try Again Tomorrow</span>':`<span class="result-pop">🎉 Congratulations — ${reward}</span>`;
@@ -1407,9 +1499,8 @@ function startStageSpin(){
     if(box)box.classList.add(NON_PRIZE.includes(reward)?"try-flash":"win-flash");
     if(NON_PRIZE.includes(reward)){playSadSound();}
     else{playWinSound();showConfetti();}
-  },4900);
+  },RESULT_DELAY);
   setTimeout(async function(){
-    await saveSpin(type,reward);
     if(pendingSpin&&pendingSpin.resultEl)pendingSpin.resultEl.innerText=NON_PRIZE.includes(reward)?"Try again next time.":"You won: "+reward;
     if(!NON_PRIZE.includes(reward)){
       showWinnerToast(currentPlayer?.name||"Palace Player",reward,type==="monthly");
@@ -1420,8 +1511,9 @@ function startStageSpin(){
       closeModal("spinStageModal",true);
     }
     pendingSpin=null;
+    try{await loadPlayer()}catch(e){}
     updateRewardUI();
-  },6600);
+  },CLOSE_DELAY);
 }
 function openSpinStage(type,list,picked,finalRot){
   closeModal("spinStageModal",true);
@@ -1430,11 +1522,17 @@ function openSpinStage(type,list,picked,finalRot){
   document.body.appendChild(div);buildWheel("spinStageWheel",list);
 }
 async function saveSpin(type,reward){
-  var now=new Date().toISOString();
+  if(!currentUser)throw new Error("Login required before spinning.");
+  const {data,error}=await sb.rpc("player_record_wheel_spin",{p_wheel:type,p_reward:reward});
+  if(error)throw error;
+  var now=(data&&data.spun_at)?data.spun_at:new Date().toISOString();
   try{localStorage.setItem(type==="daily"?"apLastDaily_"+currentUser.id:"apLastMonthly_"+currentUser.id,now)}catch(e){}
-  if(currentPlayer){if(type==="daily")currentPlayer.last_daily_spin=now;else currentPlayer.last_monthly_spin=now}
-  var payload=type==="daily"?{last_daily_spin:now,daily_reward:reward}:{last_monthly_spin:now,monthly_reward:reward};
-  try{await sb.from("players").update(payload).eq("id",currentUser.id)}catch(e){}
+  if(currentPlayer){
+    if(type==="daily"){currentPlayer.last_daily_spin=now;currentPlayer.daily_reward=reward;currentPlayer.daily_allowed=false;currentPlayer.daily_deposit_amount=0;}
+    else{currentPlayer.last_monthly_spin=now;currentPlayer.monthly_reward=reward;currentPlayer.monthly_allowed=false;currentPlayer.monthly_approved=false;}
+  }
+  try{await loadPlayer()}catch(e){}
+  return data;
 }
 
 // ── CLAIMS ──
@@ -1520,14 +1618,50 @@ function showWelcome(name){var el=document.getElementById("welcomeToast"),msg=do
 function showWinnerToast(name,amount,jackpot){var box=document.getElementById("winnerToasts");if(!box)return;var el=document.createElement("div");el.className="winner-toast"+(jackpot?" jackpot":"");el.innerHTML=`<div class="wt-icon">${jackpot?"👑":"🎉"}</div><div><div class="wt-name">${name}</div><div class="wt-text">won from Aub's Palace</div></div><div class="wt-amount">${amount}</div>`;box.appendChild(el);setTimeout(()=>el.classList.add("show"),50);setTimeout(()=>{el.classList.remove("show");setTimeout(()=>el.remove(),500)},6000)}
 function showResultToast(txt,sad){var box=document.getElementById("winnerToasts");if(!box)return;var el=document.createElement("div");el.className="winner-toast";el.innerHTML=`<div class="wt-icon">${sad?"🍀":"🎉"}</div><div><div class="wt-name">${txt}</div><div class="wt-text">Palace reward update</div></div>`;box.appendChild(el);setTimeout(()=>el.classList.add("show"),50);setTimeout(()=>{el.classList.remove("show");setTimeout(()=>el.remove(),500)},5000)}
 function showConfetti(){for(let i=0;i<70;i++){var c=document.createElement("div");c.className="confetti-piece";c.style.left=Math.random()*100+"vw";c.style.background=["#f5d878","#a855f7","#fff4b8","#7c3aed","#7CFC9B"][Math.floor(Math.random()*5)];c.style.animationDuration=(2.4+Math.random()*2.2)+"s";c.style.animationDelay=(Math.random()*.35)+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),5200)}}
-function playTickSound(){try{var ctx=new (window.AudioContext||window.webkitAudioContext)();let t=ctx.currentTime;for(let i=0;i<18;i++){let o=ctx.createOscillator(),g=ctx.createGain();o.type="triangle";o.frequency.value=560+i*8;g.gain.setValueAtTime(.025,t+i*.075);g.gain.exponentialRampToValueAtTime(.001,t+i*.075+.045);o.connect(g);g.connect(ctx.destination);o.start(t+i*.075);o.stop(t+i*.075+.055)}}catch(e){}}
-function playWinSound(){try{var ctx=new (window.AudioContext||window.webkitAudioContext)();var t=ctx.currentTime;[523,659,784,1046].forEach(function(freq,i){var o=ctx.createOscillator(),g=ctx.createGain();o.type="sine";o.frequency.value=freq;g.gain.setValueAtTime(.001,t+i*.13);g.gain.exponentialRampToValueAtTime(.08,t+i*.13+.025);g.gain.exponentialRampToValueAtTime(.001,t+i*.13+.22);o.connect(g);g.connect(ctx.destination);o.start(t+i*.13);o.stop(t+i*.13+.25)});}catch(e){}}
-function playSadSound(){try{var ctx=new (window.AudioContext||window.webkitAudioContext)();var t=ctx.currentTime;[392,330,262].forEach(function(freq,i){var o=ctx.createOscillator(),g=ctx.createGain();o.type="triangle";o.frequency.value=freq;g.gain.setValueAtTime(.001,t+i*.22);g.gain.exponentialRampToValueAtTime(.06,t+i*.22+.035);g.gain.exponentialRampToValueAtTime(.001,t+i*.22+.35);o.connect(g);g.connect(ctx.destination);o.start(t+i*.22);o.stop(t+i*.22+.38)});}catch(e){}}
+function getAudioCtx(){
+  try{
+    if(!apAudioCtx)apAudioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    return apAudioCtx;
+  }catch(e){return null}
+}
+function resumeSpinAudio(){try{var ctx=getAudioCtx();if(ctx&&ctx.state==="suspended")ctx.resume()}catch(e){}}
+function playTone(ctx,freq,start,duration,gain,type){
+  try{
+    var o=ctx.createOscillator(),g=ctx.createGain();
+    o.type=type||"triangle";
+    o.frequency.setValueAtTime(freq,start);
+    g.gain.setValueAtTime(.001,start);
+    g.gain.exponentialRampToValueAtTime(gain,start+.012);
+    g.gain.exponentialRampToValueAtTime(.001,start+duration);
+    o.connect(g);g.connect(ctx.destination);
+    o.start(start);o.stop(start+duration+.02);
+  }catch(e){}
+}
+function playSpinSound(durationMs){
+  try{
+    var ctx=getAudioCtx();if(!ctx)return;resumeSpinAudio();
+    var start=ctx.currentTime+.015;
+    var total=46;
+    var duration=(durationMs||SPIN_DURATION)/1000;
+    for(let i=0;i<total;i++){
+      var p=i/(total-1);
+      var t=start+Math.pow(p,1.55)*duration;
+      var freq=720-(p*260);
+      var gain=.035-(p*.012);
+      playTone(ctx,freq,t,.038,gain,"triangle");
+    }
+    // Final settled click right before the result appears.
+    playTone(ctx,420,start+duration-.08,.07,.045,"square");
+  }catch(e){}
+}
+function playTickSound(){playSpinSound(SPIN_DURATION)}
+function playWinSound(){try{var ctx=getAudioCtx();if(!ctx)return;resumeSpinAudio();var t=ctx.currentTime;[523,659,784,1046].forEach(function(freq,i){playTone(ctx,freq,t+i*.13,.25,.08,"sine")});}catch(e){}}
+function playSadSound(){try{var ctx=getAudioCtx();if(!ctx)return;resumeSpinAudio();var t=ctx.currentTime;[392,330,262].forEach(function(freq,i){playTone(ctx,freq,t+i*.22,.38,.06,"triangle")});}catch(e){}}
 
 // ── LIVE SECTION ──
 const sampleNames=["Maria","Jason","Anna","Kelly","Sophie","Alex","Rachel","Diana","Tony","Brandon","Nina","Chris","Preston","Samantha","Kevin","Ashley","Daniel","Monica","Jordan","Brianna"];
 const palaceGames=["Milkyway","Orion Stars","Juwa","Vblink","Game Vault","LasVegas Sweeps","Gameroom","Cash Machine","Panda Master","Fire Kirin","Juwa 2.0","Mafia","Mr. All in One"];
-const liveAmounts=["$45","$65","$80","$95","$120","$145","$175","$220","$260","$300","$330","$385","$400","$15 Bonus","$10 Free Play","15% Bonus"];
+const liveAmounts=["$45","$65","$80","$95","$120","$145","$175","$220","$260","$300","$330","$385","$400","$15 Bonus","$10","15% Bonus"];
 const cashoutAmounts=[95,120,145,175,220,260,300,330,385,400];
 function seededRandom(seed){
   var x=Math.sin(seed)*10000;
